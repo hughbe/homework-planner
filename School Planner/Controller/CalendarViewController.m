@@ -168,7 +168,7 @@
     return _homeworkManager;
 }
 
-- (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(UIView<JTCalendarDay> *)dayView {
+- (void)calendarDidDateSelected:(JTCalendar *)calendar date:(NSDate *)date {
     self.calendar.calendarAppearance.isWeekMode = !self.calendar.calendarAppearance.isWeekMode;
     self.viewingDate = date;
     [self transitionExample];

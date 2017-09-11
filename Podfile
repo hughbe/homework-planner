@@ -7,7 +7,7 @@ target 'Homework Planner' do
 
   # Pods for Homework Planner
   pod 'SZTextView'
-  pod 'JTCalendar'
+  pod 'JTCalendar', '~>1.2.3'
   pod 'BButton'
   pod 'UIView+Borders'
   pod 'UIColor+Additions'

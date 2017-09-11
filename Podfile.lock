@@ -1,6 +1,6 @@
 PODS:
   - BButton (4.0.2)
-  - JTCalendar (2.1.9)
+  - JTCalendar (1.2.3)
   - SZTextView (1.3.0)
   - UIColor+Additions (2.0.3)
   - UINavigationBar+Addition (1.3.0)
@@ -8,7 +8,7 @@ PODS:
 
 DEPENDENCIES:
   - BButton
-  - JTCalendar
+  - JTCalendar (~> 1.2.3)
   - SZTextView
   - UIColor+Additions
   - UINavigationBar+Addition
@@ -16,12 +16,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
-  JTCalendar: beb2f4c1b639bf6880f680b4858227acf83a049c
+  JTCalendar: 246ea3e338fb97624846ec77cdcde448242c4d5c
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
   UIColor+Additions: 3938bb45c6413481f2c60ad91f958a278b646fad
   UINavigationBar+Addition: 433c16a992cfb73c3141b1f7fcaa93169c15cfa0
   UIView+Borders: d632c8bef679e7f98e913b569e972858742841ce
 
-PODFILE CHECKSUM: 37ddfd4c2a71a6b479947521d80e3161f6528289
+PODFILE CHECKSUM: e6e4306adf640012501c788466cd0012e6496df7
 
 COCOAPODS: 1.3.1
