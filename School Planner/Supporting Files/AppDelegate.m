@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    UIColor *barTintColor = [[UIColor colorWithRed:103 green:153 blue:170 alpha:1.0] add_darkerColorWithValue:0.2];
+    UIColor *barTintColor = [[UIColor colorWithRed:103.0/255.0 green:130.0/255.0 blue:180.0/255.0 alpha:1.0] add_darkerColorWithValue:0.75];
     UIColor *foregroundColor = [UIColor whiteColor];
 
     [[UITabBar appearance] setTintColor:foregroundColor];
