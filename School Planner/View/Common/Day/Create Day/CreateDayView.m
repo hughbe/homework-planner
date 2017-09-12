@@ -9,6 +9,7 @@
 #import "CreateDayView.h"
 
 #import "UIView+Borders.h"
+#import "UIKitLocalizedString.h"
 
 #import "Day.h"
 
@@ -33,7 +34,7 @@
 
 - (void)reset {
     self.day = nil;
-    [self.dayButton setTitle:@"Select Day" forState:UIControlStateNormal];
+    [self.dayButton setTitle:NSLocalizedString(@"Select Day", nil) forState:UIControlStateNormal];
     self.day.week = 1;
     [self.weekButton setTitle:[self.day weekString] forState:UIControlStateNormal];
     self.hidden = YES;
@@ -52,17 +53,17 @@
 }
 
 - (IBAction)selectDay:(id)sender {
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Select Day" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Select Day", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [self addDayItem:@"Monday" withDayNumber:1 toAlertController:actionSheet];
-    [self addDayItem:@"Tuesday" withDayNumber:2 toAlertController:actionSheet];
-    [self addDayItem:@"Wednesday" withDayNumber:3 toAlertController:actionSheet];
-    [self addDayItem:@"Thursday" withDayNumber:4 toAlertController:actionSheet];
-    [self addDayItem:@"Friday" withDayNumber:5 toAlertController:actionSheet];
-    [self addDayItem:@"Saturday" withDayNumber:6 toAlertController:actionSheet];
-    [self addDayItem:@"Sunday" withDayNumber:7 toAlertController:actionSheet];
+    [self addDayItem:NSLocalizedString(@"Monday", nil) withDayNumber:1 toAlertController:actionSheet];
+    [self addDayItem:NSLocalizedString(@"Tuesday", nil) withDayNumber:2 toAlertController:actionSheet];
+    [self addDayItem:NSLocalizedString(@"Wednesday", nil) withDayNumber:3 toAlertController:actionSheet];
+    [self addDayItem:NSLocalizedString(@"Thursday", nil) withDayNumber:4 toAlertController:actionSheet];
+    [self addDayItem:NSLocalizedString(@"Friday", nil) withDayNumber:5 toAlertController:actionSheet];
+    [self addDayItem:NSLocalizedString(@"Saturday", nil) withDayNumber:6 toAlertController:actionSheet];
+    [self addDayItem:NSLocalizedString(@"Sunday", nil) withDayNumber:7 toAlertController:actionSheet];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:UIKitLocalizedString(UIKitCancelIdentifier) style:UIAlertActionStyleCancel handler:nil];
     
     [actionSheet addAction:cancel];
     
@@ -80,10 +81,10 @@
 - (IBAction)selectWeek:(id)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Week" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    [self addWeekItem:@"Week 1" withWeekNumber:1 toAlertController:alert];
-    [self addWeekItem:@"Week 2" withWeekNumber:2 toAlertController:alert];
+    [self addWeekItem:NSLocalizedString(@"Week 1", nil) withWeekNumber:1 toAlertController:alert];
+    [self addWeekItem:NSLocalizedString(@"Week 2", nil) withWeekNumber:2 toAlertController:alert];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:UIKitLocalizedString(UIKitCancelIdentifier) style:UIAlertActionStyleCancel handler:nil];
     
     [alert addAction:cancel];
     

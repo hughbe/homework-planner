@@ -87,7 +87,7 @@
         }
         [bar pushNavigationItem:[[UINavigationItem alloc]initWithTitle:attachment.title] animated:NO];
         bar.translucent = NO;
-        bar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(close:)];
+        bar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Close", nil) style:UIBarButtonItemStylePlain target:self action:@selector(close:)];
         bar.topItem.leftBarButtonItem.tag = i;
         bar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
         
@@ -185,7 +185,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error Loading. Please check your internet connection or attachment" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Connection Error", nil) preferredStyle:UIAlertControllerStyleAlert];
 
     [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
     

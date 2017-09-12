@@ -8,6 +8,8 @@
 
 #import "CreateHomeworkWorkSetView.h"
 
+#import "UIKitLocalizedString.h"
+
 #import "SZTextView.h"
 #import "Attachment.h"
 
@@ -56,7 +58,7 @@
     [self verify];
     
     self.homeworkType = HomeworkTypeNone;
-    [self.typeButton setTitle:@"No Type" forState:UIControlStateNormal];
+    [self.typeButton setTitle:NSLocalizedString(@"No Type", nil) forState:UIControlStateNormal];
     
     self.attachments = [NSMutableArray array];
     
@@ -103,9 +105,9 @@
         ShowCreateWebsiteBlock();
     }
     else {
-        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Websites" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Websites", nil)message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
-        UIAlertAction *create = [UIAlertAction actionWithTitle:@"Add Website" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
+        UIAlertAction *create = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add Website", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
             [self.navigationItem setRightBarButtonItem:nil animated:YES];
             ShowCreateWebsiteBlock();
         }];
@@ -118,7 +120,7 @@
 
             [UIAlertAction actionWithTitle:websiteTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
                 Attachment *attachment = [self filteredAttachmentsArrayForType:AttachmentTypeWebsite][i];
-                UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc]initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAttachment:)];
+                UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Delete", nil) style:UIBarButtonItemStylePlain target:self action:@selector(deleteAttachment:)];
                 deleteButton.tag = i;
                 [self.navigationItem setRightBarButtonItem:deleteButton animated:YES];
                 self.createWebsiteView.attachment = attachment;
@@ -160,9 +162,9 @@
         ShowCreatePhotoBlock();
     }
     else {
-        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Photos" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Photos", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
-        UIAlertAction *create = [UIAlertAction actionWithTitle:@"Add Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
+        UIAlertAction *create = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add Photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
             [self.navigationItem setRightBarButtonItem:nil animated:YES];
             ShowCreatePhotoBlock();
         }];
@@ -175,7 +177,7 @@
             
             [UIAlertAction actionWithTitle:photoTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
                 Attachment *attachment = [self filteredAttachmentsArrayForType:AttachmentTypePhoto][i];
-                UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc]initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAttachment:)];
+                UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Delete", nil) style:UIBarButtonItemStylePlain target:self action:@selector(deleteAttachment:)];
                 deleteButton.tag = i;
                 [self.navigationItem setRightBarButtonItem:deleteButton animated:YES];
                 self.createPhotoView.attachment = attachment;
@@ -215,15 +217,15 @@
 }
 
 - (IBAction)changeType:(id)sender {
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Homework Type" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Homework Type", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [self addHomeworkType:@"Essay" withType:HomeworkTypeEssay toAlertController:actionSheet];
-    [self addHomeworkType:@"Exercise" withType:HomeworkTypeExercise toAlertController:actionSheet];
-    [self addHomeworkType:@"Revision" withType:HomeworkTypeRevision toAlertController:actionSheet];
-    [self addHomeworkType:@"Notes" withType:HomeworkTypeNotes toAlertController:actionSheet];
-    [self addHomeworkType:@"Other" withType:HomeworkTypeOther toAlertController:actionSheet];
+    [self addHomeworkType:NSLocalizedString(@"Essay", nil) withType:HomeworkTypeEssay toAlertController:actionSheet];
+    [self addHomeworkType:NSLocalizedString(@"Exercise", nil) withType:HomeworkTypeExercise toAlertController:actionSheet];
+    [self addHomeworkType:NSLocalizedString(@"Revision", nil) withType:HomeworkTypeRevision toAlertController:actionSheet];
+    [self addHomeworkType:NSLocalizedString(@"Notes", nil) withType:HomeworkTypeNotes toAlertController:actionSheet];
+    [self addHomeworkType:NSLocalizedString(@"Other", nil) withType:HomeworkTypeOther toAlertController:actionSheet];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:UIKitLocalizedString(UIKitCancelIdentifier) style:UIAlertActionStyleCancel handler:nil];
     
     [actionSheet addAction:cancel];
     
@@ -232,7 +234,7 @@
 
 - (void)createPhotoViewDidCancel:(CreatePhotoView *)createPhotoView {
     [self endEditing:YES];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(next:)] animated:YES];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Next", nil) style:UIBarButtonItemStylePlain target:self action:@selector(next:)] animated:YES];
     [UIView animateWithDuration:0.25 animations:^{
         CGPoint centerOffset = self.center;
         centerOffset.x += self.frame.size.width;
@@ -254,7 +256,7 @@
 
 - (void)createWebsiteViewDidCancel:(CreateWebsiteView *)createWebsiteView {
     [self endEditing:YES];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(next:)] animated:YES];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Next", nil) style:UIBarButtonItemStylePlain target:self action:@selector(next:)] animated:YES];
     [UIView animateWithDuration:0.25 animations:^{
         CGPoint centerOffset = self.center;
         centerOffset.x += self.frame.size.width;

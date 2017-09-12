@@ -139,7 +139,7 @@
 - (void)setViewType:(DaysViewType)viewType {
     _viewType = viewType;
     if(_viewType == DaysViewTypeSelection) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
     }
     else if(_viewType == DaysViewTypeModal) {
         self.navigationItem.leftBarButtonItem = nil;

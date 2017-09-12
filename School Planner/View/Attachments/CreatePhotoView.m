@@ -9,6 +9,7 @@
 #import "CreatePhotoView.h"
 
 #import "UIView+Borders.h"
+#import "UIKitLocalizedString.h"
 
 #import "Attachment.h"
 
@@ -55,11 +56,11 @@
 - (void)pickImage {
     UIViewController *controller = self.window.rootViewController;
     
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Add Photo" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Add Photo", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"Camera", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
         if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Camera not available"  message:@"This device does not have a camera" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Camera not available", nil)  message:nil preferredStyle:UIAlertControllerStyleAlert];
             [controller presentViewController:alert animated:YES completion:nil];
         }
         else {
@@ -68,8 +69,8 @@
         }
     }];
     
-    UIAlertAction *cameraRoll = [UIAlertAction actionWithTitle:@"Camera Roll" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
-        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Camera not available"  message:@"This device does not have a camera" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cameraRoll = [UIAlertAction actionWithTitle:NSLocalizedString(@"Camera Roll", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Camera not available", nil)  message:nil preferredStyle:UIAlertControllerStyleAlert];
             
             [controller presentViewController:alert animated:YES completion:nil];
         }
@@ -79,7 +80,7 @@
         }
     }];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:UIKitLocalizedString(UIKitCancelIdentifier) style:UIAlertActionStyleDefault handler:nil];
     
     [actionSheet addAction:camera];
     [actionSheet addAction:cameraRoll];
@@ -143,7 +144,7 @@
     self.imageView.image = [UIImage imageWithData:attachment.attachmentInfo];
     if(!self.imageView.image) {
         self.showCustomImage = NO;
-        self.imageView.image = [UIImage imageNamed:@"No Image.png"];
+        self.imageView.image = [UIImage imageNamed:@"No Image"];
     }
     else {
         self.showCustomImage = YES;

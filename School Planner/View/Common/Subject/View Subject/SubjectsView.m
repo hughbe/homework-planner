@@ -8,6 +8,8 @@
 
 #import "SubjectsView.h"
 
+#import "UIKitLocalizedString.h"
+
 #import "LessonTableViewCell.h"
 #import "Subject.h"
 
@@ -203,7 +205,7 @@
 - (void)setViewType:(SubjectsViewType)viewType {
     _viewType = viewType;
     if(_viewType == SubjectsViewTypeSelection) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:UIKitLocalizedString(UIKitCancelIdentifier) style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
     }
     else if(_viewType == SubjectsViewTypeModal) {
         self.navigationItem.leftBarButtonItem = nil;

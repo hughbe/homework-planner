@@ -9,6 +9,7 @@
 #import "TimetableViewController.h"
 
 #import "UINavigationBar+Addition.h"
+#import "UIKitLocalizedString.h"
 
 #import "Day.h"
 #import "Lesson.h"
@@ -140,11 +141,11 @@
             UIBarButtonItem *doneButtonItem  = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(edit:)];
             doneButtonItem.tag = 1;
             self.editBarButtonItem.tag = 1;
-            self.editBarButtonItem.title = @"Done";
+            self.editBarButtonItem.title = NSLocalizedString(@"Done", nil);
         }
         else {
             self.editBarButtonItem.tag = 0;
-            self.editBarButtonItem.title = @"Edit";
+            self.editBarButtonItem.title = NSLocalizedString(@"Edit", nil);
         }
     }
     else {
@@ -162,14 +163,14 @@
 - (IBAction)edit:(UIBarButtonItem *)sender {
     if(!sender.tag) {
         sender.tag = 1;
-        sender.title = @"Done";
+        sender.title = NSLocalizedString(@"Done", nil);
         
         [self.tableView setEditing:YES animated:YES];
     }
     else {
         sender.tag = 0;
-        sender.title = @"Edit";
-        
+        sender.title = NSLocalizedString(@"Edit", nil);
+
         [self.tableView setEditing:NO animated:YES];
     }
 }
@@ -223,7 +224,7 @@
     Lesson *lesson = self.timetableManager[indexPath.row];
     if(tableView.editing) {
         [tableView setEditing:NO animated:YES];
-        self.editBarButtonItem.title = @"Edit";
+        self.editBarButtonItem.title = NSLocalizedString(@"Edit", nil);
         self.editBarButtonItem.tag = 0;
         self.createLessonView.lesson = [lesson copy];
         [self createLesson:nil];
@@ -254,24 +255,24 @@
 
 - (IBAction)changeDate:(UIBarButtonItem *)sender {
     if(!sender.tag) {
-        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Options" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Options", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
-        UIAlertAction *goToToday = [UIAlertAction actionWithTitle:@"Go To Today" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
+        UIAlertAction *goToToday = [UIAlertAction actionWithTitle:NSLocalizedString(@"Go To Today", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
             self.day = [Day dayWithDate:[NSDate date]];
         }];
         
         [actionSheet addAction:goToToday];
         
         if ([DaysManager isTwoWeeked]) {
-            UIAlertAction *selectWeek = [UIAlertAction actionWithTitle:@"Set Week" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
+            UIAlertAction *selectWeek = [UIAlertAction actionWithTitle:NSLocalizedString(@"Set Week", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
                 
                 UIAlertController *selectWeekActionSheet = [UIAlertController alertControllerWithTitle:@"Select Current Week" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
                 
-                UIAlertAction *week1 = [UIAlertAction actionWithTitle:@"Week 1" style:UIAlertActionStyleDefault handler:^(UIAlertAction* currentAction) {
+                UIAlertAction *week1 = [UIAlertAction actionWithTitle:NSLocalizedString(@"Week 1", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* currentAction) {
                     self.day.week = 1;
                     [DaysManager setWeeksStartDate:[NSDate date]];
                 }];
-                UIAlertAction *week2 = [UIAlertAction actionWithTitle:@"Week 2" style:UIAlertActionStyleDefault handler:^(UIAlertAction* currentAction) {
+                UIAlertAction *week2 = [UIAlertAction actionWithTitle:NSLocalizedString(@"Week 2", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* currentAction) {
                     self.day.week = 2;
                     
                     NSDateComponents *components = [[NSDateComponents alloc]init];
@@ -280,7 +281,7 @@
                     NSDate *nextDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
                     [DaysManager setWeeksStartDate:nextDate];
                 }];
-                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:UIKitLocalizedString(UIKitCancelIdentifier) style:UIAlertActionStyleCancel handler:nil];
                 
                 [selectWeekActionSheet addAction:week1];
                 [selectWeekActionSheet addAction:week2];
@@ -292,7 +293,7 @@
             [actionSheet addAction:selectWeek];
         }
         
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:UIKitLocalizedString(UIKitCancelIdentifier) style:UIAlertActionStyleCancel handler:nil];
         
         [actionSheet addAction:cancel];
         
@@ -349,7 +350,7 @@
 
 - (void)setDay:(Day *)day {
     [self.tableView setEditing:NO animated:YES];
-    self.editBarButtonItem.title = @"Edit";
+    self.editBarButtonItem.title = NSLocalizedString(@"Edit", nil);
     self.editBarButtonItem.tag = 0;
     _day = day;
     self.timetableManager.day = day;
@@ -370,10 +371,10 @@
     
     NSString *dayString;
     if(components.weekday - 1 == day.day && day.week == [DaysManager currentWeek]) {
-        dayString = @"Today";
+        dayString = NSLocalizedString(@"Today", nil);
     }
     else if(components.weekday + 1 - day.day == 1 && day.week == [DaysManager currentWeek]) {
-        dayString = @"Tomorrow";
+        dayString = NSLocalizedString(@"Tomorrow", nil);
     }
     else {
         dayString = [day dayString];

@@ -9,6 +9,7 @@
 #import "CreateSubjectView.h"
 
 #import "UIView+Borders.h"
+#import "UIKitLocalizedString.h"
 
 #import "Subject.h"
 
@@ -38,8 +39,8 @@
 }
 
 - (void)reset {
-    [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    [self.createButton setTitle:@"Next" forState:UIControlStateNormal];
+    [self.cancelButton setTitle:UIKitLocalizedString(UIKitCancelIdentifier) forState:UIControlStateNormal];
+    [self.createButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
     self.selectedButton = nil;
     for (UIButton *button in self.colorsView.subviews) {
         button.layer.borderWidth = 0.0;
@@ -76,8 +77,8 @@
 - (IBAction)cancelCreation:(id)sender {
     [self endEditing:YES];
     if(!self.colorsView.frame.origin.x) {
-        [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-        [self.createButton setTitle:@"Next" forState:UIControlStateNormal];
+        [self.cancelButton setTitle:UIKitLocalizedString(UIKitCancelIdentifier) forState:UIControlStateNormal];
+        [self.createButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
         [UIView animateWithDuration:0.2 animations:^{
             CGRect frame = self.colorsView.frame;
             frame.origin.x = self.frame.size.width;
@@ -94,8 +95,8 @@
 - (IBAction)completeCreation:(id)sender {
     [self endEditing:YES];
     if(self.colorsView.frame.origin.x) {
-        [self.cancelButton setTitle:@"Back" forState:UIControlStateNormal];
-        [self.createButton setTitle:@"Create" forState:UIControlStateNormal];
+        [self.cancelButton setTitle:NSLocalizedString(@"Back", nil) forState:UIControlStateNormal];
+        [self.createButton setTitle:NSLocalizedString(@"Create", nil) forState:UIControlStateNormal];
         [UIView animateWithDuration:0.2 animations:^{
             CGRect frame = self.colorsView.frame;
             frame.origin.x = 0;

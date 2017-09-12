@@ -12,5 +12,6 @@ target 'Homework Planner' do
   pod 'UIView+Borders'
   pod 'UIColor+Additions'
   pod 'UINavigationBar+Addition'
-
+  pod 'UIKitLocalizedString'
+  
 end

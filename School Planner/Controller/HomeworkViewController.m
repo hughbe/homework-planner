@@ -325,7 +325,7 @@ typedef NS_ENUM(NSInteger, HomeworkSearchType) {
     }
     else if(comparison == NSOrderedSame && !homework.done) {
         cell.timeLabel.textColor = [cell timeLabelTodayColor];
-        cell.timeLabel.text = @"Today";
+        cell.timeLabel.text = NSLocalizedString(@"Today", nil);
     }
     else {
         cell.timeLabel.textColor = [cell timeLabelNormalColor];
