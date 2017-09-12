@@ -266,7 +266,7 @@
         if ([DaysManager isTwoWeekTimetable]) {
             UIAlertAction *selectWeek = [UIAlertAction actionWithTitle:NSLocalizedString(@"Set Week", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
                 
-                UIAlertController *selectWeekActionSheet = [UIAlertController alertControllerWithTitle:@"Select Current Week" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+                UIAlertController *selectWeekActionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Select Current Week", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
                 
                 UIAlertAction *week1 = [UIAlertAction actionWithTitle:NSLocalizedString(@"Week 1", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* currentAction) {
                     self.day.week = 1;

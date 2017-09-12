@@ -68,25 +68,25 @@
 - (NSString *)dayString {
     NSString *day = @"";
     if(self.day == 1) {
-        day = @"Monday";
+        day = NSLocalizedString(@"Monday", nil);
     }
     else if(self.day == 2) {
-        day = @"Tuesday";
+        day = NSLocalizedString(@"Tuesday", nil);
     }
     else if(self.day == 3) {
-        day = @"Wednesday";
+        day = NSLocalizedString(@"Wednesday", nil);
     }
     else if(self.day == 4) {
-        day = @"Thursday";
+        day = NSLocalizedString(@"Thursday", nil);
     }
     else if(self.day == 5) {
-        day = @"Friday";
+        day = NSLocalizedString(@"Friday", nil);
     }
     else if(self.day == 6) {
-        day = @"Saturday";
+        day = NSLocalizedString(@"Saturday", nil);
     }
     else if(self.day == 7) {
-        day = @"Sunday";
+        day = NSLocalizedString(@"Sunday", nil);
     }
     return day;
 }

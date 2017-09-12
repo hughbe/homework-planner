@@ -131,22 +131,22 @@
 - (NSString *)typeString {
     NSString *type;
     if(self.type == HomeworkTypeNone) {
-        type = @"No Type";
+        type = NSLocalizedString(@"No Type", nil);
     }
     else if(self.type == HomeworkTypeEssay) {
-        type = @"Essay";
+        type = NSLocalizedString(@"Essay", nil);
     }
     else if(self.type == HomeworkTypeExercise) {
-        type = @"Exercise";
+        type = NSLocalizedString(@"Exercise", nil);
     }
     else if(self.type == HomeworkTypeRevision) {
-        type = @"Revision";
+        type = NSLocalizedString(@"Revision", nil);
     }
     else if(self.type == HomeworkTypeNotes) {
-        type = @"Notes";
+        type = NSLocalizedString(@"Notes", nil);
     }
     else if(self.type == HomeworkTypeOther) {
-        type = @"Other";
+        type = NSLocalizedString(@"Other", nil);
     }
     return type;
 }

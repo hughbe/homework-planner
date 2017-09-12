@@ -50,7 +50,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.daysManager.count ? @"Days" : @"No Days";
+    return self.daysManager.count ? NSLocalizedString(@"Days", nil) : NSLocalizedString(@"No Days", nil);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

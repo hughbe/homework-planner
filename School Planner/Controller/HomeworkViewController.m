@@ -1,5 +1,5 @@
 //
-//  HomeworkTableViewController.m
+//  HomeworksTableViewController.m
 //  Homework Planner & Diary
 //
 //  Created by Hugh Bellamy on 13/01/2015.
@@ -320,7 +320,7 @@ typedef NS_ENUM(NSInteger, HomeworkSearchType) {
     
     if(comparison == NSOrderedAscending && !homework.done) {
         cell.timeLabel.textColor = [cell timeLabelOverdueColor];
-        cell.timeLabel.text = [@"Overdue - " stringByAppendingString:cell.timeLabel.text];
+        cell.timeLabel.text = [NSLocalizedString(@"Overdue - ", nil) stringByAppendingString:cell.timeLabel.text];
     }
     else if(comparison == NSOrderedSame && !homework.done) {
         cell.timeLabel.textColor = [cell timeLabelTodayColor];

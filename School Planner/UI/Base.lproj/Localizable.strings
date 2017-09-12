@@ -26,6 +26,10 @@
 "Saturday"="Saturday";
 "Sunday"="Sunday";
 
+"Subjects"="Subjects";
+"No Subjects"="No Subjects";
+
+"Work Set"="Work Set";
 
 "Go To Today"="Go To Today";
 "Today"="Today";
@@ -53,5 +57,11 @@
 
 "Set Week"="Set Week";
 "Select Week"="Select Week";
+"Select Current Week"="Select Current Week";
 "Week 1"="Week 1";
 "Week 2"="Week 2";
+
+"Days"="Days";
+"No Days"="No Days";
+
+"Overdue - "="Overdue - "

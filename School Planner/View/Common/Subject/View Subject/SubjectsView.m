@@ -46,7 +46,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.subjectsManager.count ? @"Subjects" : @"No Subjects";
+    return self.subjectsManager.count ? NSLocalizedString(@"Subjects", nil) : NSLocalizedString(@"No Subjects", nil);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

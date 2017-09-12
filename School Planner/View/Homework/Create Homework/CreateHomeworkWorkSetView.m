@@ -22,7 +22,7 @@
     self.mainView.layer.cornerRadius = 2.5;
     
     self.workSetTextView.font = [UIFont systemFontOfSize:17.5];
-    self.workSetTextView.placeholder = @"Work Set";
+    self.workSetTextView.placeholder = NSLocalizedString(@"Work Set", nil);
     self.workSetTextView.placeholderTextColor = [UIColor colorWithWhite:0.8 alpha:1.0];
     
     CAShapeLayer *typeViewBorder = [CAShapeLayer layer];
