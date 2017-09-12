@@ -15,8 +15,7 @@ typedef NS_ENUM(NSInteger, HomeworkSearchType) {
     HomeworkSearchTypeAll,
     HomeworkSearchTypeSubject,
     HomeworkSearchTypeTeacher,
-    HomeworkSearchTypeWorkSet,
-    HomeworkSearchTypeDone
+    HomeworkSearchTypeWorkSet
 };
 
 @interface HomeworkViewController () <UIGestureRecognizerDelegate>
@@ -289,7 +288,7 @@ typedef NS_ENUM(NSInteger, HomeworkSearchType) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HomeworkTableViewCell *cell = (HomeworkTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    HomeworkTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     Homework *homework = [self.homeworkManager homeworkForSection:indexPath.section row:indexPath.row];
     if(!homework) {
         return cell;

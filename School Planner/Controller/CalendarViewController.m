@@ -179,11 +179,6 @@
     return homework.count || lessons.count;
 }
 
-- (UIColor *)dotColorForEvent:(JTCalendar *)calendar date:(NSDate *)date {
-    NSArray *homework = [self.homeworkManager homeworkForDate:date];
-    return homework.count ? [UIColor redColor] : nil;
-}
-
 - (NSArray *)homeworkArray {
     return [self.homeworkManager homeworkForDate:self.viewingDate];
 }
