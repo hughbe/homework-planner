@@ -10,8 +10,6 @@
 @class Attachment;
 @protocol CreatePhotoViewDelegate;
 
-typedef void(^ImagePickerBlock)();
-
 @interface CreatePhotoView : UIView <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (void)reset;

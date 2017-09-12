@@ -124,7 +124,7 @@
     NSDateComponents *weeksStartDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitWeekOfYear fromDate:[DaysManager weeksStartDate] toDate:[NSDate date] options:0];
     NSInteger startWeek = [weeksStartDateComponents weekOfYear];
     NSInteger limitedWeek = 0;
-    if(startWeek % 2 == 0 || ![DaysManager isTwoWeeked]) {
+    if(startWeek % 2 == 0 || ![DaysManager isTwoWeekTimetable]) {
         limitedWeek = 1;
     }
     else {
@@ -133,7 +133,7 @@
     return limitedWeek;
 }
 
-+ (BOOL)isTwoWeeked {
++ (BOOL)isTwoWeekTimetable {
     NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
     NSData *daysData = [standardDefaults objectForKey:DAYS_KEY];
     if(daysData) {

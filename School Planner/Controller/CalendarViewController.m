@@ -27,7 +27,6 @@
 @property (strong, nonatomic) NSDate *viewingDate;
 
 @property (assign, nonatomic) NSInteger homeworkSection;
-@property (assign, nonatomic) NSInteger timetableSection;
 
 @property (strong, nonatomic) QuickHomeworkView *quickHomeworkView;
 @end
@@ -200,14 +199,11 @@
     NSArray *lessons = [self lessonsArray];
     NSArray *homework = [self homeworkArray];
     self.homeworkSection = -1;
-    self.timetableSection = -1;
     if(lessons.count && homework.count) {
         self.homeworkSection = 0;
-        self.timetableSection = 0;
         return 2;
     }
     else if(lessons.count) {
-        self.timetableSection = 0;
         return 1;
     }
     else if(homework.count) {

@@ -18,7 +18,6 @@
 - (NSString *)dayString;
 - (NSString *)weekString;
 
-- (NSString *)titleString;
 - (NSString *)keyString;
 
 + (Day *)dayWithDate:(NSDate *)date;

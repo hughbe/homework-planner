@@ -95,15 +95,6 @@
     return [NSString stringWithFormat: @"Week %@", @(self.week)];
 }
 
-- (NSString *)titleString {
-    if([DaysManager isTwoWeeked]) {
-        return [self keyString];
-    }
-    else {
-        return self.dayString;
-    }
-}
-
 - (NSString *)keyString {
     return [NSString stringWithFormat:@"%@ - %@", [self dayString], [self weekString]];
 }

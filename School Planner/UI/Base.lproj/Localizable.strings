@@ -11,6 +11,7 @@
 "Close"="Close";
 "Error"="Error";
 "Options"="Options";
+"Done"="Done";
 
 "Create"="Create";
 "Edit"="Edit";
@@ -51,5 +52,6 @@
 "Connection Error"="Error Loading. Please check your internet connection or attachment";
 
 "Set Week"="Set Week";
+"Select Week"="Select Week";
 "Week 1"="Week 1";
 "Week 2"="Week 2";

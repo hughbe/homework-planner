@@ -1,5 +1,5 @@
 //
-//  HomeworksTableViewController.h
+//  HomeworkTableViewController.h
 //  Homework Planner & Diary
 //
 //  Created by Hugh Bellamy on 13/01/2015.

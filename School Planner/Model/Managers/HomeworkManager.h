@@ -26,7 +26,6 @@
 - (NSArray *)orderedSubjectKeys;
 
 - (void)searchWithPredicate:(NSPredicate *)predicate informDelegate:(BOOL)informDelegate;
-- (void)clearSearch;
 
 - (Homework *)homeworkForSection:(NSInteger)section row:(NSInteger)row;
 - (NSArray *)homeworkForDate:(NSDate *)date;

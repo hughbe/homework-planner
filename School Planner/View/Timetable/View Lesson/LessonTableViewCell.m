@@ -8,9 +8,6 @@
 
 #import "LessonTableViewCell.h"
 
-#import "Lesson.h"
-#import "Subject.h"
-
 @interface LessonTableViewCell ()
 
 @property (strong, nonatomic) NSDateFormatter *timeDateFormatter;
@@ -31,13 +28,6 @@
     frame.origin.y = 8;
     frame.origin.x = self.contentView.frame.size.width - frame.size.width - 4;
     self.startTimeLabel.frame = frame;
-}
-
-- (void)loadLesson:(Lesson *)lesson {
-    self.subjectLabel.text = lesson.subject.subjectName;
-    self.teacherLabel.text = lesson.subject.teacher;
-    [self setStartTime:lesson.startTime endTime:lesson.endTime];
-    self.subjectIndicatorView.backgroundColor = lesson.subject.color;
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {

@@ -110,11 +110,6 @@
     }
 }
 
-- (void)clearSearch {
-    self.searchingPredicate = nil;
-    self.allHomework = [self.clearHomework copy];
-}
-
 - (NSString *)titleForSection:(NSInteger)section {
     return [self orderedSubjectKeys][section];
 }

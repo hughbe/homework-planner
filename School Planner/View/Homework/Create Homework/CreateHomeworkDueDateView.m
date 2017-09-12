@@ -21,7 +21,7 @@
     [self reset];
 }
 
-- (UIFont *)dayDatePickerView:(DayDatePickerView *)dayDatePickerView fontForColumType:(DayDatePickerViewColumnType)columnType {
+- (UIFont *)dayDatePickerView:(DayDatePickerView *)dayDatePickerView fontForRow:(NSInteger)row inColumn:(DayDatePickerViewColumnType)columnType disabled:(BOOL)disabled {
     UIFont *font;
     if(columnType == DayDatePickerViewColumnTypeDay) {
         font = [UIFont systemFontOfSize:20.0];

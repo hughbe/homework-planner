@@ -27,5 +27,5 @@
 + (NSInteger)currentWeek;
 + (NSDate *)weeksStartDate;
 + (void)setWeeksStartDate:(NSDate *)weeksStartDate;
-+ (BOOL)isTwoWeeked;
++ (BOOL)isTwoWeekTimetable;
 @end

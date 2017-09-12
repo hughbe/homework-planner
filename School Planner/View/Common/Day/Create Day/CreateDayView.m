@@ -79,7 +79,7 @@
 }
 
 - (IBAction)selectWeek:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Week" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Select Week", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     [self addWeekItem:NSLocalizedString(@"Week 1", nil) withWeekNumber:1 toAlertController:alert];
     [self addWeekItem:NSLocalizedString(@"Week 2", nil) withWeekNumber:2 toAlertController:alert];

@@ -56,7 +56,7 @@
     [self.navigationController.view addSubview:self.toolbar];
     [self.navigationController.navigationBar hideBottomHairline];
     
-    [self displayNoLessonsView:NO];
+    [self displayNoLessonsView];
     
     [self.daysManagers reload];
     
@@ -129,7 +129,7 @@
     [self createLessonViewDidCancel:createLessonView]; //Dismiss
 }
 
-- (void)displayNoLessonsView:(BOOL)animated {
+- (void)displayNoLessonsView {
     if([self.timetableManager numberOfRowsForDay:self.day]) {
         [UIView animateWithDuration:0.2 animations:^{
             self.noLessonsView.alpha = 0.0;
@@ -176,7 +176,7 @@
 }
 
 - (void)timetableManagerDidUpdate:(TimetableManager *)timetableManager {
-    [self displayNoLessonsView:YES];
+    [self displayNoLessonsView];
     [UIView transitionWithView: self.tableView duration: 0.35f options: UIViewAnimationOptionTransitionCrossDissolve animations: ^(void) {
         [self.tableView reloadData];
     } completion: nil];
@@ -191,7 +191,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LessonTableViewCell *cell = (LessonTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    LessonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     Lesson *lesson = self.timetableManager[indexPath.row];
     cell.subjectLabel.text = lesson.subject.subjectName;
     cell.teacherLabel.text = lesson.subject.teacher;
@@ -208,7 +208,7 @@
         Lesson *lesson = self.timetableManager[indexPath.row];
         [self.timetableManager deleteLesson:lesson];
         [tableView endUpdates];
-        [self displayNoLessonsView:YES];
+        [self displayNoLessonsView];
     }
 }
 
@@ -263,7 +263,7 @@
         
         [actionSheet addAction:goToToday];
         
-        if ([DaysManager isTwoWeeked]) {
+        if ([DaysManager isTwoWeekTimetable]) {
             UIAlertAction *selectWeek = [UIAlertAction actionWithTitle:NSLocalizedString(@"Set Week", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
                 
                 UIAlertController *selectWeekActionSheet = [UIAlertController alertControllerWithTitle:@"Select Current Week" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -327,7 +327,7 @@
             day.day = self.day.day + sender.tag;
             if(day.day > 7) {
                 day.day = 1;
-                if([DaysManager isTwoWeeked]) {
+                if([DaysManager isTwoWeekTimetable]) {
                     day.week++;
                     if(day.week > 2) {
                         day.week = 1;
@@ -336,7 +336,7 @@
             }
             else if(day.day < 1) {
                 day.day = 7;
-                if([DaysManager isTwoWeeked]) {
+                if([DaysManager isTwoWeekTimetable]) {
                     day.week--;
                     if(day.week < 1) {
                         day.week = 2;
@@ -365,7 +365,7 @@
     
     self.reloadAnimation = UITableViewRowAnimationNone;
     
-    [self displayNoLessonsView:YES];
+    [self displayNoLessonsView];
     
     NSDateComponents *components = [[NSCalendar currentCalendar]components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday fromDate:[NSDate date]];
     
@@ -379,7 +379,7 @@
     else {
         dayString = [day dayString];
     }
-    if([DaysManager isTwoWeeked]) {
+    if([DaysManager isTwoWeekTimetable]) {
         dayString = [dayString stringByAppendingFormat:@" - %@", day.weekString];
     }
     self.dayBarButtonItem.title = dayString;

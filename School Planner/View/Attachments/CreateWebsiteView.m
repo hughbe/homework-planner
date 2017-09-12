@@ -77,9 +77,4 @@
     [self verify];
 }
 
-- (void)setType:(CreateWebsiteViewType)type {
-    _type = type;
-    
-}
-
 @end

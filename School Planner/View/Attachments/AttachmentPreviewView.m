@@ -56,17 +56,17 @@
 }
 
 - (void)back:(UIBarButtonItem *)sender {
-    UIWebView *webView = (UIWebView *)[self.scrollView viewWithTag:sender.tag - 400];
+    UIWebView *webView = [self.scrollView viewWithTag:sender.tag - 400];
     [webView goBack];
 }
 
 - (void)forward:(UIBarButtonItem *)sender {
-    UIWebView *webView = (UIWebView *)[self.scrollView viewWithTag:sender.tag - 300];
+    UIWebView *webView = [self.scrollView viewWithTag:sender.tag - 300];
     [webView goForward];
 }
 
 - (void)refresh:(UIBarButtonItem *)sender {
-    UIWebView *webView = (UIWebView *)[self.scrollView viewWithTag:sender.tag - 500];
+    UIWebView *webView = [self.scrollView viewWithTag:sender.tag - 500];
     [webView reload];
 }
 
@@ -166,9 +166,9 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
-    UINavigationBar *bar = (UINavigationBar*)[self.scrollView viewWithTag:webView.tag + 100];
+    UINavigationBar *bar = [self.scrollView viewWithTag:webView.tag + 100];
     bar.topItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    UIToolbar *toolbar = (UIToolbar *)[self.scrollView viewWithTag:webView.tag + 200];
+    UIToolbar *toolbar = [self.scrollView viewWithTag:webView.tag + 200];
     
     for(UIBarButtonItem *barButtonItem in toolbar.items) {
         if([barButtonItem isKindOfClass:[UIBarButtonItem class]]) {
@@ -190,25 +190,6 @@
     [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
     
     [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)pinch:(UIPinchGestureRecognizer *)gesture {
-    if (gesture.state == UIGestureRecognizerStateEnded
-        || gesture.state == UIGestureRecognizerStateChanged) {        
-        CGFloat currentScale = gesture.view.frame.size.width / gesture.view.bounds.size.width;
-        CGFloat newScale = currentScale * gesture.scale;
-        
-        if (newScale < 0.5) {
-            newScale = 0.5;
-        }
-        if (newScale > 1) {
-            newScale = 1;
-        }
-        
-        CGAffineTransform transform = CGAffineTransformMakeScale(newScale, newScale);
-        gesture.view.transform = transform;
-        gesture.scale = 1;
-    }
 }
 
 - (NSArray *)attachments {

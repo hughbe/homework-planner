@@ -20,6 +20,4 @@
 
 @property (weak, nonatomic) IBOutlet UIView *subjectIndicatorView;
 
-- (void)loadLesson:(Lesson *)lesson;
-
 @end

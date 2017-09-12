@@ -11,17 +11,11 @@
 
 @protocol CreateWebsiteViewDelegate;
 
-typedef NS_ENUM(NSInteger, CreateWebsiteViewType) {
-    CreateWebsiteViewTypeCreate,
-    CreateWebsiteViewTypeEdit
-};
-
 @interface CreateWebsiteView : UIView <UITextFieldDelegate>
 
 - (void)reset;
 
 @property (weak, nonatomic) id<CreateWebsiteViewDelegate> delegate;
-@property (assign, nonatomic) CreateWebsiteViewType type;
 
 @property (strong, nonatomic) Attachment *attachment;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
