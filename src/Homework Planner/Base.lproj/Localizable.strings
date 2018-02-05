@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Homework Planner
+
+  Created by Hugh Bellamy on 31/01/2018.
+  Copyright © 2018 Hugh Bellamy. All rights reserved.
+*/
+
+"Homework Type" = "Homework Type";
+"No Type" = "No Type";
+"Essay" = "Essay";
+"Exercise" = "Exercise";
+"Revision" = "Revision";
+"Notes" = "Notes";
+"Other" = "Other";
