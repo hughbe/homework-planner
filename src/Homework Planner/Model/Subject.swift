@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 extension Subject {

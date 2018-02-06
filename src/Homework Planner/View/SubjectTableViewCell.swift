@@ -9,7 +9,7 @@
 import UIKit
 
 public class SubjectTableViewCell : UITableViewCell {
-    @IBOutlet var colorView: UIView!
+    @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var teacherLabel: UILabel!
 }

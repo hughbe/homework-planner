@@ -9,8 +9,14 @@
 /* Begin PBXBuildFile section */
 		1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3998412021F62B002DFFA3 /* PanelView.swift */; };
 		1E39984620220BF1002DFFA3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E39984420220BF1002DFFA3 /* Localizable.strings */; };
+		1E5D7AB82028F26500DF39F1 /* Date+OrdinalIndicatorString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */; };
 		1E651F822020F990007FD685 /* HomeworkContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E651F812020F990007FD685 /* HomeworkContentViewController.swift */; };
 		1E6B91BB2021E4D10019FC5D /* SelectColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B91BA2021E4D10019FC5D /* SelectColorView.swift */; };
+		1E8EFA0E2028FA7B003D711C /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA0D2028FA7B003D711C /* TimetableViewController.swift */; };
+		1E8EFA102028FCBB003D711C /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA0F2028FCBB003D711C /* LessonTableViewCell.swift */; };
+		1E8EFA122029D01B003D711C /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA112029D01B003D711C /* Lesson.swift */; };
+		1E8EFA142029DAAB003D711C /* CreateLessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA132029DAAB003D711C /* CreateLessonViewController.swift */; };
+		1E8EFA1A2029DC31003D711C /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA192029DC31003D711C /* TimePickerViewController.swift */; };
 		1EACEC27201D4BC5000E4915 /* UIColor+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EACEC26201D4BC5000E4915 /* UIColor+String.swift */; };
 		1EBA2668201D05E00042E03D /* Homework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2667201D05E00042E03D /* Homework.swift */; };
 		1EBA266C201D09A90042E03D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA266B201D09A90042E03D /* Subject.swift */; };
@@ -20,6 +26,9 @@
 		1EBA2677201D467C0042E03D /* SelectSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2676201D467C0042E03D /* SelectSubjectViewController.swift */; };
 		1EBA2679201D48390042E03D /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2678201D48390042E03D /* UIViewController+ShowAlert.swift */; };
 		1EBA267C201D498A0042E03D /* SubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA267B201D498A0042E03D /* SubjectTableViewCell.swift */; };
+		1EBC88E9202890BC003937FD /* DayDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC88E8202890BC003937FD /* DayDatePickerViewController.swift */; };
+		1EBC88EB20289457003937FD /* UIView+FadeInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */; };
+		1EBC88ED202896E1003937FD /* HomeworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC88EC202896E1003937FD /* HomeworkTableViewCell.swift */; };
 		1EECD575201FC4710091B0B8 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EECD574201FC4710091B0B8 /* ContainerView.swift */; };
 		1EF6A89C201D030F009F2BC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */; };
 		1EF6A8A1201D030F009F2BC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A89F201D030F009F2BC7 /* Main.storyboard */; };
@@ -43,8 +52,14 @@
 		1E3998412021F62B002DFFA3 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		1E39984520220BF1002DFFA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Homework Planner/Base.lproj/Localizable.strings"; sourceTree = SOURCE_ROOT; };
 		1E39984720220CCF002DFFA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+OrdinalIndicatorString.swift"; sourceTree = "<group>"; };
 		1E651F812020F990007FD685 /* HomeworkContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkContentViewController.swift; sourceTree = "<group>"; };
 		1E6B91BA2021E4D10019FC5D /* SelectColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorView.swift; sourceTree = "<group>"; };
+		1E8EFA0D2028FA7B003D711C /* TimetableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewController.swift; sourceTree = "<group>"; };
+		1E8EFA0F2028FCBB003D711C /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
+		1E8EFA112029D01B003D711C /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		1E8EFA132029DAAB003D711C /* CreateLessonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLessonViewController.swift; sourceTree = "<group>"; };
+		1E8EFA192029DC31003D711C /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		1EACEC26201D4BC5000E4915 /* UIColor+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+String.swift"; sourceTree = "<group>"; };
 		1EBA2667201D05E00042E03D /* Homework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework.swift; sourceTree = "<group>"; };
 		1EBA266B201D09A90042E03D /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
@@ -54,6 +69,9 @@
 		1EBA2676201D467C0042E03D /* SelectSubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSubjectViewController.swift; sourceTree = "<group>"; };
 		1EBA2678201D48390042E03D /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
 		1EBA267B201D498A0042E03D /* SubjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTableViewCell.swift; sourceTree = "<group>"; };
+		1EBC88E8202890BC003937FD /* DayDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDatePickerViewController.swift; sourceTree = "<group>"; };
+		1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+FadeInOut.swift"; sourceTree = "<group>"; };
+		1EBC88EC202896E1003937FD /* HomeworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTableViewCell.swift; sourceTree = "<group>"; };
 		1EECD574201FC4710091B0B8 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		1EF6A898201D030F009F2BC7 /* Homework Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Homework Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,9 +109,48 @@
 		1E39984320220BC4002DFFA3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1EF6A8A5201D030F009F2BC7 /* Assets.xcassets */,
 				1E39984420220BF1002DFFA3 /* Localizable.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		1E8EFA152029DAAF003D711C /* Homework */ = {
+			isa = PBXGroup;
+			children = (
+				1EBA2672201D3D3D0042E03D /* HomeworkViewController.swift */,
+				1EBA2674201D45B80042E03D /* CreateHomeworkViewController.swift */,
+				1E651F812020F990007FD685 /* HomeworkContentViewController.swift */,
+			);
+			path = Homework;
+			sourceTree = "<group>";
+		};
+		1E8EFA162029DABF003D711C /* Lesson */ = {
+			isa = PBXGroup;
+			children = (
+				1E8EFA0D2028FA7B003D711C /* TimetableViewController.swift */,
+				1E8EFA132029DAAB003D711C /* CreateLessonViewController.swift */,
+			);
+			path = Lesson;
+			sourceTree = "<group>";
+		};
+		1E8EFA172029DAD1003D711C /* Subject */ = {
+			isa = PBXGroup;
+			children = (
+				1EBA2676201D467C0042E03D /* SelectSubjectViewController.swift */,
+				1EBA266E201D0B060042E03D /* CreateSubjectViewController.swift */,
+			);
+			path = Subject;
+			sourceTree = "<group>";
+		};
+		1E8EFA182029DAD7003D711C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1EBA2678201D48390042E03D /* UIViewController+ShowAlert.swift */,
+				1E8EFA192029DC31003D711C /* TimePickerViewController.swift */,
+				1EBC88E8202890BC003937FD /* DayDatePickerViewController.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		1EBA2666201D05D20042E03D /* Model */ = {
@@ -101,6 +158,8 @@
 			children = (
 				1EBA2667201D05E00042E03D /* Homework.swift */,
 				1EBA266B201D09A90042E03D /* Subject.swift */,
+				1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */,
+				1E8EFA112029D01B003D711C /* Lesson.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -108,12 +167,10 @@
 		1EBA266D201D0AF90042E03D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1EBA266E201D0B060042E03D /* CreateSubjectViewController.swift */,
-				1EBA2672201D3D3D0042E03D /* HomeworkViewController.swift */,
-				1EBA2674201D45B80042E03D /* CreateHomeworkViewController.swift */,
-				1EBA2676201D467C0042E03D /* SelectSubjectViewController.swift */,
-				1EBA2678201D48390042E03D /* UIViewController+ShowAlert.swift */,
-				1E651F812020F990007FD685 /* HomeworkContentViewController.swift */,
+				1E8EFA182029DAD7003D711C /* Common */,
+				1E8EFA172029DAD1003D711C /* Subject */,
+				1E8EFA162029DABF003D711C /* Lesson */,
+				1E8EFA152029DAAF003D711C /* Homework */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -121,11 +178,14 @@
 		1EBA267A201D496C0042E03D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1EBC88EC202896E1003937FD /* HomeworkTableViewCell.swift */,
 				1EBA267B201D498A0042E03D /* SubjectTableViewCell.swift */,
-				1EACEC26201D4BC5000E4915 /* UIColor+String.swift */,
+				1E8EFA0F2028FCBB003D711C /* LessonTableViewCell.swift */,
 				1EECD574201FC4710091B0B8 /* ContainerView.swift */,
 				1E6B91BA2021E4D10019FC5D /* SelectColorView.swift */,
 				1E3998412021F62B002DFFA3 /* PanelView.swift */,
+				1EACEC26201D4BC5000E4915 /* UIColor+String.swift */,
+				1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,7 +219,6 @@
 				1EBA266D201D0AF90042E03D /* Controller */,
 				1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */,
 				1EF6A89F201D030F009F2BC7 /* Main.storyboard */,
-				1EF6A8A5201D030F009F2BC7 /* Assets.xcassets */,
 				1EF6A8A7201D030F009F2BC7 /* LaunchScreen.storyboard */,
 				1EF6A8AA201D030F009F2BC7 /* Info.plist */,
 				1EF6A8A2201D030F009F2BC7 /* Homework_Planner.xcdatamodeld */,
@@ -361,19 +420,28 @@
 			files = (
 				1EBA2679201D48390042E03D /* UIViewController+ShowAlert.swift in Sources */,
 				1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */,
+				1E8EFA0E2028FA7B003D711C /* TimetableViewController.swift in Sources */,
 				1EACEC27201D4BC5000E4915 /* UIColor+String.swift in Sources */,
 				1EBA266C201D09A90042E03D /* Subject.swift in Sources */,
+				1E8EFA102028FCBB003D711C /* LessonTableViewCell.swift in Sources */,
+				1E8EFA142029DAAB003D711C /* CreateLessonViewController.swift in Sources */,
+				1EBC88EB20289457003937FD /* UIView+FadeInOut.swift in Sources */,
 				1EBA2673201D3D3D0042E03D /* HomeworkViewController.swift in Sources */,
+				1EBC88E9202890BC003937FD /* DayDatePickerViewController.swift in Sources */,
+				1EBC88ED202896E1003937FD /* HomeworkTableViewCell.swift in Sources */,
 				1EBA2668201D05E00042E03D /* Homework.swift in Sources */,
 				1E6B91BB2021E4D10019FC5D /* SelectColorView.swift in Sources */,
+				1E8EFA1A2029DC31003D711C /* TimePickerViewController.swift in Sources */,
 				1EBA2675201D45B80042E03D /* CreateHomeworkViewController.swift in Sources */,
 				1E651F822020F990007FD685 /* HomeworkContentViewController.swift in Sources */,
 				1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */,
 				1EBA267C201D498A0042E03D /* SubjectTableViewCell.swift in Sources */,
+				1E5D7AB82028F26500DF39F1 /* Date+OrdinalIndicatorString.swift in Sources */,
 				1EECD575201FC4710091B0B8 /* ContainerView.swift in Sources */,
 				1EF6A89C201D030F009F2BC7 /* AppDelegate.swift in Sources */,
 				1EBA2677201D467C0042E03D /* SelectSubjectViewController.swift in Sources */,
 				1EF6A8A4201D030F009F2BC7 /* Homework_Planner.xcdatamodeld in Sources */,
+				1E8EFA122029D01B003D711C /* Lesson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

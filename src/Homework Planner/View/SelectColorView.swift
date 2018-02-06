@@ -12,7 +12,7 @@ import UIKit
     func selectColorView(selectColorView: SelectColorView, didSelectColor color: UIColor)
 }
 
-public class SelectColorView: PanelView, UICollectionViewDelegate, UICollectionViewDataSource {
+public class SelectColorView : PanelView, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet public var delegate: SelectColorViewDelegate!
     public var selectedColor: UIColor?
     

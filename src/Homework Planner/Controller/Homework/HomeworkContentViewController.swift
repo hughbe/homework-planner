@@ -8,6 +8,10 @@
 
 import UIKit
 
+public protocol HomeworkContentViewControllerDelegate {
+    func homeworkContentViewController(viewController: HomeworkContentViewController, didUpdateHomework homework: Homework)
+}
+
 public class HomeworkContentViewController: UIViewController {
     @IBOutlet weak var additionalActionsView: UIView!
     @IBOutlet weak var typeView: UIView!
@@ -19,6 +23,8 @@ public class HomeworkContentViewController: UIViewController {
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var websiteButton: UIButton!
     
+    public var homework: Homework!
+    public var delegate: HomeworkContentViewControllerDelegate!
     private var type = HomeworkType.None
     
     public override func viewDidLoad() {
@@ -26,9 +32,21 @@ public class HomeworkContentViewController: UIViewController {
         
         additionalActionsView.addTopBorder(withHeight: 1, andColor: UIColor.black)
         typeView.addRightBorder(withWidth: 1, andColor: UIColor.black)
+        
+        navigationItem.title = homework.subject?.name
+        workSetTextView.text = homework.workSet
+    }
+    
+    public override func viewWillAppear(_ animated: Bool)  {
+        super.viewWillAppear(animated)
+        
+        if isBeingPresented || isMovingToParentViewController {
+            workSetTextView.becomeFirstResponder()
+        }
     }
 
     @IBAction func next(_ sender: Any) {
+        delegate.homeworkContentViewController(viewController: self, didUpdateHomework: homework)
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
@@ -61,6 +79,9 @@ public class HomeworkContentViewController: UIViewController {
             isValid = false
         }
         
+        // Work around a bug in UIKit?
+        // Commentig out the line below means this doesn't work...
+        navigationItem.rightBarButtonItem?.isEnabled = !isValid
         navigationItem.rightBarButtonItem?.isEnabled = isValid
     }
 }

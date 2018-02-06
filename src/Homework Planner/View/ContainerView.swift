@@ -21,7 +21,7 @@ private extension UIView {
     }
 }
 
-public class ContainerView: PanelView {
+public class ContainerView : PanelView {
     @IBOutlet public var centerVerticalContstraint: NSLayoutConstraint!
     private var keyboardFrame: CGRect?
     
@@ -31,12 +31,16 @@ public class ContainerView: PanelView {
     }
 
     private func setVerticalConstraint() {
-        guard let keyboardFrame = keyboardFrame,
-              containsFirstResponder() else {
-                return
+        guard let keyboardFrame = keyboardFrame, containsFirstResponder() else {
+            return
+        }
+
+        guard let originInWindow = superview?.convert(frame.origin, to: nil) else {
+            return
         }
         
-        let diff = frame.maxY - keyboardFrame.minY + 20
+        let maxY = originInWindow.y + frame.size.height
+        let diff = maxY - keyboardFrame.minY + 20
         if diff > 0 {
             centerVerticalContstraint.constant = -diff
         }
@@ -51,7 +55,6 @@ public class ContainerView: PanelView {
             if let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 self.keyboardFrame = keyboardFrame
                 self.setVerticalConstraint()
-
             }
         }
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: nil) { notification in

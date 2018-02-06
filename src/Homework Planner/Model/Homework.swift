@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import CoreData
 import Foundation
 
 public enum HomeworkType: Int32 {
@@ -43,14 +44,25 @@ public enum HomeworkType: Int32 {
     ]
 }
 
+private extension Date {
+    
+}
+
 extension Homework {
-    public var overdue: Bool {
+    public var dueString: String {
         get {
             guard let dueDate = dueDate else {
-                return false
+                return "No Date"
             }
 
-            return dueDate.compare(Date()) == ComparisonResult.orderedAscending && !completed;
+            let prefixFormatter = DateFormatter()
+            prefixFormatter.formatterBehavior = .behavior10_4
+            prefixFormatter.dateFormat = "EEEE dd"
+            
+            let monthFormatter = DateFormatter()
+            monthFormatter.dateFormat = " MMM"
+            
+            return prefixFormatter.string(from: dueDate) + dueDate.ordinalIndicatorString + monthFormatter.string(from: dueDate)
         }
     }
 }

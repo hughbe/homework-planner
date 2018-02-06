@@ -22,17 +22,17 @@ public class SelectSubjectViewController: UIViewController {
     @IBOutlet weak var subjectsTableView: UITableView!
     @IBOutlet weak var noSubjectsView: UIView!
 
-    var subjects: [Subject] = []
+    private var subjects: [Subject] = []
     public var delegate: SelectSubjectViewControllerDelegate!
     
     public var selectedSubject: Subject?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
+        loadData(animated: false)
     }
     
-    private func loadData() {
+    private func loadData(animated: Bool) {
         let request = NSFetchRequest<Subject>(entityName: "Subject")
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Subject.name, ascending: true)
@@ -48,8 +48,8 @@ public class SelectSubjectViewController: UIViewController {
             }
             
             editButton.isEnabled = hasSubjects
-            subjectsTableView.isHidden = !hasSubjects
-            noSubjectsView.isHidden = hasSubjects
+            subjectsTableView.setHidden(hidden: !hasSubjects, animated: animated)
+            noSubjectsView.setHidden(hidden: hasSubjects, animated: animated)
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -91,7 +91,7 @@ public class SelectSubjectViewController: UIViewController {
 extension SelectSubjectViewController : CreateSubjectViewControllerDelegate {
     public func createSubjectViewController(viewController: CreateSubjectViewController, didCreateSubject: Subject) {
         dismiss(animated: true, completion: nil)
-        loadData()
+        loadData(animated: true)
     }
     
     public func didCancel(viewController: CreateSubjectViewController) {
@@ -155,7 +155,7 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
                 showAlert(error: error)
             }
 
-            loadData()
+            loadData(animated: true)
         }
     }
 }

@@ -13,3 +13,11 @@
 "Revision" = "Revision";
 "Notes" = "Notes";
 "Other" = "Other";
+
+"Overdue" = "Overdue";
+"Today" = "Today";
+"Due Date" = "Due Date";
+"Start Time" = "Start Time";
+"End Time" = "End Time";
+
+"Create" = "Create";
