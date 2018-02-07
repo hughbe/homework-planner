@@ -19,12 +19,18 @@ public class DayDatePickerViewController: UIViewController {
     
     public var delegate: DayDatePickerViewControllerDelegate?
     
+    public var date: DayDatePickerView.Date?
+    public var minDate: DayDatePickerView.Date?
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        let components = Calendar.current.dateComponents([.day, .month, .year], from: Date()) as NSDateComponents
-        datePickerView.setMinDate(year: components.year, month: components.month, day: components.day, animated: false)
-        datePickerView.setDate(year: components.year, month: components.month, day: components.day, animated: false)
+        if let minDate = minDate {
+            datePickerView.setMinDate(minDate: minDate, animated: false)
+        }
+        
+        let date = self.date ?? DayDatePickerView.Date(date: Date())
+        datePickerView.setDate(date: date, animated: false)
     }
 
     @IBAction func handleSelected(_ sender: Any) {

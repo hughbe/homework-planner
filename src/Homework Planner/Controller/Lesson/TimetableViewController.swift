@@ -11,7 +11,7 @@ import UIKit
 
 public class TimetableViewController : UIViewController {
     @IBOutlet weak var toolbar: UIToolbar!
-    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet weak var createButton: UIBarButtonItem!
     
     @IBOutlet weak var previousDayButton: UIBarButtonItem!
@@ -20,8 +20,16 @@ public class TimetableViewController : UIViewController {
 
     @IBOutlet weak var noLessonsTableView: UIImageView!
     @IBOutlet weak var lessonsTableView: UITableView!
+    
+    private var reloadAnimation = UITableViewRowAnimation.none
 
     private var lessons: [Lesson] = []
+    private var day = Day(date: Date()) {
+        didSet {
+            currentDayButton.title = day.name
+            loadData(animated: true)
+        }
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,19 +54,30 @@ public class TimetableViewController : UIViewController {
     }
 
     @IBAction func createLesson(_ sender: Any) {
+        showCreateLesson(lesson: nil)
+    }
+    
+    private func showCreateLesson(lesson: Lesson?) {
         let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateLessonNavigationViewController") as! CreateLessonViewController
         viewController.createDelegate = self
+        if let lesson = lesson {
+            viewController.setLesson(lesson: lesson)
+        }
         
         tabBarController?.present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func goToPreviousDay(_ sender: Any) {
+        reloadAnimation = .right
+        day = day.previousDay
     }
     
     @IBAction func currentDayTapped(_ sender: Any) {
     }
     
     @IBAction func goToNextDay(_ sender: Any) {
+        reloadAnimation = .left
+        day = day.nextDay
     }
     
     fileprivate func loadData(animated: Bool) {
@@ -67,17 +86,23 @@ public class TimetableViewController : UIViewController {
             NSSortDescriptor(keyPath: \Lesson.startHour, ascending: true),
             NSSortDescriptor(keyPath: \Lesson.startMinute, ascending: true)
         ]
-        // TODO: filter for current day.
-        
+        request.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
+
         do {
             lessons = try AppDelegate.shared.persistentContainer.viewContext.fetch(request)
             
-            lessonsTableView.reloadData()
+            if animated {
+                lessonsTableView.beginUpdates()
+                lessonsTableView.reloadSections(IndexSet(integer: 0), with: reloadAnimation)
+                lessonsTableView.endUpdates()
+            } else {
+                lessonsTableView.reloadData()
+            }
             
             let hasLessons = lessons.count != 0
             if hasLessons {
                 if var items = toolbar.items, let first = items.first, first != editButton {
-                    items.append(editButton)
+                    items.insert(editButton, at: 0)
                     toolbar.setItems(items, animated: animated)
                 }
             } else {
@@ -120,6 +145,9 @@ extension TimetableViewController : CreateLessonViewControllerDelegate {
     
     public func createLessonViewController(viewController: CreateLessonViewController, didCreateLesson lesson: Lesson) {
         do {
+            lesson.dayOfWeek = Int32(day.dayOfWeek)
+            lesson.week = Int32(day.week)
+
             try AppDelegate.shared.persistentContainer.viewContext.save()
             loadData(animated: true)
             viewController.dismiss(animated: true, completion: nil)
@@ -137,7 +165,7 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! LessonTableViewCell
         let lesson = lessons[indexPath.row]
-        
+
         cell.colorView.backgroundColor = lesson.subject?.uiColor ?? UIColor.black
         cell.nameLabel.text = lesson.subject?.name ?? "No Subject"
         cell.teacherLabel.text = lesson.subject?.teacher
@@ -152,5 +180,47 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let lesson = lessons[indexPath.row]
+        if let teacher = lesson.subject?.teacher, teacher.count > 0 {
+            return 85
+        }
+        
+        return 75
+    }
+    
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let lesson = lessons[indexPath.row]
+            AppDelegate.shared.persistentContainer.viewContext.delete(lesson)
+            
+            do {
+                try AppDelegate.shared.persistentContainer.viewContext.save()
+                
+                lessons.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .top)
+                
+                loadData(animated: true)
+            } catch let error as NSError {
+                showAlert(error: error)
+            }
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard tableView.isEditing else {
+            return
+        }
+
+        let lesson = lessons[indexPath.row]
+        showCreateLesson(lesson: lesson)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

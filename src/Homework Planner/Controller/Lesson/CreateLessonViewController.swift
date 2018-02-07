@@ -42,7 +42,8 @@ public class CreateLessonViewController : UINavigationController {
                 timePickerViewController.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Next", comment: "Next")
                 
                 if lesson.hasStartTime {
-                    timePickerViewController.setTime(hour: Int(lesson.startHour), minute: Int(lesson.startMinute))
+                    let time = TimePickerView.Time(hour: Int(lesson.startHour), minute: Int(lesson.startMinute))
+                    timePickerViewController.time = time
                 }
             } else if segue.identifier == "setEndTime" {
                 endTimeController = timePickerViewController
@@ -50,11 +51,16 @@ public class CreateLessonViewController : UINavigationController {
                 timePickerViewController.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Create", comment: "Create")
                 
                 if lesson.hasStartTime {
-                    timePickerViewController.setMinTime(hour: Int(lesson.startHour), minute: Int(lesson.startMinute))
+                    let time = TimePickerView.Time(hour: Int(lesson.startHour), minute: Int(lesson.startMinute))
+                    timePickerViewController.minTime = time.time(byAddingHour: 0, andMinutes: 5)
                 }
                 
                 if lesson.hasEndTime {
-                    timePickerViewController.setTime(hour: Int(lesson.endHour), minute: Int(lesson.endMinute))
+                    let time = TimePickerView.Time(hour: Int(lesson.endHour), minute: Int(lesson.endMinute))
+                    timePickerViewController.time = time
+                } else {
+                    let time = TimePickerView.Time(hour: Int(lesson.startHour), minute: Int(lesson.startMinute))
+                    timePickerViewController.minTime = time.time(byAddingHour: 0, andMinutes: 30)
                 }
             }
             

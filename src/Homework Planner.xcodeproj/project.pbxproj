@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E122C9C202A138400506B71 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E122C9B202A138400506B71 /* Day.swift */; };
+		1E122C9E202A14BA00506B71 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E122C9D202A14BA00506B71 /* Settings.swift */; };
 		1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3998412021F62B002DFFA3 /* PanelView.swift */; };
 		1E39984620220BF1002DFFA3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E39984420220BF1002DFFA3 /* Localizable.strings */; };
 		1E5D7AB82028F26500DF39F1 /* Date+OrdinalIndicatorString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */; };
@@ -29,6 +31,7 @@
 		1EBC88E9202890BC003937FD /* DayDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC88E8202890BC003937FD /* DayDatePickerViewController.swift */; };
 		1EBC88EB20289457003937FD /* UIView+FadeInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */; };
 		1EBC88ED202896E1003937FD /* HomeworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBC88EC202896E1003937FD /* HomeworkTableViewCell.swift */; };
+		1EE7EBE2202B17DA0093ED37 /* UIView+FindViewWithClassNamed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE7EBE1202B17DA0093ED37 /* UIView+FindViewWithClassNamed.swift */; };
 		1EECD575201FC4710091B0B8 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EECD574201FC4710091B0B8 /* ContainerView.swift */; };
 		1EF6A89C201D030F009F2BC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */; };
 		1EF6A8A1201D030F009F2BC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A89F201D030F009F2BC7 /* Main.storyboard */; };
@@ -49,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E122C9B202A138400506B71 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		1E122C9D202A14BA00506B71 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		1E3998412021F62B002DFFA3 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		1E39984520220BF1002DFFA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Homework Planner/Base.lproj/Localizable.strings"; sourceTree = SOURCE_ROOT; };
 		1E39984720220CCF002DFFA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -72,6 +77,7 @@
 		1EBC88E8202890BC003937FD /* DayDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDatePickerViewController.swift; sourceTree = "<group>"; };
 		1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+FadeInOut.swift"; sourceTree = "<group>"; };
 		1EBC88EC202896E1003937FD /* HomeworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTableViewCell.swift; sourceTree = "<group>"; };
+		1EE7EBE1202B17DA0093ED37 /* UIView+FindViewWithClassNamed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+FindViewWithClassNamed.swift"; sourceTree = "<group>"; };
 		1EECD574201FC4710091B0B8 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		1EF6A898201D030F009F2BC7 /* Homework Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Homework Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +166,8 @@
 				1EBA266B201D09A90042E03D /* Subject.swift */,
 				1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */,
 				1E8EFA112029D01B003D711C /* Lesson.swift */,
+				1E122C9B202A138400506B71 /* Day.swift */,
+				1E122C9D202A14BA00506B71 /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 				1E3998412021F62B002DFFA3 /* PanelView.swift */,
 				1EACEC26201D4BC5000E4915 /* UIColor+String.swift */,
 				1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */,
+				1EE7EBE1202B17DA0093ED37 /* UIView+FindViewWithClassNamed.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -420,6 +429,7 @@
 			files = (
 				1EBA2679201D48390042E03D /* UIViewController+ShowAlert.swift in Sources */,
 				1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */,
+				1E122C9E202A14BA00506B71 /* Settings.swift in Sources */,
 				1E8EFA0E2028FA7B003D711C /* TimetableViewController.swift in Sources */,
 				1EACEC27201D4BC5000E4915 /* UIColor+String.swift in Sources */,
 				1EBA266C201D09A90042E03D /* Subject.swift in Sources */,
@@ -436,6 +446,8 @@
 				1E651F822020F990007FD685 /* HomeworkContentViewController.swift in Sources */,
 				1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */,
 				1EBA267C201D498A0042E03D /* SubjectTableViewCell.swift in Sources */,
+				1E122C9C202A138400506B71 /* Day.swift in Sources */,
+				1EE7EBE2202B17DA0093ED37 /* UIView+FindViewWithClassNamed.swift in Sources */,
 				1E5D7AB82028F26500DF39F1 /* Date+OrdinalIndicatorString.swift in Sources */,
 				1EECD575201FC4710091B0B8 /* ContainerView.swift in Sources */,
 				1EF6A89C201D030F009F2BC7 /* AppDelegate.swift in Sources */,

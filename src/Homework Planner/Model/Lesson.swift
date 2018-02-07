@@ -9,6 +9,12 @@
 import Foundation
 
 public extension Lesson {
+    public var day: Day? {
+        get {
+            return Day(dayOfWeek: Int(dayOfWeek), week: Int(week))
+        }
+    }
+    
     public var startDate: Date? {
         get {
             var dateComponents = DateComponents()

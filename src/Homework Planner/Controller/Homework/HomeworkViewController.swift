@@ -29,8 +29,16 @@ public class HomeworkViewController : UIViewController {
     }
 
     @IBAction func createHomework(_ sender: Any) {
+        showCreateHomework(homework: nil)
+    }
+    
+    func showCreateHomework(homework: Homework?) {
         let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateHomeworkNavigationViewController") as! CreateHomeworkViewController
         viewController.createDelegate = self
+        
+        if let homework = homework {
+            viewController.setHomework(homework: homework)
+        }
         
         tabBarController?.present(viewController, animated: true, completion: nil)
     }
@@ -111,13 +119,12 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let homework = sectionedHomework[section].first, let subject = homework.subject else {
+        guard let homework = sectionedHomework[section].first, let subject = homework.subject, var title = subject.name else {
             return nil
         }
-        
-        var title = subject.name
-        if let teacher = subject.teacher {
-            title = " (" + teacher + ")"
+
+        if let teacher = subject.teacher, teacher.count > 0 {
+            title.append("(\(teacher))")
         }
         
         return title
@@ -133,21 +140,12 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        let result = Calendar.current.compare(dueDate, to: Date(), toGranularity: .day)
-        if result == .orderedAscending && !homework.completed {
-            cell.dueLabel.textColor = UIColor.red
-            cell.dueLabel.text = NSLocalizedString("Overdue", comment: "Overdue") + " - " + homework.dueString
-        } else if result == .orderedSame && !homework.completed {
-            cell.dueLabel.textColor = UIColor.orange
-            cell.dueLabel.text = NSLocalizedString("Today", comment: "Today")
-        }
-        else {
-            cell.dueLabel.textColor = UIColor(white: 0.6, alpha: 1)
-            cell.dueLabel.text = homework.dueString
-        }
-        
+        cell.dueDate = dueDate
+
         cell.completionHandler = { cell in
             homework.completed = !homework.completed
+            cell.completed = homework.completed
+            
             do {
                 try AppDelegate.shared.persistentContainer.viewContext.save()
             } catch let error as NSError {
@@ -169,17 +167,26 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
             
             do {
                 try AppDelegate.shared.persistentContainer.viewContext.save()
+
+                sectionedHomework[indexPath.section].remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+
+                loadData(animated: true)
             } catch let error as NSError {
                 showAlert(error: error)
             }
-            
-            loadData(animated: true)
         }
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let homework = sectionedHomework[indexPath.section][indexPath.row]
+
+        if tableView.isEditing {
+            showCreateHomework(homework: homework)
+        } else {
+            showAlert(title: homework.subject?.name ?? "", message: "Homework")
+        }
         
-        showAlert(title: homework.subject?.name ?? "", message: "Homework")
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

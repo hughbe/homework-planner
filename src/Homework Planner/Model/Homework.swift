@@ -44,25 +44,3 @@ public enum HomeworkType: Int32 {
     ]
 }
 
-private extension Date {
-    
-}
-
-extension Homework {
-    public var dueString: String {
-        get {
-            guard let dueDate = dueDate else {
-                return "No Date"
-            }
-
-            let prefixFormatter = DateFormatter()
-            prefixFormatter.formatterBehavior = .behavior10_4
-            prefixFormatter.dateFormat = "EEEE dd"
-            
-            let monthFormatter = DateFormatter()
-            monthFormatter.dateFormat = " MMM"
-            
-            return prefixFormatter.string(from: dueDate) + dueDate.ordinalIndicatorString + monthFormatter.string(from: dueDate)
-        }
-    }
-}

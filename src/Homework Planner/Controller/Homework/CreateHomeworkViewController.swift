@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import DayDatePicker
 import UIKit
 
 public protocol CreateHomeworkViewControllerDelegate {
@@ -39,6 +40,11 @@ public class CreateHomeworkViewController : UINavigationController {
             homeworkDueDateViewController.navigationItem.title = NSLocalizedString("Due Date", comment: "Due Date")
             homeworkDueDateViewController.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Create", comment: "Create")
             homeworkDueDateViewController.delegate = self
+            
+            if let dueDate = homework.dueDate {
+                homeworkDueDateViewController.minDate = DayDatePickerView.Date(date: Date())
+                homeworkDueDateViewController.date = DayDatePickerView.Date(date: dueDate)
+            }
         }
     }
 }

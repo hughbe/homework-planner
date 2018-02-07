@@ -17,35 +17,18 @@ public class TimePickerViewController : UIViewController {
     @IBOutlet public weak var timePickerView: TimePickerView!
     @IBOutlet weak var selectBarButtonItem: UIBarButtonItem!
     
-    private var minHour: Int?
-    private var minMinute: Int?
-    
-    private var hour: Int?
-    private var minute: Int?
-    
-    public func setTime(hour: Int, minute: Int) {
-        self.hour = hour
-        self.minute = minute
-    }
-    
-    public func setMinTime(hour: Int, minute: Int) {
-        self.minHour = hour
-        self.minMinute = minute
-    }
+    public var minTime: TimePickerView.Time?
+    public var time: TimePickerView.Time?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let minHour = minHour, let minMinute = minMinute {
-            timePickerView.setMinTime(hour: minHour, minute: minMinute, animated: false)
+        if let minTime = minTime {
+            timePickerView.setMinTime(minTime: minTime, animated: false)
         }
 
-        if let hour = hour, let minute = minute {
-            timePickerView.setTime(hour: hour, minute: minute, animated: false)
-        } else {
-            let components = Calendar.current.dateComponents([.hour, .minute], from: Date()) as NSDateComponents
-            timePickerView.setTime(hour: components.hour, minute: components.minute, animated: false)
-        }
+        let time = self.time ?? TimePickerView.Time(date: Date())
+        timePickerView.setTime(time: time, animated: false)
     }
     
     public var delegate: TimePickerViewControllerDelegate?

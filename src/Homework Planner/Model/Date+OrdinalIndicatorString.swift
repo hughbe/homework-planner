@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Date {
+internal extension Date {
     var ordinalIndicatorString: String {
         get {
             let day = Calendar.current.component(.day, from: self)
@@ -23,6 +23,13 @@ extension Date {
             default:
                 return "th"
             }
+        }
+    }
+    
+    var day: Date {
+        get {
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: self)
+            return Calendar.current.date(from: components)!
         }
     }
 }

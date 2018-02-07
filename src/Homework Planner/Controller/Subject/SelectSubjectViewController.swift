@@ -40,6 +40,7 @@ public class SelectSubjectViewController: UIViewController {
 
         do {
             subjects = try AppDelegate.shared.persistentContainer.viewContext.fetch(request)
+
             subjectsTableView.reloadData()
             
             let hasSubjects = subjects.count != 0
@@ -151,11 +152,14 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
 
             do {
                 try AppDelegate.shared.persistentContainer.viewContext.save()
+                
+                subjects.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+
+                loadData(animated: true)
             } catch let error as NSError {
                 showAlert(error: error)
             }
-
-            loadData(animated: true)
         }
     }
 }

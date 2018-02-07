@@ -25,7 +25,6 @@ public class HomeworkContentViewController: UIViewController {
     
     public var homework: Homework!
     public var delegate: HomeworkContentViewControllerDelegate!
-    private var type = HomeworkType.None
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +34,12 @@ public class HomeworkContentViewController: UIViewController {
         
         navigationItem.title = homework.subject?.name
         workSetTextView.text = homework.workSet
+        
+        if let type = HomeworkType(rawValue: homework.type) {
+            displayHomeworkType(type: type)
+        }
+
+        checkValid()
     }
     
     public override func viewWillAppear(_ animated: Bool)  {
@@ -46,6 +51,8 @@ public class HomeworkContentViewController: UIViewController {
     }
 
     @IBAction func next(_ sender: Any) {
+        homework.workSet = workSetTextView.text
+        
         delegate.homeworkContentViewController(viewController: self, didUpdateHomework: homework)
     }
     
@@ -59,15 +66,15 @@ public class HomeworkContentViewController: UIViewController {
         for type in HomeworkType.allValues {
             let name = type.getName()
             actionSheet.addAction(UIAlertAction(title: name, style: .default) { action in
-                self.setHomeworkType(type: type)
+                self.homework.type = type.rawValue
+                self.displayHomeworkType(type: type)
             })
         }
         
         present(actionSheet, animated: true, completion: nil)
     }
     
-    private func setHomeworkType(type: HomeworkType) {
-        self.type = type
+    private func displayHomeworkType(type: HomeworkType) {
         typeButton.setTitle(type.getName(), for: .normal)
     }
     
@@ -80,7 +87,7 @@ public class HomeworkContentViewController: UIViewController {
         }
         
         // Work around a bug in UIKit?
-        // Commentig out the line below means this doesn't work...
+        // Commenting out the line below means this doesn't work...
         navigationItem.rightBarButtonItem?.isEnabled = !isValid
         navigationItem.rightBarButtonItem?.isEnabled = isValid
     }
