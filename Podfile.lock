@@ -1,5 +1,5 @@
 PODS:
-  - DayDatePicker (1.4)
+  - DayDatePicker (1.5)
   - FLAnimatedImage (1.0.12)
   - JTCalendar (2.2.1)
   - NYTPhotoViewer (2.0.0):
@@ -13,20 +13,20 @@ PODS:
   - UIView+Borders (0.0.2)
 
 DEPENDENCIES:
-  - DayDatePicker
+  - DayDatePicker (~> 1.5)
   - JTCalendar
   - NYTPhotoViewer
   - SZTextView
   - UIView+Borders
 
 SPEC CHECKSUMS:
-  DayDatePicker: ad2523631388480bba0c3fb653e08d087ddae96d
+  DayDatePicker: fc2c53e23179995d50f4db40cd139d1a5c0174e8
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   JTCalendar: be9e781229c6e539d9b71267560410886cd65cfb
   NYTPhotoViewer: 34b8bd6bcc297466adec1668f9a01249d73c90e6
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
   UIView+Borders: d632c8bef679e7f98e913b569e972858742841ce
 
-PODFILE CHECKSUM: 0818620a71bcd678e61c59f1144d81a5b3c9bb91
+PODFILE CHECKSUM: cb8fb967972a077f6e743f30c83ad407335c6274
 
 COCOAPODS: 1.4.0

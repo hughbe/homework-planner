@@ -7,7 +7,7 @@ target 'Homework Planner' do
 
   project "src/Homework Planner.xcodeproj"
 
-  pod 'DayDatePicker'
+  pod 'DayDatePicker', '~> 1.5'
   pod 'NYTPhotoViewer'
   pod 'JTCalendar'
   pod 'SZTextView'
