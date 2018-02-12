@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import Homework_Planner_Core
 import UIKit
 
 public protocol SelectSubjectViewControllerDelegate {
@@ -42,7 +43,7 @@ public class SelectSubjectViewController: UIViewController {
         ]
 
         do {
-            subjects = try AppDelegate.shared.persistentContainer.viewContext.fetch(request)
+            subjects = try CoreDataStorage.shared.context.fetch(request)
 
             subjectsTableView.reloadData()
             
@@ -154,10 +155,10 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let subject = subjects[indexPath.row]
-            AppDelegate.shared.persistentContainer.viewContext.delete(subject)
+            CoreDataStorage.shared.context.delete(subject)
 
             do {
-                try AppDelegate.shared.persistentContainer.viewContext.save()
+                try CoreDataStorage.shared.context.save()
                 
                 subjects.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)

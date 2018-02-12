@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import Homework_Planner_Core
 import Foundation
 import UIKit
 
@@ -78,16 +79,14 @@ public class CreateSubjectViewController : UIViewController {
     }
 
     @IBAction func createSubject(_ sender: Any) {
-        let context = AppDelegate.shared.persistentContainer.viewContext
-        
-        let createdSubject = editingSubject ?? Subject(context: AppDelegate.shared.persistentContainer.viewContext)
+        let createdSubject = editingSubject ?? Subject(context: CoreDataStorage.shared.context)
 
         createdSubject.name = nameTextField.text
         createdSubject.teacher = teacherTextField.text
         createdSubject.uiColor = colorButton.backgroundColor
 
         do {
-            try context.save()
+            try CoreDataStorage.shared.context.save()
         } catch let error as NSError {
             showAlert(error: error)
         }

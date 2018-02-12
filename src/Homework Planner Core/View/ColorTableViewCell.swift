@@ -9,8 +9,8 @@
 import UIKit
 
 public class ColorTableViewCell : UITableViewCell {
-    @IBOutlet weak var colorView: UIView!
-    @IBOutlet weak var colorLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet public weak var colorView: UIView!
+    @IBOutlet public weak var colorLeadingConstraint: NSLayoutConstraint!
 
     public override func willTransition(to state: UITableViewCellStateMask) {
         super.willTransition(to: state)

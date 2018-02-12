@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Homework_Planner_Core
 
 public protocol CreateAttachmentViewControllerDelegate {
     func createAttachmentViewController(viewController: CreateAttachmentViewController, didCreateAttachment attachment: Attachment)

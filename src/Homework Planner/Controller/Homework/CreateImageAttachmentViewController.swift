@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Homework_Planner_Core
 
 public class CreateImageAttachmentViewController : CreateAttachmentViewController {
     @IBOutlet weak var imageView: UIImageView!
@@ -70,7 +71,7 @@ public class CreateImageAttachmentViewController : CreateAttachmentViewControlle
     }
 
     @IBAction func createAttachment(_ sender: Any) {
-        let createdAttachment = editingAttachment ?? ImageAttachment(context: AppDelegate.shared.persistentContainer.viewContext)
+        let createdAttachment = editingAttachment ?? ImageAttachment(context: CoreDataStorage.shared.context)
         
         createdAttachment.title = nameTextField.text
         createdAttachment.image = image

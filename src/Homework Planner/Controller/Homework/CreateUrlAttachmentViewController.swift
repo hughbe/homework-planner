@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import Homework_Planner_Core
 import UIKit
 
 public class CreateUrlAttachmentViewController : CreateAttachmentViewController {
@@ -57,7 +58,7 @@ public class CreateUrlAttachmentViewController : CreateAttachmentViewController 
             return
         }
         
-        let createdAttachment = editingAttachment ?? UrlAttachment(context: AppDelegate.shared.persistentContainer.viewContext)
+        let createdAttachment = editingAttachment ?? UrlAttachment(context: CoreDataStorage.shared.context)
         
         createdAttachment.title = nameTextField.text
         createdAttachment.url = url

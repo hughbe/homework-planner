@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="85" id="LBR-KL-cYf" customClass="HomeworkTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="85" id="LBR-KL-cYf" customClass="HomeworkTableViewCell" customModule="Homework_Planner_Core">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LBR-KL-cYf" id="owz-RQ-CyS">
@@ -33,13 +33,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOg-oI-82L">
-                                                    <rect key="frame" x="18" y="16" width="232.5" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <rect key="frame" x="18" y="16" width="232.5" height="26.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Work Set" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72f-R3-X27">
-                                                    <rect key="frame" x="32" y="48" width="218.5" height="22"/>
+                                                    <rect key="frame" x="32" y="50.5" width="218.5" height="22"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -109,8 +109,8 @@
                                     <outlet property="delegate" destination="Ef2-Wj-t3g" id="PDQ-ba-dlf"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lbK-rO-8OT" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
-                                <rect key="frame" x="46.5" y="155.5" width="281.5" height="372.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lbK-rO-8OT" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                <rect key="frame" x="47" y="137" width="281.5" height="408.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Homework"/>
@@ -122,12 +122,16 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="lbK-rO-8OT" firstAttribute="width" secondItem="ipI-y8-hOF" secondAttribute="width" multiplier="0.75" id="1TN-yc-bmN"/>
                             <constraint firstItem="OtN-HI-dxQ" firstAttribute="bottom" secondItem="ipI-y8-hOF" secondAttribute="bottom" id="9k2-WC-zRY"/>
                             <constraint firstItem="lbK-rO-8OT" firstAttribute="centerY" secondItem="OtN-HI-dxQ" secondAttribute="centerY" id="Cf9-tS-fLD"/>
+                            <constraint firstItem="lbK-rO-8OT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OtN-HI-dxQ" secondAttribute="top" constant="20" id="Czq-TR-JyR"/>
+                            <constraint firstItem="OtN-HI-dxQ" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lbK-rO-8OT" secondAttribute="bottom" constant="20" id="MVJ-rG-heZ"/>
                             <constraint firstItem="lbK-rO-8OT" firstAttribute="centerX" secondItem="OtN-HI-dxQ" secondAttribute="centerX" id="OnS-gH-HQ0"/>
+                            <constraint firstItem="lbK-rO-8OT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OtN-HI-dxQ" secondAttribute="leading" constant="20" id="cjr-JF-OcU"/>
                             <constraint firstItem="OtN-HI-dxQ" firstAttribute="trailing" secondItem="ipI-y8-hOF" secondAttribute="trailing" id="l67-Rt-peJ"/>
+                            <constraint firstItem="lbK-rO-8OT" firstAttribute="width" secondItem="xoy-k3-Q3R" secondAttribute="width" multiplier="0.75" id="mhA-hT-J3g"/>
                             <constraint firstItem="ipI-y8-hOF" firstAttribute="leading" secondItem="OtN-HI-dxQ" secondAttribute="leading" id="rkf-lB-SFc"/>
+                            <constraint firstItem="OtN-HI-dxQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lbK-rO-8OT" secondAttribute="trailing" constant="20" id="skJ-4S-7Dn"/>
                             <constraint firstItem="ipI-y8-hOF" firstAttribute="top" secondItem="OtN-HI-dxQ" secondAttribute="top" id="tMv-KS-F2r"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OtN-HI-dxQ"/>
@@ -193,7 +197,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="295" height="302"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <prototypes>
-                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubjectCell" rowHeight="80" id="M2u-Yc-ddj" customClass="SubjectTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubjectCell" rowHeight="80" id="M2u-Yc-ddj" customClass="SubjectTableViewCell" customModule="Homework_Planner_Core">
                                                             <rect key="frame" x="0.0" y="28" width="295" height="80"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M2u-Yc-ddj" id="P63-cM-db4">
@@ -1567,19 +1571,11 @@
                                     <constraint firstAttribute="height" constant="77" id="5m3-26-Gm4"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-3M-yfH" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
-                                <rect key="frame" x="56" y="171" width="262.5" height="341"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="Nothing On Today"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Esc-xK-s42">
                                 <rect key="frame" x="0.0" y="141" width="375" height="477"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeworkCell" rowHeight="85" id="hyg-bt-RYN" customClass="HomeworkTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeworkCell" rowHeight="85" id="hyg-bt-RYN" customClass="HomeworkTableViewCell" customModule="Homework_Planner_Core">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hyg-bt-RYN" id="XmU-ko-C4D">
@@ -1587,13 +1583,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPS-Zz-YwE">
-                                                    <rect key="frame" x="18" y="16" width="337" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <rect key="frame" x="18" y="16" width="337" height="26.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Work Set" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1O-6Z-Kmc">
-                                                    <rect key="frame" x="32" y="48" width="323" height="22"/>
+                                                    <rect key="frame" x="32" y="50.5" width="323" height="22"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1629,7 +1625,7 @@
                                             <outlet property="titleLabel" destination="IPS-Zz-YwE" id="V9Q-kH-b9x"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="LessonCell" rowHeight="80" id="wsO-mV-Obm" customClass="LessonTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="LessonCell" rowHeight="80" id="wsO-mV-Obm" customClass="LessonTableViewCell" customModule="Homework_Planner_Core">
                                         <rect key="frame" x="0.0" y="140.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wsO-mV-Obm" id="q9O-6F-NMs">
@@ -1694,22 +1690,34 @@
                                     <outlet property="delegate" destination="ZQ9-s0-eST" id="xQ6-Yj-iVU"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-3M-yfH" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                <rect key="frame" x="56" y="185" width="262.5" height="389.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="Nothing On Today"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="8vF-De-dF2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hme-3M-yfH" secondAttribute="trailing" constant="20" id="0Ay-MN-2R5"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="trailing" secondItem="Esc-xK-s42" secondAttribute="trailing" id="1qj-fl-Cb1"/>
                             <constraint firstItem="CMz-5d-ad6" firstAttribute="top" secondItem="8vF-De-dF2" secondAttribute="top" id="5Ss-gK-Ky2"/>
                             <constraint firstItem="wee-qt-Xo3" firstAttribute="top" secondItem="8vF-De-dF2" secondAttribute="top" id="5iu-za-IaV"/>
+                            <constraint firstItem="hme-3M-yfH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Esc-xK-s42" secondAttribute="top" constant="20" id="Cag-qp-IOM"/>
                             <constraint firstItem="CMz-5d-ad6" firstAttribute="leading" secondItem="8vF-De-dF2" secondAttribute="leading" id="E6N-hL-RDP"/>
                             <constraint firstItem="hme-3M-yfH" firstAttribute="width" secondItem="dVc-Em-Bp0" secondAttribute="width" multiplier="0.7" id="EyJ-ff-HpX"/>
                             <constraint firstItem="wee-qt-Xo3" firstAttribute="leading" secondItem="8vF-De-dF2" secondAttribute="leading" id="KZP-Ld-pJg"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="bottom" secondItem="CMz-5d-ad6" secondAttribute="bottom" id="LU2-WT-u3A"/>
-                            <constraint firstItem="hme-3M-yfH" firstAttribute="centerY" secondItem="8vF-De-dF2" secondAttribute="centerY" id="LUR-i1-L44"/>
                             <constraint firstItem="Esc-xK-s42" firstAttribute="leading" secondItem="8vF-De-dF2" secondAttribute="leading" id="QUz-mB-fhE"/>
+                            <constraint firstItem="8vF-De-dF2" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hme-3M-yfH" secondAttribute="bottom" constant="20" id="Z0W-cv-h0V"/>
+                            <constraint firstItem="hme-3M-yfH" firstAttribute="centerY" secondItem="Esc-xK-s42" secondAttribute="centerY" id="Zsu-rD-iNF"/>
                             <constraint firstItem="hme-3M-yfH" firstAttribute="centerX" secondItem="8vF-De-dF2" secondAttribute="centerX" id="aCU-GP-hab"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="trailing" secondItem="CMz-5d-ad6" secondAttribute="trailing" id="atV-ml-p0C"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="trailing" secondItem="wee-qt-Xo3" secondAttribute="trailing" id="b4a-8Z-KWw"/>
+                            <constraint firstItem="hme-3M-yfH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8vF-De-dF2" secondAttribute="leading" constant="20" id="duW-15-h0B"/>
                             <constraint firstItem="Esc-xK-s42" firstAttribute="top" secondItem="CMz-5d-ad6" secondAttribute="bottom" id="qeU-vc-ZS6"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="bottom" secondItem="Esc-xK-s42" secondAttribute="bottom" id="tj4-nh-acm"/>
                         </constraints>
@@ -1806,7 +1814,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Cell" rowHeight="80" id="8vY-Ek-PjJ" customClass="LessonTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Cell" rowHeight="80" id="8vY-Ek-PjJ" customClass="LessonTableViewCell" customModule="Homework_Planner_Core">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8vY-Ek-PjJ" id="Et9-Ur-F6Q">
@@ -1871,8 +1879,8 @@
                                     <outlet property="delegate" destination="5PN-hO-PtM" id="BZr-4y-94o"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7m-dR-pUp" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
-                                <rect key="frame" x="47" y="133.5" width="281.5" height="372.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7m-dR-pUp" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                <rect key="frame" x="47" y="115" width="281.5" height="408.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Lessons"/>
@@ -1924,10 +1932,14 @@
                             <constraint firstItem="ttB-Zz-tmg" firstAttribute="top" secondItem="WLM-MQ-LPw" secondAttribute="top" id="GuU-jo-jvS"/>
                             <constraint firstItem="GMP-fZ-HCQ" firstAttribute="centerY" secondItem="WLM-MQ-LPw" secondAttribute="centerY" id="Iko-rd-TGe"/>
                             <constraint firstItem="WLM-MQ-LPw" firstAttribute="trailing" secondItem="ttB-Zz-tmg" secondAttribute="trailing" id="TZx-Tl-BfV"/>
+                            <constraint firstItem="WLM-MQ-LPw" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="d7m-dR-pUp" secondAttribute="bottom" constant="20" id="VMs-eO-r72"/>
                             <constraint firstItem="N1s-LH-ldj" firstAttribute="leading" secondItem="WLM-MQ-LPw" secondAttribute="leading" id="Zxv-RA-pyP"/>
+                            <constraint firstItem="d7m-dR-pUp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WLM-MQ-LPw" secondAttribute="leading" constant="20" id="cT0-hw-Lri"/>
+                            <constraint firstItem="d7m-dR-pUp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WLM-MQ-LPw" secondAttribute="top" constant="20" id="cbm-xN-IYQ"/>
                             <constraint firstItem="GMP-fZ-HCQ" firstAttribute="centerX" secondItem="WLM-MQ-LPw" secondAttribute="centerX" id="d7B-ED-osq"/>
                             <constraint firstItem="d7m-dR-pUp" firstAttribute="centerX" secondItem="WLM-MQ-LPw" secondAttribute="centerX" id="gEi-zw-lB5"/>
                             <constraint firstItem="d7m-dR-pUp" firstAttribute="width" secondItem="rEd-gp-oZB" secondAttribute="width" multiplier="0.75" id="jEd-w8-IM4"/>
+                            <constraint firstItem="WLM-MQ-LPw" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d7m-dR-pUp" secondAttribute="trailing" constant="20" id="nLZ-FG-HSE"/>
                             <constraint firstItem="ttB-Zz-tmg" firstAttribute="leading" secondItem="WLM-MQ-LPw" secondAttribute="leading" id="rbZ-gI-wkE"/>
                             <constraint firstItem="GMP-fZ-HCQ" firstAttribute="width" secondItem="rEd-gp-oZB" secondAttribute="width" multiplier="0.6" id="xIc-Y8-fVn"/>
                             <constraint firstItem="d7m-dR-pUp" firstAttribute="centerY" secondItem="WLM-MQ-LPw" secondAttribute="centerY" id="z11-Bk-SO6"/>

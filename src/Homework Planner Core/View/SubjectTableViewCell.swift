@@ -9,6 +9,6 @@
 import UIKit
 
 public class SubjectTableViewCell : ColorTableViewCell {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var teacherLabel: UILabel!
+    @IBOutlet public weak var nameLabel: UILabel!
+    @IBOutlet public weak var teacherLabel: UILabel!
 }

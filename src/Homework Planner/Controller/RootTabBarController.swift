@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import Homework_Planner_Core
 import StoreKit
 import UIKit
 
@@ -85,7 +86,7 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
 
     private func setNumberOfWeeks(numberOfWeeks: Int) {
         Settings.numberOfWeeks = numberOfWeeks
-        Settings.weekStart = Date().day.previousMonday
+        Settings.weekStart = Date().previous(dayOfWeek: DayOfWeek.Monday)
 
         if let navigationController = self.viewControllers?[1] as? UINavigationController, let viewController = navigationController.viewControllers.first as? TimetableViewController {
             viewController.reloadAnimation = .fade

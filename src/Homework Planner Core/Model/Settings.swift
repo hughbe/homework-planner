@@ -31,7 +31,7 @@ public class Settings {
                 return date
             }
 
-            return Date().previousMonday
+            return Date().previous(dayOfWeek: DayOfWeek.Monday)
         }
         set {
             UserDefaults.standard.set(newValue, forKey: weekStartKey)

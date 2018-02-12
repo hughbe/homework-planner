@@ -8,6 +8,7 @@
 
 import CoreData
 import DayDatePicker
+import Homework_Planner_Core
 import UIKit
 
 public protocol CreateHomeworkViewControllerDelegate {
@@ -29,7 +30,7 @@ public class CreateHomeworkViewController : UINavigationController {
         if let editingHomework = editingHomework {
             homework = editingHomework
         } else {
-            let entityDescription = NSEntityDescription.entity(forEntityName: "Homework", in: AppDelegate.shared.persistentContainer.viewContext)!
+            let entityDescription = NSEntityDescription.entity(forEntityName: "Homework", in: CoreDataStorage.shared.context)!
             homework = Homework(entity: entityDescription, insertInto: nil)
         }
 
@@ -74,7 +75,7 @@ extension CreateHomeworkViewController : HomeworkContentViewControllerDelegate {
 
 extension CreateHomeworkViewController : DayDatePickerViewControllerDelegate {
     public func dayDatePickerViewController(viewController: DayDatePickerViewController, didSelectDate date: Date) {
-        AppDelegate.shared.persistentContainer.viewContext.insert(homework)
+        CoreDataStorage.shared.context.insert(homework)
         
         homework.subject = subject
         homework.dueDate = date

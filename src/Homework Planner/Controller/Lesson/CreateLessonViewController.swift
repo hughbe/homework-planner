@@ -8,6 +8,7 @@
 
 import CoreData
 import DayDatePicker
+import Homework_Planner_Core
 import UIKit
 
 public protocol CreateLessonViewControllerDelegate {
@@ -33,7 +34,7 @@ public class CreateLessonViewController : UINavigationController {
         if let editingLesson = editingLesson {
             lesson = editingLesson
         } else {
-            let entityDescription = NSEntityDescription.entity(forEntityName: "Lesson", in: AppDelegate.shared.persistentContainer.viewContext)!
+            let entityDescription = NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataStorage.shared.context)!
             lesson = Lesson(entity: entityDescription, insertInto: nil)
         }
         
@@ -101,7 +102,7 @@ extension CreateLessonViewController : TimePickerViewControllerDelegate {
             
             performSegue(withIdentifier: "setEndTime", sender: nil)
         } else if viewController == endTimeController {
-            AppDelegate.shared.persistentContainer.viewContext.insert(lesson)
+            CoreDataStorage.shared.context.insert(lesson)
 
             lesson.subject = subject
             lesson.endHour = Int32(time.hour)

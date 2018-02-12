@@ -7,22 +7,16 @@
 //
 
 import CoreData
+import Homework_Planner_Core
 import JTCalendar
 import UIKit
 
-public class CalenadarViewController : UIViewController {
+public class CalenadarViewController : DayViewController {
     @IBOutlet weak var calendarMenuView: JTCalendarMenuView!
     @IBOutlet weak var calendarContentView: JTHorizontalCalendarView!
     
-    @IBOutlet weak var noEventsView: UIView!
-    @IBOutlet weak var tableView: UITableView!
-    
     private var manager = JTCalendarManager()
     private var menuFont: UIFont!
-    
-    private var homework: [Homework] = []
-    private var lessons: [Lesson] = []
-    private var currentDate = Date()
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,63 +38,14 @@ public class CalenadarViewController : UIViewController {
         manager.setDate(currentDate)
         
         setWeekMode(weekMode: true, animated: false)
-        
-        if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: tableView)
-        }
-    }
-    
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        loadDate(date: currentDate, animated: true)
     }
     
     @IBOutlet var contentHeightConstraint: NSLayoutConstraint!
     @IBOutlet var contentBottomConstraint: NSLayoutConstraint!
     
-    public func loadDate(date: Date, animated: Bool) {
-        let dateDay = date.day
-
-        manager.setDate(dateDay)
-        currentDate = dateDay
-        (homework, lessons) = fetchData(date: currentDate)
-        
-        let hasEvents = homework.count > 0 || lessons.count > 0
-        tableView.setHidden(hidden: !hasEvents, animated: animated)
-        noEventsView.setHidden(hidden: hasEvents, animated: animated)
-        
-        UIView.transition(with: tableView, duration: animated ? 0.25 : 0, options: .transitionCrossDissolve, animations: {
-            self.tableView.reloadData()
-        })
-    }
-    
-    private func fetchData(date: Date) -> ([Homework], [Lesson]) {
-        let day = Day(date: date, modifyIfWeekend: false)
-
-        let homeworkRequest = NSFetchRequest<Homework>(entityName: "Homework")
-        homeworkRequest.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Homework.subject?.name, ascending: true)
-        ]
-        homeworkRequest.predicate = NSPredicate(format: "dueDate == %@", argumentArray: [date])
-        
-        let lessonsRequest = NSFetchRequest<Lesson>(entityName: "Lesson")
-        lessonsRequest.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Lesson.startHour, ascending: true),
-            NSSortDescriptor(keyPath: \Lesson.startMinute, ascending: true)
-        ]
-        lessonsRequest.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
-        
-        do {
-            let homework = try AppDelegate.shared.persistentContainer.viewContext.fetch(homeworkRequest)
-            let lessons = try AppDelegate.shared.persistentContainer.viewContext.fetch(lessonsRequest)
-            
-            return (homework, lessons)
-        } catch let error as NSError {
-            showAlert(error: error)
-            
-            return ([], [])
-        }
+    public override func loadDate(date: Date, animated: Bool) {
+        manager.setDate(date)
+        super.loadDate(date: date, animated: animated)
     }
 
     public func setWeekMode(weekMode: Bool, animated: Bool) {
@@ -128,6 +73,17 @@ public class CalenadarViewController : UIViewController {
         if let date = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) {
             loadDate(date: date, animated: true)
             manager.reload()
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if homework.count > 0 && indexPath.section == 0 {
+            let homework = self.homework[indexPath.row]
+            
+            let homeworkViewController = HomeworkContentViewController.create(for: homework)
+            tabBarController?.present(homeworkViewController, animated: true)
         }
     }
 }
@@ -182,75 +138,6 @@ extension CalenadarViewController : JTCalendarDelegate {
         } else {
             manager.reload()
         }
-    }
-}
-
-extension CalenadarViewController : UITableViewDelegate, UITableViewDataSource {
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        return homework.count > 0 ? 1 : 0 + lessons.count > 0 ? 1 : 0
-    }
-    
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if homework.count > 0 && section == 0 {
-            return homework.count
-        }
-        
-        return lessons.count
-    }
-    
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if homework.count > 0 && section == 0 {
-            return NSLocalizedString("Homework", comment: "Homework")
-        }
-
-        return NSLocalizedString("Lessons", comment: "Lessons")
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if homework.count > 0 && indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HomeworkCell", for: indexPath) as! HomeworkTableViewCell
-            let homework = self.homework[indexPath.row]
-            
-            cell.titleLabel.text = homework.subject?.name
-            cell.detailLabel.text = homework.workSet
-            cell.colorView.backgroundColor = homework.subject?.uiColor
-            
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LessonCell", for: indexPath) as! LessonTableViewCell
-            let lesson = self.lessons[indexPath.row]
-            
-            cell.nameLabel.text = lesson.subject?.name ?? "No Subject"
-            cell.teacherLabel.text = lesson.subject?.teacher
-            cell.colorView.backgroundColor = lesson.subject?.uiColor
-            cell.timeLabel.text = lesson.formattedDuration
-            
-            return cell
-        }
-    }
-    
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if homework.count > 0 && indexPath.section == 0 {
-            let homework = self.homework[indexPath.row]
-            
-            let homeworkViewController = HomeworkContentViewController.create(for: homework)
-            tabBarController?.present(homeworkViewController, animated: true)
-        }
-    }
-    
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section != 1 {
-            return 85
-        }
-        
-        let lesson = lessons[indexPath.row]
-        if let teacher = lesson.subject?.teacher, teacher.count > 0 {
-            return 85
-        }
-        
-        return 75
     }
 }
 

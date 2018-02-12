@@ -50,7 +50,7 @@ public enum HomeworkType: Int32 {
     ]
 }
 
-internal extension Homework {
+public extension Homework {
     var attachmentsArray: [Attachment] {
         get {
             guard let attachments = attachments else {
@@ -63,7 +63,7 @@ internal extension Homework {
         }
     }
     
-    func isGreaterThan(other: Homework, comparisonType: HomeworkComparisonType) -> Bool {
+    public func isGreaterThan(other: Homework, comparisonType: HomeworkComparisonType) -> Bool {
         if priority != other.priority {
             if priority {
                 // Greater priority than the other.

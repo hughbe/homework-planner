@@ -8,8 +8,18 @@
 
 import Foundation
 
-internal extension Date {
-    var ordinalIndicatorString: String {
+public enum DayOfWeek : Int {
+    case Monday = 2
+    case Tuesday = 3
+    case Wednesday = 4
+    case Thursday = 5
+    case Friday = 6
+    case Saturday = 7
+    case Sunday = 1
+}
+
+public extension Date {
+    public var ordinalIndicatorString: String {
         let day = Calendar.current.component(.day, from: self)
 
         switch day {
@@ -24,12 +34,12 @@ internal extension Date {
         }
     }
     
-    var day: Date {
+    public var day: Date {
         let components = Calendar.current.dateComponents([.year, .month, .day], from: self)
         return Calendar.current.date(from: components)!
     }
     
-    var formattedDayName: String {
+    public var formattedDayName: String {
         let difference = Calendar.current.dateComponents([.day], from: Date().day, to: day).day!
         if difference == 0 {
             return NSLocalizedString("Today", comment: "Today")
@@ -46,11 +56,11 @@ internal extension Date {
         return prefixFormatter.string(from: self) + ordinalIndicatorString + monthFormatter.string(from: self)
     }
     
-    var previousMonday: Date {
+    public func previous(dayOfWeek: DayOfWeek) -> Date {
         var previousMonday = day
         while true {
-            let dayOfWeek = Calendar.current.component(.weekday, from: previousMonday)
-            if dayOfWeek == 2 {
+            let weekday = Calendar.current.component(.weekday, from: previousMonday)
+            if weekday == dayOfWeek.rawValue {
                 return previousMonday
             }
             

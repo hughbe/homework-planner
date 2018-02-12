@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import Homework_Planner_Core
 import UIKit
 import UserNotifications
 
@@ -149,7 +150,7 @@ public class HomeworkViewController : UIViewController {
         }
         
         do {
-            unsectionedHomework = try AppDelegate.shared.persistentContainer.viewContext.fetch(request)
+            unsectionedHomework = try CoreDataStorage.shared.context.fetch(request)
             sectionData()
             
             UIView.transition(with: homeworkTableView, duration: animated ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
@@ -277,7 +278,7 @@ extension HomeworkViewController : CreateHomeworkViewControllerDelegate {
     
     public func createHomeworkViewController(viewController: CreateHomeworkViewController, didCreateHomework homework: Homework) {
         do {
-            try AppDelegate.shared.persistentContainer.viewContext.save()
+            try CoreDataStorage.shared.context.save()
 
             createNotification(for: homework)
             
@@ -379,7 +380,7 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
         })
         
         do {
-            try AppDelegate.shared.persistentContainer.viewContext.save()
+            try CoreDataStorage.shared.context.save()
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -413,10 +414,10 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
             let homework = sectionedHomework[indexPath.section][indexPath.row]
             deleteNotification(for: homework)
 
-            AppDelegate.shared.persistentContainer.viewContext.delete(homework)
+            CoreDataStorage.shared.context.delete(homework)
             
             do {
-                try AppDelegate.shared.persistentContainer.viewContext.save()
+                try CoreDataStorage.shared.context.save()
 
                 sectionedHomework[indexPath.section].remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)

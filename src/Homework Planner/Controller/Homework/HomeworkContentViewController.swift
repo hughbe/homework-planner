@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import Homework_Planner_Core
 import UIKit
 
 public protocol HomeworkContentViewControllerDelegate {

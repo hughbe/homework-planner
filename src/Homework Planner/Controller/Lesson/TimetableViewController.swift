@@ -7,8 +7,9 @@
 //
 
 import CoreData
-import UIKit
+import Homework_Planner_Core
 import StoreKit
+import UIKit
 
 public class TimetableViewController : UIViewController {
     @IBOutlet weak var toolbar: UIToolbar!
@@ -100,13 +101,13 @@ public class TimetableViewController : UIViewController {
                 let currentWeeekAlertController = UIAlertController(title: NSLocalizedString("Current Week", comment: "Current Week"), message: nil, preferredStyle: .actionSheet)
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 1", comment: "Week 1"), style: .default) { action in
-                    Settings.weekStart = self.day.date.previousMonday
+                    Settings.weekStart = self.day.date.previous(dayOfWeek: DayOfWeek.Monday)
                     self.day = Day(dayOfWeek: self.day.dayOfWeek, week: 1)
                 })
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 2", comment: "Week 2"), style: .default) { action in
                     let date = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: self.day.date)!
-                    Settings.weekStart = date.previousMonday
+                    Settings.weekStart = date.previous(dayOfWeek: DayOfWeek.Monday)
                     self.day = Day(dayOfWeek: self.day.dayOfWeek, week: 2)
                 })
                 
@@ -146,7 +147,7 @@ public class TimetableViewController : UIViewController {
         request.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
 
         do {
-            lessons = try AppDelegate.shared.persistentContainer.viewContext.fetch(request)
+            lessons = try CoreDataStorage.shared.context.fetch(request)
             
             if animated {
                 lessonsTableView.beginUpdates()
@@ -211,7 +212,7 @@ extension TimetableViewController : CreateLessonViewControllerDelegate {
             lesson.dayOfWeek = Int32(day.dayOfWeek)
             lesson.week = Int32(day.week)
             
-            try AppDelegate.shared.persistentContainer.viewContext.save()
+            try CoreDataStorage.shared.context.save()
             loadData(animated: true)
             viewController.dismiss(animated: true)
         } catch let error as NSError {
@@ -249,10 +250,10 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let lesson = lessons[indexPath.row]
-            AppDelegate.shared.persistentContainer.viewContext.delete(lesson)
+            CoreDataStorage.shared.context.delete(lesson)
             
             do {
-                try AppDelegate.shared.persistentContainer.viewContext.save()
+                try CoreDataStorage.shared.context.save()
                 
                 lessons.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .top)

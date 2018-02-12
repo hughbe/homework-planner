@@ -9,8 +9,8 @@
 import UIKit
 
 public class HomeworkTableViewCell : ColorTableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet public weak var titleLabel: UILabel!
+    @IBOutlet public weak var detailLabel: UILabel!
     @IBOutlet weak var completedButton: UIButton!
     @IBOutlet weak var priorityButton: UIButton!
     

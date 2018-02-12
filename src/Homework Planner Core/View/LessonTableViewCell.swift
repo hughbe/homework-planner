@@ -9,5 +9,5 @@
 import UIKit
 
 public class LessonTableViewCell : SubjectTableViewCell {
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet public weak var timeLabel: UILabel!
 }
