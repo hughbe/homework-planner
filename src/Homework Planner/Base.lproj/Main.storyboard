@@ -21,6 +21,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lbK-rO-8OT" customClass="BackupView" customModule="Homework_Planner_Core">
+                                <rect key="frame" x="47" y="137" width="281.5" height="408.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Homework"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Try creating some"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Homework"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ipI-y8-hOF">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -109,15 +118,6 @@
                                     <outlet property="delegate" destination="Ef2-Wj-t3g" id="PDQ-ba-dlf"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lbK-rO-8OT" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
-                                <rect key="frame" x="47" y="137" width="281.5" height="408.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Homework"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Try creating some"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Homework"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -170,7 +170,7 @@
         <!--Subject-->
         <scene sceneID="KwG-KA-Uf2">
             <objects>
-                <viewController storyboardIdentifier="SelectSubjectViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a9V-aC-zqB" customClass="SelectSubjectViewController" customModule="Homework_Planner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectSubjectViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a9V-aC-zqB" customClass="SelectSubjectViewController" customModule="Homework_Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WDd-5b-Lxy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -184,7 +184,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ziU-UM-wnP" customClass="ContainerView" customModule="Homework_Planner" customModuleProvider="target">
                                             <rect key="frame" x="40" y="151" width="295" height="301.5"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20R-Kq-3jG" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20R-Kq-3jG" customClass="BackupView" customModule="Homework_Planner_Core">
                                                     <rect key="frame" x="0.0" y="0.0" width="295" height="301.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -337,7 +337,7 @@
         <!--Attachments-->
         <scene sceneID="5Dy-At-8Ix">
             <objects>
-                <viewController storyboardIdentifier="AttachmentsViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DoX-Yt-fwP" customClass="AttachmentsViewController" customModule="Homework_Planner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AttachmentsViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DoX-Yt-fwP" customClass="AttachmentsViewController" customModule="Homework_Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yYy-WD-IyU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -351,7 +351,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dip-0y-Omo" customClass="ContainerView" customModule="Homework_Planner" customModuleProvider="target">
                                             <rect key="frame" x="40" y="121.5" width="295" height="361.5"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuu-3N-I7K" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuu-3N-I7K" customClass="BackupView" customModule="Homework_Planner_Core">
                                                     <rect key="frame" x="0.0" y="0.0" width="295" height="361.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -1571,6 +1571,14 @@
                                     <constraint firstAttribute="height" constant="77" id="5m3-26-Gm4"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hme-3M-yfH" customClass="BackupView" customModule="Homework_Planner_Core">
+                                <rect key="frame" x="56" y="185" width="262.5" height="389.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="Nothing On Today"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Esc-xK-s42">
                                 <rect key="frame" x="0.0" y="141" width="375" height="477"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1690,14 +1698,6 @@
                                     <outlet property="delegate" destination="ZQ9-s0-eST" id="xQ6-Yj-iVU"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-3M-yfH" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
-                                <rect key="frame" x="56" y="185" width="262.5" height="389.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="Nothing On Today"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -1810,6 +1810,15 @@
                                     <constraint firstItem="ekv-OO-wh8" firstAttribute="top" secondItem="og4-fz-vJl" secondAttribute="bottom" constant="8" symbolic="YES" id="l7j-DW-aZA"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7m-dR-pUp" customClass="BackupView" customModule="Homework_Planner_Core">
+                                <rect key="frame" x="47" y="115" width="281.5" height="408.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Lessons"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Enjoy your day!"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="N1s-LH-ldj">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1879,15 +1888,6 @@
                                     <outlet property="delegate" destination="5PN-hO-PtM" id="BZr-4y-94o"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7m-dR-pUp" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
-                                <rect key="frame" x="47" y="115" width="281.5" height="408.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Lessons"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Enjoy your day!"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttB-Zz-tmg">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
@@ -2056,6 +2056,6 @@
         <segue reference="aPX-ku-gub"/>
         <segue reference="yCN-PC-RDR"/>
         <segue reference="xUW-92-lDD"/>
-        <segue reference="UwU-fc-4oc"/>
+        <segue reference="FUw-5O-xYG"/>
     </inferredMetricsTieBreakers>
 </document>

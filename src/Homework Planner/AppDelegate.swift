@@ -53,6 +53,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        guard let resourceSpecifier = (url as NSURL).resourceSpecifier, resourceSpecifier.count > 2 else {
+            return false
+        }
+        
+        let index: String.Index = resourceSpecifier.index(resourceSpecifier.startIndex, offsetBy: 2)
+        let objectId = resourceSpecifier[index...]
+        
+        return showHomework(objectId: String(objectId))
+    }
+    
+    private func showHomework(objectId: String) -> Bool {
+        guard let url = URL(string: objectId), let id = CoreDataStorage.shared.context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: url), let viewController = window?.rootViewController else {
+            return false
+        }
+        
+        do {
+            let homework = try CoreDataStorage.shared.context.existingObject(with: id) as! Homework
+            
+            viewController.present(HomeworkContentViewController.create(for: homework), animated: true)
+            
+            return true
+        } catch let error as NSError {
+            print(error)
+            
+            return false
+        }
+    }
 }
 
 extension AppDelegate : UNUserNotificationCenterDelegate {
@@ -66,19 +95,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             return
         }
         
-        guard let url = URL(string: response.notification.request.identifier), let id = CoreDataStorage.shared.context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: url), let viewController = self.window?.rootViewController else {
-            completionHandler()
-            return
-        }
-
-        do {
-            let homework = try CoreDataStorage.shared.context.existingObject(with: id) as! Homework
-            
-            viewController.present(HomeworkContentViewController.create(for: homework), animated: true)
-        } catch let error as NSError {
-            print(error)
-        }
-
+        showHomework(objectId: response.notification.request.identifier)
         completionHandler()
     }
     

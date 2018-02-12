@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 
 open class DayViewController : UIViewController {
-    @IBOutlet public weak var noEventsView: UIView!
+    @IBOutlet public weak var noEventsView: UIView?
     @IBOutlet public weak var tableView: UITableView!
 
     public var homework: [Homework] = []
@@ -31,7 +31,7 @@ open class DayViewController : UIViewController {
 
         let hasEvents = homework.count > 0 || lessons.count > 0
         tableView.setHidden(hidden: !hasEvents, animated: animated)
-        noEventsView.setHidden(hidden: hasEvents, animated: animated)
+        noEventsView?.setHidden(hidden: hasEvents, animated: animated)
         
         UIView.transition(with: tableView, duration: animated ? 0.25 : 0, options: .transitionCrossDissolve, animations: {
             self.tableView.reloadData()
@@ -69,7 +69,7 @@ open class DayViewController : UIViewController {
 
 extension DayViewController : UITableViewDelegate, UITableViewDataSource {
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return homework.count > 0 ? 1 : 0 + lessons.count > 0 ? 1 : 0
+        return (homework.count > 0 ? 1 : 0) + (lessons.count > 0 ? 1 : 0)
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

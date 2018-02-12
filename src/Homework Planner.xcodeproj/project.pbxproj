@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		1E0572CA203203A600CCFD2A /* Homework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2667201D05E00042E03D /* Homework.swift */; };
 		1E0572CE203208A600CCFD2A /* SubjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0572CD203208A600CCFD2A /* SubjectTests.swift */; };
+		1E0572CF20321D7E00CCFD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A8A5201D030F009F2BC7 /* Assets.xcassets */; };
+		1E0572D020321DA700CCFD2A /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E53286B2030AD01007AD7AC /* BackupView.swift */; };
 		1E244325202E05F000E9DC68 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E244324202E05EF00E9DC68 /* SafariServices.framework */; };
 		1E244329202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E244328202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift */; };
 		1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3998412021F62B002DFFA3 /* PanelView.swift */; };
 		1E39984620220BF1002DFFA3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E39984420220BF1002DFFA3 /* Localizable.strings */; };
-		1E53286C2030AD01007AD7AC /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E53286B2030AD01007AD7AC /* BackupView.swift */; };
 		1E672408202DFB52000A0B95 /* CreateImageAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672407202DFB52000A0B95 /* CreateImageAttachmentViewController.swift */; };
 		1E67240A202DFC2A000A0B95 /* CreateAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672409202DFC2A000A0B95 /* CreateAttachmentViewController.swift */; };
 		1E67240C202E030F000A0B95 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E67240B202E030F000A0B95 /* Photo.swift */; };
@@ -345,7 +346,6 @@
 				1EFCA767202DEF8200DB9C11 /* UrlAttachmentTableViewCell.swift */,
 				1EFCA769202DEFD100DB9C11 /* ImageAttachmentTableViewCell.swift */,
 				1E67240B202E030F000A0B95 /* Photo.swift */,
-				1E53286B2030AD01007AD7AC /* BackupView.swift */,
 				1E98FA48202DDF850018F736 /* UIBarButtonItem+Badge.swift */,
 				1E244328202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift */,
 			);
@@ -403,6 +403,7 @@
 		1EC2ACB32031BADE00969D3A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1E53286B2030AD01007AD7AC /* BackupView.swift */,
 				1ECDFFC4202C870C005A4731 /* ColorTableViewCell.swift */,
 				1EBC88EC202896E1003937FD /* HomeworkTableViewCell.swift */,
 				1EBA267B201D498A0042E03D /* SubjectTableViewCell.swift */,
@@ -721,6 +722,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E0572CF20321D7E00CCFD2A /* Assets.xcassets in Resources */,
 				1EC2AC6B2031A04100969D3A /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -853,6 +855,7 @@
 				1EC2ACA52031A59300969D3A /* Settings.swift in Sources */,
 				1EC2ACA12031A59300969D3A /* Day.swift in Sources */,
 				1EC2ACB92031BC3300969D3A /* UIView+FadeInOut.swift in Sources */,
+				1E0572D020321DA700CCFD2A /* BackupView.swift in Sources */,
 				1EC2ACB42031BB0700969D3A /* HomeworkTableViewCell.swift in Sources */,
 				1EEF710C2031FAC100DF8442 /* Date+Day.swift in Sources */,
 				1EEF71112031FB1A00DF8442 /* Date+Previous.swift in Sources */,
@@ -879,7 +882,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E53286C2030AD01007AD7AC /* BackupView.swift in Sources */,
 				1E67240C202E030F000A0B95 /* Photo.swift in Sources */,
 				1EE7EBE8202B585F0093ED37 /* RootTabBarController.swift in Sources */,
 				1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */,

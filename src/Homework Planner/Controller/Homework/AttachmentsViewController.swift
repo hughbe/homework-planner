@@ -107,7 +107,7 @@ public class AttachmentsViewController : UIViewController {
 
 extension AttachmentsViewController : UITableViewDelegate, UITableViewDataSource {
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return websites.count > 0 ? 1 : 0 + images.count > 0 ? 1 : 0
+        return (websites.count > 0 ? 1 : 0) + (images.count > 0 ? 1 : 0)
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

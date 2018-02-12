@@ -11,6 +11,13 @@ import UIKit
 public class ColorTableViewCell : UITableViewCell {
     @IBOutlet public weak var colorView: UIView!
     @IBOutlet public weak var colorLeadingConstraint: NSLayoutConstraint!
+    
+    public override func setSelected(_ selected: Bool, animated: Bool) {
+        let color = colorView.backgroundColor
+        
+        super.setSelected(selected, animated: animated)
+        colorView.backgroundColor = color
+    }
 
     public override func willTransition(to state: UITableViewCellStateMask) {
         super.willTransition(to: state)

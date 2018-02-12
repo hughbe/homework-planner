@@ -53,7 +53,7 @@ public class CalenadarViewController : DayViewController {
         manager.reload()
         
         tableView.isHidden = !weekMode && (homework.count > 0 || lessons.count > 0)
-        noEventsView.isHidden = !weekMode || homework.count > 0 || lessons.count > 0
+        noEventsView?.isHidden = !weekMode || homework.count > 0 || lessons.count > 0
         contentBottomConstraint.isActive = !weekMode
         contentHeightConstraint.isActive = weekMode
         

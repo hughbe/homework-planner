@@ -44,7 +44,6 @@ public class BackupView : UIView {
         }
         set {
             titleLabel.text = newValue
-            titleLabel.sizeToFit()
             layoutIfNeeded()
         }
     }
@@ -65,7 +64,6 @@ public class BackupView : UIView {
            return subtitleLabel.text
         } set {
             subtitleLabel.text = newValue
-            subtitleLabel.sizeToFit()
             layoutIfNeeded()
         }
     }

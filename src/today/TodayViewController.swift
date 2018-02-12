@@ -6,29 +6,58 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import Homework_Planner_Core
 import UIKit
 import NotificationCenter
 
-class TodayViewController: UIViewController, NCWidgetProviding {
-        
+class TodayViewController: DayViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view from its nib.
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+
+        tableView.reloadData()
+        extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.contentInset = UIEdgeInsetsMake(-25, 0, 0, 0)
+    }
+    
+    override func loadDate(date: Date, animated: Bool) {
+        super.loadDate(date: date, animated: true)
+        
+        tableView.layoutIfNeeded()
+        preferredContentSize = tableView.contentSize
+    }
+    
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        tableView.reloadData()
+        tableView.layoutIfNeeded()
+        preferredContentSize = CGSize(width: preferredContentSize.width, height: tableView.contentSize.height + 50)
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-        
+        loadDate(date: currentDate, animated: true)        
         completionHandler(NCUpdateResult.newData)
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.textColor = UIColor.black
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if self.homework.count > 0 && indexPath.section == 0 {
+            let homework = self.homework[indexPath.row]
+            let urlString = homework.objectID.uriRepresentation().absoluteString
+            let url = URL(string: "homework-planner://\(urlString)")!
+
+            extensionContext?.open(url)
+        }
+    }
 }
