@@ -13,8 +13,9 @@ import UIKit
 public class CalenadarViewController : UIViewController {
     @IBOutlet weak var calendarMenuView: JTCalendarMenuView!
     @IBOutlet weak var calendarContentView: JTHorizontalCalendarView!
+    
+    @IBOutlet weak var noEventsView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noEventsView: UIImageView!
     
     private var manager = JTCalendarManager()
     private var menuFont: UIFont!

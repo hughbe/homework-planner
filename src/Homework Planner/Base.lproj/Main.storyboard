@@ -21,12 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Homework" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-TC-wNu">
-                                <rect key="frame" x="75" y="196.5" width="225" height="289"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="sEw-TC-wNu" secondAttribute="height" multiplier="250:321" id="bzo-QN-TTN"/>
-                                </constraints>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ipI-y8-hOF">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -115,14 +109,23 @@
                                     <outlet property="delegate" destination="Ef2-Wj-t3g" id="PDQ-ba-dlf"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lbK-rO-8OT" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                <rect key="frame" x="46.5" y="155.5" width="281.5" height="372.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Homework"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Try creating some"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Homework"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="lbK-rO-8OT" firstAttribute="width" secondItem="ipI-y8-hOF" secondAttribute="width" multiplier="0.75" id="1TN-yc-bmN"/>
                             <constraint firstItem="OtN-HI-dxQ" firstAttribute="bottom" secondItem="ipI-y8-hOF" secondAttribute="bottom" id="9k2-WC-zRY"/>
-                            <constraint firstItem="sEw-TC-wNu" firstAttribute="width" secondItem="xoy-k3-Q3R" secondAttribute="width" multiplier="0.6" id="DzN-YI-Aw7"/>
-                            <constraint firstItem="sEw-TC-wNu" firstAttribute="centerY" secondItem="OtN-HI-dxQ" secondAttribute="centerY" id="VwB-O0-8bt"/>
-                            <constraint firstItem="sEw-TC-wNu" firstAttribute="centerX" secondItem="OtN-HI-dxQ" secondAttribute="centerX" id="agV-md-bLB"/>
+                            <constraint firstItem="lbK-rO-8OT" firstAttribute="centerY" secondItem="OtN-HI-dxQ" secondAttribute="centerY" id="Cf9-tS-fLD"/>
+                            <constraint firstItem="lbK-rO-8OT" firstAttribute="centerX" secondItem="OtN-HI-dxQ" secondAttribute="centerX" id="OnS-gH-HQ0"/>
                             <constraint firstItem="OtN-HI-dxQ" firstAttribute="trailing" secondItem="ipI-y8-hOF" secondAttribute="trailing" id="l67-Rt-peJ"/>
                             <constraint firstItem="ipI-y8-hOF" firstAttribute="leading" secondItem="OtN-HI-dxQ" secondAttribute="leading" id="rkf-lB-SFc"/>
                             <constraint firstItem="ipI-y8-hOF" firstAttribute="top" secondItem="OtN-HI-dxQ" secondAttribute="top" id="tMv-KS-F2r"/>
@@ -148,7 +151,7 @@
                         <outlet property="createButton" destination="le0-va-O9k" id="yOZ-fy-E65"/>
                         <outlet property="editButton" destination="V7C-pB-JRJ" id="9P6-Qc-y6M"/>
                         <outlet property="homeworkTableView" destination="ipI-y8-hOF" id="l6F-Dj-Qpj"/>
-                        <outlet property="noHomeworkView" destination="sEw-TC-wNu" id="rev-VX-Srj"/>
+                        <outlet property="noHomeworkView" destination="lbK-rO-8OT" id="5g2-QT-lOu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0V-oW-fsg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -158,7 +161,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-3631" y="1712"/>
+            <point key="canvasLocation" x="-3631.1999999999998" y="1711.3943028485758"/>
         </scene>
         <!--Subject-->
         <scene sceneID="KwG-KA-Uf2">
@@ -177,31 +180,14 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ziU-UM-wnP" customClass="ContainerView" customModule="Homework_Planner" customModuleProvider="target">
                                             <rect key="frame" x="40" y="151" width="295" height="301.5"/>
                                             <subviews>
-                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66D-hk-tte" userLabel="No Subjects View">
-                                                    <rect key="frame" x="20" y="20" width="255" height="261.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Subjects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRf-VA-mta">
-                                                            <rect key="frame" x="60" y="115" width="136.5" height="31.5"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcX-Wg-J13">
-                                                            <rect key="frame" x="99" y="153.5" width="58" height="36"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                            <state key="normal" title="Create"/>
-                                                            <connections>
-                                                                <segue destination="BYZ-38-t0r" kind="presentation" id="t7c-Ae-yUk"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20R-Kq-3jG" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="295" height="301.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstItem="aRf-VA-mta" firstAttribute="centerY" secondItem="66D-hk-tte" secondAttribute="centerY" id="9DI-kr-dbM"/>
-                                                        <constraint firstItem="PcX-Wg-J13" firstAttribute="centerX" secondItem="66D-hk-tte" secondAttribute="centerX" id="e6S-2e-c9T"/>
-                                                        <constraint firstItem="PcX-Wg-J13" firstAttribute="top" secondItem="aRf-VA-mta" secondAttribute="bottom" constant="7.5" id="qR1-9X-dPg"/>
-                                                        <constraint firstItem="aRf-VA-mta" firstAttribute="centerX" secondItem="66D-hk-tte" secondAttribute="centerX" id="zCk-lD-XIE"/>
-                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Subjects"/>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Subjects"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Try creating one"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rcq-Oe-nFE">
                                                     <rect key="frame" x="0.0" y="0.0" width="295" height="302"/>
@@ -266,13 +252,13 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="66D-hk-tte" secondAttribute="bottom" constant="20" symbolic="YES" id="5vh-QS-acQ"/>
+                                                <constraint firstItem="20R-Kq-3jG" firstAttribute="leading" secondItem="ziU-UM-wnP" secondAttribute="leading" id="BAM-WM-lNw"/>
                                                 <constraint firstAttribute="bottom" secondItem="rcq-Oe-nFE" secondAttribute="bottom" id="BRR-cR-rAG"/>
+                                                <constraint firstAttribute="trailing" secondItem="20R-Kq-3jG" secondAttribute="trailing" id="KvX-Sr-REc"/>
                                                 <constraint firstItem="rcq-Oe-nFE" firstAttribute="leading" secondItem="ziU-UM-wnP" secondAttribute="leading" id="O9z-g8-chg"/>
-                                                <constraint firstItem="66D-hk-tte" firstAttribute="leading" secondItem="ziU-UM-wnP" secondAttribute="leading" constant="20" symbolic="YES" id="OO7-hF-1fJ"/>
-                                                <constraint firstAttribute="trailing" secondItem="66D-hk-tte" secondAttribute="trailing" constant="20" symbolic="YES" id="XeK-jG-bCd"/>
-                                                <constraint firstItem="66D-hk-tte" firstAttribute="top" secondItem="ziU-UM-wnP" secondAttribute="top" constant="20" symbolic="YES" id="bb8-KO-zpf"/>
+                                                <constraint firstItem="20R-Kq-3jG" firstAttribute="top" secondItem="ziU-UM-wnP" secondAttribute="top" id="dUm-Tt-hnv"/>
                                                 <constraint firstAttribute="trailing" secondItem="rcq-Oe-nFE" secondAttribute="trailing" id="pwR-DQ-FBa"/>
+                                                <constraint firstAttribute="bottom" secondItem="20R-Kq-3jG" secondAttribute="bottom" id="sLf-NG-me4"/>
                                                 <constraint firstItem="rcq-Oe-nFE" firstAttribute="top" secondItem="ziU-UM-wnP" secondAttribute="top" id="yBL-pC-V83"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
@@ -335,7 +321,7 @@
                         <outlet property="cancelButton" destination="Hav-pL-OEl" id="17e-uP-hwP"/>
                         <outlet property="createButton" destination="XuB-km-QQF" id="lUb-QE-WMK"/>
                         <outlet property="editButton" destination="hZF-Qw-Aub" id="Zol-dC-Ph4"/>
-                        <outlet property="noSubjectsView" destination="66D-hk-tte" id="tbU-o6-c6z"/>
+                        <outlet property="noSubjectsView" destination="20R-Kq-3jG" id="rjq-Kc-COL"/>
                         <outlet property="subjectsTableView" destination="rcq-Oe-nFE" id="GGM-qs-osq"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="editSubject" id="yCN-PC-RDR"/>
                     </connections>
@@ -361,31 +347,14 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dip-0y-Omo" customClass="ContainerView" customModule="Homework_Planner" customModuleProvider="target">
                                             <rect key="frame" x="40" y="121.5" width="295" height="361.5"/>
                                             <subviews>
-                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hbq-Ne-XNF" userLabel="No Attachments View">
-                                                    <rect key="frame" x="20" y="20" width="255" height="321.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Attachments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFx-JM-LL1" userLabel="No Attachments">
-                                                            <rect key="frame" x="37" y="144.5" width="181.5" height="31.5"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cls-fu-AqL">
-                                                            <rect key="frame" x="99" y="183" width="58" height="36"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                            <state key="normal" title="Create"/>
-                                                            <connections>
-                                                                <action selector="createAttachment:" destination="DoX-Yt-fwP" eventType="touchUpInside" id="Xiz-m5-s5a"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuu-3N-I7K" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="295" height="361.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstItem="tFx-JM-LL1" firstAttribute="centerX" secondItem="Hbq-Ne-XNF" secondAttribute="centerX" id="59g-2h-uNT"/>
-                                                        <constraint firstItem="tFx-JM-LL1" firstAttribute="centerY" secondItem="Hbq-Ne-XNF" secondAttribute="centerY" id="5js-JG-KvM"/>
-                                                        <constraint firstItem="cls-fu-AqL" firstAttribute="centerX" secondItem="Hbq-Ne-XNF" secondAttribute="centerX" id="fuO-w0-imF"/>
-                                                        <constraint firstItem="cls-fu-AqL" firstAttribute="top" secondItem="tFx-JM-LL1" secondAttribute="bottom" constant="7.5" id="utN-Kb-QYQ"/>
-                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Attachments"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Try creating one"/>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Attachments"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="JN9-PH-r4q">
                                                     <rect key="frame" x="0.0" y="0.0" width="295" height="362"/>
@@ -473,14 +442,14 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Hbq-Ne-XNF" secondAttribute="bottom" constant="20" symbolic="YES" id="0jF-el-Ef7"/>
+                                                <constraint firstItem="Uuu-3N-I7K" firstAttribute="top" secondItem="dip-0y-Omo" secondAttribute="top" id="7FG-Nz-Ejw"/>
+                                                <constraint firstAttribute="trailing" secondItem="Uuu-3N-I7K" secondAttribute="trailing" id="BTX-9C-Syq"/>
                                                 <constraint firstAttribute="bottom" secondItem="JN9-PH-r4q" secondAttribute="bottom" id="En1-zj-p3b"/>
-                                                <constraint firstAttribute="trailing" secondItem="Hbq-Ne-XNF" secondAttribute="trailing" constant="20" symbolic="YES" id="OvX-SB-Xkz"/>
+                                                <constraint firstItem="Uuu-3N-I7K" firstAttribute="leading" secondItem="dip-0y-Omo" secondAttribute="leading" id="F9J-FS-lvF"/>
                                                 <constraint firstAttribute="trailing" secondItem="JN9-PH-r4q" secondAttribute="trailing" id="cFE-wa-9Vj"/>
-                                                <constraint firstItem="Hbq-Ne-XNF" firstAttribute="top" secondItem="dip-0y-Omo" secondAttribute="top" constant="20" symbolic="YES" id="eAj-aA-Pfb"/>
+                                                <constraint firstAttribute="bottom" secondItem="Uuu-3N-I7K" secondAttribute="bottom" id="dOb-Tu-TqX"/>
                                                 <constraint firstItem="JN9-PH-r4q" firstAttribute="leading" secondItem="dip-0y-Omo" secondAttribute="leading" id="ekQ-Z6-ffb"/>
                                                 <constraint firstItem="JN9-PH-r4q" firstAttribute="top" secondItem="dip-0y-Omo" secondAttribute="top" id="n0d-tn-EGQ"/>
-                                                <constraint firstItem="Hbq-Ne-XNF" firstAttribute="leading" secondItem="dip-0y-Omo" secondAttribute="leading" constant="20" symbolic="YES" id="oIM-1P-BUz"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -537,8 +506,7 @@
                         <outlet property="attachmentsTableView" destination="JN9-PH-r4q" id="jZQ-Bg-g5B"/>
                         <outlet property="createButton" destination="g6d-fp-lvt" id="yFm-kD-cdM"/>
                         <outlet property="editButton" destination="LNq-ps-CIF" id="aVX-mD-1X9"/>
-                        <outlet property="noAttachmentsCreateButton" destination="cls-fu-AqL" id="Q78-9A-Pk8"/>
-                        <outlet property="noAttachmentsView" destination="Hbq-Ne-XNF" id="C7W-RM-3Lo"/>
+                        <outlet property="noAttachmentsView" destination="Uuu-3N-I7K" id="2z8-xt-N7V"/>
                         <segue destination="SOa-6U-yGp" kind="presentation" identifier="createUrlAttachment" id="aPX-ku-gub"/>
                         <segue destination="Cwj-7R-ISW" kind="presentation" identifier="createImageAttachment" id="obX-Rw-xMM"/>
                     </connections>
@@ -1209,7 +1177,7 @@
                                                         <action selector="nameNext:" destination="Cwj-7R-ISW" eventType="editingDidEndOnExit" id="1kW-iq-mH0"/>
                                                     </connections>
                                                 </textField>
-                                                <imageView contentMode="scaleAspectFit" image="No Image" translatesAutoresizingMaskIntoConstraints="NO" id="kmj-Nh-dcP">
+                                                <imageView contentMode="scaleAspectFit" image="No Images" translatesAutoresizingMaskIntoConstraints="NO" id="kmj-Nh-dcP">
                                                     <rect key="frame" x="20" y="58" width="295" height="343.5"/>
                                                     <gestureRecognizers/>
                                                     <connections>
@@ -1594,17 +1562,19 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMz-5d-ad6" customClass="JTHorizontalCalendarView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="77"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="77" id="5m3-26-Gm4"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Homework" translatesAutoresizingMaskIntoConstraints="NO" id="hr1-Q8-88j">
-                                <rect key="frame" x="75" y="235" width="225" height="289"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hr1-Q8-88j" secondAttribute="height" multiplier="250:321" id="yE5-CW-db4"/>
-                                </constraints>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-3M-yfH" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                <rect key="frame" x="56" y="171" width="262.5" height="341"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="Nothing On Today"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Esc-xK-s42">
                                 <rect key="frame" x="0.0" y="141" width="375" height="477"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1731,16 +1701,15 @@
                             <constraint firstItem="8vF-De-dF2" firstAttribute="trailing" secondItem="Esc-xK-s42" secondAttribute="trailing" id="1qj-fl-Cb1"/>
                             <constraint firstItem="CMz-5d-ad6" firstAttribute="top" secondItem="8vF-De-dF2" secondAttribute="top" id="5Ss-gK-Ky2"/>
                             <constraint firstItem="wee-qt-Xo3" firstAttribute="top" secondItem="8vF-De-dF2" secondAttribute="top" id="5iu-za-IaV"/>
-                            <constraint firstItem="hr1-Q8-88j" firstAttribute="width" secondItem="hr1-Q8-88j" secondAttribute="height" multiplier="250:321" id="7LK-5F-2q4"/>
                             <constraint firstItem="CMz-5d-ad6" firstAttribute="leading" secondItem="8vF-De-dF2" secondAttribute="leading" id="E6N-hL-RDP"/>
+                            <constraint firstItem="hme-3M-yfH" firstAttribute="width" secondItem="dVc-Em-Bp0" secondAttribute="width" multiplier="0.7" id="EyJ-ff-HpX"/>
                             <constraint firstItem="wee-qt-Xo3" firstAttribute="leading" secondItem="8vF-De-dF2" secondAttribute="leading" id="KZP-Ld-pJg"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="bottom" secondItem="CMz-5d-ad6" secondAttribute="bottom" id="LU2-WT-u3A"/>
-                            <constraint firstItem="hr1-Q8-88j" firstAttribute="width" secondItem="dVc-Em-Bp0" secondAttribute="width" multiplier="0.6" id="N8f-R6-44e"/>
+                            <constraint firstItem="hme-3M-yfH" firstAttribute="centerY" secondItem="8vF-De-dF2" secondAttribute="centerY" id="LUR-i1-L44"/>
                             <constraint firstItem="Esc-xK-s42" firstAttribute="leading" secondItem="8vF-De-dF2" secondAttribute="leading" id="QUz-mB-fhE"/>
+                            <constraint firstItem="hme-3M-yfH" firstAttribute="centerX" secondItem="8vF-De-dF2" secondAttribute="centerX" id="aCU-GP-hab"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="trailing" secondItem="CMz-5d-ad6" secondAttribute="trailing" id="atV-ml-p0C"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="trailing" secondItem="wee-qt-Xo3" secondAttribute="trailing" id="b4a-8Z-KWw"/>
-                            <constraint firstItem="hr1-Q8-88j" firstAttribute="centerY" secondItem="Esc-xK-s42" secondAttribute="centerY" id="iAJ-BN-vj2"/>
-                            <constraint firstItem="hr1-Q8-88j" firstAttribute="centerX" secondItem="8vF-De-dF2" secondAttribute="centerX" id="lKr-w6-x2g"/>
                             <constraint firstItem="Esc-xK-s42" firstAttribute="top" secondItem="CMz-5d-ad6" secondAttribute="bottom" id="qeU-vc-ZS6"/>
                             <constraint firstItem="8vF-De-dF2" firstAttribute="bottom" secondItem="Esc-xK-s42" secondAttribute="bottom" id="tj4-nh-acm"/>
                         </constraints>
@@ -1761,7 +1730,7 @@
                         <outlet property="calendarMenuView" destination="wee-qt-Xo3" id="buM-sa-EUN"/>
                         <outlet property="contentBottomConstraint" destination="LU2-WT-u3A" id="eA7-Tq-2j1"/>
                         <outlet property="contentHeightConstraint" destination="5m3-26-Gm4" id="LiZ-jK-lgp"/>
-                        <outlet property="noEventsView" destination="hr1-Q8-88j" id="NWT-bc-tEB"/>
+                        <outlet property="noEventsView" destination="hme-3M-yfH" id="TgD-1R-5TL"/>
                         <outlet property="tableView" destination="Esc-xK-s42" id="hZP-KM-QB2"/>
                     </connections>
                 </viewController>
@@ -1833,9 +1802,6 @@
                                     <constraint firstItem="ekv-OO-wh8" firstAttribute="top" secondItem="og4-fz-vJl" secondAttribute="bottom" constant="8" symbolic="YES" id="l7j-DW-aZA"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Lessons" translatesAutoresizingMaskIntoConstraints="NO" id="4Rg-la-Um5">
-                                <rect key="frame" x="75" y="158.5" width="225" height="321"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="N1s-LH-ldj">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1905,6 +1871,15 @@
                                     <outlet property="delegate" destination="5PN-hO-PtM" id="BZr-4y-94o"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7m-dR-pUp" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
+                                <rect key="frame" x="47" y="133.5" width="281.5" height="372.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="No Lessons"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Enjoy your day!"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttB-Zz-tmg">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
@@ -1946,16 +1921,16 @@
                             <constraint firstItem="WLM-MQ-LPw" firstAttribute="trailing" secondItem="N1s-LH-ldj" secondAttribute="trailing" id="9uo-ea-Qh8"/>
                             <constraint firstItem="WLM-MQ-LPw" firstAttribute="bottom" secondItem="N1s-LH-ldj" secondAttribute="bottom" id="9yZ-BQ-m9m"/>
                             <constraint firstItem="N1s-LH-ldj" firstAttribute="top" secondItem="WLM-MQ-LPw" secondAttribute="top" id="A9d-G1-H73"/>
-                            <constraint firstItem="4Rg-la-Um5" firstAttribute="centerY" secondItem="WLM-MQ-LPw" secondAttribute="centerY" id="EYP-0u-sop"/>
                             <constraint firstItem="ttB-Zz-tmg" firstAttribute="top" secondItem="WLM-MQ-LPw" secondAttribute="top" id="GuU-jo-jvS"/>
                             <constraint firstItem="GMP-fZ-HCQ" firstAttribute="centerY" secondItem="WLM-MQ-LPw" secondAttribute="centerY" id="Iko-rd-TGe"/>
                             <constraint firstItem="WLM-MQ-LPw" firstAttribute="trailing" secondItem="ttB-Zz-tmg" secondAttribute="trailing" id="TZx-Tl-BfV"/>
-                            <constraint firstItem="4Rg-la-Um5" firstAttribute="centerX" secondItem="WLM-MQ-LPw" secondAttribute="centerX" id="UNr-SC-x7A"/>
-                            <constraint firstItem="4Rg-la-Um5" firstAttribute="width" secondItem="rEd-gp-oZB" secondAttribute="width" multiplier="0.6" id="XJQ-gz-YQ0"/>
                             <constraint firstItem="N1s-LH-ldj" firstAttribute="leading" secondItem="WLM-MQ-LPw" secondAttribute="leading" id="Zxv-RA-pyP"/>
                             <constraint firstItem="GMP-fZ-HCQ" firstAttribute="centerX" secondItem="WLM-MQ-LPw" secondAttribute="centerX" id="d7B-ED-osq"/>
+                            <constraint firstItem="d7m-dR-pUp" firstAttribute="centerX" secondItem="WLM-MQ-LPw" secondAttribute="centerX" id="gEi-zw-lB5"/>
+                            <constraint firstItem="d7m-dR-pUp" firstAttribute="width" secondItem="rEd-gp-oZB" secondAttribute="width" multiplier="0.75" id="jEd-w8-IM4"/>
                             <constraint firstItem="ttB-Zz-tmg" firstAttribute="leading" secondItem="WLM-MQ-LPw" secondAttribute="leading" id="rbZ-gI-wkE"/>
                             <constraint firstItem="GMP-fZ-HCQ" firstAttribute="width" secondItem="rEd-gp-oZB" secondAttribute="width" multiplier="0.6" id="xIc-Y8-fVn"/>
+                            <constraint firstItem="d7m-dR-pUp" firstAttribute="centerY" secondItem="WLM-MQ-LPw" secondAttribute="centerY" id="z11-Bk-SO6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WLM-MQ-LPw"/>
                         <connections>
@@ -1978,7 +1953,7 @@
                         <outlet property="editButton" destination="SGI-6M-fw2" id="lGU-A5-KjL"/>
                         <outlet property="lessonsTableView" destination="N1s-LH-ldj" id="Rra-Ef-PwL"/>
                         <outlet property="nextDayButton" destination="hPU-LZ-td2" id="Dca-Do-p0j"/>
-                        <outlet property="noLessonsView" destination="4Rg-la-Um5" id="7fa-nF-2vW"/>
+                        <outlet property="noLessonsView" destination="d7m-dR-pUp" id="lFN-yF-yLU"/>
                         <outlet property="notPurchasedView" destination="GMP-fZ-HCQ" id="X9M-eO-22G"/>
                         <outlet property="previousDayButton" destination="71X-BB-UML" id="ddx-03-tga"/>
                         <outlet property="toolbar" destination="ttB-Zz-tmg" id="Nuj-Yd-9N6"/>
@@ -1996,7 +1971,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2703" y="1711"/>
+            <point key="canvasLocation" x="-2703.1999999999998" y="1710.4947526236883"/>
         </scene>
         <!--Create Homework View Controller-->
         <scene sceneID="vLJ-z1-LU8">
@@ -2048,9 +2023,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="No Homework" width="250" height="321"/>
-        <image name="No Image" width="150" height="266"/>
-        <image name="No Lessons" width="250" height="321"/>
+        <image name="No Attachments" width="340" height="340"/>
+        <image name="No Homework" width="340" height="340"/>
+        <image name="No Images" width="340" height="340"/>
+        <image name="No Lessons" width="340" height="340"/>
+        <image name="No Subjects" width="340" height="340"/>
         <image name="backDay" width="22" height="22"/>
         <image name="calendar" width="28" height="28"/>
         <image name="camera" width="28" height="28"/>

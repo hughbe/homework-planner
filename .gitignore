@@ -184,4 +184,6 @@ fabric.properties
 
 .idea/
 
+.DS_Store
+
 # End of https://www.gitignore.io/api/swift,xcode,carthage,cocoapods,objective-c

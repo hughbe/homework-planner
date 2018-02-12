@@ -20,7 +20,7 @@ public class TimetableViewController : UIViewController {
     @IBOutlet weak var nextDayButton: UIBarButtonItem!
 
     @IBOutlet weak var notPurchasedView: UIView!
-    @IBOutlet weak var noLessonsView: UIImageView!
+    @IBOutlet weak var noLessonsView: UIView!
     @IBOutlet weak var lessonsTableView: UITableView!
     
     public var reloadAnimation = UITableViewRowAnimation.none

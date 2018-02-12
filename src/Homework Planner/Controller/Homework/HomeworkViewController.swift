@@ -21,7 +21,7 @@ public class HomeworkViewController : UIViewController {
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet weak var createButton: UIBarButtonItem!
 
-    @IBOutlet weak var noHomeworkView: UIImageView!
+    @IBOutlet weak var noHomeworkView: UIView!
     @IBOutlet weak var homeworkTableView: UITableView!
     
     private var searchBar: UISearchBar!
@@ -252,7 +252,7 @@ public class HomeworkViewController : UIViewController {
 
                 let content = UNMutableNotificationContent()
                 content.title = name + " " + NSLocalizedString("homework is due tomorrow", comment: "homework is due tomorrow")
-                
+
                 let notification = UNNotificationRequest(identifier: homework.objectID.uriRepresentation().absoluteString, content: content, trigger: trigger)
                 let center = UNUserNotificationCenter.current()
                 center.add(notification) { error in
