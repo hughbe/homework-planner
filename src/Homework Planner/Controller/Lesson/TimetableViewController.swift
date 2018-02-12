@@ -40,8 +40,8 @@ public class TimetableViewController : UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !Settings.purchasedTimetable {
-            let request = SKProductsRequest(productIdentifiers: [InAppPurchases.unlockTimetable.rawValue])
+        if !InAppPurchase.unlockTimetable.isPurchased {
+            let request = SKProductsRequest(productIdentifiers: [InAppPurchase.unlockTimetable.rawValue])
             request.delegate = self
             request.start()
         }
@@ -128,7 +128,7 @@ public class TimetableViewController : UIViewController {
     }
     
     public func loadData(animated: Bool) {
-        guard Settings.purchasedTimetable else {
+        guard InAppPurchase.unlockTimetable.isPurchased else {
             lessonsTableView.setHidden(hidden: true, animated: animated)
             noLessonsView.setHidden(hidden: true, animated: animated)
             
@@ -279,7 +279,7 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension TimetableViewController : SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        timetableProduct = response.products.first { $0.productIdentifier == InAppPurchases.unlockTimetable.rawValue }
+        timetableProduct = response.products.first { $0.productIdentifier == InAppPurchase.unlockTimetable.rawValue }
     }
     
     public func request(_ request: SKRequest, didFailWithError error: Error) {

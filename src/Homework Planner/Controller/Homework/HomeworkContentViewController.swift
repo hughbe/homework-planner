@@ -33,7 +33,7 @@ public class HomeworkContentViewController: UIViewController {
         navigationItem.title = homework.subject?.name
         workSetTextView.text = homework.workSet
         
-        if let type = HomeworkType(rawValue: homework.type) {
+        if let type = Homework.WorkType(rawValue: homework.type) {
             displayHomeworkType(type: type)
         }
         
@@ -85,7 +85,7 @@ public class HomeworkContentViewController: UIViewController {
     @IBAction func changeType(_ sender: Any) {
         let actionSheet = UIAlertController(title: NSLocalizedString("Homework Type", comment: "Homework Type"), message: nil, preferredStyle: .actionSheet)
         
-        for type in HomeworkType.allValues {
+        for type in Homework.WorkType.allValues {
             actionSheet.addAction(UIAlertAction(title: type.name, style: .default) { action in
                 self.homework.type = type.rawValue
                 self.displayHomeworkType(type: type)
@@ -95,7 +95,7 @@ public class HomeworkContentViewController: UIViewController {
         present(actionSheet, animated: true)
     }
     
-    private func displayHomeworkType(type: HomeworkType) {
+    private func displayHomeworkType(type: Homework.WorkType) {
         typeButton.title = type.name
     }
     

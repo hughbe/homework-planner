@@ -100,15 +100,15 @@ extension AppDelegate : SKPaymentTransactionObserver {
             switch (transaction.transactionState) {
             case .purchased:
                 let productId = transaction.payment.productIdentifier
-                if productId == InAppPurchases.unlockTimetable.rawValue {
-                    Settings.purchasedTimetable = true
+                if productId == InAppPurchase.unlockTimetable.rawValue {
+                    InAppPurchase.unlockTimetable.purchase()
                     reloadTimetableViewController()
                 }
                 break
             case .restored:
                 let productId = transaction.original?.payment.productIdentifier
-                if productId == InAppPurchases.unlockTimetable.rawValue {
-                    Settings.purchasedTimetable = true
+                if productId == InAppPurchase.unlockTimetable.rawValue {
+                    InAppPurchase.unlockTimetable.purchase()
                     reloadTimetableViewController()
                 }
                 break

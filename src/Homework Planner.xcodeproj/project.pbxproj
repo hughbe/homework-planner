@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0572CA203203A600CCFD2A /* Homework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2667201D05E00042E03D /* Homework.swift */; };
+		1E0572CE203208A600CCFD2A /* SubjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0572CD203208A600CCFD2A /* SubjectTests.swift */; };
 		1E244325202E05F000E9DC68 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E244324202E05EF00E9DC68 /* SafariServices.framework */; };
 		1E244329202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E244328202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift */; };
 		1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3998412021F62B002DFFA3 /* PanelView.swift */; };
@@ -35,15 +37,13 @@
 		1EC2AC942031A4C500969D3A /* Homework_Planner_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC2AC7F2031A4C500969D3A /* Homework_Planner_Core.framework */; };
 		1EC2AC952031A4C500969D3A /* Homework_Planner_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC2AC7F2031A4C500969D3A /* Homework_Planner_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EC2AC9D2031A53600969D3A /* Homework_Planner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1EF6A8A2201D030F009F2BC7 /* Homework_Planner.xcdatamodeld */; };
-		1EC2AC9E2031A59300969D3A /* Homework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2667201D05E00042E03D /* Homework.swift */; };
 		1EC2AC9F2031A59300969D3A /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA266B201D09A90042E03D /* Subject.swift */; };
 		1EC2ACA02031A59300969D3A /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA112029D01B003D711C /* Lesson.swift */; };
 		1EC2ACA12031A59300969D3A /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E122C9B202A138400506B71 /* Day.swift */; };
-		1EC2ACA22031A59300969D3A /* HomeworkDisplayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE7EBE9202B8E2B0093ED37 /* HomeworkDisplayType.swift */; };
 		1EC2ACA32031A59300969D3A /* Date+OrdinalIndicatorString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */; };
 		1EC2ACA42031A59300969D3A /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCA76B202DF20E00DB9C11 /* Attachment.swift */; };
 		1EC2ACA52031A59300969D3A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E122C9D202A14BA00506B71 /* Settings.swift */; };
-		1EC2ACA62031A59300969D3A /* InAppPurchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECB7F732030832B00858162 /* InAppPurchases.swift */; };
+		1EC2ACA62031A59300969D3A /* InAppPurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECB7F732030832B00858162 /* InAppPurchase.swift */; };
 		1EC2ACA72031A59300969D3A /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC2AC772031A24E00969D3A /* CoreDataStorage.swift */; };
 		1EC2ACAA2031A63600969D3A /* UIColor+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EACEC26201D4BC5000E4915 /* UIColor+String.swift */; };
 		1EC2ACAB2031A64700969D3A /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2678201D48390042E03D /* UIViewController+ShowAlert.swift */; };
@@ -61,6 +61,16 @@
 		1EE7EBE6202B54370093ED37 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE7EBE5202B54370093ED37 /* StoreKit.framework */; };
 		1EE7EBE8202B585F0093ED37 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE7EBE7202B585F0093ED37 /* RootTabBarController.swift */; };
 		1EECD575201FC4710091B0B8 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EECD574201FC4710091B0B8 /* ContainerView.swift */; };
+		1EEF70FC2031F72B00DF8442 /* UIColor+StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF70FB2031F72B00DF8442 /* UIColor+StringTests.swift */; };
+		1EEF70FE2031F72B00DF8442 /* Homework_Planner_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC2AC7F2031A4C500969D3A /* Homework_Planner_Core.framework */; };
+		1EEF71082031F97400DF8442 /* Date+OrdinalIndicatorStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71062031F96F00DF8442 /* Date+OrdinalIndicatorStringTests.swift */; };
+		1EEF710A2031FA4D00DF8442 /* Date+DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71092031FA4D00DF8442 /* Date+DayTests.swift */; };
+		1EEF710C2031FAC100DF8442 /* Date+Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF710B2031FAC100DF8442 /* Date+Day.swift */; };
+		1EEF710F2031FAF600DF8442 /* Date+FormattedDayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF710E2031FAF600DF8442 /* Date+FormattedDayName.swift */; };
+		1EEF71112031FB1A00DF8442 /* Date+Previous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71102031FB1A00DF8442 /* Date+Previous.swift */; };
+		1EEF71142031FBF300DF8442 /* Date+FormattedDayNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71132031FBF300DF8442 /* Date+FormattedDayNameTests.swift */; };
+		1EEF71162031FCE700DF8442 /* Date+PreviousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71152031FCE700DF8442 /* Date+PreviousTests.swift */; };
+		1EEF71182031FEC100DF8442 /* HomeworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71172031FEC100DF8442 /* HomeworkTests.swift */; };
 		1EF6A89C201D030F009F2BC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */; };
 		1EF6A8A6201D030F009F2BC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A8A5201D030F009F2BC7 /* Assets.xcassets */; };
 		1EF6A8A9201D030F009F2BC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A8A7201D030F009F2BC7 /* LaunchScreen.storyboard */; };
@@ -70,6 +80,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1E0572CB2032042100CCFD2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EF6A890201D030F009F2BC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EF6A897201D030F009F2BC7;
+			remoteInfo = "Homework Planner";
+		};
 		1EC2AC6D2031A04100969D3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1EF6A890201D030F009F2BC7 /* Project object */;
@@ -83,6 +100,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1EC2AC7E2031A4C500969D3A;
 			remoteInfo = "homework-planner-core";
+		};
+		1EEF70FF2031F72B00DF8442 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EF6A890201D030F009F2BC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EC2AC7E2031A4C500969D3A;
+			remoteInfo = "Homework Planner Core";
 		};
 		1EF6A8B0201D030F009F2BC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -119,6 +143,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E0572CD203208A600CCFD2A /* SubjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTests.swift; sourceTree = "<group>"; };
 		1E122C9B202A138400506B71 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		1E122C9D202A14BA00506B71 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		1E244324202E05EF00E9DC68 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -163,7 +188,7 @@
 		1EC2AC822031A4C500969D3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EC2ACA82031A5B100969D3A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1EC2ACAF2031B9AF00969D3A /* DayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
-		1ECB7F732030832B00858162 /* InAppPurchases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchases.swift; sourceTree = "<group>"; };
+		1ECB7F732030832B00858162 /* InAppPurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchase.swift; sourceTree = "<group>"; };
 		1ECC7EE12030D37E0032F709 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1ECDFFC4202C870C005A4731 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
 		1ECDFFC7202C9B0F005A4731 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -172,8 +197,18 @@
 		1EE7EBE4202B54270093ED37 /* Homework Planner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Homework Planner.entitlements"; sourceTree = "<group>"; };
 		1EE7EBE5202B54370093ED37 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1EE7EBE7202B585F0093ED37 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
-		1EE7EBE9202B8E2B0093ED37 /* HomeworkDisplayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkDisplayType.swift; sourceTree = "<group>"; };
 		1EECD574201FC4710091B0B8 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		1EEF70F92031F72B00DF8442 /* Homework Planner Core Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Homework Planner Core Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EEF70FB2031F72B00DF8442 /* UIColor+StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+StringTests.swift"; sourceTree = "<group>"; };
+		1EEF70FD2031F72B00DF8442 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EEF71062031F96F00DF8442 /* Date+OrdinalIndicatorStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+OrdinalIndicatorStringTests.swift"; sourceTree = "<group>"; };
+		1EEF71092031FA4D00DF8442 /* Date+DayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+DayTests.swift"; path = "tests/Homework Planner Core Tests/Extensions/Date+DayTests.swift"; sourceTree = SOURCE_ROOT; };
+		1EEF710B2031FAC100DF8442 /* Date+Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Day.swift"; sourceTree = "<group>"; };
+		1EEF710E2031FAF600DF8442 /* Date+FormattedDayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+FormattedDayName.swift"; sourceTree = "<group>"; };
+		1EEF71102031FB1A00DF8442 /* Date+Previous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Previous.swift"; sourceTree = "<group>"; };
+		1EEF71132031FBF300DF8442 /* Date+FormattedDayNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+FormattedDayNameTests.swift"; sourceTree = "<group>"; };
+		1EEF71152031FCE700DF8442 /* Date+PreviousTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+PreviousTests.swift"; sourceTree = "<group>"; };
+		1EEF71172031FEC100DF8442 /* HomeworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTests.swift; sourceTree = "<group>"; };
 		1EF6A898201D030F009F2BC7 /* Homework Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Homework Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EF6A8A3201D030F009F2BC7 /* Homework_Planner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Homework_Planner.xcdatamodel; sourceTree = "<group>"; };
@@ -205,6 +240,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EEF70F62031F72B00DF8442 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EEF70FE2031F72B00DF8442 /* Homework_Planner_Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,16 +378,14 @@
 		1EC2ACAD2031B8C100969D3A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1EACEC26201D4BC5000E4915 /* UIColor+String.swift */,
-				1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */,
+				1EEF710D2031FAC600DF8442 /* Extensions */,
 				1EBA2667201D05E00042E03D /* Homework.swift */,
 				1EBA266B201D09A90042E03D /* Subject.swift */,
 				1E8EFA112029D01B003D711C /* Lesson.swift */,
 				1E122C9B202A138400506B71 /* Day.swift */,
-				1EE7EBE9202B8E2B0093ED37 /* HomeworkDisplayType.swift */,
 				1EFCA76B202DF20E00DB9C11 /* Attachment.swift */,
 				1E122C9D202A14BA00506B71 /* Settings.swift */,
-				1ECB7F732030832B00858162 /* InAppPurchases.swift */,
+				1ECB7F732030832B00858162 /* InAppPurchase.swift */,
 				1EC2AC772031A24E00969D3A /* CoreDataStorage.swift */,
 			);
 			path = Model;
@@ -380,11 +421,55 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		1EEF70FA2031F72B00DF8442 /* Homework Planner Core Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1EEF71122031FB2D00DF8442 /* Extensions */,
+				1EEF70FD2031F72B00DF8442 /* Info.plist */,
+				1EEF71172031FEC100DF8442 /* HomeworkTests.swift */,
+				1E0572CD203208A600CCFD2A /* SubjectTests.swift */,
+			);
+			path = "Homework Planner Core Tests";
+			sourceTree = "<group>";
+		};
+		1EEF71042031F73700DF8442 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				1EF6A8B2201D030F009F2BC7 /* Homework Planner Tests */,
+				1EEF70FA2031F72B00DF8442 /* Homework Planner Core Tests */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		1EEF710D2031FAC600DF8442 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1EACEC26201D4BC5000E4915 /* UIColor+String.swift */,
+				1EEF710B2031FAC100DF8442 /* Date+Day.swift */,
+				1EEF710E2031FAF600DF8442 /* Date+FormattedDayName.swift */,
+				1EEF71102031FB1A00DF8442 /* Date+Previous.swift */,
+				1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1EEF71122031FB2D00DF8442 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1EEF70FB2031F72B00DF8442 /* UIColor+StringTests.swift */,
+				1EEF71092031FA4D00DF8442 /* Date+DayTests.swift */,
+				1EEF71132031FBF300DF8442 /* Date+FormattedDayNameTests.swift */,
+				1EEF71062031F96F00DF8442 /* Date+OrdinalIndicatorStringTests.swift */,
+				1EEF71152031FCE700DF8442 /* Date+PreviousTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1EF6A88F201D030F009F2BC7 = {
 			isa = PBXGroup;
 			children = (
+				1EEF71042031F73700DF8442 /* tests */,
 				1EF6A89A201D030F009F2BC7 /* Homework Planner */,
-				1EF6A8B2201D030F009F2BC7 /* Homework PlannerTests */,
 				1EC2AC662031A04100969D3A /* today */,
 				1EC2AC802031A4C500969D3A /* Homework Planner Core */,
 				1EF6A899201D030F009F2BC7 /* Products */,
@@ -400,6 +485,7 @@
 				1EF6A8AF201D030F009F2BC7 /* Homework PlannerTests.xctest */,
 				1EC2AC632031A04100969D3A /* today.appex */,
 				1EC2AC7F2031A4C500969D3A /* Homework_Planner_Core.framework */,
+				1EEF70F92031F72B00DF8442 /* Homework Planner Core Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -419,12 +505,12 @@
 			path = "Homework Planner";
 			sourceTree = "<group>";
 		};
-		1EF6A8B2201D030F009F2BC7 /* Homework PlannerTests */ = {
+		1EF6A8B2201D030F009F2BC7 /* Homework Planner Tests */ = {
 			isa = PBXGroup;
 			children = (
 				1EF6A8B5201D030F009F2BC7 /* Info.plist */,
 			);
-			path = "Homework PlannerTests";
+			path = "Homework Planner Tests";
 			sourceTree = "<group>";
 		};
 		C45FCD599FA563811961476B /* Pods */ = {
@@ -497,6 +583,25 @@
 			productReference = 1EC2AC7F2031A4C500969D3A /* Homework_Planner_Core.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		1EEF70F82031F72B00DF8442 /* Homework Planner Core Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1EEF71012031F72B00DF8442 /* Build configuration list for PBXNativeTarget "Homework Planner Core Tests" */;
+			buildPhases = (
+				1EEF70F52031F72B00DF8442 /* Sources */,
+				1EEF70F62031F72B00DF8442 /* Frameworks */,
+				1EEF70F72031F72B00DF8442 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1EEF71002031F72B00DF8442 /* PBXTargetDependency */,
+				1E0572CC2032042100CCFD2A /* PBXTargetDependency */,
+			);
+			name = "Homework Planner Core Tests";
+			productName = Homework_Planner_CoreTests;
+			productReference = 1EEF70F92031F72B00DF8442 /* Homework Planner Core Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1EF6A897201D030F009F2BC7 /* Homework Planner */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EF6A8B8201D030F009F2BC7 /* Build configuration list for PBXNativeTarget "Homework Planner" */;
@@ -562,6 +667,11 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
+					1EEF70F82031F72B00DF8442 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1EF6A897201D030F009F2BC7;
+					};
 					1EF6A897201D030F009F2BC7 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -601,6 +711,7 @@
 				1EF6A8AE201D030F009F2BC7 /* Homework PlannerTests */,
 				1EC2AC622031A04100969D3A /* today */,
 				1EC2AC7E2031A4C500969D3A /* Homework Planner Core */,
+				1EEF70F82031F72B00DF8442 /* Homework Planner Core Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -615,6 +726,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1EC2AC7D2031A4C500969D3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EEF70F72031F72B00DF8442 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -718,26 +836,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EEF710F2031FAF600DF8442 /* Date+FormattedDayName.swift in Sources */,
 				1EC2ACA32031A59300969D3A /* Date+OrdinalIndicatorString.swift in Sources */,
-				1EC2ACA22031A59300969D3A /* HomeworkDisplayType.swift in Sources */,
 				1EC2ACAA2031A63600969D3A /* UIColor+String.swift in Sources */,
 				1EC2AC9D2031A53600969D3A /* Homework_Planner.xcdatamodeld in Sources */,
 				1EC2AC9F2031A59300969D3A /* Subject.swift in Sources */,
 				1EC2ACB52031BB0900969D3A /* ColorTableViewCell.swift in Sources */,
+				1E0572CA203203A600CCFD2A /* Homework.swift in Sources */,
 				1EC2ACB02031B9AF00969D3A /* DayViewController.swift in Sources */,
 				1EC2ACB82031BB2200969D3A /* LessonTableViewCell.swift in Sources */,
 				1EC2ACA42031A59300969D3A /* Attachment.swift in Sources */,
-				1EC2ACA62031A59300969D3A /* InAppPurchases.swift in Sources */,
+				1EC2ACA62031A59300969D3A /* InAppPurchase.swift in Sources */,
 				1EC2ACAB2031A64700969D3A /* UIViewController+ShowAlert.swift in Sources */,
 				1EC2ACB72031BB1F00969D3A /* SubjectTableViewCell.swift in Sources */,
-				1EC2AC9E2031A59300969D3A /* Homework.swift in Sources */,
 				1EC2ACA72031A59300969D3A /* CoreDataStorage.swift in Sources */,
 				1EC2ACA52031A59300969D3A /* Settings.swift in Sources */,
 				1EC2ACA12031A59300969D3A /* Day.swift in Sources */,
 				1EC2ACB92031BC3300969D3A /* UIView+FadeInOut.swift in Sources */,
 				1EC2ACB42031BB0700969D3A /* HomeworkTableViewCell.swift in Sources */,
+				1EEF710C2031FAC100DF8442 /* Date+Day.swift in Sources */,
+				1EEF71112031FB1A00DF8442 /* Date+Previous.swift in Sources */,
 				1EC2ACB62031BB1400969D3A /* UIView+FindViewWithClassNamed.swift in Sources */,
 				1EC2ACA02031A59300969D3A /* Lesson.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EEF70F52031F72B00DF8442 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EEF71142031FBF300DF8442 /* Date+FormattedDayNameTests.swift in Sources */,
+				1EEF710A2031FA4D00DF8442 /* Date+DayTests.swift in Sources */,
+				1E0572CE203208A600CCFD2A /* SubjectTests.swift in Sources */,
+				1EEF71162031FCE700DF8442 /* Date+PreviousTests.swift in Sources */,
+				1EEF71082031F97400DF8442 /* Date+OrdinalIndicatorStringTests.swift in Sources */,
+				1EEF70FC2031F72B00DF8442 /* UIColor+StringTests.swift in Sources */,
+				1EEF71182031FEC100DF8442 /* HomeworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +918,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1E0572CC2032042100CCFD2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1EF6A897201D030F009F2BC7 /* Homework Planner */;
+			targetProxy = 1E0572CB2032042100CCFD2A /* PBXContainerItemProxy */;
+		};
 		1EC2AC6E2031A04100969D3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1EC2AC622031A04100969D3A /* today */;
@@ -793,6 +932,11 @@
 			isa = PBXTargetDependency;
 			target = 1EC2AC7E2031A4C500969D3A /* Homework Planner Core */;
 			targetProxy = 1EC2AC922031A4C500969D3A /* PBXContainerItemProxy */;
+		};
+		1EEF71002031F72B00DF8442 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1EC2AC7E2031A4C500969D3A /* Homework Planner Core */;
+			targetProxy = 1EEF70FF2031F72B00DF8442 /* PBXContainerItemProxy */;
 		};
 		1EF6A8B1201D030F009F2BC7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -919,6 +1063,36 @@
 			};
 			name = Release;
 		};
+		1EEF71022031F72B00DF8442 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 998TJ8ABD3;
+				INFOPLIST_FILE = "tests/Homework Planner Core Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hughbellamy.Homework-Planner-CoreTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Homework Planner.app/Homework Planner";
+			};
+			name = Debug;
+		};
+		1EEF71032031F72B00DF8442 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 998TJ8ABD3;
+				INFOPLIST_FILE = "tests/Homework Planner Core Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hughbellamy.Homework-Planner-CoreTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Homework Planner.app/Homework Planner";
+			};
+			name = Release;
+		};
 		1EF6A8B6201D030F009F2BC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1032,7 +1206,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C97BCEE2D0B3A7F45F05122 /* Pods-Homework Planner.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Homework Planner/Homework Planner.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -1050,7 +1223,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E7C455C914383ECFA0B6C661 /* Pods-Homework Planner.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Homework Planner/Homework Planner.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -1071,7 +1243,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 998TJ8ABD3;
-				INFOPLIST_FILE = "Homework PlannerTests/Info.plist";
+				INFOPLIST_FILE = "tests/Homework Planner Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hughbellamy.Homework-PlannerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1088,7 +1260,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 998TJ8ABD3;
-				INFOPLIST_FILE = "Homework PlannerTests/Info.plist";
+				INFOPLIST_FILE = "tests/Homework Planner Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hughbellamy.Homework-PlannerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1115,6 +1287,15 @@
 			buildConfigurations = (
 				1EC2AC972031A4C500969D3A /* Debug */,
 				1EC2AC982031A4C500969D3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1EEF71012031F72B00DF8442 /* Build configuration list for PBXNativeTarget "Homework Planner Core Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EEF71022031F72B00DF8442 /* Debug */,
+				1EEF71032031F72B00DF8442 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

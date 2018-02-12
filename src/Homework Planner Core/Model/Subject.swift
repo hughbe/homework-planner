@@ -13,11 +13,18 @@ extension Subject {
     public static var CommonSubjects = [
         "Biology",
         "Chemistry",
+        "Drama",
+        "Economics",
         "English",
+        "French",
         "Geography",
         "History",
+        "Latin",
         "Maths",
+        "Politics",
         "Physics",
+        "Russian",
+        "Spanish"
     ]
     
     public var uiColor: UIColor? {
@@ -29,7 +36,7 @@ extension Subject {
             return UIColor(string: color)
         }
         set {
-            color = newValue?.getString()
+            color = newValue?.stringRepresentation
         }
     }
 }

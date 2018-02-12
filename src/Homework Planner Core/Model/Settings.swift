@@ -13,7 +13,6 @@ public class Settings {
     private static let weekStartKey = "WeekStart"
     private static let includeWeekendsKey = "IncludeWeekends"
     private static let homeworkDisplayKey = "HomeworkDisplay"
-    private static let purchasedTimetableKey = "PurchasedTimetable"
     
     public static var numberOfWeeks: Int {
         get {
@@ -63,28 +62,15 @@ public class Settings {
         }
     }
     
-    public static var homeworkDisplay: HomeworkDisplayType {
+    public static var homeworkDisplay: Homework.DisplayType {
         get {
             if let value = UserDefaults.standard.value(forKey: homeworkDisplayKey) as? Int {
-                return HomeworkDisplayType(rawValue: value)!
+                return Homework.DisplayType(rawValue: value)!
             }
             
             return .sectionedByDate
         } set {
             UserDefaults.standard.set(newValue.rawValue, forKey: homeworkDisplayKey)
-        }
-    }
-    
-    public static var purchasedTimetable: Bool {
-        get {
-            if let value = UserDefaults.standard.value(forKey: purchasedTimetableKey) as? Bool {
-                return value
-            }
-            
-            return false
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: purchasedTimetableKey)
         }
     }
 }

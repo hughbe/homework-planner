@@ -75,7 +75,7 @@ public class CreateImageAttachmentViewController : CreateAttachmentViewControlle
         
         createdAttachment.title = nameTextField.text
         createdAttachment.image = image
-        createdAttachment.type = AttachmentType.image.rawValue
+        createdAttachment.type = Attachment.ContentType.image.rawValue
 
         saveAttachment(attachment: createdAttachment)
     }

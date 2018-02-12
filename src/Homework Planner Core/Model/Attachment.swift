@@ -8,12 +8,14 @@
 
 import UIKit
 
-public enum AttachmentType: Int32 {
-    case url
-    case image
+public extension Attachment {
+    public enum ContentType: Int32 {
+        case url
+        case image
+    }
 }
 
-extension ImageAttachment {
+public extension ImageAttachment {
     public var image: UIImage? {
         get {
             guard let data = data else {

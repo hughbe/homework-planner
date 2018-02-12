@@ -10,11 +10,11 @@ import UIKit
 import Foundation
 
 public extension UIColor {
-    public func getString() -> String? {
+    public var stringRepresentation: String? {
         guard let components = cgColor.components else {
             return nil
         }
-
+        
         return "[\(components[0]), \(components[1]), \(components[2]), \(components[3])]"
     }
     

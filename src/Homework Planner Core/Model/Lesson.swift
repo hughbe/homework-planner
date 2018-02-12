@@ -9,11 +9,7 @@
 import Foundation
 
 public extension Lesson {
-    public var day: Day? {
-        return Day(dayOfWeek: Int(dayOfWeek), week: Int(week))
-    }
-    
-    public var startDate: Date? {
+    private var startDate: Date? {
         var dateComponents = DateComponents()
         dateComponents.hour = Int(startHour)
         dateComponents.minute = Int(startMinute)
@@ -21,7 +17,7 @@ public extension Lesson {
         return Calendar.current.date(from: dateComponents)
    }
     
-    public var endDate: Date? {
+    private var endDate: Date? {
         var dateComponents = DateComponents()
         dateComponents.hour = Int(endHour)
         dateComponents.minute = Int(endMinute)

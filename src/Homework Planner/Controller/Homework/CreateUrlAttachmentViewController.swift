@@ -62,7 +62,7 @@ public class CreateUrlAttachmentViewController : CreateAttachmentViewController 
         
         createdAttachment.title = nameTextField.text
         createdAttachment.url = url
-        createdAttachment.type = AttachmentType.url.rawValue
+        createdAttachment.type = Attachment.ContentType.url.rawValue
         
         saveAttachment(attachment: createdAttachment)
     }

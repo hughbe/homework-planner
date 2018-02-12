@@ -45,7 +45,7 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             
             let displayTypeAlertController = UIAlertController(title: NSLocalizedString("Homework Display Type", comment: "Homework Display Type"), message: nil, preferredStyle: .actionSheet)
             
-            for type in HomeworkDisplayType.allValues {
+            for type in Homework.DisplayType.allValues {
                 displayTypeAlertController.addAction(UIAlertAction(title: type.name, style: .default) { action in
                     Settings.homeworkDisplay = type
                     

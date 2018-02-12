@@ -57,10 +57,10 @@ public class AttachmentsViewController : UIViewController {
     }
 
     private func reloadData(animated: Bool) {
-        let attachments = homework.attachmentsArray
+        let attachments = homework.attachments?.allObjects as? [Attachment] ?? []
         
-        websites = attachments.filter { $0.type == AttachmentType.url.rawValue }.map { $0 as! UrlAttachment }
-        images = attachments.filter { $0.type == AttachmentType.image.rawValue }.map { $0 as! ImageAttachment }
+        websites = attachments.filter { $0.type == Attachment.ContentType.url.rawValue }.map { $0 as! UrlAttachment }
+        images = attachments.filter { $0.type == Attachment.ContentType.image.rawValue }.map { $0 as! ImageAttachment }
         
         UIView.transition(with: attachmentsTableView, duration: animated ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
             self.attachmentsTableView.reloadData()

@@ -9,14 +9,14 @@
 import CoreData
 import UIKit
 
-private class PersistentContainer: NSPersistentContainer{
-    override class func defaultDirectoryURL() -> URL{
-        let x =  FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.homework-planner")
-        return x!
-    }
-}
-
 public class CoreDataStorage {
+    private class PersistentContainer: NSPersistentContainer{
+        override class func defaultDirectoryURL() -> URL{
+            let x =  FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.homework-planner")
+            return x!
+        }
+    }
+
     public static var shared = CoreDataStorage()
     
     public var context: NSManagedObjectContext {
