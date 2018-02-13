@@ -36,10 +36,6 @@ public class SelectSubjectViewController: UIViewController {
         loadData(animated: false)
     }
 
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude
-    }
-    
     private func loadData(animated: Bool) {
         let request = NSFetchRequest<Subject>(entityName: "Subject")
         request.sortDescriptors = [
@@ -137,11 +133,19 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
         }
         else {
             cell.nameLabel.textColor = UIColor.black
-            cell.teacherLabel.textColor = UIColor.black
+            cell.teacherLabel.textColor = UIColor(white: 0.4, alpha: 1)
             cell.backgroundColor = UIColor.clear
         }
 
         return cell
+    }
+
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
+
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

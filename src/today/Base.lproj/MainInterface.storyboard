@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -137,26 +136,20 @@
                                     <outlet property="delegate" destination="M4Y-Lb-cyx" id="z0V-Mz-2dh"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aja-zA-8fV" customClass="BackupView" customModule="Homework_Planner_Core">
-                                <rect key="frame" x="39.5" y="20" width="241" height="210"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="mainMessage" value="Nothing on Today"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="No Lessons"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="subtitleMessage" value="Have a good day!"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have a Good Day!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKe-IF-Yfe">
+                                <rect key="frame" x="59.5" y="109" width="202" height="31.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="A2b-hJ-YN2" secondAttribute="bottom" id="4iS-Hd-6mk"/>
                             <constraint firstItem="A2b-hJ-YN2" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="AA3-Wu-GfI"/>
-                            <constraint firstItem="Aja-zA-8fV" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" multiplier="0.75" constant="0.75" id="Y7r-WD-Dv1"/>
-                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="Aja-zA-8fV" secondAttribute="bottom" constant="20" id="d7L-OL-s4h"/>
+                            <constraint firstItem="NKe-IF-Yfe" firstAttribute="centerX" secondItem="ssy-KU-ocm" secondAttribute="centerX" id="gfc-yB-thZ"/>
                             <constraint firstItem="A2b-hJ-YN2" firstAttribute="trailing" secondItem="ssy-KU-ocm" secondAttribute="trailing" id="hCQ-ui-Ryg"/>
-                            <constraint firstItem="Aja-zA-8fV" firstAttribute="centerX" secondItem="ssy-KU-ocm" secondAttribute="centerX" id="hto-x9-xpR"/>
-                            <constraint firstItem="Aja-zA-8fV" firstAttribute="centerY" secondItem="ssy-KU-ocm" secondAttribute="centerY" id="k1x-15-RVX"/>
+                            <constraint firstItem="NKe-IF-Yfe" firstAttribute="centerY" secondItem="ssy-KU-ocm" secondAttribute="centerY" id="lkj-Ob-OIb"/>
                             <constraint firstItem="A2b-hJ-YN2" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" id="q3o-7T-Q37"/>
-                            <constraint firstItem="Aja-zA-8fV" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" constant="20" id="scC-th-odF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
                     </view>
@@ -165,7 +158,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="250"/>
                     <connections>
-                        <outlet property="noEventsView" destination="Aja-zA-8fV" id="eSH-vw-BiW"/>
+                        <outlet property="noEventsView" destination="NKe-IF-Yfe" id="zuH-i2-RMV"/>
                         <outlet property="tableView" destination="A2b-hJ-YN2" id="07y-Rl-GX8"/>
                     </connections>
                 </viewController>
@@ -173,7 +166,4 @@
             </objects>
         </scene>
     </scenes>
-    <resources>
-        <image name="No Lessons" width="340" height="340"/>
-    </resources>
 </document>

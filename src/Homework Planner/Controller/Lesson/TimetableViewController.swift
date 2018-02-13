@@ -27,6 +27,7 @@ public class TimetableViewController : UIViewController {
     public var reloadAnimation = UITableViewRowAnimation.none
     
     private var timetableProduct: SKProduct?
+    private var notificationToken: NSObjectProtocol?
 
     private var lessons: [Lesson] = []
     public var day = Day(date: Date().day, modifyIfWeekend: true) {
@@ -61,7 +62,25 @@ public class TimetableViewController : UIViewController {
         currentDayButton.title = day.name
         loadData(animated: false)
     }
-    
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        notificationToken = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: AppDelegate.inAppPurchaseErrorNotification), object: nil, queue: nil) { notification in
+            if let transaction = notification.object as? SKPaymentTransaction, let error = transaction.error {
+                self.showAlert(error: error as NSError)
+            }
+        }
+    }
+
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let notificationToken = notificationToken {
+            NotificationCenter.default.removeObserver(notificationToken)
+        }
+    }
+
     @IBAction func editLessons(_ sender: Any) {
         setEditingLessons(editing: !lessonsTableView.isEditing)
     }
@@ -194,6 +213,11 @@ public class TimetableViewController : UIViewController {
     @IBAction func restorePurchases(_ sender: Any) {
         guard let product = timetableProduct else {
             showAlert(title: NSLocalizedString("Invalid Product", comment: "Invalid Product"), message: nil)
+            return
+        }
+
+        guard SKPaymentQueue.canMakePayments() else {
+            showAlert(title: NSLocalizedString("Purchases are disabled in your device", comment: "Purchases are disabled in your device"), message: nil)
             return
         }
         

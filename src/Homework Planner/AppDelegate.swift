@@ -14,6 +14,8 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    public static let inAppPurchaseErrorNotification = "InAppPurchaseErrorNotfication"
+
     public static let barTintColor = UIColor(red: 5 / 255.0, green: 6 / 255.0, blue: 9 / 255.0, alpha: 1.0)
     public static let barForegroundColor = UIColor.white
     
@@ -55,6 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SKPaymentQueue.default().add(self)
         
         return true
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        SKPaymentQueue.default().remove(self)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -119,7 +125,8 @@ extension AppDelegate : SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch (transaction.transactionState) {
-            case .purchased:
+            case .purchased:                SKPaymentQueue.default().finishTransaction(transaction)
+
                 let productId = transaction.payment.productIdentifier
                 if productId == InAppPurchase.unlockTimetable.rawValue {
                     InAppPurchase.unlockTimetable.purchase()
@@ -127,16 +134,19 @@ extension AppDelegate : SKPaymentTransactionObserver {
                 }
                 break
             case .restored:
+                SKPaymentQueue.default().finishTransaction(transaction)
+
                 let productId = transaction.original?.payment.productIdentifier
                 if productId == InAppPurchase.unlockTimetable.rawValue {
                     InAppPurchase.unlockTimetable.purchase()
                     reloadTimetableViewController()
                 }
                 break
-            case .failed:
-                SKPaymentQueue.default().finishTransaction(transaction)
+            case .failed:                SKPaymentQueue.default().finishTransaction(transaction)
+
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: AppDelegate.inAppPurchaseErrorNotification), object: transaction)
                 break
-            case .deferred, .purchasing:
+            default:
                 break
             }
         }

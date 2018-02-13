@@ -34,7 +34,8 @@ public class AttachmentsViewController : UIViewController {
             noAttachmentsView.subtitleButton.isEnabled = false
             noAttachmentsView.actionableSubtitle = false
         }
-        
+
+        attachmentsTableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
         reloadData(animated: false)
     }
     
