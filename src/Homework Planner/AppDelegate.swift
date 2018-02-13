@@ -15,6 +15,7 @@ import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     public static let barTintColor = UIColor(red: 5 / 255.0, green: 6 / 255.0, blue: 9 / 255.0, alpha: 1.0)
+    public static let barForegroundColor = UIColor.white
     
     static var shared: AppDelegate {
         get {
@@ -29,24 +30,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             LegacyImporter.doImport()
             Settings.imported = true
         }
-        
-        let foregroundColor = UIColor.white
-        
-        UITabBar.appearance().tintColor = foregroundColor
+
         UITabBar.appearance().barTintColor = AppDelegate.barTintColor
         UIToolbar.appearance().barTintColor = AppDelegate.barTintColor
 
         UINavigationBar.appearance().barTintColor = AppDelegate.barTintColor
         UISearchBar.appearance().barTintColor = AppDelegate.barTintColor
-        
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : foregroundColor]
 
-        UIBarButtonItem.appearance().tintColor = foregroundColor
+        UITabBar.appearance().tintColor = AppDelegate.barForegroundColor
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : AppDelegate.barForegroundColor]
+        UIBarButtonItem.appearance().tintColor = AppDelegate.barForegroundColor
         application.statusBarStyle = .lightContent
         
         UITextField.appearance().tintColor = UIColor.black
         UITextView.appearance().tintColor = UIColor.black
-        
+
         let selectedView = UIView()
         selectedView.backgroundColor = UIColor(red: 0, green: 153 / 255.0, blue: 102 / 255.0, alpha: 1)
         UITableViewCell.appearance().selectedBackgroundView = selectedView

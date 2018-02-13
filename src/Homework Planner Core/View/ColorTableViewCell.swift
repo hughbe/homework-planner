@@ -12,10 +12,10 @@ public class ColorTableViewCell : UITableViewCell {
     @IBOutlet public weak var colorView: UIView!
     @IBOutlet public weak var colorLeadingConstraint: NSLayoutConstraint!
     
-    public override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let color = colorView.backgroundColor
         
-        super.setSelected(selected, animated: animated)
+        super.setHighlighted(highlighted, animated: animated)
         colorView.backgroundColor = color
     }
 

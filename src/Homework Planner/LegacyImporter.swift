@@ -21,14 +21,14 @@ import UIKit
     public var name: String
     public var teacher: String
     public var color: UIColor
-    
+
     required init?(coder aDecoder: NSCoder) {
         id = aDecoder.decodeObject(forKey: SubjectLegacy.idKey) as? String ?? "No Subject Id"
         name = aDecoder.decodeObject(forKey: SubjectLegacy.nameKey) as? String ?? "No Subject Name"
         teacher = aDecoder.decodeObject(forKey: SubjectLegacy.teacherKey) as? String ?? "No Teacher"
         color = aDecoder.decodeObject(forKey: SubjectLegacy.colorKey) as? UIColor ?? UIColor.black
     }
-    
+
     func encode(with aCoder: NSCoder) {
         fatalError("Unused.")
     }
