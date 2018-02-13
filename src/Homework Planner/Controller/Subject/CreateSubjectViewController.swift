@@ -85,12 +85,6 @@ public class CreateSubjectViewController : UIViewController {
         createdSubject.teacher = teacherTextField.text
         createdSubject.uiColor = colorButton.backgroundColor
 
-        do {
-            try CoreDataStorage.shared.context.save()
-        } catch let error as NSError {
-            showAlert(error: error)
-        }
-
         view.endEditing(true)
         delegate?.createSubjectViewController(viewController: self, didCreateSubject: createdSubject)
     }

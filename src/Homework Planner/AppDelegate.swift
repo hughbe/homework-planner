@@ -14,7 +14,7 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    public static let inAppPurchaseErrorNotification = "InAppPurchaseErrorNotfication"
+    public static let inAppPurchaseErrorNotification = NSNotification.Name(rawValue: "InAppPurchaseErrorNotfication")
 
     public static let barTintColor = UIColor(red: 5 / 255.0, green: 6 / 255.0, blue: 9 / 255.0, alpha: 1.0)
     public static let barForegroundColor = UIColor.white
@@ -144,7 +144,7 @@ extension AppDelegate : SKPaymentTransactionObserver {
                 break
             case .failed:                SKPaymentQueue.default().finishTransaction(transaction)
 
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: AppDelegate.inAppPurchaseErrorNotification), object: transaction)
+                NotificationCenter.default.post(name: AppDelegate.inAppPurchaseErrorNotification, object: transaction)
                 break
             default:
                 break

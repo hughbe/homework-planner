@@ -16,6 +16,8 @@ public protocol SelectSubjectViewControllerDelegate {
 }
 
 public class SelectSubjectViewController: UIViewController {
+    public static let subjectsChangedNotification = NSNotification.Name(rawValue: "SubjectsChangedNotification")
+
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var createButton: UIBarButtonItem!
@@ -34,6 +36,9 @@ public class SelectSubjectViewController: UIViewController {
         subjectsTableView.allowsSelection = selectionEnabled
         
         loadData(animated: false)
+        if let selectedSubject = selectedSubject, let index = subjects.index(where: { $0.objectID == selectedSubject.objectID }) {
+            subjectsTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
+        }
     }
 
     private func loadData(animated: Bool) {
@@ -94,12 +99,24 @@ public class SelectSubjectViewController: UIViewController {
 
         createButton.isEnabled = !editing
     }
+
+    private func subjectsDidUpdate() {
+        NotificationCenter.default.post(name: SelectSubjectViewController.subjectsChangedNotification, object: nil)
+        loadData(animated: true)
+    }
 }
 
 extension SelectSubjectViewController : CreateSubjectViewControllerDelegate {
     public func createSubjectViewController(viewController: CreateSubjectViewController, didCreateSubject: Subject) {
         dismiss(animated: true)
-        loadData(animated: true)
+
+        do {
+            try CoreDataStorage.shared.context.save()
+
+            subjectsDidUpdate()
+        } catch let error as NSError {
+            showAlert(error: error)
+        }
     }
     
     public func didCancel(viewController: CreateSubjectViewController) {
@@ -175,7 +192,7 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
                 subjects.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
 
-                loadData(animated: true)
+                subjectsDidUpdate()
             } catch let error as NSError {
                 showAlert(error: error)
             }

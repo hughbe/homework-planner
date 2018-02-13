@@ -57,28 +57,34 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             
             displayTypeAlertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
 
+            displayTypeAlertController.popoverPresentationController?.sourceView = self.tabBar
+            displayTypeAlertController.popoverPresentationController?.sourceRect = self.tabBar.bounds
             self.present(displayTypeAlertController, animated: true)
         })
 
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Set Number of Weeks", comment: "Set Number of Weeks"), style: .default) { action in
             
-            let displayTypeAlertController = UIAlertController(title: NSLocalizedString("Number of Weeks", comment: "Number of Weeks"), message: nil, preferredStyle: .actionSheet)
+            let numberOfWeeksAlertController = UIAlertController(title: NSLocalizedString("Number of Weeks", comment: "Number of Weeks"), message: nil, preferredStyle: .actionSheet)
             
-            displayTypeAlertController.addAction(UIAlertAction(title: NSLocalizedString("1 Week", comment: "1 Week"), style: .default) { action in
+            numberOfWeeksAlertController.addAction(UIAlertAction(title: NSLocalizedString("1 Week", comment: "1 Week"), style: .default) { action in
                 self.setNumberOfWeeks(numberOfWeeks: 1)
             })
             
-            displayTypeAlertController.addAction(UIAlertAction(title: NSLocalizedString("2 Weeks", comment: "2 Weeks"), style: .default) { action in
+            numberOfWeeksAlertController.addAction(UIAlertAction(title: NSLocalizedString("2 Weeks", comment: "2 Weeks"), style: .default) { action in
                 self.setNumberOfWeeks(numberOfWeeks: 2)
             })
 
-            displayTypeAlertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
+            numberOfWeeksAlertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
 
-            self.present(displayTypeAlertController, animated: true)
+            numberOfWeeksAlertController.popoverPresentationController?.sourceView = self.tabBar
+            numberOfWeeksAlertController.popoverPresentationController?.sourceRect = self.tabBar.bounds
+            self.present(numberOfWeeksAlertController, animated: true)
         })
 
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
-        
+
+        alertController.popoverPresentationController?.sourceView = tabBar
+        alertController.popoverPresentationController?.sourceRect = tabBar.bounds
         present(alertController, animated: true)
         
         return false

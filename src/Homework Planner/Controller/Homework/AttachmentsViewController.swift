@@ -49,7 +49,8 @@ public class AttachmentsViewController : UIViewController {
             self.performSegue(withIdentifier: "createImageAttachment", sender: nil)
         })
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel))
-        
+
+        alertController.popoverPresentationController?.barButtonItem = createButton
         present(alertController, animated: true)
     }
     

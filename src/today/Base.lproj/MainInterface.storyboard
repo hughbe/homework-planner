@@ -31,13 +31,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3c-x3-bac">
-                                                    <rect key="frame" x="18" y="16" width="282" height="26.5"/>
+                                                    <rect key="frame" x="18" y="16" width="73" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Work Set" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmG-1U-ula">
-                                                    <rect key="frame" x="32" y="50.5" width="268" height="22"/>
+                                                    <rect key="frame" x="32" y="50.5" width="74" height="22"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -54,12 +54,12 @@
                                             <constraints>
                                                 <constraint firstItem="ZeT-Pv-Wdz" firstAttribute="top" secondItem="hQb-1z-jZS" secondAttribute="top" id="7LP-Po-RS3"/>
                                                 <constraint firstItem="ZeT-Pv-Wdz" firstAttribute="height" secondItem="hQb-1z-jZS" secondAttribute="height" id="I26-dr-2pt"/>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="lmG-1U-ula" secondAttribute="trailing" constant="20" symbolic="YES" id="QM6-ge-Go4"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lmG-1U-ula" secondAttribute="trailing" constant="20" symbolic="YES" id="QM6-ge-Go4"/>
                                                 <constraint firstItem="U3c-x3-bac" firstAttribute="leading" secondItem="ZeT-Pv-Wdz" secondAttribute="trailing" constant="8" symbolic="YES" id="Ukq-4J-cBr"/>
                                                 <constraint firstItem="ZeT-Pv-Wdz" firstAttribute="leading" secondItem="hQb-1z-jZS" secondAttribute="leading" id="XyV-FW-zLo"/>
                                                 <constraint firstItem="lmG-1U-ula" firstAttribute="leading" secondItem="ZeT-Pv-Wdz" secondAttribute="trailing" constant="22" id="d0x-zg-hYD"/>
                                                 <constraint firstItem="lmG-1U-ula" firstAttribute="top" secondItem="U3c-x3-bac" secondAttribute="bottom" constant="8" symbolic="YES" id="dq1-W4-0FV"/>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="U3c-x3-bac" secondAttribute="trailing" constant="20" symbolic="YES" id="knw-1x-Nqe"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="U3c-x3-bac" secondAttribute="trailing" constant="20" symbolic="YES" id="knw-1x-Nqe"/>
                                                 <constraint firstItem="U3c-x3-bac" firstAttribute="top" secondItem="hQb-1z-jZS" secondAttribute="top" constant="16" id="tzy-Uu-c8l"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -79,7 +79,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miH-KP-A3S">
-                                                    <rect key="frame" x="18" y="16" width="236" height="26.5"/>
+                                                    <rect key="frame" x="18" y="16" width="73" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -109,9 +109,9 @@
                                                 <constraint firstItem="A2L-FG-GES" firstAttribute="leading" secondItem="IK2-Nw-hTF" secondAttribute="trailing" constant="22" id="A7X-rd-du6"/>
                                                 <constraint firstItem="IK2-Nw-hTF" firstAttribute="leading" secondItem="V4q-1d-C74" secondAttribute="leading" id="DCl-Bf-zWA"/>
                                                 <constraint firstItem="A2L-FG-GES" firstAttribute="top" secondItem="miH-KP-A3S" secondAttribute="bottom" constant="8" symbolic="YES" id="cbz-SI-6cu"/>
-                                                <constraint firstItem="A2L-FG-GES" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="V4q-1d-C74" secondAttribute="trailing" constant="20" symbolic="YES" id="fou-xR-wcy"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="A2L-FG-GES" secondAttribute="trailing" constant="20" symbolic="YES" id="fou-xR-wcy"/>
                                                 <constraint firstAttribute="trailing" secondItem="ULV-5h-csi" secondAttribute="trailing" constant="15" id="kbH-SF-Rdu"/>
-                                                <constraint firstItem="ULV-5h-csi" firstAttribute="leading" secondItem="miH-KP-A3S" secondAttribute="trailing" constant="8" symbolic="YES" id="nIA-GR-hFJ"/>
+                                                <constraint firstItem="ULV-5h-csi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="miH-KP-A3S" secondAttribute="trailing" constant="8" symbolic="YES" id="nIA-GR-hFJ"/>
                                                 <constraint firstItem="IK2-Nw-hTF" firstAttribute="top" secondItem="V4q-1d-C74" secondAttribute="top" id="v0t-c4-GV7"/>
                                                 <constraint firstItem="ULV-5h-csi" firstAttribute="top" secondItem="V4q-1d-C74" secondAttribute="top" constant="16" id="vC9-gy-51y"/>
                                                 <constraint firstItem="miH-KP-A3S" firstAttribute="leading" secondItem="IK2-Nw-hTF" secondAttribute="trailing" constant="8" symbolic="YES" id="xEq-ES-S2H"/>
