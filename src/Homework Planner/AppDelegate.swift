@@ -25,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        if !Settings.imported {
+            LegacyImporter.doImport()
+            Settings.imported = true
+        }
+        
         let foregroundColor = UIColor.white
         
         UITabBar.appearance().tintColor = foregroundColor
@@ -65,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return showHomework(objectId: String(objectId))
     }
     
+    @discardableResult
     private func showHomework(objectId: String) -> Bool {
         guard let url = URL(string: objectId), let id = CoreDataStorage.shared.context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: url), let viewController = window?.rootViewController else {
             return false

@@ -13,6 +13,7 @@ public class Settings {
     private static let weekStartKey = "WeekStart"
     private static let includeWeekendsKey = "IncludeWeekends"
     private static let homeworkDisplayKey = "HomeworkDisplay"
+    private static let importedKey = "Imported"
     
     public static var numberOfWeeks: Int {
         get {
@@ -71,6 +72,19 @@ public class Settings {
             return .sectionedByDate
         } set {
             UserDefaults.standard.set(newValue.rawValue, forKey: homeworkDisplayKey)
+        }
+    }
+    
+    public static var imported: Bool {
+        get {
+            if let value = UserDefaults.standard.value(forKey: importedKey) as? Bool {
+                return value
+            }
+            
+            return false
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: importedKey)
         }
     }
 }

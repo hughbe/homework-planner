@@ -59,7 +59,7 @@ public class CreateUrlAttachmentViewController : CreateAttachmentViewController 
         }
         
         let createdAttachment = editingAttachment ?? UrlAttachment(context: CoreDataStorage.shared.context)
-        
+
         createdAttachment.title = nameTextField.text
         createdAttachment.url = url
         createdAttachment.type = Attachment.ContentType.url.rawValue

@@ -11,6 +11,7 @@
 		1E0572CE203208A600CCFD2A /* SubjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0572CD203208A600CCFD2A /* SubjectTests.swift */; };
 		1E0572CF20321D7E00CCFD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A8A5201D030F009F2BC7 /* Assets.xcassets */; };
 		1E0572D020321DA700CCFD2A /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E53286B2030AD01007AD7AC /* BackupView.swift */; };
+		1E05737720323D9F00CCFD2A /* LegacyImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05737320323CBF00CCFD2A /* LegacyImporter.swift */; };
 		1E244325202E05F000E9DC68 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E244324202E05EF00E9DC68 /* SafariServices.framework */; };
 		1E244329202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E244328202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift */; };
 		1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3998412021F62B002DFFA3 /* PanelView.swift */; };
@@ -145,6 +146,7 @@
 
 /* Begin PBXFileReference section */
 		1E0572CD203208A600CCFD2A /* SubjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTests.swift; sourceTree = "<group>"; };
+		1E05737320323CBF00CCFD2A /* LegacyImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyImporter.swift; sourceTree = "<group>"; };
 		1E122C9B202A138400506B71 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		1E122C9D202A14BA00506B71 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		1E244324202E05EF00E9DC68 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -498,6 +500,7 @@
 				1EBA267A201D496C0042E03D /* View */,
 				1EBA266D201D0AF90042E03D /* Controller */,
 				1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */,
+				1E05737320323CBF00CCFD2A /* LegacyImporter.swift */,
 				1ECC7EE02030D37E0032F709 /* Main.storyboard */,
 				1EF6A8A7201D030F009F2BC7 /* LaunchScreen.storyboard */,
 				1EF6A8AA201D030F009F2BC7 /* Info.plist */,
@@ -675,6 +678,7 @@
 					};
 					1EF6A897201D030F009F2BC7 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -886,6 +890,7 @@
 				1EE7EBE8202B585F0093ED37 /* RootTabBarController.swift in Sources */,
 				1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */,
 				1EC2ACB22031BA6700969D3A /* HomeworkContentViewController.swift in Sources */,
+				1E05737720323D9F00CCFD2A /* LegacyImporter.swift in Sources */,
 				1E98FA49202DDF850018F736 /* UIBarButtonItem+Badge.swift in Sources */,
 				1E8EFA0E2028FA7B003D711C /* TimetableViewController.swift in Sources */,
 				1E244329202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift in Sources */,

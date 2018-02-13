@@ -32,7 +32,7 @@ public class AttachmentsViewController : UIViewController {
         if !isEditingEnabled {
             editButton.hide()
             createButton.hide()
-            noAttachmentsCreateButton.isHidden = true
+            noAttachmentsCreateButton?.isHidden = true
         }
         
         reloadData(animated: false)
