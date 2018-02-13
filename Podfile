@@ -2,16 +2,15 @@
 platform :ios, '8.0'
 
 target 'Homework Planner' do
-  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
-  # use_frameworks!
+  use_frameworks!
+  inhibit_all_warnings!
 
-  # Pods for Homework Planner
+  project "src/Homework Planner.xcodeproj"
+
+  pod 'DayDatePicker', '~> 1.5'
+  pod 'NYTPhotoViewer'
+  pod 'JTCalendar'
   pod 'SZTextView'
-  pod 'JTCalendar', '~>1.2.3'
-  pod 'BButton'
   pod 'UIView+Borders'
-  pod 'UIColor+Additions'
-  pod 'UINavigationBar+Addition'
-  pod 'UIKitLocalizedString'
   
 end

@@ -1,0 +1,82 @@
+/* 
+  Localizable.strings
+  Homework Planner
+
+  Created by Hugh Bellamy on 31/01/2018.
+  Copyright © 2018 Hugh Bellamy. All rights reserved.
+*/
+
+"Homework Type" = "Homework Type";
+"No Type" = "No Type";
+"Essay" = "Essay";
+"Exercise" = "Exercise";
+"Revision" = "Revision";
+"Notes" = "Notes";
+"Other" = "Other";
+
+"Overdue" = "Overdue";
+"Today" = "Today";
+"Due Date" = "Due Date";
+"Start Time" = "Start Time";
+"End Time" = "End Time";
+
+"Create" = "Create";
+
+"Today" = "Today";
+"Tomorrow" = "Tomorrow";
+"Week" = "Week";
+
+"Options" = "Options";
+"Go To Today" = "Go To Today";
+
+"Cannot delete used" = "Cannot delete this subject as there are pieces of homework or lessons that use it.";
+
+"Settings" = "Settings";
+"Restore Purchases" = "Restore Purchases";
+"Change Subjects" = "Change Subjects";
+"Show Weekends" = "Show Weekends";
+"Hide Weekends" = "Hide Weekends";
+"Set Homework Display" = "Set Homework Display";
+"Set Number of Weeks" = "Set Number of Weeks";
+
+"Number of Weeks" = "Number of Weeks";
+"1 Week" = "1 Week";
+"2 Weeks" = "2 Weeks";
+
+"Set Current Week" = "Set Current Week";
+"Week 1" = "Week 1";
+"Week 2" = "Week 2";
+
+"Homework Display" = "Homework Display";
+"Order By Date" = "Order By Date";
+"Order By Subject" = "Order By Subject";
+
+"Homework" = "Homework";
+"Lessons" = "Lessons";
+
+"Attachment Type" = "Attachment Type";
+"Websites" = "Websites";
+"Images" = "Images";
+
+"Website" = "Website";
+"Image" = "Image";
+
+"Invalid url" = "The url is invalid and is not a website";
+"Invalid url scheme" = "The website must be an HTTP or HTTPS url";
+
+"Add Photo" = "Add Photo";
+"Camera" = "Camera";
+"Photo Library" = "Photo Library";
+"Could not fetch image" = "Could not fetch image";
+
+"Hide Done" = "Hide Done";
+"Show Done" = "Show Done";
+"All" = "All";
+"Subject" = "Subject";
+"Teacher" = "Teacher";
+"Work Set" = "Work Set";
+
+"homework is due tomorrow" = "homework is due tomorrow";
+
+"Invalid Product" = "Cannot restore purchases. Please check your internet connection.";
+"Restored Purchases" = "Restored Purchases";
