@@ -239,12 +239,7 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let lesson = lessons[indexPath.row]
-        if let teacher = lesson.subject?.teacher, teacher.count > 0 {
-            return 85
-        }
-        
-        return 75
+        return 90
     }
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

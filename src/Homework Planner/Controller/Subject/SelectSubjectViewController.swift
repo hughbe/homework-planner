@@ -35,6 +35,10 @@ public class SelectSubjectViewController: UIViewController {
         
         loadData(animated: false)
     }
+
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
     
     private func loadData(animated: Bool) {
         let request = NSFetchRequest<Subject>(entityName: "Subject")
@@ -60,6 +64,10 @@ public class SelectSubjectViewController: UIViewController {
         }
     }
 
+    @IBAction func createSubject(_ sender: Any) {
+        performSegue(withIdentifier: "createEditSubject", sender: nil)
+    }
+    
     @IBAction func cancel(_ sender: Any) {
         delegate?.didCancel(viewController: self )
     }
@@ -71,8 +79,8 @@ public class SelectSubjectViewController: UIViewController {
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let createSubjectViewController = segue.destination as? CreateSubjectViewController {
             createSubjectViewController.delegate = self
-            if segue.identifier == "editSubject" {
-                createSubjectViewController.editingSubject = sender as? Subject
+            if let subject = sender as? Subject {
+                createSubjectViewController.editingSubject = subject
             }
         }
     }
@@ -143,7 +151,7 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
         
         let subject = subjects[indexPath.row]
         if subjectsTableView.isEditing {
-            performSegue(withIdentifier: "editSubject", sender: subject)
+            performSegue(withIdentifier: "createEditSubject", sender: subject)
         } else {
             selectedSubject = subject
             subjectsTableView.reloadData()

@@ -13,8 +13,7 @@ import UIKit
 
 public class AttachmentsViewController : UIViewController {
     @IBOutlet weak var attachmentsTableView: UITableView!
-    @IBOutlet weak var noAttachmentsView: UIView!
-    @IBOutlet weak var noAttachmentsCreateButton: UIButton!
+    @IBOutlet weak var noAttachmentsView: BackupView!
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var createButton: UIBarButtonItem!
@@ -32,7 +31,8 @@ public class AttachmentsViewController : UIViewController {
         if !isEditingEnabled {
             editButton.hide()
             createButton.hide()
-            noAttachmentsCreateButton?.isHidden = true
+            noAttachmentsView.subtitleButton.isEnabled = false
+            noAttachmentsView.actionableSubtitle = false
         }
         
         reloadData(animated: false)

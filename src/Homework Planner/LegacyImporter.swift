@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 import Homework_Planner_Core
-import Homework_Planner_Legacy
+import UIKit
 
 @objc(SubjectLegacy) private class SubjectLegacy : NSObject, NSCoding {
     private static let idKey = "subject_id"

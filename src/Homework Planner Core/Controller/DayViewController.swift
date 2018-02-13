@@ -118,7 +118,7 @@ extension DayViewController : UITableViewDelegate, UITableViewDataSource {
         
         let lesson = lessons[indexPath.row]
         if let teacher = lesson.subject?.teacher, teacher.count > 0 {
-            return 85
+            return 90
         }
         
         return 75
