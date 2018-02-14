@@ -69,6 +69,7 @@ public class HomeworkContentViewController: UIViewController {
     }
 
     @IBAction func next(_ sender: Any) {
+        view.endEditing(true)
         homework.workSet = workSetTextView.text
         
         delegate?.homeworkContentViewController(viewController: self, didUpdateHomework: homework)

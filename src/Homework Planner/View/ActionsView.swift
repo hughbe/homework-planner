@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIView_Borders
 
 @IBDesignable
 public class ActionsView : UIView {
@@ -19,13 +18,16 @@ public class ActionsView : UIView {
     
     public override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-
-        addTopBorder(withHeight: 1, andColor: UIColor.gray)
+        setup()
     }
     
     public override func awakeFromNib() {
         super.awakeFromNib()
+        setup()
+    }
 
-        addTopBorder(withHeight: 1, andColor: UIColor.gray)
+    private func setup() {
+        cancelView.addViewBackedBorder(side: .right, thickness: 1, color: UIColor.gray)
+        addViewBackedBorder(side: .top, thickness: 1, color: UIColor.gray)
     }
 }

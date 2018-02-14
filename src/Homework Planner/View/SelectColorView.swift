@@ -13,9 +13,13 @@ import Homework_Planner_Core
     func selectColorView(selectColorView: SelectColorView, didSelectColor color: UIColor)
 }
 
-public class SelectColorView : PanelView, UICollectionViewDelegate, UICollectionViewDataSource {
+public class SelectColorView : PanelView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     @IBOutlet public var delegate: SelectColorViewDelegate!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet public weak var collectionView: UICollectionView! {
+        didSet {
+            collectionView?.delegate = self
+        }
+    }
 
     public var selectedColor: UIColor? {
         didSet {
@@ -53,5 +57,25 @@ public class SelectColorView : PanelView, UICollectionViewDelegate, UICollection
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let color = colors[indexPath.row]
         delegate.selectColorView(selectColorView: self, didSelectColor: color)
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let sectionInsets: CGFloat = 8
+
+        let heightSmall = (frame.size.height - sectionInsets * 2) / 2 - 2
+
+        let totalWidthSmall = CGFloat(colors.count / 2) * heightSmall
+        if totalWidthSmall < frame.size.width * 0.75 {
+            let heightLarge = frame.size.height - sectionInsets * 2
+            return CGSize(width: heightLarge, height: heightLarge)
+        }
+
+        return CGSize(width: heightSmall, height: heightSmall)
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }

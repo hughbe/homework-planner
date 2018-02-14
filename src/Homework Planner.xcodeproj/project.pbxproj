@@ -30,6 +30,7 @@
 		1E94DCFC203494B300BC3117 /* UINavigationController+Replace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94DCFB203494B300BC3117 /* UINavigationController+Replace.swift */; };
 		1E94DD0220349B8600BC3117 /* EditableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94DD0120349B8600BC3117 /* EditableViewController.swift */; };
 		1E94DD0320349C1700BC3117 /* UIBarButtonItem+SetHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E244328202E1EAD00E9DC68 /* UIBarButtonItem+SetHidden.swift */; };
+		1E94DD072034B48F00BC3117 /* UIView+Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94DD062034B48F00BC3117 /* UIView+Borders.swift */; };
 		1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA266E201D0B060042E03D /* CreateSubjectViewController.swift */; };
 		1EBA2673201D3D3D0042E03D /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2672201D3D3D0042E03D /* HomeworkViewController.swift */; };
 		1EBA2675201D45B80042E03D /* CreateHomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2674201D45B80042E03D /* CreateHomeworkViewController.swift */; };
@@ -174,6 +175,7 @@
 		1E94DCF8203492D700BC3117 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		1E94DCFB203494B300BC3117 /* UINavigationController+Replace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Replace.swift"; sourceTree = "<group>"; };
 		1E94DD0120349B8600BC3117 /* EditableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableViewController.swift; sourceTree = "<group>"; };
+		1E94DD062034B48F00BC3117 /* UIView+Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Borders.swift"; sourceTree = "<group>"; };
 		1EACEC26201D4BC5000E4915 /* UIColor+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+String.swift"; sourceTree = "<group>"; };
 		1EBA2667201D05E00042E03D /* Homework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework.swift; sourceTree = "<group>"; };
 		1EBA266B201D09A90042E03D /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				1E244328202E1EAD00E9DC68 /* UIBarButtonItem+SetHidden.swift */,
+				1E94DD062034B48F00BC3117 /* UIView+Borders.swift */,
 				1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */,
 				1EE7EBE1202B17DA0093ED37 /* UIView+FindViewWithClassNamed.swift */,
 			);
@@ -868,7 +871,6 @@
 				"${BUILT_PRODUCTS_DIR}/JTCalendar/JTCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SZTextView/SZTextView.framework",
-				"${BUILT_PRODUCTS_DIR}/UIView+Borders/UIView_Borders.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -877,7 +879,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SZTextView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIView_Borders.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -923,6 +924,7 @@
 				1EC2ACB42031BB0700969D3A /* HomeworkTableViewCell.swift in Sources */,
 				1EEF710C2031FAC100DF8442 /* Date+Day.swift in Sources */,
 				1EEF71112031FB1A00DF8442 /* Date+Previous.swift in Sources */,
+				1E94DD072034B48F00BC3117 /* UIView+Borders.swift in Sources */,
 				1E94DD0320349C1700BC3117 /* UIBarButtonItem+SetHidden.swift in Sources */,
 				1E906BAE203461FF00762A5A /* DataInjector.swift in Sources */,
 				1EC2ACB62031BB1400969D3A /* UIView+FindViewWithClassNamed.swift in Sources */,

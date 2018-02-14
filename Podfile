@@ -11,6 +11,5 @@ target 'Homework Planner' do
   pod 'NYTPhotoViewer'
   pod 'JTCalendar'
   pod 'SZTextView'
-  pod 'UIView+Borders'
   
 end

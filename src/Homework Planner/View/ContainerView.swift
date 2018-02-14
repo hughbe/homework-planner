@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIView_Borders
 
 private extension UIView {
     func containsFirstResponder() -> Bool {
