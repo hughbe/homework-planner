@@ -37,7 +37,9 @@ public class SelectSubjectViewController: UIViewController {
         
         loadData(animated: false)
         if let selectedSubject = selectedSubject, let index = subjects.index(where: { $0.objectID == selectedSubject.objectID }) {
-            subjectsTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
+            DispatchQueue.main.async {
+                self.subjectsTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
+            }
         }
     }
 
@@ -166,6 +168,8 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
         guard selectionEnabled else {
             return
         }

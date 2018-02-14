@@ -217,13 +217,13 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHz-eQ-ufm">
-                                                                        <rect key="frame" x="25" y="16" width="73" height="26.5"/>
+                                                                        <rect key="frame" x="25" y="14" width="73" height="26.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Teacher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBa-6s-3Z0">
-                                                                        <rect key="frame" x="35" y="50" width="65" height="21.5"/>
+                                                                        <rect key="frame" x="35" y="48" width="65" height="21.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                         <color key="textColor" white="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -234,7 +234,7 @@
                                                                     <constraint firstItem="fBa-6s-3Z0" firstAttribute="leading" secondItem="FTC-Vh-7Ld" secondAttribute="trailing" constant="25" id="EIX-DI-PNp"/>
                                                                     <constraint firstItem="gHz-eQ-ufm" firstAttribute="leading" secondItem="FTC-Vh-7Ld" secondAttribute="trailing" constant="15" id="EhC-IP-MiX"/>
                                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fBa-6s-3Z0" secondAttribute="trailing" constant="20" symbolic="YES" id="KMH-PN-5SW"/>
-                                                                    <constraint firstItem="gHz-eQ-ufm" firstAttribute="top" secondItem="P63-cM-db4" secondAttribute="top" constant="16" id="M7t-MH-riI"/>
+                                                                    <constraint firstItem="gHz-eQ-ufm" firstAttribute="top" secondItem="P63-cM-db4" secondAttribute="top" constant="14" id="M7t-MH-riI"/>
                                                                     <constraint firstItem="fBa-6s-3Z0" firstAttribute="top" secondItem="gHz-eQ-ufm" secondAttribute="bottom" constant="8" symbolic="YES" id="Ys3-Ca-a5X"/>
                                                                     <constraint firstItem="FTC-Vh-7Ld" firstAttribute="top" secondItem="P63-cM-db4" secondAttribute="top" id="svA-lv-6iz"/>
                                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gHz-eQ-ufm" secondAttribute="trailing" constant="20" symbolic="YES" id="yAm-go-n7G"/>
