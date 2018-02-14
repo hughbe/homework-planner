@@ -42,8 +42,8 @@ public class HomeworkContentViewController: UIViewController {
             typeButton.isEnabled = false
 
             workSetTextView.isEditable = false
-            cameraButton.hide()
-            websiteButton.hide()
+            cameraButton.setHidden(true)
+            websiteButton.setHidden(true)
             
             if let attachmentsCount = homework.attachments?.count, let title = attachmentsButton.title, attachmentsCount > 0 {
                 attachmentsButton.title = title + " (\(attachmentsCount))"

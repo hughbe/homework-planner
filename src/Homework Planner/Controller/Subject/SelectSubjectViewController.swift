@@ -15,17 +15,15 @@ public protocol SelectSubjectViewControllerDelegate {
     func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: Subject)
 }
 
-public class SelectSubjectViewController: UIViewController {
-    public static let subjectsChangedNotification = NSNotification.Name(rawValue: "SubjectsChangedNotification")
-
+public class SelectSubjectViewController: EditableViewController {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
-    @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var createButton: UIBarButtonItem!
 
-    @IBOutlet weak var subjectsTableView: UITableView!
-    @IBOutlet weak var noSubjectsView: UIView!
-
-    private var subjects: [Subject] = []
+    private var subjects: [Subject] = [] {
+        didSet {
+            tableView.reloadData()
+            setHasData(subjects.count != 0, animated: true)
+        }
+    }
     public var delegate: SelectSubjectViewControllerDelegate?
     
     public var selectedSubject: Subject?
@@ -33,35 +31,24 @@ public class SelectSubjectViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        subjectsTableView.allowsSelection = selectionEnabled
-        
-        loadData(animated: false)
+        tableView.allowsSelection = selectionEnabled
+
         if let selectedSubject = selectedSubject, let index = subjects.index(where: { $0.objectID == selectedSubject.objectID }) {
             DispatchQueue.main.async {
-                self.subjectsTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
+                self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
             }
         }
     }
 
-    private func loadData(animated: Bool) {
+    public override func reloadData() {
         let request = NSFetchRequest<Subject>(entityName: "Subject")
         request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Subject.name, ascending: true)
+            NSSortDescriptor(keyPath: \Subject.name, ascending: true),
+            NSSortDescriptor(keyPath: \Subject.teacher, ascending: true)
         ]
 
         do {
             subjects = try CoreDataStorage.shared.context.fetch(request)
-
-            subjectsTableView.reloadData()
-            
-            let hasSubjects = subjects.count != 0
-            if subjectsTableView.isEditing && !hasSubjects {
-                setEditingSubjects(editing: false)
-            }
-            
-            editButton.isEnabled = hasSubjects
-            subjectsTableView.setHidden(hidden: !hasSubjects, animated: animated)
-            noSubjectsView.setHidden(hidden: hasSubjects, animated: animated)
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -75,10 +62,6 @@ public class SelectSubjectViewController: UIViewController {
         delegate?.didCancel(viewController: self )
     }
     
-    @IBAction func edit(_ sender: Any) {
-        setEditingSubjects(editing: !subjectsTableView.isEditing)
-    }
-    
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let createSubjectViewController = segue.destination as? CreateSubjectViewController {
             createSubjectViewController.delegate = self
@@ -87,35 +70,17 @@ public class SelectSubjectViewController: UIViewController {
             }
         }
     }
-    
-    private func setEditingSubjects(editing: Bool) {
-        subjectsTableView.setEditing(editing, animated: true)
-
-        if editing {
-            editButton.title = NSLocalizedString("Done", comment: "Done")
-            editButton.style = .done
-        } else {
-            editButton.title = NSLocalizedString("Edit", comment: "Edit")
-            editButton.style = .plain
-        }
-
-        createButton.isEnabled = !editing
-    }
-
-    private func subjectsDidUpdate() {
-        NotificationCenter.default.post(name: SelectSubjectViewController.subjectsChangedNotification, object: nil)
-        loadData(animated: true)
-    }
 }
 
 extension SelectSubjectViewController : CreateSubjectViewControllerDelegate {
     public func createSubjectViewController(viewController: CreateSubjectViewController, didCreateSubject: Subject) {
-        dismiss(animated: true)
 
         do {
             try CoreDataStorage.shared.context.save()
+            dismiss(animated: true)
 
-            subjectsDidUpdate()
+            NotificationCenter.default.post(name: Subject.Notifications.subjectsChanged, object: nil)
+            reloadData()
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -175,11 +140,11 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
         }
         
         let subject = subjects[indexPath.row]
-        if subjectsTableView.isEditing {
+        if tableView.isEditing {
             performSegue(withIdentifier: "createEditSubject", sender: subject)
         } else {
             selectedSubject = subject
-            subjectsTableView.reloadData()
+            tableView.reloadData()
             
             delegate?.selectSubjectViewController(viewController: self, didSelectSubject: subject)
         }
@@ -196,8 +161,10 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
                 subjects.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
 
-                subjectsDidUpdate()
+                NotificationCenter.default.post(name: Subject.Notifications.subjectsChanged, object: nil)
+                reloadData()
             } catch let error as NSError {
+                CoreDataStorage.shared.context.rollback()
                 showAlert(error: error)
             }
         }

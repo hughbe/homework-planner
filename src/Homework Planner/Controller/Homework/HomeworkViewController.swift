@@ -18,40 +18,17 @@ public enum HomeworkSearchType : Int {
     case workSet
 }
 
-public class HomeworkViewController : SubjectDependentViewController {
-    @IBOutlet var editButton: UIBarButtonItem!
-    @IBOutlet weak var createButton: UIBarButtonItem!
-
-    @IBOutlet weak var noHomeworkView: UIView!
-    @IBOutlet weak var homeworkTableView: UITableView!
-    
-    private var searchBar: UISearchBar!
-    private var searchType = HomeworkSearchType.all {
-        didSet {
-            loadData(animated: true)
-        }
-    }
-    private var showCompleted = true {
-        didSet {
-            loadData(animated: true)
-        }
-    }
-    
-    private var unsectionedHomework: [Homework] = []
-    private var sectionedHomework: [[Homework]] = []
-
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-
+public class HomeworkViewController : EditableViewController {
+    private lazy var searchBar: UISearchBar = {
         let filterType = UISegmentedControl(items: [NSLocalizedString("All", comment: "All"), NSLocalizedString("Subject", comment: "Subject"), NSLocalizedString("Teacher", comment: "Teacher"), NSLocalizedString("Work Set", comment: "Work Set")])
         filterType.selectedSegmentIndex = 0
         filterType.apportionsSegmentWidthsByContent = true
         filterType.addTarget(self, action: #selector(changeSearchType), for: .valueChanged)
         filterType.sizeToFit()
-        
+
         let accessoryView = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
         accessoryView.barTintColor = UIColor.white
-        
+
         let showHideCompletedButton = UIBarButtonItem(title: NSLocalizedString("Hide Done", comment: "Hide Done"), style: .plain, target: self, action: #selector(showHideCompleted))
         showHideCompletedButton.tintColor = view.tintColor
 
@@ -59,9 +36,10 @@ public class HomeworkViewController : SubjectDependentViewController {
             UIBarButtonItem(customView: filterType),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             showHideCompletedButton
-        ], animated: false)
-        
-        searchBar = UISearchBar()
+            ], animated: false)
+
+        let searchBar = UISearchBar()
+
         searchBar.searchBarStyle = .minimal
         searchBar.placeholder = NSLocalizedString("Homework", comment: "Homework")
         searchBar.inputAccessoryView = accessoryView
@@ -71,17 +49,54 @@ public class HomeworkViewController : SubjectDependentViewController {
         textField?.textColor = UIColor.white
         textField?.tintColor = UIColor.white
 
+        return searchBar
+    }()
+
+    private var searchType = HomeworkSearchType.all {
+        didSet {
+            reloadData()
+        }
+    }
+    private var showCompleted = true {
+        didSet {
+            reloadData()
+        }
+    }
+
+    private var reloadAnimation = false
+    
+    private var unsectionedHomework: [Homework] = [] {
+        didSet {
+            sectionData()
+
+            UIView.transition(with: tableView, duration: reloadAnimation ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
+                self.tableView.reloadData()
+            })
+
+            setHasData(unsectionedHomework.count != 0, animated: reloadAnimation)
+
+            // The first reload is the only one that is not animated.
+            reloadAnimation = true
+        }
+    }
+
+    private var sectionedHomework: [[Homework]] = []
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+
         navigationItem.titleView = searchBar
 
         if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: homeworkTableView)
+            registerForPreviewing(with: self, sourceView: tableView)
         }
-        
-        loadData(animated: false)
-    }
-    
-    @IBAction func editHomework(_ sender: Any) {
-        setEditingHomework(editing: !homeworkTableView.isEditing)
+
+        register(notification: Homework.DisplayType.Notifications.didChange) { _ in
+            self.reloadData()
+        }
+        register(notification: Subject.Notifications.subjectsChanged) { _ in
+            self.reloadData()
+        }
     }
 
     @IBAction func createHomework(_ sender: Any) {
@@ -113,10 +128,10 @@ public class HomeworkViewController : SubjectDependentViewController {
         
         tabBarController?.present(viewController, animated: true)
     }
-    
-    public override func loadData(animated: Bool) {
+
+    public override func reloadData() {
         let request = NSFetchRequest<Homework>(entityName: "Homework")
-        
+
         let notCompletedPredicate: NSPredicate?
         if !showCompleted {
             notCompletedPredicate = NSPredicate(format: "completed != TRUE")
@@ -143,33 +158,14 @@ public class HomeworkViewController : SubjectDependentViewController {
         } else {
             filterPredicate = nil
         }
-        
+
         let predicates = [notCompletedPredicate, filterPredicate].flatMap { $0 }
         if predicates.count > 0 {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
-        
+
         do {
             unsectionedHomework = try CoreDataStorage.shared.context.fetch(request)
-            sectionData()
-            
-            UIView.transition(with: homeworkTableView, duration: animated ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
-                self.homeworkTableView.reloadData()
-            })
-            
-            let hasHomework = unsectionedHomework.count != 0
-            if hasHomework {
-                navigationItem.leftBarButtonItem = editButton
-            } else {
-                navigationItem.leftBarButtonItem = nil
-            }
-
-            if homeworkTableView.isEditing && !hasHomework {
-                setEditingHomework(editing: false)
-            }
-            
-            homeworkTableView.setHidden(hidden: !hasHomework, animated: animated)
-            noHomeworkView.setHidden(hidden: hasHomework, animated: animated)
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -202,8 +198,8 @@ public class HomeworkViewController : SubjectDependentViewController {
             sectionedHomework = [unsectionedHomework]
         }
 
-        for enumerator in sectionedHomework.enumerated() {
-            sectionedHomework[enumerator.offset] = enumerator.element.sorted { (homework1, homework2) in
+        sectionedHomework = sectionedHomework.map { homework in
+            return homework.sorted { (homework1, homework2) in
                 let order = homework1.order(other: homework2, comparisonType: homeworkDisplay.comparisonType)
 
                 return order == .before
@@ -211,8 +207,8 @@ public class HomeworkViewController : SubjectDependentViewController {
         }
     }
     
-    private func setEditingHomework(editing: Bool) {
-        homeworkTableView.setEditing(editing, animated: true)
+    private func setEditing(editing: Bool) {
+        tableView.setEditing(editing, animated: true)
         
         if editing {
             editButton.title = NSLocalizedString("Done", comment: "Done")
@@ -273,13 +269,13 @@ extension HomeworkViewController : CreateHomeworkViewControllerDelegate {
     }
     
     public func createHomeworkViewController(viewController: CreateHomeworkViewController, didCreateHomework homework: Homework) {
+
         do {
             try CoreDataStorage.shared.context.save()
+            viewController.dismiss(animated: true)
 
             createNotification(for: homework)
-            
-            loadData(animated: true)
-            viewController.dismiss(animated: true)
+            reloadData()
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -365,13 +361,13 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
         sectionData()
         
         let newHomework = self.sectionedHomework[indexPath.section]
-        homeworkTableView.performBatchUpdates({
+        tableView.performBatchUpdates({
             for enumerator in newHomework.enumerated() {
                 let oldIndex = oldHomework.index(of: enumerator.element.objectID)!
                 let oldIndexPath = IndexPath(row: oldIndex, section: indexPath.section)
                 let newIndexPath = IndexPath(row: enumerator.offset, section: indexPath.section)
 
-                homeworkTableView.moveRow(at: oldIndexPath, to: newIndexPath)
+                tableView.moveRow(at: oldIndexPath, to: newIndexPath)
             }
         })
         
@@ -418,8 +414,9 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
                 sectionedHomework[indexPath.section].remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
 
-                loadData(animated: true)
+                reloadData()
             } catch let error as NSError {
+                CoreDataStorage.shared.context.rollback()
                 showAlert(error: error)
             }
         }
@@ -440,13 +437,13 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension HomeworkViewController : UISearchBarDelegate {
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        loadData(animated: true)
+        reloadData()
     }
 }
 
 extension HomeworkViewController : UIViewControllerPreviewingDelegate {
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = homeworkTableView.indexPathForRow(at: location) else {
+        guard let indexPath = tableView.indexPathForRow(at: location) else {
             return nil
         }
         

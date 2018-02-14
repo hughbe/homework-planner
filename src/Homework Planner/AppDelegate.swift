@@ -14,8 +14,6 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    public static let inAppPurchaseErrorNotification = NSNotification.Name(rawValue: "InAppPurchaseErrorNotfication")
-
     public static let barTintColor = UIColor(red: 5 / 255.0, green: 6 / 255.0, blue: 9 / 255.0, alpha: 1.0)
     public static let barForegroundColor = UIColor.white
     
@@ -49,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self]).highlightedTextColor = UIColor.white
         
         UNUserNotificationCenter.current().delegate = self
-        SKPaymentQueue.default().add(self)
+        SKPaymentQueue.default().add(InAppPurchase.transactionObserver)
 
         LegacyImporter.importIfNeeded()
 #if DEBUG
@@ -60,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        SKPaymentQueue.default().remove(self)
+        SKPaymentQueue.default().remove(InAppPurchase.transactionObserver)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -107,7 +105,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         showHomework(objectId: response.notification.request.identifier)
         completionHandler()
     }
-    
+    /*
     private func reloadTimetableViewController() {
         let tabBarController = window?.rootViewController as? UITabBarController
         if let navigationController = tabBarController?.viewControllers?[1] as? UINavigationController, let viewController = navigationController.viewControllers.first as? TimetableViewController {
@@ -117,47 +115,5 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                 viewController.loadData(animated: true)
             }
         }
-    }
-}
-
-extension AppDelegate : SKPaymentTransactionObserver {
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-            switch (transaction.transactionState) {
-            case .purchased:                SKPaymentQueue.default().finishTransaction(transaction)
-
-                let productId = transaction.payment.productIdentifier
-                if productId == InAppPurchase.unlockTimetable.rawValue {
-                    InAppPurchase.unlockTimetable.purchase()
-                    reloadTimetableViewController()
-                }
-                break
-            case .restored:
-                SKPaymentQueue.default().finishTransaction(transaction)
-
-                let productId = transaction.original?.payment.productIdentifier
-                if productId == InAppPurchase.unlockTimetable.rawValue {
-                    InAppPurchase.unlockTimetable.purchase()
-                    reloadTimetableViewController()
-                }
-                break
-            case .failed:                SKPaymentQueue.default().finishTransaction(transaction)
-
-                NotificationCenter.default.post(name: AppDelegate.inAppPurchaseErrorNotification, object: transaction)
-                break
-            default:
-                break
-            }
-        }
-    }
-    
-    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        window?.rootViewController?.showAlert(title: NSLocalizedString("Restored Purchases", comment: "Restored Purchases"), message: nil)
-        
-        paymentQueue(queue, updatedTransactions: queue.transactions)
-    }
-    
-    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        window?.rootViewController?.showAlert(error: error as NSError)
-    }
+    }*/
 }

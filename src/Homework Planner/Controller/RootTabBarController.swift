@@ -48,10 +48,6 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             for type in Homework.DisplayType.allValues {
                 displayTypeAlertController.addAction(UIAlertAction(title: type.name, style: .default) { action in
                     Settings.homeworkDisplay = type
-                    
-                    if let navigationController = self.viewControllers?.first as? UINavigationController, let viewController = navigationController.viewControllers.first as? HomeworkViewController {
-                        viewController.loadData(animated: true)
-                    }
                 })
             }
             

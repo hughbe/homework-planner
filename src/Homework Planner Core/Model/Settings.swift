@@ -61,7 +61,7 @@ public class Settings {
             UserDefaults.standard.set(newValue, forKey: includeWeekendsKey)
         }
     }
-    
+
     public static var homeworkDisplay: Homework.DisplayType {
         get {
             if let value = UserDefaults.standard.value(forKey: homeworkDisplayKey) as? Int {
@@ -71,6 +71,8 @@ public class Settings {
             return .sectionedByDate
         } set {
             UserDefaults.standard.set(newValue.rawValue, forKey: homeworkDisplayKey)
+
+            NotificationCenter.default.post(name: Homework.DisplayType.Notifications.didChange, object: newValue)
         }
     }
 }

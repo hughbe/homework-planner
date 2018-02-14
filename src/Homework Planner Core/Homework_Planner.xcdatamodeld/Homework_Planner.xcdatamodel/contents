@@ -6,7 +6,7 @@
         <relationship name="homework" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Homework" inverseName="attachments" inverseEntity="Homework" syncable="YES"/>
     </entity>
     <entity name="Homework" representedClassName="Homework" syncable="YES" codeGenerationType="class">
-        <attribute name="completed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="completed" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="priority" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>

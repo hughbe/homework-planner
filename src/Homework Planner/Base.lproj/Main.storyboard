@@ -144,7 +144,7 @@
                     <navigationItem key="navigationItem" title="Homework" id="hK6-Kp-57S">
                         <barButtonItem key="leftBarButtonItem" title="Edit" id="V7C-pB-JRJ">
                             <connections>
-                                <action selector="editHomework:" destination="Ef2-Wj-t3g" id="Ne6-cH-kXr"/>
+                                <action selector="edit:" destination="Ef2-Wj-t3g" id="Ne6-cH-kXr"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="le0-va-O9k">
@@ -156,8 +156,8 @@
                     <connections>
                         <outlet property="createButton" destination="le0-va-O9k" id="yOZ-fy-E65"/>
                         <outlet property="editButton" destination="V7C-pB-JRJ" id="9P6-Qc-y6M"/>
-                        <outlet property="homeworkTableView" destination="ipI-y8-hOF" id="l6F-Dj-Qpj"/>
-                        <outlet property="noHomeworkView" destination="lbK-rO-8OT" id="5g2-QT-lOu"/>
+                        <outlet property="noDataView" destination="lbK-rO-8OT" id="5g2-QT-lOu"/>
+                        <outlet property="tableView" destination="ipI-y8-hOF" id="l6F-Dj-Qpj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0V-oW-fsg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -329,8 +329,8 @@
                         <outlet property="cancelButton" destination="Hav-pL-OEl" id="17e-uP-hwP"/>
                         <outlet property="createButton" destination="XuB-km-QQF" id="lUb-QE-WMK"/>
                         <outlet property="editButton" destination="hZF-Qw-Aub" id="Zol-dC-Ph4"/>
-                        <outlet property="noSubjectsView" destination="20R-Kq-3jG" id="rjq-Kc-COL"/>
-                        <outlet property="subjectsTableView" destination="rcq-Oe-nFE" id="GGM-qs-osq"/>
+                        <outlet property="noDataView" destination="20R-Kq-3jG" id="rjq-Kc-COL"/>
+                        <outlet property="tableView" destination="rcq-Oe-nFE" id="GGM-qs-osq"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="createEditSubject" id="wfA-T0-L7B"/>
                     </connections>
                 </viewController>
@@ -732,7 +732,7 @@
                                                             <rect key="frame" x="0.0" y="28" width="279" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Efy-2e-tSw" id="yP3-qL-8Df">
-                                                                <rect key="frame" x="0.0" y="0.0" width="669" height="43.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="279" height="43.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </tableViewCellContentView>
                                                         </tableViewCell>
@@ -1743,7 +1743,7 @@
                         <outlet property="calendarMenuView" destination="wee-qt-Xo3" id="buM-sa-EUN"/>
                         <outlet property="contentBottomConstraint" destination="LU2-WT-u3A" id="eA7-Tq-2j1"/>
                         <outlet property="contentHeightConstraint" destination="5m3-26-Gm4" id="LiZ-jK-lgp"/>
-                        <outlet property="noEventsView" destination="hme-3M-yfH" id="TgD-1R-5TL"/>
+                        <outlet property="noDataView" destination="hme-3M-yfH" id="Hvx-K1-rUt"/>
                         <outlet property="tableView" destination="Esc-xK-s42" id="hZP-KM-QB2"/>
                     </connections>
                 </viewController>
@@ -1889,7 +1889,7 @@
                                 <items>
                                     <barButtonItem title="Edit" id="SGI-6M-fw2">
                                         <connections>
-                                            <action selector="editLessons:" destination="5PN-hO-PtM" id="fQv-Uz-lVf"/>
+                                            <action selector="edit:" destination="5PN-hO-PtM" id="fQv-Uz-lVf"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="nrh-cr-SZS"/>
@@ -1957,11 +1957,11 @@
                         <outlet property="createButton" destination="CDg-bH-3ZB" id="v3K-RL-6Tk"/>
                         <outlet property="currentDayButton" destination="hp2-cn-Bnj" id="bYw-7z-Sjy"/>
                         <outlet property="editButton" destination="SGI-6M-fw2" id="lGU-A5-KjL"/>
-                        <outlet property="lessonsTableView" destination="N1s-LH-ldj" id="Rra-Ef-PwL"/>
                         <outlet property="nextDayButton" destination="hPU-LZ-td2" id="Dca-Do-p0j"/>
-                        <outlet property="noLessonsView" destination="d7m-dR-pUp" id="lFN-yF-yLU"/>
+                        <outlet property="noDataView" destination="d7m-dR-pUp" id="pkv-sx-EdY"/>
                         <outlet property="notPurchasedView" destination="eHj-ca-Tt2" id="Rlo-4L-ywd"/>
                         <outlet property="previousDayButton" destination="71X-BB-UML" id="ddx-03-tga"/>
+                        <outlet property="tableView" destination="N1s-LH-ldj" id="elZ-3k-Fmm"/>
                         <outlet property="toolbar" destination="ttB-Zz-tmg" id="Nuj-Yd-9N6"/>
                     </connections>
                 </viewController>

@@ -1,6 +1,6 @@
 //
 //  UIView+FadeInOut.swift
-//  Homework Planner
+//  Homework Planner Core
 //
 //  Created by Hugh Bellamy on 05/02/2018.
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.

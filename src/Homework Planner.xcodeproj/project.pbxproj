@@ -11,9 +11,7 @@
 		1E0572CE203208A600CCFD2A /* SubjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0572CD203208A600CCFD2A /* SubjectTests.swift */; };
 		1E0572CF20321D7E00CCFD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A8A5201D030F009F2BC7 /* Assets.xcassets */; };
 		1E0572D020321DA700CCFD2A /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E53286B2030AD01007AD7AC /* BackupView.swift */; };
-		1E07C3E1203358970072DF75 /* SubjectDependentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E07C3E0203358970072DF75 /* SubjectDependentViewController.swift */; };
 		1E244325202E05F000E9DC68 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E244324202E05EF00E9DC68 /* SafariServices.framework */; };
-		1E244329202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E244328202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift */; };
 		1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3998412021F62B002DFFA3 /* PanelView.swift */; };
 		1E39984620220BF1002DFFA3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E39984420220BF1002DFFA3 /* Localizable.strings */; };
 		1E672408202DFB52000A0B95 /* CreateImageAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672407202DFB52000A0B95 /* CreateImageAttachmentViewController.swift */; };
@@ -28,7 +26,10 @@
 		1E8EFA1A2029DC31003D711C /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA192029DC31003D711C /* TimePickerViewController.swift */; };
 		1E906BAE203461FF00762A5A /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E906BAD203461FF00762A5A /* DataInjector.swift */; };
 		1E906BAF20346C8900762A5A /* LegacyImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05737320323CBF00CCFD2A /* LegacyImporter.swift */; };
-		1E98FA49202DDF850018F736 /* UIBarButtonItem+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98FA48202DDF850018F736 /* UIBarButtonItem+Badge.swift */; };
+		1E94DCF9203492D700BC3117 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94DCF8203492D700BC3117 /* DataViewController.swift */; };
+		1E94DCFC203494B300BC3117 /* UINavigationController+Replace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94DCFB203494B300BC3117 /* UINavigationController+Replace.swift */; };
+		1E94DD0220349B8600BC3117 /* EditableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94DD0120349B8600BC3117 /* EditableViewController.swift */; };
+		1E94DD0320349C1700BC3117 /* UIBarButtonItem+SetHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E244328202E1EAD00E9DC68 /* UIBarButtonItem+SetHidden.swift */; };
 		1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA266E201D0B060042E03D /* CreateSubjectViewController.swift */; };
 		1EBA2673201D3D3D0042E03D /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2672201D3D3D0042E03D /* HomeworkViewController.swift */; };
 		1EBA2675201D45B80042E03D /* CreateHomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2674201D45B80042E03D /* CreateHomeworkViewController.swift */; };
@@ -149,11 +150,10 @@
 /* Begin PBXFileReference section */
 		1E0572CD203208A600CCFD2A /* SubjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTests.swift; sourceTree = "<group>"; };
 		1E05737320323CBF00CCFD2A /* LegacyImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyImporter.swift; sourceTree = "<group>"; };
-		1E07C3E0203358970072DF75 /* SubjectDependentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDependentViewController.swift; sourceTree = "<group>"; };
 		1E122C9B202A138400506B71 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		1E122C9D202A14BA00506B71 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		1E244324202E05EF00E9DC68 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		1E244328202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Hide.swift"; sourceTree = "<group>"; };
+		1E244328202E1EAD00E9DC68 /* UIBarButtonItem+SetHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+SetHidden.swift"; sourceTree = "<group>"; };
 		1E3998412021F62B002DFFA3 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		1E53286B2030AD01007AD7AC /* BackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupView.swift; sourceTree = "<group>"; };
 		1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+OrdinalIndicatorString.swift"; sourceTree = "<group>"; };
@@ -171,7 +171,9 @@
 		1E8EFA132029DAAB003D711C /* CreateLessonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLessonViewController.swift; sourceTree = "<group>"; };
 		1E8EFA192029DC31003D711C /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		1E906BAD203461FF00762A5A /* DataInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
-		1E98FA48202DDF850018F736 /* UIBarButtonItem+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Badge.swift"; sourceTree = "<group>"; };
+		1E94DCF8203492D700BC3117 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
+		1E94DCFB203494B300BC3117 /* UINavigationController+Replace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Replace.swift"; sourceTree = "<group>"; };
+		1E94DD0120349B8600BC3117 /* EditableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableViewController.swift; sourceTree = "<group>"; };
 		1EACEC26201D4BC5000E4915 /* UIColor+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+String.swift"; sourceTree = "<group>"; };
 		1EBA2667201D05E00042E03D /* Homework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework.swift; sourceTree = "<group>"; };
 		1EBA266B201D09A90042E03D /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
@@ -325,7 +327,6 @@
 			children = (
 				1E8EFA192029DC31003D711C /* TimePickerViewController.swift */,
 				1EBC88E8202890BC003937FD /* DayDatePickerViewController.swift */,
-				1E07C3E0203358970072DF75 /* SubjectDependentViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -339,9 +340,51 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1E94DCFA2034948E00BC3117 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1E94DCFD203494BA00BC3117 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1E94DCFB203494B300BC3117 /* UINavigationController+Replace.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1E94DCFE2034958500BC3117 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1ECB7F732030832B00858162 /* InAppPurchase.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1E94DD0420349C1A00BC3117 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1E244328202E1EAD00E9DC68 /* UIBarButtonItem+SetHidden.swift */,
+				1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */,
+				1EE7EBE1202B17DA0093ED37 /* UIView+FindViewWithClassNamed.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1E94DD052034B2FD00BC3117 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1EBA2678201D48390042E03D /* UIViewController+ShowAlert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1EBA266D201D0AF90042E03D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1E94DCFD203494BA00BC3117 /* Extensions */,
 				1ECDFFC6202C9B05005A4731 /* Calendar */,
 				1E8EFA182029DAD7003D711C /* Common */,
 				1E8EFA172029DAD1003D711C /* Subject */,
@@ -355,6 +398,7 @@
 		1EBA267A201D496C0042E03D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1E94DCFA2034948E00BC3117 /* Extensions */,
 				1EECD574201FC4710091B0B8 /* ContainerView.swift */,
 				1E6B91BA2021E4D10019FC5D /* SelectColorView.swift */,
 				1E3998412021F62B002DFFA3 /* PanelView.swift */,
@@ -362,8 +406,6 @@
 				1EFCA767202DEF8200DB9C11 /* UrlAttachmentTableViewCell.swift */,
 				1EFCA769202DEFD100DB9C11 /* ImageAttachmentTableViewCell.swift */,
 				1E67240B202E030F000A0B95 /* Photo.swift */,
-				1E98FA48202DDF850018F736 /* UIBarButtonItem+Badge.swift */,
-				1E244328202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -402,7 +444,6 @@
 				1E122C9B202A138400506B71 /* Day.swift */,
 				1EFCA76B202DF20E00DB9C11 /* Attachment.swift */,
 				1E122C9D202A14BA00506B71 /* Settings.swift */,
-				1ECB7F732030832B00858162 /* InAppPurchase.swift */,
 				1EC2AC772031A24E00969D3A /* CoreDataStorage.swift */,
 			);
 			path = Model;
@@ -411,8 +452,10 @@
 		1EC2ACAE2031B8D200969D3A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1EBA2678201D48390042E03D /* UIViewController+ShowAlert.swift */,
+				1E94DD052034B2FD00BC3117 /* Extensions */,
 				1EC2ACAF2031B9AF00969D3A /* DayViewController.swift */,
+				1E94DCF8203492D700BC3117 /* DataViewController.swift */,
+				1E94DD0120349B8600BC3117 /* EditableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -420,13 +463,12 @@
 		1EC2ACB32031BADE00969D3A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1E94DD0420349C1A00BC3117 /* Extensions */,
 				1E53286B2030AD01007AD7AC /* BackupView.swift */,
 				1ECDFFC4202C870C005A4731 /* ColorTableViewCell.swift */,
 				1EBC88EC202896E1003937FD /* HomeworkTableViewCell.swift */,
 				1EBA267B201D498A0042E03D /* SubjectTableViewCell.swift */,
 				1E8EFA0F2028FCBB003D711C /* LessonTableViewCell.swift */,
-				1EBC88EA20289457003937FD /* UIView+FadeInOut.swift */,
-				1EE7EBE1202B17DA0093ED37 /* UIView+FindViewWithClassNamed.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -511,6 +553,7 @@
 		1EF6A89A201D030F009F2BC7 /* Homework Planner */ = {
 			isa = PBXGroup;
 			children = (
+				1E94DCFE2034958500BC3117 /* Model */,
 				1E39984320220BC4002DFFA3 /* Resources */,
 				1EBA267A201D496C0042E03D /* View */,
 				1EBA266D201D0AF90042E03D /* Controller */,
@@ -863,6 +906,7 @@
 				1EC2AC9D2031A53600969D3A /* Homework_Planner.xcdatamodeld in Sources */,
 				1EC2AC9F2031A59300969D3A /* Subject.swift in Sources */,
 				1EC2ACB52031BB0900969D3A /* ColorTableViewCell.swift in Sources */,
+				1E94DD0220349B8600BC3117 /* EditableViewController.swift in Sources */,
 				1E0572CA203203A600CCFD2A /* Homework.swift in Sources */,
 				1EC2ACB02031B9AF00969D3A /* DayViewController.swift in Sources */,
 				1EC2ACB82031BB2200969D3A /* LessonTableViewCell.swift in Sources */,
@@ -870,6 +914,7 @@
 				1EC2ACA62031A59300969D3A /* InAppPurchase.swift in Sources */,
 				1EC2ACAB2031A64700969D3A /* UIViewController+ShowAlert.swift in Sources */,
 				1EC2ACB72031BB1F00969D3A /* SubjectTableViewCell.swift in Sources */,
+				1E94DCF9203492D700BC3117 /* DataViewController.swift in Sources */,
 				1EC2ACA72031A59300969D3A /* CoreDataStorage.swift in Sources */,
 				1EC2ACA52031A59300969D3A /* Settings.swift in Sources */,
 				1EC2ACA12031A59300969D3A /* Day.swift in Sources */,
@@ -878,6 +923,7 @@
 				1EC2ACB42031BB0700969D3A /* HomeworkTableViewCell.swift in Sources */,
 				1EEF710C2031FAC100DF8442 /* Date+Day.swift in Sources */,
 				1EEF71112031FB1A00DF8442 /* Date+Previous.swift in Sources */,
+				1E94DD0320349C1700BC3117 /* UIBarButtonItem+SetHidden.swift in Sources */,
 				1E906BAE203461FF00762A5A /* DataInjector.swift in Sources */,
 				1EC2ACB62031BB1400969D3A /* UIView+FindViewWithClassNamed.swift in Sources */,
 				1EC2ACA02031A59300969D3A /* Lesson.swift in Sources */,
@@ -902,14 +948,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E94DCFC203494B300BC3117 /* UINavigationController+Replace.swift in Sources */,
 				1E67240C202E030F000A0B95 /* Photo.swift in Sources */,
 				1EE7EBE8202B585F0093ED37 /* RootTabBarController.swift in Sources */,
 				1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */,
 				1EC2ACB22031BA6700969D3A /* HomeworkContentViewController.swift in Sources */,
-				1E07C3E1203358970072DF75 /* SubjectDependentViewController.swift in Sources */,
-				1E98FA49202DDF850018F736 /* UIBarButtonItem+Badge.swift in Sources */,
 				1E8EFA0E2028FA7B003D711C /* TimetableViewController.swift in Sources */,
-				1E244329202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift in Sources */,
 				1E7DCBD0202DAD5800C7B1BC /* ActionsView.swift in Sources */,
 				1E8EFA142029DAAB003D711C /* CreateLessonViewController.swift in Sources */,
 				1ECDFFC8202C9B0F005A4731 /* CalendarViewController.swift in Sources */,

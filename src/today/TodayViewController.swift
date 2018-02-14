@@ -24,9 +24,9 @@ class TodayViewController: DayViewController, NCWidgetProviding {
         
         tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
     }
-    
-    override func loadDate(date: Date, animated: Bool) {
-        super.loadDate(date: date, animated: true)
+
+    override func reloadData(animated: Bool) {
+        super.reloadData(animated: true)
         
         tableView.layoutIfNeeded()
         preferredContentSize = tableView.contentSize
@@ -39,7 +39,7 @@ class TodayViewController: DayViewController, NCWidgetProviding {
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        loadDate(date: currentDate, animated: true)        
+        reloadData(animated: true)       
         completionHandler(NCUpdateResult.newData)
     }
     

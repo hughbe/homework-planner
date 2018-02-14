@@ -15,45 +15,41 @@ public class CalenadarViewController : DayViewController {
     @IBOutlet weak var calendarMenuView: JTCalendarMenuView!
     @IBOutlet weak var calendarContentView: JTHorizontalCalendarView!
     
-    private var manager = JTCalendarManager()
+    private lazy var manager: JTCalendarManager = {
+        let manager = JTCalendarManager()
+        manager.delegate = self
+        manager.menuView = calendarMenuView
+        manager.contentView = calendarContentView
+        manager.setDate(currentDate)
+
+        return manager
+    }()
+
     private var menuFont: UIFont!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         // Promote the menu view from the view to the navigation controller.
-        if let view = navigationController?.navigationBar {
-            view.addSubview(calendarMenuView)
-            view.addConstraints([
-                NSLayoutConstraint(item: calendarMenuView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: calendarMenuView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: calendarMenuView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: calendarMenuView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottomMargin, multiplier: 1, constant: 0)
-            ])
-        }
-        
-        manager.delegate = self
-        manager.menuView = calendarMenuView
-        manager.contentView = calendarContentView
-        manager.setDate(currentDate)
+        navigationController?.replaceNavigationBar(with: calendarMenuView)
         
         setWeekMode(weekMode: true, animated: false)
     }
     
     @IBOutlet var contentHeightConstraint: NSLayoutConstraint!
     @IBOutlet var contentBottomConstraint: NSLayoutConstraint!
-    
-    public override func loadDate(date: Date, animated: Bool) {
-        manager.setDate(date)
-        super.loadDate(date: date, animated: animated)
-    }
 
     public func setWeekMode(weekMode: Bool, animated: Bool) {
         manager.settings.weekModeEnabled = weekMode
         manager.reload()
-        
-        tableView.isHidden = !weekMode && (homework.count > 0 || lessons.count > 0)
-        noEventsView?.isHidden = !weekMode || homework.count > 0 || lessons.count > 0
+
+        if weekMode {
+            setHasData(homework.count > 0 || lessons.count > 0, animated: false)
+        } else {
+            tableView.isHidden = true
+            noDataView?.isHidden = true
+        }
+
         contentBottomConstraint.isActive = !weekMode
         contentHeightConstraint.isActive = weekMode
         
@@ -64,14 +60,16 @@ public class CalenadarViewController : DayViewController {
 
     @IBAction func goToPreviousDay(_ sender: Any) {
         if let date = Calendar.current.date(byAdding: .day, value: -1, to: currentDate) {
-            loadDate(date: date, animated: true)
+            manager.setDate(date)
+            currentDate = date
             manager.reload()
         }
     }
 
     @IBAction func goToNextDay(_ sender: Any) {
         if let date = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) {
-            loadDate(date: date, animated: true)
+            manager.setDate(date)
+            currentDate = date
             manager.reload()
         }
     }
@@ -103,19 +101,21 @@ extension CalenadarViewController : JTCalendarDelegate {
 
         view.alpha = 1
         
-        if view.isFromAnotherMonth {
-            view.alpha = 0.5
-        } else if manager.dateHelper.date(currentDate, isTheSameDayThan: view.date) {
+        if Calendar.current.isDate(currentDate, inSameDayAs: view.date) {
             view.circleView.isHidden = false
             view.circleView.backgroundColor = UIColor.red
             view.dotView.backgroundColor = UIColor.white
             view.textLabel.textColor = UIColor.white
-        } else if manager.dateHelper.date(Date(), isTheSameDayThan: view.date) {
+        } else if Calendar.current.isDate(Date(), inSameDayAs: view.date) {
             view.circleView.isHidden = false
             view.circleView.backgroundColor = UIColor.black
             view.dotView.backgroundColor = UIColor.white
             view.textLabel.textColor = UIColor.white
         } else {
+            if view.isFromAnotherMonth {
+                view.alpha = 0.5
+            }
+
             view.circleView.isHidden = true
             view.dotView.backgroundColor = UIColor.red
             view.textLabel.textColor = UIColor.black
@@ -127,9 +127,13 @@ extension CalenadarViewController : JTCalendarDelegate {
     
     public func calendar(_ calendar: JTCalendarManager!, didTouchDayView dayView: (UIView & JTCalendarDay)!) {
         let view = dayView as! JTCalendarDayView
-        loadDate(date: view.date, animated: true)
+        let date = view.date.day
+        let oldCurrentDate = currentDate
 
-        if calendar.dateHelper.date(view.date, isTheSameDayThan: currentDate) {
+        manager.setDate(date)
+        currentDate = date
+
+        if Calendar.current.isDate(oldCurrentDate, inSameDayAs: date) {
             setWeekMode(weekMode: !calendar.settings.weekModeEnabled, animated: true)
         } else if homework.count == 0 && lessons.count == 0 {
             setWeekMode(weekMode: false, animated: true)

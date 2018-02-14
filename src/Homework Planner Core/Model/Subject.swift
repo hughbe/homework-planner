@@ -35,6 +35,10 @@ extension Subject {
         }
     }
 
+    public class Notifications {
+        public static let subjectsChanged = NSNotification.Name(rawValue: "SubjectsChangedNotification")
+    }
+
     public static var CommonSubjects = [
         "Biology",
         "Chemistry",

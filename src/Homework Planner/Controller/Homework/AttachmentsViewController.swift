@@ -11,7 +11,7 @@ import NYTPhotoViewer
 import SafariServices
 import UIKit
 
-public class AttachmentsViewController : UIViewController {
+public class AttachmentsViewController : DataViewController {
     @IBOutlet weak var attachmentsTableView: UITableView!
     @IBOutlet weak var noAttachmentsView: BackupView!
     
@@ -29,8 +29,8 @@ public class AttachmentsViewController : UIViewController {
         super.viewDidLoad()
         
         if !isEditingEnabled {
-            editButton.hide()
-            createButton.hide()
+            editButton.setHidden(true)
+            createButton.setHidden(true)
             noAttachmentsView.subtitleButton.isEnabled = false
             noAttachmentsView.actionableSubtitle = false
         }

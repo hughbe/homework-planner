@@ -9,33 +9,47 @@
 import CoreData
 import UIKit
 
-open class DayViewController : UIViewController {
-    @IBOutlet public weak var noEventsView: UIView?
-    @IBOutlet public weak var tableView: UITableView!
-
+open class DayViewController : DataViewController {
     public var homework: [Homework] = []
     public var lessons: [Lesson] = []
-    public var currentDate = Date()
-
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        loadDate(date: currentDate, animated: true)
+    public var currentDate = Date() {
+        didSet {
+            reloadData(animated: true)
+        }
     }
 
-    open func loadDate(date: Date, animated: Bool) {
-        let dateDay = date.day
+    private var token: NSObjectProtocol!
 
-        currentDate = dateDay
-        (homework, lessons) = fetchData(date: currentDate)
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+
+        register(notification: Subject.Notifications.subjectsChanged) { _ in
+            self.reloadData(animated: true)
+        }
+    }
+
+    open override func reloadData() {
+        reloadData(animated: false)
+    }
+
+    open func reloadData(animated: Bool) {
+        let dateDay = currentDate.day
+        (homework, lessons) = fetchData(date: dateDay)
 
         let hasEvents = homework.count > 0 || lessons.count > 0
         tableView.setHidden(hidden: !hasEvents, animated: animated)
-        noEventsView?.setHidden(hidden: hasEvents, animated: animated)
-        
+        noDataView?.setHidden(hidden: hasEvents, animated: animated)
+
         UIView.transition(with: tableView, duration: animated ? 0.25 : 0, options: .transitionCrossDissolve, animations: {
             self.tableView.reloadData()
         })
+
+    }
+
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        reloadData(animated: true)
     }
 
     public func fetchData(date: Date) -> ([Homework], [Lesson]) {

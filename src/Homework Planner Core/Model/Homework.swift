@@ -76,6 +76,10 @@ public extension Homework {
                 return .date
             }
         }
+
+        public class Notifications {
+            public static let didChange = NSNotification.Name("HomeworkDisplayTypeDidChange")
+        }
     }
 
     public enum Order {

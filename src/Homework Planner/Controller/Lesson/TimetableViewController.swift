@@ -11,78 +11,86 @@ import Homework_Planner_Core
 import StoreKit
 import UIKit
 
-public class TimetableViewController : SubjectDependentViewController {
+public class TimetableViewController : EditableViewController {
     @IBOutlet weak var toolbar: UIToolbar!
-    @IBOutlet var editButton: UIBarButtonItem!
-    @IBOutlet weak var createButton: UIBarButtonItem!
     
     @IBOutlet weak var previousDayButton: UIBarButtonItem!
     @IBOutlet weak var currentDayButton: UIBarButtonItem!
     @IBOutlet weak var nextDayButton: UIBarButtonItem!
 
     @IBOutlet weak var notPurchasedView: UIView!
-    @IBOutlet weak var noLessonsView: UIView!
-    @IBOutlet weak var lessonsTableView: UITableView!
     
     public var reloadAnimation = UITableViewRowAnimation.none
     
     private var timetableProduct: SKProduct?
-    private var notificationToken: NSObjectProtocol?
 
-    private var lessons: [Lesson] = []
+    private var lessons: [Lesson] = [] {
+        didSet {
+            if reloadAnimation != .none {
+                tableView.beginUpdates()
+                tableView.reloadSections(IndexSet(integer: 0), with: reloadAnimation)
+                tableView.endUpdates()
+            } else {
+                tableView.reloadData()
+            }
+
+            setHasData(lessons.count != 0, animated: reloadAnimation != .none)
+        }
+    }
+
     public var day = Day(date: Date().day, modifyIfWeekend: true) {
         didSet {
             currentDayButton.title = day.name
-            setEditingLessons(editing: false)
-            loadData(animated: true)
+            setEditing(false)
+            reloadData()
         }
     }
-    
+
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if !InAppPurchase.unlockTimetable.isPurchased {
             let request = SKProductsRequest(productIdentifiers: [InAppPurchase.unlockTimetable.rawValue])
             request.delegate = self
             request.start()
+        } else {
+            notPurchasedView.isHidden = true
         }
-        
+
         // Promote the toolbar from the view to the navigation controller.
-        if let view = navigationController?.view {
-            toolbar.clipsToBounds = true
-
-            view.addSubview(toolbar)
-            view.addConstraints([
-                NSLayoutConstraint(item: toolbar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: toolbar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: toolbar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1, constant: 0),
-            ])
-        }
-
+        navigationController?.replaceNavigationBar(with: toolbar)
         currentDayButton.title = day.name
-        loadData(animated: false)
-    }
 
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        notificationToken = NotificationCenter.default.addObserver(forName:  AppDelegate.inAppPurchaseErrorNotification, object: nil, queue: nil) { notification in
+        register(notification: InAppPurchase.Notifications.purchaseError) { notification in
             if let transaction = notification.object as? SKPaymentTransaction, let error = transaction.error {
                 self.showAlert(error: error as NSError)
             }
         }
-    }
 
-    public override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        register(notification: InAppPurchase.Notifications.purchaseSuccess) { notification in
+            if let transaction = notification.object as? SKPaymentTransaction, let error = transaction.error {
+                self.showAlert(error: error as NSError)
+            }
+        }
 
-        if let notificationToken = notificationToken {
-            NotificationCenter.default.removeObserver(notificationToken)
+        register(notification: Subject.Notifications.subjectsChanged) { _ in
+            self.reloadData()
         }
     }
 
-    @IBAction func editLessons(_ sender: Any) {
-        setEditingLessons(editing: !lessonsTableView.isEditing)
+    override public func reloadData() {
+        let request = NSFetchRequest<Lesson>(entityName: "Lesson")
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Lesson.startHour, ascending: true),
+            NSSortDescriptor(keyPath: \Lesson.startMinute, ascending: true)
+        ]
+        request.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
+
+        do {
+            lessons = try CoreDataStorage.shared.context.fetch(request)
+        } catch let error as NSError {
+            showAlert(error: error)
+        }
     }
 
     @IBAction func createLesson(_ sender: Any) {
@@ -148,70 +156,6 @@ public class TimetableViewController : SubjectDependentViewController {
         reloadAnimation = .left
         day = day.nextDay
     }
-    
-    public override func loadData(animated: Bool) {
-        guard InAppPurchase.unlockTimetable.isPurchased else {
-            lessonsTableView.setHidden(hidden: true, animated: animated)
-            noLessonsView.setHidden(hidden: true, animated: animated)
-            
-            notPurchasedView.setHidden(hidden: false, animated: animated)
-            
-            return
-        }
-    
-        notPurchasedView.setHidden(hidden: true, animated: animated)
-        
-        let request = NSFetchRequest<Lesson>(entityName: "Lesson")
-        request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Lesson.startHour, ascending: true),
-            NSSortDescriptor(keyPath: \Lesson.startMinute, ascending: true)
-        ]
-        request.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
-
-        do {
-            lessons = try CoreDataStorage.shared.context.fetch(request)
-            
-            if animated {
-                lessonsTableView.beginUpdates()
-                lessonsTableView.reloadSections(IndexSet(integer: 0), with: reloadAnimation)
-                lessonsTableView.endUpdates()
-            } else {
-                lessonsTableView.reloadData()
-            }
-            
-            let hasLessons = lessons.count != 0
-            if hasLessons {
-                editButton.tintColor = nil
-                editButton.isEnabled = true
-            } else {
-                editButton.tintColor = UIColor.clear
-                editButton.isEnabled = false
-            }
-            
-            if lessonsTableView.isEditing && !hasLessons {
-                setEditingLessons(editing: false)
-            }
-            
-            lessonsTableView.setHidden(hidden: !hasLessons, animated: animated)
-            noLessonsView.setHidden(hidden: hasLessons, animated: animated)
-        } catch let error as NSError {
-            showAlert(error: error)
-        }
-    }
-    
-    private func setEditingLessons(editing: Bool) {
-        lessonsTableView.setEditing(editing, animated: true)
-        
-        if editing {
-            editButton.title = NSLocalizedString("Done", comment: "Done")
-            editButton.style = .done
-        } else {
-            editButton.title = NSLocalizedString("Edit", comment: "Edit")
-            editButton.style = .plain
-        }
-        
-        createButton.isEnabled = !editing
-    }
 
     @IBAction func restorePurchases(_ sender: Any) {
         guard let product = timetableProduct else {
@@ -235,13 +179,14 @@ extension TimetableViewController : CreateLessonViewControllerDelegate {
     }
     
     public func createLessonViewController(viewController: CreateLessonViewController, didCreateLesson lesson: Lesson) {
+        lesson.dayOfWeek = Int32(day.dayOfWeek)
+        lesson.week = Int32(day.week)
+
         do {
-            lesson.dayOfWeek = Int32(day.dayOfWeek)
-            lesson.week = Int32(day.week)
-            
             try CoreDataStorage.shared.context.save()
-            loadData(animated: true)
             viewController.dismiss(animated: true)
+
+            reloadData()
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -279,23 +224,22 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
                 
                 lessons.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .top)
-                
-                loadData(animated: true)
             } catch let error as NSError {
+                CoreDataStorage.shared.context.rollback()
                 showAlert(error: error)
             }
         }
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
         guard tableView.isEditing else {
             return
         }
 
         let lesson = lessons[indexPath.row]
         showCreateLesson(lesson: lesson, startHour: nil, startMinute: nil)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
