@@ -18,7 +18,7 @@ public enum HomeworkSearchType : Int {
     case workSet
 }
 
-public class HomeworkViewController : UIViewController {
+public class HomeworkViewController : SubjectDependentViewController {
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet weak var createButton: UIBarButtonItem!
 
@@ -114,7 +114,7 @@ public class HomeworkViewController : UIViewController {
         tabBarController?.present(viewController, animated: true)
     }
     
-    public func loadData(animated: Bool) {
+    public override func loadData(animated: Bool) {
         let request = NSFetchRequest<Homework>(entityName: "Homework")
         
         let notCompletedPredicate: NSPredicate?

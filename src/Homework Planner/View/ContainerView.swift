@@ -88,4 +88,14 @@ public class ContainerView : PanelView {
             }, completion: nil)
         }
     }
+
+    override public var bounds: CGRect {
+        didSet {
+            guard self.containsFirstResponder() else {
+                return
+            }
+
+            setVerticalConstraint(duration: 0.35, options: [])
+        }
+    }
 }

@@ -22,7 +22,7 @@ class TodayViewController: DayViewController, NCWidgetProviding {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.contentInset = UIEdgeInsetsMake(-25, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
     }
     
     override func loadDate(date: Date, animated: Bool) {

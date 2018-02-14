@@ -14,7 +14,10 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    public static let inAppPurchaseErrorNotification = NSNotification.Name(rawValue: "InAppPurchaseErrorNotfication")
+
     public static let barTintColor = UIColor(red: 5 / 255.0, green: 6 / 255.0, blue: 9 / 255.0, alpha: 1.0)
+    public static let barForegroundColor = UIColor.white
     
     static var shared: AppDelegate {
         get {
@@ -29,24 +32,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             LegacyImporter.doImport()
             Settings.imported = true
         }
-        
-        let foregroundColor = UIColor.white
-        
-        UITabBar.appearance().tintColor = foregroundColor
+
         UITabBar.appearance().barTintColor = AppDelegate.barTintColor
         UIToolbar.appearance().barTintColor = AppDelegate.barTintColor
 
         UINavigationBar.appearance().barTintColor = AppDelegate.barTintColor
         UISearchBar.appearance().barTintColor = AppDelegate.barTintColor
-        
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : foregroundColor]
 
-        UIBarButtonItem.appearance().tintColor = foregroundColor
+        UITabBar.appearance().tintColor = AppDelegate.barForegroundColor
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : AppDelegate.barForegroundColor]
+        UIBarButtonItem.appearance().tintColor = AppDelegate.barForegroundColor
         application.statusBarStyle = .lightContent
         
         UITextField.appearance().tintColor = UIColor.black
         UITextView.appearance().tintColor = UIColor.black
-        
+
         let selectedView = UIView()
         selectedView.backgroundColor = UIColor(red: 0, green: 153 / 255.0, blue: 102 / 255.0, alpha: 1)
         UITableViewCell.appearance().selectedBackgroundView = selectedView
@@ -57,6 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SKPaymentQueue.default().add(self)
         
         return true
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        SKPaymentQueue.default().remove(self)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -121,7 +125,8 @@ extension AppDelegate : SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch (transaction.transactionState) {
-            case .purchased:
+            case .purchased:                SKPaymentQueue.default().finishTransaction(transaction)
+
                 let productId = transaction.payment.productIdentifier
                 if productId == InAppPurchase.unlockTimetable.rawValue {
                     InAppPurchase.unlockTimetable.purchase()
@@ -129,16 +134,19 @@ extension AppDelegate : SKPaymentTransactionObserver {
                 }
                 break
             case .restored:
+                SKPaymentQueue.default().finishTransaction(transaction)
+
                 let productId = transaction.original?.payment.productIdentifier
                 if productId == InAppPurchase.unlockTimetable.rawValue {
                     InAppPurchase.unlockTimetable.purchase()
                     reloadTimetableViewController()
                 }
                 break
-            case .failed:
-                SKPaymentQueue.default().finishTransaction(transaction)
+            case .failed:                SKPaymentQueue.default().finishTransaction(transaction)
+
+                NotificationCenter.default.post(name: AppDelegate.inAppPurchaseErrorNotification, object: transaction)
                 break
-            case .deferred, .purchasing:
+            default:
                 break
             }
         }

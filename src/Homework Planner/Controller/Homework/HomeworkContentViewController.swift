@@ -83,16 +83,17 @@ public class HomeworkContentViewController: UIViewController {
     }
 
     @IBAction func changeType(_ sender: Any) {
-        let actionSheet = UIAlertController(title: NSLocalizedString("Homework Type", comment: "Homework Type"), message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: NSLocalizedString("Homework Type", comment: "Homework Type"), message: nil, preferredStyle: .actionSheet)
         
         for type in Homework.WorkType.allValues {
-            actionSheet.addAction(UIAlertAction(title: type.name, style: .default) { action in
+            alertController.addAction(UIAlertAction(title: type.name, style: .default) { action in
                 self.homework.type = type.rawValue
                 self.displayHomeworkType(type: type)
             })
         }
-        
-        present(actionSheet, animated: true)
+
+        alertController.popoverPresentationController?.barButtonItem = typeButton
+        present(alertController, animated: true)
     }
     
     private func displayHomeworkType(type: Homework.WorkType) {

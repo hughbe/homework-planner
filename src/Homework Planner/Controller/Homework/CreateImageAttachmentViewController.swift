@@ -66,7 +66,9 @@ public class CreateImageAttachmentViewController : CreateAttachmentViewControlle
         }
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .default))
-        
+
+        alertController.popoverPresentationController?.sourceView = imageView
+        alertController.popoverPresentationController?.sourceRect = imageView.bounds
         present(alertController, animated: true)
     }
 

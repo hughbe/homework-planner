@@ -146,19 +146,28 @@ public class BackupView : UIControl {
             NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: subtitleButton, attribute: .bottom, multiplier: 1, constant: 20),
             NSLayoutConstraint(item: subtitleButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: subtitleButton.titleLabel!.font.pointSize * 1.5)
         ])
-        
+
         layoutIfNeeded()
     }
     
     @objc private func subtitleTapped(_ sender: UIButton) {
         sendActions(for: .touchUpInside)
     }
-    
+
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let result = super.hitTest(point, with: event)
+        if result == subtitleButton {
+            return result
+        }
+
+        return nil
+    }
+
     private func displaySubtitleButton() {
         if actionableSubtitle {
-            subtitleButton.layer.borderWidth = 1
+            subtitleButton.layer.borderWidth = 0.5
             subtitleButton.layer.borderColor = UIColor(white: 0.2, alpha: 1).cgColor
-            subtitleButton.layer.cornerRadius = 4
+            subtitleButton.layer.cornerRadius = 10
             subtitleButton.backgroundColor = UIColor(hue: 208 / 360, saturation: 0.72, brightness: 0.69, alpha: 1)
             subtitleButton.tintColor = UIColor.white
         } else {

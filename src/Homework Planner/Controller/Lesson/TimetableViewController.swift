@@ -11,7 +11,7 @@ import Homework_Planner_Core
 import StoreKit
 import UIKit
 
-public class TimetableViewController : UIViewController {
+public class TimetableViewController : SubjectDependentViewController {
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet weak var createButton: UIBarButtonItem!
@@ -27,6 +27,7 @@ public class TimetableViewController : UIViewController {
     public var reloadAnimation = UITableViewRowAnimation.none
     
     private var timetableProduct: SKProduct?
+    private var notificationToken: NSObjectProtocol?
 
     private var lessons: [Lesson] = []
     public var day = Day(date: Date().day, modifyIfWeekend: true) {
@@ -61,7 +62,25 @@ public class TimetableViewController : UIViewController {
         currentDayButton.title = day.name
         loadData(animated: false)
     }
-    
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        notificationToken = NotificationCenter.default.addObserver(forName:  AppDelegate.inAppPurchaseErrorNotification, object: nil, queue: nil) { notification in
+            if let transaction = notification.object as? SKPaymentTransaction, let error = transaction.error {
+                self.showAlert(error: error as NSError)
+            }
+        }
+    }
+
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let notificationToken = notificationToken {
+            NotificationCenter.default.removeObserver(notificationToken)
+        }
+    }
+
     @IBAction func editLessons(_ sender: Any) {
         setEditingLessons(editing: !lessonsTableView.isEditing)
     }
@@ -77,6 +96,7 @@ public class TimetableViewController : UIViewController {
         let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateLessonNavigationViewController") as! CreateLessonViewController
         viewController.createDelegate = self
 
+        viewController.editingLesson = lesson
         viewController.startHour = startHour
         viewController.startMinute = startMinute
 
@@ -89,15 +109,15 @@ public class TimetableViewController : UIViewController {
     }
     
     @IBAction func currentDayTapped(_ sender: Any) {
-        let alert = UIAlertController(title: NSLocalizedString("Options", comment: "Options"), message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: NSLocalizedString("Options", comment: "Options"), message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Go To Today", comment: "Go To Today"), style: .default) { action in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Go To Today", comment: "Go To Today"), style: .default) { action in
             self.reloadAnimation = .fade
             self.day = Day(date: Date(), modifyIfWeekend: true)
         })
         
         if Settings.numberOfWeeks != 1 {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Set Current Week", comment: "Set Current Week"), style: .default) { action in
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Set Current Week", comment: "Set Current Week"), style: .default) { action in
                 let currentWeeekAlertController = UIAlertController(title: NSLocalizedString("Current Week", comment: "Current Week"), message: nil, preferredStyle: .actionSheet)
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 1", comment: "Week 1"), style: .default) { action in
@@ -112,14 +132,16 @@ public class TimetableViewController : UIViewController {
                 })
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
-                
+
+                currentWeeekAlertController.popoverPresentationController?.barButtonItem = self.currentDayButton
                 self.present(currentWeeekAlertController, animated: true)
             })
         }
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
-        
-        present(alert, animated: true)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
+
+        alertController.popoverPresentationController?.barButtonItem = currentDayButton
+        present(alertController, animated: true)
     }
     
     @IBAction func goToNextDay(_ sender: Any) {
@@ -127,7 +149,7 @@ public class TimetableViewController : UIViewController {
         day = day.nextDay
     }
     
-    public func loadData(animated: Bool) {
+    public override func loadData(animated: Bool) {
         guard InAppPurchase.unlockTimetable.isPurchased else {
             lessonsTableView.setHidden(hidden: true, animated: animated)
             noLessonsView.setHidden(hidden: true, animated: animated)
@@ -194,6 +216,11 @@ public class TimetableViewController : UIViewController {
     @IBAction func restorePurchases(_ sender: Any) {
         guard let product = timetableProduct else {
             showAlert(title: NSLocalizedString("Invalid Product", comment: "Invalid Product"), message: nil)
+            return
+        }
+
+        guard SKPaymentQueue.canMakePayments() else {
+            showAlert(title: NSLocalizedString("Purchases are disabled in your device", comment: "Purchases are disabled in your device"), message: nil)
             return
         }
         

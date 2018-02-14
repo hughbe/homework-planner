@@ -21,6 +21,8 @@ extension Subject {
         "History",
         "Latin",
         "Maths",
+        "PE",
+        "Philosophy",
         "Politics",
         "Physics",
         "Russian",
