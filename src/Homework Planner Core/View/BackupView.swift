@@ -104,22 +104,22 @@ public class BackupView : UIControl {
         guard imageView.superview == nil else {
             return
         }
-        
+
         backgroundColor = UIColor.clear
-        
+
         titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.5
-        
+
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
 
         displaySubtitleButton()
         subtitleButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         subtitleButton.isHidden = subtitleMessage == nil || subtitleMessage.count == 0
-        
+
         subtitleButton.titleLabel?.adjustsFontSizeToFitWidth = true
         subtitleButton.titleLabel?.minimumScaleFactor = 0.5
         subtitleButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5.0, bottom: 0, right: 5)

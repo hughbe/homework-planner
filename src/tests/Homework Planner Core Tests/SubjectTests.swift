@@ -51,7 +51,7 @@ class SubjectTests: XCTestCase {
     }
 
     func testSetUiColor() {
-        subject.uiColor= UIColor.purple
+        subject.uiColor = UIColor.purple
         XCTAssertEqual(UIColor.purple, subject.uiColor)
         XCTAssertEqual("[0.5, 0.0, 0.5, 1.0]", subject.color)
     }

@@ -46,7 +46,6 @@ public extension Homework {
     }
     
     public enum ComparisonType {
-        case none
         case subject
         case date
     }
@@ -68,39 +67,63 @@ public extension Homework {
             .sectionedByDate,
             .sectionedBySubject
         ]
+
+        public var comparisonType: ComparisonType {
+            switch self {
+            case .sectionedByDate:
+                return .subject
+            case .sectionedBySubject:
+                return .date
+            }
+        }
     }
 
-    public func isGreaterThan(other: Homework, comparisonType: ComparisonType) -> Bool {
-        if priority != other.priority {
-            if priority {
-                // Greater priority than the other.
-                return other.completed == completed || !completed
-            } else {
-                // Lower priority than the other.
-                return !completed && other.completed
+    public enum Order {
+        case before
+        case equal
+        case after
+
+        init(comparisonResult: ComparisonResult) {
+            switch comparisonResult {
+            case .orderedAscending:
+                self = .before
+            case .orderedSame:
+                self = .equal
+            case .orderedDescending:
+                self = .after
             }
         }
-        
+    }
+
+    public func order(other: Homework, comparisonType: ComparisonType) -> Order {
+        if priority != other.priority && (!other.completed || completed == other.completed) {
+            if priority {
+                return .before
+            }
+
+            return .after
+        }
+
         if completed != other.completed {
             if completed {
-                return false
-            } else if other.completed {
-                return true
+                return .after
             }
+
+            return .before
         }
-        
+
         if comparisonType == .subject {
             let name1 = subject?.name ?? ""
             let name2 = other.subject?.name ?? ""
-            
-            return name1.compare(name2) == .orderedDescending
+
+            return Order(comparisonResult: name1.compare(name2))
         } else if comparisonType == .date {
             let date1 = dueDate ?? Date().day
             let date2 = other.dueDate ?? Date().day
-            
-            return date1.compare(date2) == .orderedDescending
+
+            return Order(comparisonResult: date1.compare(date2))
         } else {
-            return true
+            return .equal
         }
     }
 }

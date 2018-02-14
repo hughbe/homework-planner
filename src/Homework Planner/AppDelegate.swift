@@ -28,11 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if !Settings.imported {
-            LegacyImporter.doImport()
-            Settings.imported = true
-        }
-
         UITabBar.appearance().barTintColor = AppDelegate.barTintColor
         UIToolbar.appearance().barTintColor = AppDelegate.barTintColor
 
@@ -55,6 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().delegate = self
         SKPaymentQueue.default().add(self)
+
+        LegacyImporter.importIfNeeded()
+#if DEBUG
+        DataInjector.injectIfNeeded()
+#endif
         
         return true
     }
@@ -87,8 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return true
         } catch let error as NSError {
-            print(error)
-            
+            window?.rootViewController?.showAlert(error: error)
             return false
         }
     }

@@ -1,6 +1,6 @@
 //
 //  LegacyImporter.swift
-//  Homework Planner
+//  Homework Planner Core
 //
 //  Created by Hugh Bellamy on 12/02/2018.
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
@@ -8,7 +8,6 @@
 
 import CoreData
 import Foundation
-import Homework_Planner_Core
 import UIKit
 
 @objc(SubjectLegacy) private class SubjectLegacy : NSObject, NSCoding {
@@ -125,8 +124,22 @@ import UIKit
 
 public class LegacyImporter {
     private static var allSubjects: [SubjectLegacy] = []
-    
-    public static func doImport() {
+
+    private static let importedKey = "Imported"
+    private static var imported: Bool {
+        get {
+            return UserDefaults.standard.value(forKey: importedKey) as? Bool ?? false
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: importedKey)
+        }
+    }
+
+    public static func importIfNeeded() {
+        if imported {
+            return
+        }
+
         NSKeyedUnarchiver.setClass(SubjectLegacy.self, forClassName: "Subject")
         NSKeyedUnarchiver.setClass(HomeworkLegacy.self, forClassName: "Homework")
         NSKeyedUnarchiver.setClass(AttachmentLegacy.self, forClassName: "Attachment")
@@ -137,11 +150,8 @@ public class LegacyImporter {
         importHomework()
         importLessons()
 
-        do {
-            try CoreDataStorage.shared.context.save()
-        } catch let error as NSError {
-            UIApplication.shared.keyWindow?.rootViewController?.showAlert(error: error)
-        }
+        try? CoreDataStorage.shared.context.save()
+        imported = true
     }
     
     private static func importSubjects() {
@@ -304,7 +314,12 @@ public class LegacyImporter {
                 return subject.name == name && subject.teacher == teacher
             }
         } catch let error as NSError {
+#if UIApplication
             UIApplication.shared.keyWindow?.rootViewController?.showAlert(error: error)
+#else
+            print(error)
+#endif
+
             return nil
         }
     }

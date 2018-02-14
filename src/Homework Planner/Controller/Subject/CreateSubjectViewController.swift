@@ -37,7 +37,9 @@ public class CreateSubjectViewController : UIViewController {
         super.viewDidLoad()
 
         colorButton.layer.cornerRadius = 5
-        colorButton.backgroundColor = SelectColorView.getRandomColor()
+        colorButton.backgroundColor = Subject.Colors.randomColor()
+        selectColorView.colors = Subject.Colors.all
+
         setSelectColorsVisible(selectColorsVisible: false, animated: false)
         
         // Can supply an existing subject to prefill.
@@ -177,12 +179,8 @@ extension CreateSubjectViewController : SelectColorViewDelegate {
         selectColorHeightConstraint.constant = selectColorsVisible ? 90 : 0
         setSubjectsSuggestionConstraints(showSuggestions: false)
 
-        if animated {
-            UIView.animate(withDuration: 0.2) {
-                self.view.layoutIfNeeded()
-            }
-        } else {
-            view.layoutIfNeeded()
+        UIView.animate(withDuration: animated ? 0.2 : 0) {
+            self.view.layoutIfNeeded()
         }
     }
 

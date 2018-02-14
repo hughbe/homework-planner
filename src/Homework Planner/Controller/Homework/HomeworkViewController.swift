@@ -201,16 +201,12 @@ public class HomeworkViewController : SubjectDependentViewController {
         } else {
             sectionedHomework = [unsectionedHomework]
         }
-        
+
         for enumerator in sectionedHomework.enumerated() {
-            sectionedHomework[enumerator.offset] = enumerator.element.sorted { (homework1, homwork2) in
-                if homeworkDisplay == .sectionedBySubject {
-                    return homework1.isGreaterThan(other: homwork2, comparisonType: .date)
-                } else if homeworkDisplay == .sectionedByDate {
-                    return homework1.isGreaterThan(other: homwork2, comparisonType: .subject)
-                } else {
-                    return homework1.isGreaterThan(other: homwork2, comparisonType: .none)
-                }
+            sectionedHomework[enumerator.offset] = enumerator.element.sorted { (homework1, homework2) in
+                let order = homework1.order(other: homework2, comparisonType: homeworkDisplay.comparisonType)
+
+                return order == .before
             }
         }
     }

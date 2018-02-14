@@ -11,7 +11,6 @@
 		1E0572CE203208A600CCFD2A /* SubjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0572CD203208A600CCFD2A /* SubjectTests.swift */; };
 		1E0572CF20321D7E00CCFD2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A8A5201D030F009F2BC7 /* Assets.xcassets */; };
 		1E0572D020321DA700CCFD2A /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E53286B2030AD01007AD7AC /* BackupView.swift */; };
-		1E05737720323D9F00CCFD2A /* LegacyImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05737320323CBF00CCFD2A /* LegacyImporter.swift */; };
 		1E07C3E1203358970072DF75 /* SubjectDependentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E07C3E0203358970072DF75 /* SubjectDependentViewController.swift */; };
 		1E244325202E05F000E9DC68 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E244324202E05EF00E9DC68 /* SafariServices.framework */; };
 		1E244329202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E244328202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift */; };
@@ -27,6 +26,8 @@
 		1E8EFA0E2028FA7B003D711C /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA0D2028FA7B003D711C /* TimetableViewController.swift */; };
 		1E8EFA142029DAAB003D711C /* CreateLessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA132029DAAB003D711C /* CreateLessonViewController.swift */; };
 		1E8EFA1A2029DC31003D711C /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFA192029DC31003D711C /* TimePickerViewController.swift */; };
+		1E906BAE203461FF00762A5A /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E906BAD203461FF00762A5A /* DataInjector.swift */; };
+		1E906BAF20346C8900762A5A /* LegacyImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05737320323CBF00CCFD2A /* LegacyImporter.swift */; };
 		1E98FA49202DDF850018F736 /* UIBarButtonItem+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98FA48202DDF850018F736 /* UIBarButtonItem+Badge.swift */; };
 		1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA266E201D0B060042E03D /* CreateSubjectViewController.swift */; };
 		1EBA2673201D3D3D0042E03D /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBA2672201D3D3D0042E03D /* HomeworkViewController.swift */; };
@@ -169,6 +170,7 @@
 		1E8EFA112029D01B003D711C /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		1E8EFA132029DAAB003D711C /* CreateLessonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLessonViewController.swift; sourceTree = "<group>"; };
 		1E8EFA192029DC31003D711C /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
+		1E906BAD203461FF00762A5A /* DataInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
 		1E98FA48202DDF850018F736 /* UIBarButtonItem+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Badge.swift"; sourceTree = "<group>"; };
 		1EACEC26201D4BC5000E4915 /* UIColor+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+String.swift"; sourceTree = "<group>"; };
 		1EBA2667201D05E00042E03D /* Homework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework.swift; sourceTree = "<group>"; };
@@ -328,6 +330,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		1E906BAC203461F200762A5A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1E05737320323CBF00CCFD2A /* LegacyImporter.swift */,
+				1E906BAD203461FF00762A5A /* DataInjector.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		1EBA266D201D0AF90042E03D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +382,7 @@
 		1EC2AC802031A4C500969D3A /* Homework Planner Core */ = {
 			isa = PBXGroup;
 			children = (
+				1E906BAC203461F200762A5A /* Helpers */,
 				1EC2ACB32031BADE00969D3A /* View */,
 				1EC2ACAE2031B8D200969D3A /* Controller */,
 				1EC2ACAD2031B8C100969D3A /* Model */,
@@ -503,7 +515,6 @@
 				1EBA267A201D496C0042E03D /* View */,
 				1EBA266D201D0AF90042E03D /* Controller */,
 				1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */,
-				1E05737320323CBF00CCFD2A /* LegacyImporter.swift */,
 				1ECC7EE02030D37E0032F709 /* Main.storyboard */,
 				1EF6A8A7201D030F009F2BC7 /* LaunchScreen.storyboard */,
 				1EF6A8AA201D030F009F2BC7 /* Info.plist */,
@@ -846,6 +857,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EEF710F2031FAF600DF8442 /* Date+FormattedDayName.swift in Sources */,
+				1E906BAF20346C8900762A5A /* LegacyImporter.swift in Sources */,
 				1EC2ACA32031A59300969D3A /* Date+OrdinalIndicatorString.swift in Sources */,
 				1EC2ACAA2031A63600969D3A /* UIColor+String.swift in Sources */,
 				1EC2AC9D2031A53600969D3A /* Homework_Planner.xcdatamodeld in Sources */,
@@ -866,6 +878,7 @@
 				1EC2ACB42031BB0700969D3A /* HomeworkTableViewCell.swift in Sources */,
 				1EEF710C2031FAC100DF8442 /* Date+Day.swift in Sources */,
 				1EEF71112031FB1A00DF8442 /* Date+Previous.swift in Sources */,
+				1E906BAE203461FF00762A5A /* DataInjector.swift in Sources */,
 				1EC2ACB62031BB1400969D3A /* UIView+FindViewWithClassNamed.swift in Sources */,
 				1EC2ACA02031A59300969D3A /* Lesson.swift in Sources */,
 			);
@@ -894,7 +907,6 @@
 				1EBA266F201D0B060042E03D /* CreateSubjectViewController.swift in Sources */,
 				1EC2ACB22031BA6700969D3A /* HomeworkContentViewController.swift in Sources */,
 				1E07C3E1203358970072DF75 /* SubjectDependentViewController.swift in Sources */,
-				1E05737720323D9F00CCFD2A /* LegacyImporter.swift in Sources */,
 				1E98FA49202DDF850018F736 /* UIBarButtonItem+Badge.swift in Sources */,
 				1E8EFA0E2028FA7B003D711C /* TimetableViewController.swift in Sources */,
 				1E244329202E1EAD00E9DC68 /* UIBarButtonItem+Hide.swift in Sources */,

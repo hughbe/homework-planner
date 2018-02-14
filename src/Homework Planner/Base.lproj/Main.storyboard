@@ -414,13 +414,13 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYe-7w-uba">
-                                                                        <rect key="frame" x="15" y="27" width="484" height="26.5"/>
+                                                                        <rect key="frame" x="15" y="27" width="216" height="26.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="88z-RD-9rJ">
-                                                                        <rect key="frame" x="507" y="0.0" width="80" height="80"/>
+                                                                        <rect key="frame" x="239" y="0.0" width="80" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="88z-RD-9rJ" secondAttribute="height" multiplier="1:1" id="qSN-4Z-REJ"/>
                                                                         </constraints>
@@ -691,6 +691,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
+                                                <outlet property="collectionView" destination="1hN-su-HCz" id="txo-1t-EO1"/>
                                                 <outlet property="delegate" destination="BYZ-38-t0r" id="uXi-2k-QHK"/>
                                             </connections>
                                         </view>

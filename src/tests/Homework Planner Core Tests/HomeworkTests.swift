@@ -162,111 +162,111 @@ class HomeworkTests: XCTestCase {
         context.delete(highPriorityCompletedDateB)
     }
     
-    func testIsGreaterThanSubject() {
+    func testOrderSubject() {
         // Not Priority/Completed vs Not Priority/Completed
-        XCTAssertEqual(false, lowPriorityCompletedSubjectA.isGreaterThan(other: lowPriorityCompletedSubjectB, comparisonType: .subject))
-        XCTAssertEqual(true, lowPriorityCompletedSubjectB.isGreaterThan(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(false, lowPriorityCompletedSubjectA.isGreaterThan(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
-        
+        XCTAssertEqual(.before, lowPriorityCompletedSubjectA.order(other: lowPriorityCompletedSubjectB, comparisonType: .subject))
+        XCTAssertEqual(.after, lowPriorityCompletedSubjectB.order(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.equal, lowPriorityCompletedSubjectA.order(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
+
         // Not Priority/Completed vs Not Priority/Not Completed
-        XCTAssertEqual(false, lowPriorityCompletedSubjectA.isGreaterThan(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(true, lowPriorityNotCompletedSubjectA.isGreaterThan(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.after, lowPriorityCompletedSubjectA.order(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, lowPriorityNotCompletedSubjectA.order(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
         
         // Not Priority/Completed vs Priority/Completed
-        XCTAssertEqual(false, lowPriorityCompletedSubjectA.isGreaterThan(other: highPriorityCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(true, highPriorityCompletedSubjectA.isGreaterThan(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.after, lowPriorityCompletedSubjectA.order(other: highPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, highPriorityCompletedSubjectA.order(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
         
         // Not Priority/Completed vs Priority/Not Completed
-        XCTAssertEqual(false, lowPriorityCompletedSubjectA.isGreaterThan(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(true, highPriorityNotCompletedSubjectA.isGreaterThan(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.after, lowPriorityCompletedSubjectA.order(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, highPriorityNotCompletedSubjectA.order(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
         
         // Not Priority/Completed vs Priority/Completed
-        XCTAssertEqual(false, lowPriorityCompletedSubjectA.isGreaterThan(other: highPriorityCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(true, highPriorityCompletedSubjectA.isGreaterThan(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
-        
+        XCTAssertEqual(.after, lowPriorityCompletedSubjectA.order(other: highPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, highPriorityCompletedSubjectA.order(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
+
         // Not Priority/Not Completed vs Not Priority/Not Completed
-        XCTAssertEqual(false, lowPriorityNotCompletedSubjectA.isGreaterThan(other: lowPriorityNotCompletedSubjectB, comparisonType: .subject))
-        XCTAssertEqual(true, lowPriorityNotCompletedSubjectB.isGreaterThan(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(false, lowPriorityNotCompletedSubjectA.isGreaterThan(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, lowPriorityNotCompletedSubjectA.order(other: lowPriorityNotCompletedSubjectB, comparisonType: .subject))
+        XCTAssertEqual(.after, lowPriorityNotCompletedSubjectB.order(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.equal, lowPriorityNotCompletedSubjectA.order(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
         
         // Not Priority/Not Completed vs Priority/Not Completed
-        XCTAssertEqual(false, lowPriorityNotCompletedSubjectA.isGreaterThan(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(true, highPriorityNotCompletedSubjectA.isGreaterThan(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.after, lowPriorityNotCompletedSubjectA.order(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, highPriorityNotCompletedSubjectA.order(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
         
         // Not Priority/Not Completed vs Not Priority/Completed
-        XCTAssertEqual(true, lowPriorityNotCompletedSubjectA.isGreaterThan(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(false, lowPriorityCompletedSubjectA.isGreaterThan(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, lowPriorityNotCompletedSubjectA.order(other: lowPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.after, lowPriorityCompletedSubjectA.order(other: lowPriorityNotCompletedSubjectA, comparisonType: .subject))
         
         // Not Priority/Not Completed vs Priority/Completed
-        XCTAssertEqual(true, lowPriorityNotCompletedSubjectA.isGreaterThan(other: highPriorityCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(false, lowPriorityCompletedSubjectA.isGreaterThan(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, lowPriorityNotCompletedSubjectA.order(other: highPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.after, lowPriorityCompletedSubjectA.order(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
 
         // Priority/Not Completed vs Priority/Not Completed
-        XCTAssertEqual(false, highPriorityNotCompletedSubjectA.isGreaterThan(other: highPriorityNotCompletedSubjectB, comparisonType: .subject))
-        XCTAssertEqual(true, highPriorityNotCompletedSubjectB.isGreaterThan(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(false, highPriorityNotCompletedSubjectA.isGreaterThan(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
-        
+        XCTAssertEqual(.before, highPriorityNotCompletedSubjectA.order(other: highPriorityNotCompletedSubjectB, comparisonType: .subject))
+        XCTAssertEqual(.after, highPriorityNotCompletedSubjectB.order(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.equal, highPriorityNotCompletedSubjectA.order(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
+
         // Priority/Not Completed vs Priority/Completed
-        XCTAssertEqual(true, highPriorityNotCompletedSubjectA.isGreaterThan(other: highPriorityCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(false, highPriorityCompletedSubjectA.isGreaterThan(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, highPriorityNotCompletedSubjectA.order(other: highPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.after, highPriorityCompletedSubjectA.order(other: highPriorityNotCompletedSubjectA, comparisonType: .subject))
         
         // Priority/Completed vs Priority/Completed
-        XCTAssertEqual(false, highPriorityCompletedSubjectA.isGreaterThan(other: highPriorityCompletedSubjectB, comparisonType: .subject))
-        XCTAssertEqual(true, highPriorityCompletedSubjectB.isGreaterThan(other: highPriorityCompletedSubjectA, comparisonType: .subject))
-        XCTAssertEqual(false, highPriorityCompletedSubjectA.isGreaterThan(other: highPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.before, highPriorityCompletedSubjectA.order(other: highPriorityCompletedSubjectB, comparisonType: .subject))
+        XCTAssertEqual(.after, highPriorityCompletedSubjectB.order(other: highPriorityCompletedSubjectA, comparisonType: .subject))
+        XCTAssertEqual(.equal, highPriorityCompletedSubjectA.order(other: highPriorityCompletedSubjectA, comparisonType: .subject))
     }
 
-    func testIsGreaterThanDate() {
+    func testOrderDate() {
         // Not Priority/Completed vs Not Priority/Completed
-        XCTAssertEqual(false, lowPriorityCompletedDateA.isGreaterThan(other: lowPriorityCompletedDateB, comparisonType: .date))
-        XCTAssertEqual(true, lowPriorityCompletedDateB.isGreaterThan(other: lowPriorityCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(false, lowPriorityCompletedDateA.isGreaterThan(other: lowPriorityCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.before, lowPriorityCompletedDateA.order(other: lowPriorityCompletedDateB, comparisonType: .date))
+        XCTAssertEqual(.after, lowPriorityCompletedDateB.order(other: lowPriorityCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.equal, lowPriorityCompletedDateA.order(other: lowPriorityCompletedDateA, comparisonType: .date))
+
         // Not Priority/Completed vs Not Priority/Not Completed
-        XCTAssertEqual(false, lowPriorityCompletedDateA.isGreaterThan(other: lowPriorityNotCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(true, lowPriorityNotCompletedDateA.isGreaterThan(other: lowPriorityCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.after, lowPriorityCompletedDateA.order(other: lowPriorityNotCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.before, lowPriorityNotCompletedDateA.order(other: lowPriorityCompletedDateA, comparisonType: .date))
+
         // Not Priority/Completed vs Priority/Completed
-        XCTAssertEqual(false, lowPriorityCompletedDateA.isGreaterThan(other: highPriorityCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(true, highPriorityCompletedDateA.isGreaterThan(other: lowPriorityCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.after, lowPriorityCompletedDateA.order(other: highPriorityCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.before, highPriorityCompletedDateA.order(other: lowPriorityCompletedDateA, comparisonType: .date))
+
         // Not Priority/Completed vs Priority/Not Completed
-        XCTAssertEqual(false, lowPriorityCompletedDateA.isGreaterThan(other: highPriorityNotCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(true, highPriorityNotCompletedDateA.isGreaterThan(other: lowPriorityCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.after, lowPriorityCompletedDateA.order(other: highPriorityNotCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.before, highPriorityNotCompletedDateA.order(other: lowPriorityCompletedDateA, comparisonType: .date))
+
         // Not Priority/Completed vs Priority/Completed
-        XCTAssertEqual(false, lowPriorityCompletedDateA.isGreaterThan(other: highPriorityCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(true, highPriorityCompletedDateA.isGreaterThan(other: lowPriorityCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.after, lowPriorityCompletedDateA.order(other: highPriorityCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.before, highPriorityCompletedDateA.order(other: lowPriorityCompletedDateA, comparisonType: .date))
+
         // Not Priority/Not Completed vs Not Priority/Not Completed
-        XCTAssertEqual(false, lowPriorityNotCompletedDateA.isGreaterThan(other: lowPriorityNotCompletedDateB, comparisonType: .date))
-        XCTAssertEqual(true, lowPriorityNotCompletedDateB.isGreaterThan(other: lowPriorityNotCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(false, lowPriorityNotCompletedDateA.isGreaterThan(other: lowPriorityNotCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.before, lowPriorityNotCompletedDateA.order(other: lowPriorityNotCompletedDateB, comparisonType: .date))
+        XCTAssertEqual(.after, lowPriorityNotCompletedDateB.order(other: lowPriorityNotCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.equal, lowPriorityNotCompletedDateA.order(other: lowPriorityNotCompletedDateA, comparisonType: .date))
+
         // Not Priority/Not Completed vs Priority/Not Completed
-        XCTAssertEqual(false, lowPriorityNotCompletedDateA.isGreaterThan(other: highPriorityNotCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(true, highPriorityNotCompletedDateA.isGreaterThan(other: lowPriorityNotCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.after, lowPriorityNotCompletedDateA.order(other: highPriorityNotCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.before, highPriorityNotCompletedDateA.order(other: lowPriorityNotCompletedDateA, comparisonType: .date))
+
         // Not Priority/Not Completed vs Not Priority/Completed
-        XCTAssertEqual(true, lowPriorityNotCompletedDateA.isGreaterThan(other: lowPriorityCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(false, lowPriorityCompletedDateA.isGreaterThan(other: lowPriorityNotCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.before, lowPriorityNotCompletedDateA.order(other: lowPriorityCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.after, lowPriorityCompletedDateA.order(other: lowPriorityNotCompletedDateA, comparisonType: .date))
+
         // Not Priority/Not Completed vs Priority/Completed
-        XCTAssertEqual(true, lowPriorityNotCompletedDateA.isGreaterThan(other: highPriorityCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(false, lowPriorityCompletedDateA.isGreaterThan(other: highPriorityNotCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.before, lowPriorityNotCompletedDateA.order(other: highPriorityCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.after, lowPriorityCompletedDateA.order(other: highPriorityNotCompletedDateA, comparisonType: .date))
+
         // Priority/Not Completed vs Priority/Not Completed
-        XCTAssertEqual(false, highPriorityNotCompletedDateA.isGreaterThan(other: highPriorityNotCompletedDateB, comparisonType: .date))
-        XCTAssertEqual(true, highPriorityNotCompletedDateB.isGreaterThan(other: highPriorityNotCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(false, highPriorityNotCompletedDateA.isGreaterThan(other: highPriorityNotCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.before, highPriorityNotCompletedDateA.order(other: highPriorityNotCompletedDateB, comparisonType: .date))
+        XCTAssertEqual(.after, highPriorityNotCompletedDateB.order(other: highPriorityNotCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.equal, highPriorityNotCompletedDateA.order(other: highPriorityNotCompletedDateA, comparisonType: .date))
+
         // Priority/Not Completed vs Priority/Completed
-        XCTAssertEqual(true, highPriorityNotCompletedDateA.isGreaterThan(other: highPriorityCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(false, highPriorityCompletedDateA.isGreaterThan(other: highPriorityNotCompletedDateA, comparisonType: .date))
-        
+        XCTAssertEqual(.before, highPriorityNotCompletedDateA.order(other: highPriorityCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.after, highPriorityCompletedDateA.order(other: highPriorityNotCompletedDateA, comparisonType: .date))
+
         // Priority/Completed vs Priority/Completed
-        XCTAssertEqual(false, highPriorityCompletedDateA.isGreaterThan(other: highPriorityCompletedDateB, comparisonType: .date))
-        XCTAssertEqual(true, highPriorityCompletedDateB.isGreaterThan(other: highPriorityCompletedDateA, comparisonType: .date))
-        XCTAssertEqual(false, highPriorityCompletedDateA.isGreaterThan(other: highPriorityCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.before, highPriorityCompletedDateA.order(other: highPriorityCompletedDateB, comparisonType: .date))
+        XCTAssertEqual(.after, highPriorityCompletedDateB.order(other: highPriorityCompletedDateA, comparisonType: .date))
+        XCTAssertEqual(.equal, highPriorityCompletedDateA.order(other: highPriorityCompletedDateA, comparisonType: .date))
     }
 }

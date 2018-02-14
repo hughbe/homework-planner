@@ -34,4 +34,21 @@ public class CoreDataStorage {
         })
         return container
     }()
+
+#if DEBUG
+    public func clear() {
+        let homeworkFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Homework")
+        let homeworkRequest = NSBatchDeleteRequest(fetchRequest: homeworkFetch)
+
+        let lessonFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
+        let lessonRequest = NSBatchDeleteRequest(fetchRequest: lessonFetch)
+
+        let subjectFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Subject")
+        let subjectRequest = NSBatchDeleteRequest(fetchRequest: subjectFetch)
+
+        try! context.execute(homeworkRequest)
+        try! context.execute(lessonRequest)
+        try! context.execute(subjectRequest)
+    }
+#endif
 }

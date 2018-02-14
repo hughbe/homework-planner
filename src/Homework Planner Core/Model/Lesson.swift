@@ -24,15 +24,15 @@ public extension Lesson {
         
         return Calendar.current.date(from: dateComponents)
     }
-    
+
     public var hasStartTime: Bool {
         return startHour != -1 && startMinute != -1
     }
-    
+
     public var hasEndTime: Bool {
         return endHour != -1 && endMinute != -1
     }
-    
+
     public var formattedDuration: String {
         if let startDate = startDate, let endDate = endDate {
             let startTime = DateFormatter.localizedString(from: startDate, dateStyle: .none, timeStyle: .short)
