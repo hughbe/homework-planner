@@ -37,6 +37,8 @@ public class DataInjector {
         injectHomework()
         injectLessons()
 
+        InAppPurchase.unlockTimetable.purchase()
+
         do {
             try CoreDataStorage.shared.context.save()
             injected = true
