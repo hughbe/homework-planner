@@ -80,15 +80,8 @@ public class TimetableViewController : EditableViewController {
     }
 
     override public func reloadData() {
-        let request = NSFetchRequest<Lesson>(entityName: "Lesson")
-        request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Lesson.startHour, ascending: true),
-            NSSortDescriptor(keyPath: \Lesson.startMinute, ascending: true)
-        ]
-        request.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
-
         do {
-            lessons = try CoreDataStorage.shared.context.fetch(request)
+            lessons = try Timetable.shared.getLessons(on: day)
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -125,18 +118,18 @@ public class TimetableViewController : EditableViewController {
             self.day = Day(date: Date(), modifyIfWeekend: true)
         })
         
-        if Settings.numberOfWeeks != 1 {
+        if Timetable.shared.numberOfWeeks != 1 {
             alertController.addAction(UIAlertAction(title: NSLocalizedString("Set Current Week", comment: "Set Current Week"), style: .default) { action in
                 let currentWeeekAlertController = UIAlertController(title: NSLocalizedString("Current Week", comment: "Current Week"), message: nil, preferredStyle: .actionSheet)
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 1", comment: "Week 1"), style: .default) { action in
-                    Settings.weekStart = self.day.date.previous(dayOfWeek: DayOfWeek.Monday).withoutTime
+                    Timetable.shared.weekStart = self.day.date.previous(dayOfWeek: DayOfWeek.Monday).withoutTime
                     self.day = Day(dayOfWeek: self.day.dayOfWeek, week: 1)
                 })
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 2", comment: "Week 2"), style: .default) { action in
                     let date = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: self.day.date)!
-                    Settings.weekStart = date.previous(dayOfWeek: DayOfWeek.Monday).withoutTime
+                    Timetable.shared.weekStart = date.previous(dayOfWeek: DayOfWeek.Monday).withoutTime
                     self.day = Day(dayOfWeek: self.day.dayOfWeek, week: 2)
                 })
                 

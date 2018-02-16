@@ -14,6 +14,7 @@
 		1E244325202E05F000E9DC68 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E244324202E05EF00E9DC68 /* SafariServices.framework */; };
 		1E3998422021F62B002DFFA3 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3998412021F62B002DFFA3 /* PanelView.swift */; };
 		1E39984620220BF1002DFFA3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E39984420220BF1002DFFA3 /* Localizable.strings */; };
+		1E66A98A203722C9009D7562 /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66A989203722C9009D7562 /* Timetable.swift */; };
 		1E672408202DFB52000A0B95 /* CreateImageAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672407202DFB52000A0B95 /* CreateImageAttachmentViewController.swift */; };
 		1E67240A202DFC2A000A0B95 /* CreateAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672409202DFC2A000A0B95 /* CreateAttachmentViewController.swift */; };
 		1E67240C202E030F000A0B95 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E67240B202E030F000A0B95 /* Photo.swift */; };
@@ -48,7 +49,6 @@
 		1EC2ACA12031A59300969D3A /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E122C9B202A138400506B71 /* Day.swift */; };
 		1EC2ACA32031A59300969D3A /* Date+OrdinalIndicatorString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */; };
 		1EC2ACA42031A59300969D3A /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCA76B202DF20E00DB9C11 /* Attachment.swift */; };
-		1EC2ACA52031A59300969D3A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E122C9D202A14BA00506B71 /* Settings.swift */; };
 		1EC2ACA62031A59300969D3A /* InAppPurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECB7F732030832B00858162 /* InAppPurchase.swift */; };
 		1EC2ACA72031A59300969D3A /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC2AC772031A24E00969D3A /* CoreDataStorage.swift */; };
 		1EC2ACAA2031A63600969D3A /* UIColor+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EACEC26201D4BC5000E4915 /* UIColor+String.swift */; };
@@ -150,13 +150,13 @@
 		1E0572CD203208A600CCFD2A /* SubjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTests.swift; sourceTree = "<group>"; };
 		1E05737320323CBF00CCFD2A /* LegacyImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyImporter.swift; sourceTree = "<group>"; };
 		1E122C9B202A138400506B71 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
-		1E122C9D202A14BA00506B71 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		1E244324202E05EF00E9DC68 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		1E244328202E1EAD00E9DC68 /* UIBarButtonItem+SetHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+SetHidden.swift"; sourceTree = "<group>"; };
 		1E3998412021F62B002DFFA3 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		1E53286B2030AD01007AD7AC /* BackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupView.swift; sourceTree = "<group>"; };
 		1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+OrdinalIndicatorString.swift"; sourceTree = "<group>"; };
 		1E651F812020F990007FD685 /* HomeworkContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkContentViewController.swift; sourceTree = "<group>"; };
+		1E66A989203722C9009D7562 /* Timetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
 		1E672407202DFB52000A0B95 /* CreateImageAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateImageAttachmentViewController.swift; sourceTree = "<group>"; };
 		1E672409202DFC2A000A0B95 /* CreateAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAttachmentViewController.swift; sourceTree = "<group>"; };
 		1E67240B202E030F000A0B95 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -434,8 +434,8 @@
 				1E8EFA112029D01B003D711C /* Lesson.swift */,
 				1E122C9B202A138400506B71 /* Day.swift */,
 				1EFCA76B202DF20E00DB9C11 /* Attachment.swift */,
-				1E122C9D202A14BA00506B71 /* Settings.swift */,
 				1EC2AC772031A24E00969D3A /* CoreDataStorage.swift */,
+				1E66A989203722C9009D7562 /* Timetable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -938,11 +938,11 @@
 				1EC2ACB82031BB2200969D3A /* LessonTableViewCell.swift in Sources */,
 				1EC2ACA42031A59300969D3A /* Attachment.swift in Sources */,
 				1EC2ACA62031A59300969D3A /* InAppPurchase.swift in Sources */,
+				1E66A98A203722C9009D7562 /* Timetable.swift in Sources */,
 				1EC2ACAB2031A64700969D3A /* UIViewController+ShowAlert.swift in Sources */,
 				1EC2ACB72031BB1F00969D3A /* SubjectTableViewCell.swift in Sources */,
 				1E94DCF9203492D700BC3117 /* DataViewController.swift in Sources */,
 				1EC2ACA72031A59300969D3A /* CoreDataStorage.swift in Sources */,
-				1EC2ACA52031A59300969D3A /* Settings.swift in Sources */,
 				1EC2ACA12031A59300969D3A /* Day.swift in Sources */,
 				1EC2ACB92031BC3300969D3A /* UIView+FadeInOut.swift in Sources */,
 				1E0572D020321DA700CCFD2A /* BackupView.swift in Sources */,

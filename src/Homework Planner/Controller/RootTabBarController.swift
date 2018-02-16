@@ -37,9 +37,9 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             self.present(navigationController, animated: true)
         })
         
-        let toggleWeekends = Settings.includeWeekends ? NSLocalizedString("Hide Weekends", comment: "Hide Weekends") : NSLocalizedString("Show Weekends", comment: "Show Weekends")
+        let toggleWeekends = Timetable.shared.includeWeekends ? NSLocalizedString("Hide Weekends", comment: "Hide Weekends") : NSLocalizedString("Show Weekends", comment: "Show Weekends")
         alertController.addAction(UIAlertAction(title: toggleWeekends, style: .default) { action in
-            Settings.includeWeekends = !Settings.includeWeekends
+            Timetable.shared.includeWeekends = !Timetable.shared.includeWeekends
         })
 
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Set Homework Display Type", comment: "Set Homework Display Type"), style: .default) { action in
@@ -48,7 +48,7 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             
             for type in Homework.DisplayType.allValues {
                 displayTypeAlertController.addAction(UIAlertAction(title: type.name, style: .default) { action in
-                    Settings.homeworkDisplay = type
+                    Homework.DisplayType.currentDisplay = type
                 })
             }
             
@@ -88,8 +88,8 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
     }
 
     private func setNumberOfWeeks(numberOfWeeks: Int) {
-        Settings.numberOfWeeks = numberOfWeeks
-        Settings.weekStart = Date().previous(dayOfWeek: DayOfWeek.Monday)
+        Timetable.shared.numberOfWeeks = numberOfWeeks
+        Timetable.shared.weekStart = Date().previous(dayOfWeek: DayOfWeek.Monday)
 
         if let navigationController = self.viewControllers?[1] as? UINavigationController, let viewController = navigationController.viewControllers.first as? TimetableViewController {
             viewController.reloadAnimation = .fade

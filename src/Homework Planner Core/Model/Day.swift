@@ -19,20 +19,20 @@ public struct Day {
         components.weekOfMonth = week - 1
         components.day = dayOfWeek - 2
         
-        let date = Calendar.current.date(byAdding: components, to: Settings.weekStart)!
+        let date = Calendar.current.date(byAdding: components, to: Timetable.shared.weekStart)!
         self.init(date: date, modifyIfWeekend: true)
     }
     
     public init(date: Date, modifyIfWeekend: Bool) {
         var date = date
         if modifyIfWeekend {
-            while !Settings.includeWeekends && Calendar.current.isDateInWeekend(date) {
+            while !Timetable.shared.includeWeekends && Calendar.current.isDateInWeekend(date) {
                 date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
             }
         }
 
-        let weekStart = Settings.weekStart.withoutTime
-        let weekEnd = Settings.weekEnd.withoutTime
+        let weekStart = Timetable.shared.weekStart.withoutTime
+        let weekEnd = Timetable.shared.weekEnd.withoutTime
         let weeksLength = Calendar.current.dateComponents([.day], from: weekStart, to: weekEnd).day!
         let difference = Calendar.current.dateComponents([.day], from: weekStart, to: date).day!
         let daysInAWeek = Calendar.current.range(of: .weekday, in: .weekOfMonth, for: date)!.count
@@ -60,7 +60,7 @@ public struct Day {
 
         repeat {
             previousDate = Calendar.current.date(byAdding: .day, value: -1, to: previousDate)!
-        } while !Settings.includeWeekends && Calendar.current.isDateInWeekend(previousDate)
+        } while !Timetable.shared.includeWeekends && Calendar.current.isDateInWeekend(previousDate)
 
         return Day(date: previousDate, modifyIfWeekend: false)
     }
@@ -83,7 +83,7 @@ public struct Day {
             dayName = Calendar.current.weekdaySymbols[dayOfWeek - 1]
         }
         
-        if Settings.numberOfWeeks != 1 {
+        if Timetable.shared.numberOfWeeks != 1 {
             return dayName + " - " + NSLocalizedString("Week", comment: "Week") + " " + String(week)
         }
         

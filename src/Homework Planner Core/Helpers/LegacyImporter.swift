@@ -249,8 +249,8 @@ public class LegacyImporter {
     }
     
     private static func importLessons() {
-        Settings.numberOfWeeks = isTwoWeekTimetable ? 2 : 1
-        Settings.weekStart = weekStartDate
+        Timetable.shared.numberOfWeeks = isTwoWeekTimetable ? 2 : 1
+        Timetable.shared.weekStart = weekStartDate
 
         guard let data = UserDefaults.standard.object(forKey: "lessons") as? Data else {
             return

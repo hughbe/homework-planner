@@ -60,18 +60,10 @@ open class DayViewController : DataViewController {
             NSSortDescriptor(keyPath: \Homework.subject?.name, ascending: true)
         ]
         homeworkRequest.predicate = NSPredicate(format: "dueDate == %@", argumentArray: [date])
-        
-        let lessonsRequest = NSFetchRequest<Lesson>(entityName: "Lesson")
-        lessonsRequest.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Lesson.startHour, ascending: true),
-            NSSortDescriptor(keyPath: \Lesson.startMinute, ascending: true)
-        ]
-        lessonsRequest.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
-        
+
         do {
             let homework = try CoreDataStorage.shared.context.fetch(homeworkRequest)
-            let lessons = try CoreDataStorage.shared.context.fetch(lessonsRequest)
-            
+            let lessons = try Timetable.shared.getLessons(on: day)
             return (homework, lessons)
         } catch let error as NSError {
             showAlert(error: error)
