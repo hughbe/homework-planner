@@ -172,7 +172,7 @@ public class HomeworkViewController : EditableViewController {
     }
     
     private func sectionData() {
-        let homeworkDisplay = Settings.homeworkDisplay
+        let homeworkDisplay = Homework.DisplayType.currentDisplay
         
         if homeworkDisplay == .sectionedBySubject {
             let groupedHomework = Dictionary(grouping: unsectionedHomework) { homework in
@@ -296,7 +296,7 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
             return nil
         }
         
-        if Settings.homeworkDisplay == .sectionedBySubject {
+        if Homework.DisplayType.currentDisplay == .sectionedBySubject {
             guard let subject = homework.subject, var title = subject.name else {
                 return nil
             }
@@ -306,7 +306,7 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
             }
             
             return title
-        } else if Settings.homeworkDisplay == .sectionedByDate {
+        } else if Homework.DisplayType.currentDisplay == .sectionedByDate {
             guard let dueDate = homework.dueDate else {
                 return nil
             }
@@ -321,10 +321,10 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HomeworkTableViewCell
         let homework = sectionedHomework[indexPath.section][indexPath.row]
         
-        if Settings.homeworkDisplay == .sectionedBySubject {
+        if Homework.DisplayType.currentDisplay == .sectionedBySubject {
             cell.titleLabel.text = homework.workSet
             formatDueDateLabel(cell: cell, homework: homework)
-        } else if Settings.homeworkDisplay == .sectionedByDate {
+        } else if Homework.DisplayType.currentDisplay == .sectionedByDate {
             cell.titleLabel.text = homework.subject?.name
             cell.detailLabel.text = homework.workSet
             cell.detailLabel.textColor = UIColor(white: 0.4, alpha: 1)
@@ -346,7 +346,7 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
                 self.deleteNotification(for: homework)
             }
             
-            if Settings.homeworkDisplay != .sectionedByDate {
+            if Homework.DisplayType.currentDisplay != .sectionedByDate {
                 self.formatDueDateLabel(cell: cell, homework: homework)
             }
             

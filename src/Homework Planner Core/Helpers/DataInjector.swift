@@ -132,12 +132,11 @@ public class DataInjector {
 
     private static func injectLessons() {
         let context = CoreDataStorage.shared.context
-
-        let day = Day(date: Date().withoutTime, modifyIfWeekend: true)
+        let timetable = Timetable(date: Date(), modifyIfWeekend: true)
 
         let chemistryLesson = Lesson(context: context)
-        chemistryLesson.dayOfWeek = Int32(day.dayOfWeek)
-        chemistryLesson.week = Int32(day.week)
+        chemistryLesson.dayOfWeek = Int32(timetable.day.dayOfWeek)
+        chemistryLesson.week = Int32(timetable.day.week)
         chemistryLesson.subject = chemistry
         chemistryLesson.startHour = 9
         chemistryLesson.startMinute = 00
@@ -145,8 +144,8 @@ public class DataInjector {
         chemistryLesson.endMinute = 15
 
         let economicsLesson = Lesson(context: context)
-        economicsLesson.dayOfWeek = Int32(day.dayOfWeek)
-        economicsLesson.week = Int32(day.week)
+        economicsLesson.dayOfWeek = Int32(timetable.day.dayOfWeek)
+        economicsLesson.week = Int32(timetable.day.week)
         economicsLesson.subject = economics
         economicsLesson.startHour = 10
         economicsLesson.startMinute = 40
@@ -154,8 +153,8 @@ public class DataInjector {
         economicsLesson.endMinute = 20
 
         let maths1Lesson = Lesson(context: context)
-        maths1Lesson.dayOfWeek = Int32(day.dayOfWeek)
-        maths1Lesson.week = Int32(day.week)
+        maths1Lesson.dayOfWeek = Int32(timetable.day.dayOfWeek)
+        maths1Lesson.week = Int32(timetable.day.week)
         maths1Lesson.subject = maths1
         maths1Lesson.startHour = 11
         maths1Lesson.startMinute = 20
@@ -163,8 +162,8 @@ public class DataInjector {
         maths1Lesson.endMinute = 55
 
         let maths2Lesson = Lesson(context: context)
-        maths2Lesson.dayOfWeek = Int32(day.dayOfWeek)
-        maths2Lesson.week = Int32(day.week)
+        maths2Lesson.dayOfWeek = Int32(timetable.day.dayOfWeek)
+        maths2Lesson.week = Int32(timetable.day.week)
         maths2Lesson.subject = maths2
         maths2Lesson.startHour = 12
         maths2Lesson.startMinute = 00
@@ -172,8 +171,8 @@ public class DataInjector {
         maths2Lesson.endMinute = 35
 
         let squashLesson = Lesson(context: context)
-        squashLesson.dayOfWeek = Int32(day.dayOfWeek)
-        squashLesson.week = Int32(day.week)
+        squashLesson.dayOfWeek = Int32(timetable.day.dayOfWeek)
+        squashLesson.week = Int32(timetable.day.week)
         squashLesson.subject = squash
         squashLesson.startHour = 14
         squashLesson.startMinute = 00

@@ -80,6 +80,22 @@ public extension Homework {
         public class Notifications {
             public static let didChange = NSNotification.Name("HomeworkDisplayTypeDidChange")
         }
+
+        private static let homeworkDisplayKey = "HomeworkDisplay"
+
+        public static var currentDisplay: DisplayType {
+            get {
+                if let value = UserDefaults.standard.value(forKey: homeworkDisplayKey) as? Int {
+                    return Homework.DisplayType(rawValue: value)!
+                }
+
+                return .sectionedByDate
+            } set {
+                UserDefaults.standard.set(newValue.rawValue, forKey: homeworkDisplayKey)
+
+                NotificationCenter.default.post(name: Homework.DisplayType.Notifications.didChange, object: newValue)
+            }
+        }
     }
 
     public enum Order {

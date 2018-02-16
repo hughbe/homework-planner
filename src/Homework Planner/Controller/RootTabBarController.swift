@@ -37,9 +37,9 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             self.present(navigationController, animated: true)
         })
         
-        let toggleWeekends = Settings.includeWeekends ? NSLocalizedString("Hide Weekends", comment: "Hide Weekends") : NSLocalizedString("Show Weekends", comment: "Show Weekends")
+        let toggleWeekends = Timetable.includeWeekends ? NSLocalizedString("Hide Weekends", comment: "Hide Weekends") : NSLocalizedString("Show Weekends", comment: "Show Weekends")
         alertController.addAction(UIAlertAction(title: toggleWeekends, style: .default) { action in
-            Settings.includeWeekends = !Settings.includeWeekends
+            Timetable.includeWeekends = !Timetable.includeWeekends
         })
 
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Set Homework Display Type", comment: "Set Homework Display Type"), style: .default) { action in
@@ -48,7 +48,7 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             
             for type in Homework.DisplayType.allValues {
                 displayTypeAlertController.addAction(UIAlertAction(title: type.name, style: .default) { action in
-                    Settings.homeworkDisplay = type
+                    Homework.DisplayType.currentDisplay = type
                 })
             }
             
@@ -64,11 +64,11 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             let numberOfWeeksAlertController = UIAlertController(title: NSLocalizedString("Number of Weeks", comment: "Number of Weeks"), message: nil, preferredStyle: .actionSheet)
             
             numberOfWeeksAlertController.addAction(UIAlertAction(title: NSLocalizedString("1 Week", comment: "1 Week"), style: .default) { action in
-                self.setNumberOfWeeks(numberOfWeeks: 1)
+                Timetable.numberOfWeeks = 1
             })
             
             numberOfWeeksAlertController.addAction(UIAlertAction(title: NSLocalizedString("2 Weeks", comment: "2 Weeks"), style: .default) { action in
-                self.setNumberOfWeeks(numberOfWeeks: 2)
+                Timetable.numberOfWeeks = 2
             })
 
             numberOfWeeksAlertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
@@ -85,16 +85,6 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
         present(alertController, animated: true)
         
         return false
-    }
-
-    private func setNumberOfWeeks(numberOfWeeks: Int) {
-        Settings.numberOfWeeks = numberOfWeeks
-        Settings.weekStart = Date().previous(dayOfWeek: DayOfWeek.Monday)
-
-        if let navigationController = self.viewControllers?[1] as? UINavigationController, let viewController = navigationController.viewControllers.first as? TimetableViewController {
-            viewController.reloadAnimation = .fade
-            viewController.day = Day(dayOfWeek: viewController.day.dayOfWeek, week: 1)
-        }
     }
 }
 

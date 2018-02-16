@@ -39,9 +39,9 @@ public class TimetableViewController : EditableViewController {
         }
     }
 
-    public var day = Day(date: Date().withoutTime, modifyIfWeekend: true) {
+    public var timetable = Timetable(date: Date(), modifyIfWeekend: true) {
         didSet {
-            currentDayButton.title = day.name
+            currentDayButton.title = timetable.dayName
             setEditing(false)
             reloadData()
         }
@@ -54,13 +54,16 @@ public class TimetableViewController : EditableViewController {
             let request = SKProductsRequest(productIdentifiers: [InAppPurchase.unlockTimetable.rawValue])
             request.delegate = self
             request.start()
+
+            tableView.isHidden = true
+            noDataView.isHidden = true
         } else {
             notPurchasedView.isHidden = true
         }
 
         // Promote the toolbar from the view to the navigation controller.
         navigationController?.replaceNavigationBar(with: toolbar)
-        currentDayButton.title = day.name
+        currentDayButton.title = timetable.dayName
 
         register(notification: InAppPurchase.Notifications.purchaseError) { notification in
             if let transaction = notification.object as? SKPaymentTransaction, let error = transaction.error {
@@ -75,20 +78,20 @@ public class TimetableViewController : EditableViewController {
         }
 
         register(notification: Subject.Notifications.subjectsChanged) { _ in
+            self.reloadAnimation = .fade
+            self.reloadData()
+        }
+
+        register(notification: Timetable.Notifications.numberOfWeeksChanged) { _ in
+            self.reloadAnimation = .fade
+            self.currentDayButton.title = self.timetable.dayName
             self.reloadData()
         }
     }
 
     override public func reloadData() {
-        let request = NSFetchRequest<Lesson>(entityName: "Lesson")
-        request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Lesson.startHour, ascending: true),
-            NSSortDescriptor(keyPath: \Lesson.startMinute, ascending: true)
-        ]
-        request.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
-
         do {
-            lessons = try CoreDataStorage.shared.context.fetch(request)
+            lessons = try timetable.getLessons()
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -114,7 +117,7 @@ public class TimetableViewController : EditableViewController {
     
     @IBAction func goToPreviousDay(_ sender: Any) {
         reloadAnimation = .right
-        day = day.previousDay
+        timetable.previousDay()
     }
     
     @IBAction func currentDayTapped(_ sender: Any) {
@@ -122,22 +125,21 @@ public class TimetableViewController : EditableViewController {
 
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Go To Today", comment: "Go To Today"), style: .default) { action in
             self.reloadAnimation = .fade
-            self.day = Day(date: Date(), modifyIfWeekend: true)
+            self.timetable = Timetable(date: Date(), modifyIfWeekend: true)
         })
         
-        if Settings.numberOfWeeks != 1 {
+        if Timetable.numberOfWeeks != 1 {
             alertController.addAction(UIAlertAction(title: NSLocalizedString("Set Current Week", comment: "Set Current Week"), style: .default) { action in
                 let currentWeeekAlertController = UIAlertController(title: NSLocalizedString("Current Week", comment: "Current Week"), message: nil, preferredStyle: .actionSheet)
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 1", comment: "Week 1"), style: .default) { action in
-                    Settings.weekStart = self.day.date.previous(dayOfWeek: DayOfWeek.Monday).withoutTime
-                    self.day = Day(dayOfWeek: self.day.dayOfWeek, week: 1)
+                    self.reloadAnimation = .fade
+                    self.timetable.setCurrentWeek(week: 1)
                 })
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 2", comment: "Week 2"), style: .default) { action in
-                    let date = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: self.day.date)!
-                    Settings.weekStart = date.previous(dayOfWeek: DayOfWeek.Monday).withoutTime
-                    self.day = Day(dayOfWeek: self.day.dayOfWeek, week: 2)
+                    self.reloadAnimation = .fade
+                    self.timetable.setCurrentWeek(week: 2)
                 })
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
@@ -155,7 +157,7 @@ public class TimetableViewController : EditableViewController {
     
     @IBAction func goToNextDay(_ sender: Any) {
         reloadAnimation = .left
-        day = day.nextDay
+        timetable.nextDay()
     }
 
     @IBAction func restorePurchases(_ sender: Any) {
@@ -180,8 +182,8 @@ extension TimetableViewController : CreateLessonViewControllerDelegate {
     }
     
     public func createLessonViewController(viewController: CreateLessonViewController, didCreateLesson lesson: Lesson) {
-        lesson.dayOfWeek = Int32(day.dayOfWeek)
-        lesson.week = Int32(day.week)
+        lesson.dayOfWeek = Int32(timetable.day.dayOfWeek)
+        lesson.week = Int32(timetable.day.week)
 
         do {
             try CoreDataStorage.shared.context.save()
