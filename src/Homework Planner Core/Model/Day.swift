@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import Date_WithoutTime
 import Foundation
 
 public struct Day {
@@ -30,14 +31,14 @@ public struct Day {
             }
         }
 
-        let weekStart = Settings.weekStart.day
-        let weekEnd = Settings.weekEnd.day
+        let weekStart = Settings.weekStart.withoutTime
+        let weekEnd = Settings.weekEnd.withoutTime
         let weeksLength = Calendar.current.dateComponents([.day], from: weekStart, to: weekEnd).day!
         let difference = Calendar.current.dateComponents([.day], from: weekStart, to: date).day!
         let daysInAWeek = Calendar.current.range(of: .weekday, in: .weekOfMonth, for: date)!.count
 
         let totalDifference = difference % weeksLength
-        let weekday = Calendar.current.component(.weekday, from: date.day)
+        let weekday = Calendar.current.component(.weekday, from: date.withoutTime)
         
         var components = DateComponents()
         components.day = totalDifference
@@ -49,7 +50,7 @@ public struct Day {
             adjustedDate = Calendar.current.date(byAdding: components, to: weekEnd)!
         }
 
-        self.date = adjustedDate.day
+        self.date = adjustedDate.withoutTime
         week = totalDifference / daysInAWeek + 1
         dayOfWeek = weekday
     }
@@ -70,7 +71,7 @@ public struct Day {
     }
     
     public var name: String {
-        let day = Day(date: Date().day, modifyIfWeekend: false)
+        let day = Day(date: Date().withoutTime, modifyIfWeekend: false)
         let difference = Calendar.current.dateComponents([.day], from: day.date, to: date)
 
         let dayName: String

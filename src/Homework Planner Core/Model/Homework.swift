@@ -122,8 +122,8 @@ public extension Homework {
 
             return Order(comparisonResult: name1.compare(name2))
         } else if comparisonType == .date {
-            let date1 = dueDate ?? Date().day
-            let date2 = other.dueDate ?? Date().day
+            let date1 = dueDate ?? Date().withoutTime
+            let date2 = other.dueDate ?? date1
 
             return Order(comparisonResult: date1.compare(date2))
         } else {

@@ -70,12 +70,8 @@
 		1EEF70FC2031F72B00DF8442 /* UIColor+StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF70FB2031F72B00DF8442 /* UIColor+StringTests.swift */; };
 		1EEF70FE2031F72B00DF8442 /* Homework_Planner_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC2AC7F2031A4C500969D3A /* Homework_Planner_Core.framework */; };
 		1EEF71082031F97400DF8442 /* Date+OrdinalIndicatorStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71062031F96F00DF8442 /* Date+OrdinalIndicatorStringTests.swift */; };
-		1EEF710A2031FA4D00DF8442 /* Date+DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71092031FA4D00DF8442 /* Date+DayTests.swift */; };
-		1EEF710C2031FAC100DF8442 /* Date+Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF710B2031FAC100DF8442 /* Date+Day.swift */; };
 		1EEF710F2031FAF600DF8442 /* Date+FormattedDayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF710E2031FAF600DF8442 /* Date+FormattedDayName.swift */; };
-		1EEF71112031FB1A00DF8442 /* Date+Previous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71102031FB1A00DF8442 /* Date+Previous.swift */; };
 		1EEF71142031FBF300DF8442 /* Date+FormattedDayNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71132031FBF300DF8442 /* Date+FormattedDayNameTests.swift */; };
-		1EEF71162031FCE700DF8442 /* Date+PreviousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71152031FCE700DF8442 /* Date+PreviousTests.swift */; };
 		1EEF71182031FEC100DF8442 /* HomeworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF71172031FEC100DF8442 /* HomeworkTests.swift */; };
 		1EF6A89C201D030F009F2BC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */; };
 		1EF6A8A6201D030F009F2BC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF6A8A5201D030F009F2BC7 /* Assets.xcassets */; };
@@ -83,6 +79,7 @@
 		1EFCA768202DEF8200DB9C11 /* UrlAttachmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCA767202DEF8200DB9C11 /* UrlAttachmentTableViewCell.swift */; };
 		1EFCA76A202DEFD100DB9C11 /* ImageAttachmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCA769202DEFD100DB9C11 /* ImageAttachmentTableViewCell.swift */; };
 		5121F3108A26136D7C37CAD4 /* Pods_Homework_Planner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 567D5D8D96010EAD20CBA3EC /* Pods_Homework_Planner.framework */; };
+		E0E3EAFD4A1823E4A51D9BC8 /* Pods_Homework_Planner_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C451655B62D788C2A3581E6E /* Pods_Homework_Planner_Core.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +146,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04EA981F14FB2B038831D108 /* Pods-Homework Planner Core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework Planner Core.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Homework Planner Core/Pods-Homework Planner Core.release.xcconfig"; sourceTree = "<group>"; };
 		1E0572CD203208A600CCFD2A /* SubjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTests.swift; sourceTree = "<group>"; };
 		1E05737320323CBF00CCFD2A /* LegacyImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyImporter.swift; sourceTree = "<group>"; };
 		1E122C9B202A138400506B71 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
@@ -213,12 +211,8 @@
 		1EEF70FB2031F72B00DF8442 /* UIColor+StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+StringTests.swift"; sourceTree = "<group>"; };
 		1EEF70FD2031F72B00DF8442 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EEF71062031F96F00DF8442 /* Date+OrdinalIndicatorStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+OrdinalIndicatorStringTests.swift"; sourceTree = "<group>"; };
-		1EEF71092031FA4D00DF8442 /* Date+DayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+DayTests.swift"; path = "tests/Homework Planner Core Tests/Extensions/Date+DayTests.swift"; sourceTree = SOURCE_ROOT; };
-		1EEF710B2031FAC100DF8442 /* Date+Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Day.swift"; sourceTree = "<group>"; };
 		1EEF710E2031FAF600DF8442 /* Date+FormattedDayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+FormattedDayName.swift"; sourceTree = "<group>"; };
-		1EEF71102031FB1A00DF8442 /* Date+Previous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Previous.swift"; sourceTree = "<group>"; };
 		1EEF71132031FBF300DF8442 /* Date+FormattedDayNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+FormattedDayNameTests.swift"; sourceTree = "<group>"; };
-		1EEF71152031FCE700DF8442 /* Date+PreviousTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+PreviousTests.swift"; sourceTree = "<group>"; };
 		1EEF71172031FEC100DF8442 /* HomeworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTests.swift; sourceTree = "<group>"; };
 		1EF6A898201D030F009F2BC7 /* Homework Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Homework Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EF6A89B201D030F009F2BC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -232,6 +226,7 @@
 		1EFCA769202DEFD100DB9C11 /* ImageAttachmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachmentTableViewCell.swift; sourceTree = "<group>"; };
 		1EFCA76B202DF20E00DB9C11 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		3C97BCEE2D0B3A7F45F05122 /* Pods-Homework Planner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework Planner.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Homework Planner/Pods-Homework Planner.debug.xcconfig"; sourceTree = "<group>"; };
+		53A8755CC19DCC6F252C72BE /* Pods-Homework Planner Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework Planner Core.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Homework Planner Core/Pods-Homework Planner Core.debug.xcconfig"; sourceTree = "<group>"; };
 		567D5D8D96010EAD20CBA3EC /* Pods_Homework_Planner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homework_Planner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C451655B62D788C2A3581E6E /* Pods_Homework_Planner_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homework_Planner_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C455C914383ECFA0B6C661 /* Pods-Homework Planner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework Planner.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Homework Planner/Pods-Homework Planner.release.xcconfig"; sourceTree = "<group>"; };
@@ -251,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E3EAFD4A1823E4A51D9BC8 /* Pods_Homework_Planner_Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,13 +338,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		1E94DCFA2034948E00BC3117 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		1E94DCFD203494BA00BC3117 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,7 +390,6 @@
 		1EBA267A201D496C0042E03D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1E94DCFA2034948E00BC3117 /* Extensions */,
 				1EECD574201FC4710091B0B8 /* ContainerView.swift */,
 				1E6B91BA2021E4D10019FC5D /* SelectColorView.swift */,
 				1E3998412021F62B002DFFA3 /* PanelView.swift */,
@@ -508,9 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				1EACEC26201D4BC5000E4915 /* UIColor+String.swift */,
-				1EEF710B2031FAC100DF8442 /* Date+Day.swift */,
 				1EEF710E2031FAF600DF8442 /* Date+FormattedDayName.swift */,
-				1EEF71102031FB1A00DF8442 /* Date+Previous.swift */,
 				1E5D7AB72028F26500DF39F1 /* Date+OrdinalIndicatorString.swift */,
 			);
 			path = Extensions;
@@ -520,10 +506,8 @@
 			isa = PBXGroup;
 			children = (
 				1EEF70FB2031F72B00DF8442 /* UIColor+StringTests.swift */,
-				1EEF71092031FA4D00DF8442 /* Date+DayTests.swift */,
 				1EEF71132031FBF300DF8442 /* Date+FormattedDayNameTests.swift */,
 				1EEF71062031F96F00DF8442 /* Date+OrdinalIndicatorStringTests.swift */,
-				1EEF71152031FCE700DF8442 /* Date+PreviousTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -582,6 +566,8 @@
 			children = (
 				3C97BCEE2D0B3A7F45F05122 /* Pods-Homework Planner.debug.xcconfig */,
 				E7C455C914383ECFA0B6C661 /* Pods-Homework Planner.release.xcconfig */,
+				53A8755CC19DCC6F252C72BE /* Pods-Homework Planner Core.debug.xcconfig */,
+				04EA981F14FB2B038831D108 /* Pods-Homework Planner Core.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -633,10 +619,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EC2AC962031A4C500969D3A /* Build configuration list for PBXNativeTarget "Homework Planner Core" */;
 			buildPhases = (
+				CF8401F9F6BBB473CE3D91F5 /* [CP] Check Pods Manifest.lock */,
 				1EC2AC7A2031A4C500969D3A /* Sources */,
 				1EC2AC7B2031A4C500969D3A /* Frameworks */,
 				1EC2AC7C2031A4C500969D3A /* Headers */,
 				1EC2AC7D2031A4C500969D3A /* Resources */,
+				CBD925C06328B1381DDD706D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -859,6 +847,39 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Homework Planner/Pods-Homework Planner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CBD925C06328B1381DDD706D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Homework Planner Core/Pods-Homework Planner Core-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF8401F9F6BBB473CE3D91F5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Homework Planner Core-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D83B8E68E29943E4C040919F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -871,6 +892,8 @@
 				"${BUILT_PRODUCTS_DIR}/JTCalendar/JTCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SZTextView/SZTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/Date+Previous/Date_Previous.framework",
+				"${BUILT_PRODUCTS_DIR}/Date+WithoutTime/Date_WithoutTime.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -879,6 +902,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SZTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Date_Previous.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Date_WithoutTime.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -922,8 +947,6 @@
 				1EC2ACB92031BC3300969D3A /* UIView+FadeInOut.swift in Sources */,
 				1E0572D020321DA700CCFD2A /* BackupView.swift in Sources */,
 				1EC2ACB42031BB0700969D3A /* HomeworkTableViewCell.swift in Sources */,
-				1EEF710C2031FAC100DF8442 /* Date+Day.swift in Sources */,
-				1EEF71112031FB1A00DF8442 /* Date+Previous.swift in Sources */,
 				1E94DD072034B48F00BC3117 /* UIView+Borders.swift in Sources */,
 				1E94DD0320349C1700BC3117 /* UIBarButtonItem+SetHidden.swift in Sources */,
 				1E906BAE203461FF00762A5A /* DataInjector.swift in Sources */,
@@ -937,9 +960,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EEF71142031FBF300DF8442 /* Date+FormattedDayNameTests.swift in Sources */,
-				1EEF710A2031FA4D00DF8442 /* Date+DayTests.swift in Sources */,
 				1E0572CE203208A600CCFD2A /* SubjectTests.swift in Sources */,
-				1EEF71162031FCE700DF8442 /* Date+PreviousTests.swift in Sources */,
 				1EEF71082031F97400DF8442 /* Date+OrdinalIndicatorStringTests.swift in Sources */,
 				1EEF70FC2031F72B00DF8442 /* UIColor+StringTests.swift in Sources */,
 				1EEF71182031FEC100DF8442 /* HomeworkTests.swift in Sources */,
@@ -1084,6 +1105,7 @@
 		};
 		1EC2AC972031A4C500969D3A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A8755CC19DCC6F252C72BE /* Pods-Homework Planner Core.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1109,6 +1131,7 @@
 		};
 		1EC2AC982031A4C500969D3A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04EA981F14FB2B038831D108 /* Pods-Homework Planner Core.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";

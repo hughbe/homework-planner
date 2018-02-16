@@ -95,20 +95,20 @@ public class DataInjector {
         chemistryHomework.subject = chemistry
         chemistryHomework.workSet = "Sheet on Buckminster Fullerene structures"
         chemistryHomework.type = Homework.WorkType.exercise.rawValue
-        chemistryHomework.dueDate = Date().day
+        chemistryHomework.dueDate = Date().withoutTime
 
         let economicsHomework = Homework(context: context)
         economicsHomework.subject = economics
         economicsHomework.workSet = "To what extent is expansionary fiscal policy a good thing?"
         economicsHomework.type = Homework.WorkType.essay.rawValue
-        economicsHomework.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date().day)!
+        economicsHomework.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date().withoutTime)!
         economicsHomework.priority = true
 
         let russianHomework = Homework(context: context)
         russianHomework.subject = russian
         russianHomework.workSet = "Quizlet Vocab (3.6)\nGrammar exercises from Navigator textbook (verbs of motion)"
         russianHomework.type = Homework.WorkType.exercise.rawValue
-        russianHomework.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date().day)!
+        russianHomework.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date().withoutTime)!
         russianHomework.completed = true
 
         let russianAttachment = UrlAttachment(context: context)
@@ -121,19 +121,19 @@ public class DataInjector {
         mathsHomework.subject = maths1
         mathsHomework.workSet = "Integration by parts sheet"
         mathsHomework.type = Homework.WorkType.exercise.rawValue
-        mathsHomework.dueDate = Calendar.current.date(byAdding: .day, value: 2, to: Date().day)!
+        mathsHomework.dueDate = Calendar.current.date(byAdding: .day, value: 2, to: Date().withoutTime)!
 
         let biologyHomework = Homework(context: context)
         biologyHomework.subject = biology
         biologyHomework.workSet = "Lab write up - dissection"
         biologyHomework.type = Homework.WorkType.notes.rawValue
-        biologyHomework.dueDate = Calendar.current.date(byAdding: .day, value: 3, to: Date().day)!
+        biologyHomework.dueDate = Calendar.current.date(byAdding: .day, value: 3, to: Date().withoutTime)!
     }
 
     private static func injectLessons() {
         let context = CoreDataStorage.shared.context
 
-        let day = Day(date: Date().day, modifyIfWeekend: true)
+        let day = Day(date: Date().withoutTime, modifyIfWeekend: true)
 
         let chemistryLesson = Lesson(context: context)
         chemistryLesson.dayOfWeek = Int32(day.dayOfWeek)

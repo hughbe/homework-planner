@@ -13,3 +13,13 @@ target 'Homework Planner' do
   pod 'SZTextView'
   
 end
+
+target 'Homework Planner Core' do
+  use_frameworks!
+  inhibit_all_warnings!
+
+  pod 'Date+Previous'
+  pod 'Date+WithoutTime'
+
+  project "src/Homework Planner.xcodeproj"
+end

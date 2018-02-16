@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import Date_Previous
 import Foundation
 import UIKit
 
@@ -286,10 +287,10 @@ public class LegacyImporter {
     
     private static var weekStartDate: Date {
         if let date = UserDefaults.standard.object(forKey: "days_start_week") as? Date {
-            return date.day.previous(dayOfWeek: DayOfWeek.Monday)
+            return date.withoutTime.previous(dayOfWeek: DayOfWeek.Monday)
         }
         
-        return Date().day.previous(dayOfWeek: DayOfWeek.Monday)
+        return Date().withoutTime.previous(dayOfWeek: DayOfWeek.Monday)
     }
     
     private static var isTwoWeekTimetable: Bool {

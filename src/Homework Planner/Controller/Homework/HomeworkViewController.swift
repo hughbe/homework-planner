@@ -186,11 +186,11 @@ public class HomeworkViewController : EditableViewController {
             }
         } else if homeworkDisplay == .sectionedByDate {
             let groupedHomework = Dictionary(grouping: unsectionedHomework) { homework -> Date in
-                homework.dueDate ?? Date().day
+                homework.dueDate ?? Date().withoutTime
             }
             sectionedHomework = groupedHomework.values.sorted { homework1, homework2 in
-                let date1 = homework1.first?.dueDate ?? Date().day
-                let date2 = homework2.first?.dueDate ?? Date().day
+                let date1 = homework1.first?.dueDate ?? Date().withoutTime
+                let date2 = homework2.first?.dueDate ?? date1
                 
                 return date1.compare(date2) == .orderedAscending
             }
@@ -222,7 +222,7 @@ public class HomeworkViewController : EditableViewController {
     }
     
     private func createNotification(for homework: Homework) {
-        guard let dueDate = homework.dueDate?.day, dueDate.compare(Date().day) == .orderedDescending else {
+        guard let dueDate = homework.dueDate?.withoutTime, dueDate.compare(Date().withoutTime) == .orderedDescending else {
             return
         }
         

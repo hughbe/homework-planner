@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import Date_Previous
 import Foundation
 
 public class Settings {
@@ -27,13 +28,13 @@ public class Settings {
     public static var weekStart: Date {
         get {
             if let date = UserDefaults.standard.object(forKey: weekStartKey) as? Date {
-                return date
+                return date.withoutTime
             }
 
-            return Date().previous(dayOfWeek: DayOfWeek.Monday)
+            return Date().previous(dayOfWeek: DayOfWeek.Monday).withoutTime
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: weekStartKey)
+            UserDefaults.standard.set(newValue.withoutTime, forKey: weekStartKey)
         }
     }
     

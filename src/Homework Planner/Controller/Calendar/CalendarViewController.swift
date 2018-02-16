@@ -127,7 +127,7 @@ extension CalenadarViewController : JTCalendarDelegate {
     
     public func calendar(_ calendar: JTCalendarManager!, didTouchDayView dayView: (UIView & JTCalendarDay)!) {
         let view = dayView as! JTCalendarDayView
-        let date = view.date.day
+        let date = view.date.withoutTime
         let oldCurrentDate = currentDate
 
         manager.setDate(date)

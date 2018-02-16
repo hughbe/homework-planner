@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import Date_Previous
 import Homework_Planner_Core
 import StoreKit
 import UIKit
@@ -38,7 +39,7 @@ public class TimetableViewController : EditableViewController {
         }
     }
 
-    public var day = Day(date: Date().day, modifyIfWeekend: true) {
+    public var day = Day(date: Date().withoutTime, modifyIfWeekend: true) {
         didSet {
             currentDayButton.title = day.name
             setEditing(false)
@@ -129,13 +130,13 @@ public class TimetableViewController : EditableViewController {
                 let currentWeeekAlertController = UIAlertController(title: NSLocalizedString("Current Week", comment: "Current Week"), message: nil, preferredStyle: .actionSheet)
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 1", comment: "Week 1"), style: .default) { action in
-                    Settings.weekStart = self.day.date.previous(dayOfWeek: DayOfWeek.Monday)
+                    Settings.weekStart = self.day.date.previous(dayOfWeek: DayOfWeek.Monday).withoutTime
                     self.day = Day(dayOfWeek: self.day.dayOfWeek, week: 1)
                 })
                 
                 currentWeeekAlertController.addAction(UIAlertAction(title: NSLocalizedString("Week 2", comment: "Week 2"), style: .default) { action in
                     let date = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: self.day.date)!
-                    Settings.weekStart = date.previous(dayOfWeek: DayOfWeek.Monday)
+                    Settings.weekStart = date.previous(dayOfWeek: DayOfWeek.Monday).withoutTime
                     self.day = Day(dayOfWeek: self.day.dayOfWeek, week: 2)
                 })
                 

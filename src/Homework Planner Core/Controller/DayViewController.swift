@@ -33,7 +33,7 @@ open class DayViewController : DataViewController {
     }
 
     open func reloadData(animated: Bool) {
-        let dateDay = currentDate.day
+        let dateDay = currentDate.withoutTime
         (homework, lessons) = fetchData(date: dateDay)
 
         let hasEvents = homework.count > 0 || lessons.count > 0
