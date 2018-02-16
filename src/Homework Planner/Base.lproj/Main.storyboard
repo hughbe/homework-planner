@@ -414,13 +414,13 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYe-7w-uba">
-                                                                        <rect key="frame" x="15" y="27" width="464" height="26.5"/>
+                                                                        <rect key="frame" x="15" y="27" width="216" height="26.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="88z-RD-9rJ">
-                                                                        <rect key="frame" x="487" y="0.0" width="80" height="80"/>
+                                                                        <rect key="frame" x="239" y="0.0" width="80" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="88z-RD-9rJ" secondAttribute="height" multiplier="1:1" id="qSN-4Z-REJ"/>
                                                                         </constraints>
@@ -1640,7 +1640,7 @@
                                             <outlet property="titleLabel" destination="IPS-Zz-YwE" id="V9Q-kH-b9x"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="LessonCell" rowHeight="90" id="frl-hi-oGt" customClass="LessonTableViewCell" customModule="Homework_Planner_Core">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="LessonCell" rowHeight="90" id="frl-hi-oGt" customClass="LessonTableViewCell" customModule="Homework_Planner_Core">
                                         <rect key="frame" x="0.0" y="145.5" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="frl-hi-oGt" id="sYr-fy-0JS">

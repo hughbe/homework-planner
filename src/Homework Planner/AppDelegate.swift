@@ -105,15 +105,4 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         showHomework(objectId: response.notification.request.identifier)
         completionHandler()
     }
-    /*
-    private func reloadTimetableViewController() {
-        let tabBarController = window?.rootViewController as? UITabBarController
-        if let navigationController = tabBarController?.viewControllers?[1] as? UINavigationController, let viewController = navigationController.viewControllers.first as? TimetableViewController {
-            viewController.reloadAnimation = .fade
-            
-            if viewController.notPurchasedView != nil {
-                viewController.loadData(animated: true)
-            }
-        }
-    }*/
 }

@@ -53,8 +53,8 @@ open class DayViewController : DataViewController {
     }
 
     public func fetchData(date: Date) -> ([Homework], [Lesson]) {
-        let day = Day(date: date, modifyIfWeekend: false)
-        
+        let timetable = Timetable(date: date, modifyIfWeekend: false)
+
         let homeworkRequest = NSFetchRequest<Homework>(entityName: "Homework")
         homeworkRequest.sortDescriptors = [
             NSSortDescriptor(keyPath: \Homework.subject?.name, ascending: true)
@@ -63,7 +63,7 @@ open class DayViewController : DataViewController {
 
         do {
             let homework = try CoreDataStorage.shared.context.fetch(homeworkRequest)
-            let lessons = try Timetable.shared.getLessons(on: day)
+            let lessons = try timetable.getLessons()
             return (homework, lessons)
         } catch let error as NSError {
             showAlert(error: error)
