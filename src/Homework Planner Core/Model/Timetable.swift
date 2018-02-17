@@ -15,13 +15,12 @@ public struct Timetable {
     public var day: Day
     private var date: Date {
         didSet {
-            day = Timetable.getDay(date: date, modifyIfWeekend: true)
+            (day, _) = Timetable.getDay(date: date, modifyIfWeekend: true)
         }
     }
 
     public init(date: Date, modifyIfWeekend: Bool) {
-        self.date = date.withoutTime
-        self.day = Timetable.getDay(date: date, modifyIfWeekend: modifyIfWeekend)
+        (self.day, self.date) = Timetable.getDay(date: date, modifyIfWeekend: modifyIfWeekend)
     }
 
     public mutating func nextDay() {
@@ -58,7 +57,7 @@ public struct Timetable {
     }
 
     public var dayName: String {
-        let today = Timetable.getDay(date: Date(), modifyIfWeekend: false)
+        let (today, _) = Timetable.getDay(date: Date(), modifyIfWeekend: false)
         let difference = day.dayDifference(from: today)
 
         let dayName: String
@@ -109,13 +108,6 @@ public struct Timetable {
         }
     }
 
-    private static var weekEnd: Date {
-        get {
-            let days = 7 * numberOfWeeks - 1
-            return Calendar.current.date(byAdding: .day, value: days, to: weekStart)!
-        }
-    }
-
     public static var includeWeekends: Bool {
         get {
             if let value = UserDefaults.standard.value(forKey: Timetable.includeWeekendsKey) as? Bool {
@@ -140,7 +132,7 @@ public struct Timetable {
         }
     }
 
-    private static func getDay(date: Date, modifyIfWeekend: Bool) -> Day {
+    private static func getDay(date: Date, modifyIfWeekend: Bool) -> (Day, Date) {
         var date = date.withoutTime
         if modifyIfWeekend && !Timetable.includeWeekends {
             while Calendar.current.isDateInWeekend(date) {
@@ -155,6 +147,6 @@ public struct Timetable {
         let week = Calendar.current.dateComponents([.weekOfYear], from: weekStart, to: date).weekOfYear! % numberOfWeeks + 1
         let weekday = Calendar.current.component(.weekday, from: date)
 
-        return Day(dayOfWeek: weekday, week: week)
+        return (Day(dayOfWeek: weekday, week: week), date)
     }
 }
