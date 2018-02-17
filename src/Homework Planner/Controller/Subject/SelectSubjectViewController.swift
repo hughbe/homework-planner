@@ -28,6 +28,17 @@ public class SelectSubjectViewController: EditableViewController {
     
     public var selectedSubject: Subject?
     public var selectionEnabled = true
+    public var showCurrentLesson = false
+
+    private var currentLesson: Lesson? = nil {
+        didSet {
+            if currentLesson != nil {
+                tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
+            } else {
+                tableView.contentInset = UIEdgeInsets.zero
+            }
+        }
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +60,12 @@ public class SelectSubjectViewController: EditableViewController {
 
         do {
             subjects = try CoreDataStorage.shared.context.fetch(request)
+            if showCurrentLesson {
+                let timetable = Timetable(date: Date(), modifyIfWeekend: false)
+                currentLesson = try timetable.getCurrentLesson()
+            } else {
+                currentLesson = nil
+            }
         } catch let error as NSError {
             showAlert(error: error)
         }
@@ -92,13 +109,28 @@ extension SelectSubjectViewController : CreateSubjectViewControllerDelegate {
 }
 
 extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSource {
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return currentLesson != nil ? 2 : 1
+    }
+
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if currentLesson != nil && section == 0 {
+            return 1
+        }
+
         return subjects.count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectCell") as! SubjectTableViewCell
-        let subject = subjects[indexPath.row]
+
+        let subject: Subject
+        if let currentLessonSubject = currentLesson?.subject, indexPath.section == 0 {
+            subject = currentLessonSubject
+        } else {
+            subject = subjects[indexPath.row]
+        }
+
         let selected: Bool
         if let selectedSubject = selectedSubject, selectedSubject.objectID == subject.objectID {
             selected = true
@@ -125,7 +157,23 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
     }
 
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if currentLesson != nil {
+            return UITableViewAutomaticDimension
+        }
+
         return CGFloat.leastNonzeroMagnitude
+    }
+
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if currentLesson != nil {
+            if section == 0 {
+                return NSLocalizedString("Current Lesson", comment: "Current Lesson")
+            }
+
+            return NSLocalizedString("Subjects", comment: "Subjects")
+        }
+
+        return nil
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

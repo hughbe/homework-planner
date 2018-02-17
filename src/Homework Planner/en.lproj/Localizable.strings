@@ -81,3 +81,6 @@
 "Invalid Product" = "Cannot restore purchases. Please check your internet connection.";
 "Purchases are disabled in your device" = "Purchases are disabled in your device";
 "Restored Purchases" = "Restored Purchases";
+
+"Current Lesson" = "Current Lesson";
+"Subjects" = "Subjects";

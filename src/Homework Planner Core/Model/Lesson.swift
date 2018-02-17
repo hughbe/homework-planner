@@ -43,4 +43,19 @@ public extension Lesson {
             return "No Time"
         }
     }
+
+    public var isCurrent: Bool {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: Date())
+        let hour = components.hour!
+        let minute = components.minute!
+        if hour < startHour || (hour == startHour && minute < startMinute) {
+            return false
+        }
+
+        if hour > endHour || (hour == endHour && minute > endMinute) {
+            return false
+        }
+
+        return true
+    }
 }

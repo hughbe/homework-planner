@@ -76,6 +76,10 @@ public struct Timetable {
         return dayName
     }
 
+    public func getCurrentLesson() throws -> Lesson? {
+        return try getLessons().first { $0.isCurrent }
+    }
+
     public class Notifications {
         public static let numberOfWeeksChanged = Notification.Name("NumberOfWeeksChanged")
     }

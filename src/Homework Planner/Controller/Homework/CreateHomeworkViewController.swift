@@ -36,6 +36,7 @@ public class CreateHomeworkViewController : UINavigationController {
 
         let selectSubjectViewController = topViewController as! SelectSubjectViewController
         selectSubjectViewController.selectedSubject = homework.subject
+        selectSubjectViewController.showCurrentLesson = true
         selectSubjectViewController.delegate = self
     }
     

@@ -32,6 +32,8 @@ public class CalenadarViewController : DayViewController {
         
         // Promote the menu view from the view to the navigation controller.
         navigationController?.replaceNavigationBar(with: calendarMenuView)
+
+        tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
         
         setWeekMode(weekMode: true, animated: false)
     }

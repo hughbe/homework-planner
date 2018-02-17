@@ -65,6 +65,8 @@ public class TimetableViewController : EditableViewController {
         navigationController?.replaceNavigationBar(with: toolbar)
         currentDayButton.title = timetable.dayName
 
+        tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
+
         register(notification: InAppPurchase.Notifications.purchaseError) { notification in
             if let transaction = notification.object as? SKPaymentTransaction, let error = transaction.error {
                 self.showAlert(error: error as NSError)
