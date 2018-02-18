@@ -115,23 +115,12 @@ public class CreateSubjectViewController : UIViewController {
     }
     
     private func setSubjectsSuggestionConstraints(showSuggestions: Bool) {
-        let previousShowSuggestions = tableHeightConstraint.constant != 0
         let subjectsHeight: CGFloat = 100
         
         subjectsTableView.reloadData()
         
         subjectsTableView.isHidden = !showSuggestions
         tableHeightConstraint.constant = showSuggestions ? subjectsHeight : 0
-        
-        if previousShowSuggestions != showSuggestions {
-            if showSuggestions {
-                // Move the view up.
-                containerView.centerVerticalContstraint.constant -= subjectsHeight / 2
-            } else {
-                // Move the view down.
-                containerView.centerVerticalContstraint.constant += subjectsHeight / 2
-            }
-        }
     }
     
     private func loadSubjectsSuggestions(showSuggestions: Bool, animated: Bool) {

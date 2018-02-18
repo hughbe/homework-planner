@@ -226,9 +226,9 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
             
             do {
                 try CoreDataStorage.shared.context.save()
-                
+
+                reloadAnimation = .fade
                 lessons.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .top)
             } catch let error as NSError {
                 CoreDataStorage.shared.context.rollback()
                 showAlert(error: error)

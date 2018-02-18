@@ -18,10 +18,18 @@ public protocol SelectSubjectViewControllerDelegate {
 public class SelectSubjectViewController: EditableViewController {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
 
+    private var reloadAnimation = false
+
     private var subjects: [Subject] = [] {
         didSet {
-            tableView.reloadData()
-            setHasData(subjects.count != 0, animated: true)
+            UIView.transition(with: tableView, duration: reloadAnimation ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
+                self.tableView.reloadData()
+            })
+
+            setHasData(subjects.count != 0, animated: reloadAnimation)
+
+            // The first reload is the only one that is not animated.
+            reloadAnimation = true
         }
     }
     public var delegate: SelectSubjectViewControllerDelegate?
@@ -179,6 +187,14 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if currentLesson != nil && indexPath.section == 0 {
+            return false
+        }
+
+        return true
+    }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -186,16 +202,23 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
         guard selectionEnabled else {
             return
         }
-        
-        let subject = subjects[indexPath.row]
-        if tableView.isEditing {
-            performSegue(withIdentifier: "createEditSubject", sender: subject)
+
+        if let currentSubject = currentLesson?.subject, indexPath.section == 0 {
+            select(subject: currentSubject)
         } else {
-            selectedSubject = subject
-            tableView.reloadData()
-            
-            delegate?.selectSubjectViewController(viewController: self, didSelectSubject: subject)
+            if tableView.isEditing {
+                performSegue(withIdentifier: "createEditSubject", sender: subjects[indexPath.row])
+            } else {
+                select(subject: subjects[indexPath.row])
+            }
         }
+    }
+
+    private func select(subject: Subject) {
+        selectedSubject = subject
+        tableView.reloadData()
+
+        delegate?.selectSubjectViewController(viewController: self, didSelectSubject: subject)
     }
 
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -207,10 +230,8 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
                 try CoreDataStorage.shared.context.save()
                 
                 subjects.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
 
                 NotificationCenter.default.post(name: Subject.Notifications.subjectsChanged, object: nil)
-                reloadData()
             } catch let error as NSError {
                 CoreDataStorage.shared.context.rollback()
                 showAlert(error: error)

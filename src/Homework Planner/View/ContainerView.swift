@@ -30,20 +30,28 @@ public class ContainerView : PanelView {
     }
 
     private func setVerticalConstraint(duration: Double, options: UIViewAnimationOptions) {
-        guard let keyboardFrame = keyboardFrame else {
+        guard let keyboardFrame = keyboardFrame, let superview = superview else {
+            return
+        }
+        guard let superCenter = superview.superview?.convert(superview.center, to: nil) else {
             return
         }
 
-        guard let originInWindow = superview?.convert(frame.origin, to: nil) else {
+        let maxY = superCenter.y + frame.size.height / 2
+        let keyboardY = keyboardFrame.minY - 20
+        if maxY < keyboardY {
             return
         }
-        
-        let maxY = originInWindow.y + frame.size.height
-        let diff = maxY - keyboardFrame.minY + 20
-        if diff > 0 && originInWindow.y - diff > 0 {
-            centerVerticalContstraint.constant = -diff
+
+        let diff = keyboardY - maxY
+        let minY = superCenter.y - frame.size.height / 2
+
+        if minY + diff > 0 {
+            centerVerticalContstraint.constant = diff
+        } else {
+            centerVerticalContstraint.constant = -superCenter.y / 2 + 40
         }
-        
+
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
             self.superview?.layoutIfNeeded()
         }, completion: nil)
@@ -88,13 +96,14 @@ public class ContainerView : PanelView {
         }
     }
 
-    override public var bounds: CGRect {
-        didSet {
-            guard self.containsFirstResponder() else {
-                return
-            }
+    public override func layoutSubviews() {
+        super.layoutSubviews()
 
-            setVerticalConstraint(duration: 0.35, options: [])
+
+        guard self.containsFirstResponder() else {
+            return
         }
+
+        setVerticalConstraint(duration: 0.35, options: [])
     }
 }
