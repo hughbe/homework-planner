@@ -270,16 +270,10 @@ extension HomeworkViewController : CreateHomeworkViewControllerDelegate {
     }
     
     public func createHomeworkViewController(viewController: CreateHomeworkViewController, didCreateHomework homework: Homework) {
+        viewController.dismiss(animated: true)
 
-        do {
-            try CoreDataStorage.shared.context.save()
-            viewController.dismiss(animated: true)
-
-            createNotification(for: homework)
-            reloadData()
-        } catch let error as NSError {
-            showAlert(error: error)
-        }
+        createNotification(for: homework)
+        reloadData()
     }
 }
 

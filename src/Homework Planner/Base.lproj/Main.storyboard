@@ -513,10 +513,10 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="attachmentsTableView" destination="JN9-PH-r4q" id="jZQ-Bg-g5B"/>
                         <outlet property="createButton" destination="g6d-fp-lvt" id="yFm-kD-cdM"/>
                         <outlet property="editButton" destination="LNq-ps-CIF" id="aVX-mD-1X9"/>
-                        <outlet property="noAttachmentsView" destination="Uuu-3N-I7K" id="2z8-xt-N7V"/>
+                        <outlet property="noDataView" destination="Uuu-3N-I7K" id="dLZ-Dl-HiU"/>
+                        <outlet property="tableView" destination="JN9-PH-r4q" id="PU2-WB-wWr"/>
                         <segue destination="SOa-6U-yGp" kind="presentation" identifier="createUrlAttachment" id="aPX-ku-gub"/>
                         <segue destination="Cwj-7R-ISW" kind="presentation" identifier="createImageAttachment" id="obX-Rw-xMM"/>
                     </connections>

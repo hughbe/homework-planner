@@ -7,8 +7,7 @@ target 'Homework Planner' do
 
   project "src/Homework Planner.xcodeproj"
 
-  pod 'DayDatePicker', '~> 1.5'
-  pod 'NYTPhotoViewer'
+  pod 'DayDatePicker'
   pod 'JTCalendar'
   pod 'SZTextView'
   
@@ -18,8 +17,10 @@ target 'Homework Planner Core' do
   use_frameworks!
   inhibit_all_warnings!
 
+  project "src/Homework Planner.xcodeproj"
+
   pod 'Date+Previous'
   pod 'Date+WithoutTime'
+  pod 'INSPhotoGallery'
 
-  project "src/Homework Planner.xcodeproj"
 end

@@ -7,17 +7,11 @@
 //
 
 import Homework_Planner_Core
-import NYTPhotoViewer
+import INSPhotoGallery
 import SafariServices
 import UIKit
 
-public class AttachmentsViewController : DataViewController {
-    @IBOutlet weak var attachmentsTableView: UITableView!
-    @IBOutlet weak var noAttachmentsView: BackupView!
-    
-    @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var createButton: UIBarButtonItem!
-
+public class AttachmentsViewController : EditableViewController {
     private var websites: [UrlAttachment] = []
     private var images: [ImageAttachment] = []
     
@@ -31,17 +25,16 @@ public class AttachmentsViewController : DataViewController {
         if !isEditingEnabled {
             editButton.setHidden(true)
             createButton.setHidden(true)
-            noAttachmentsView.subtitleButton.isEnabled = false
-            noAttachmentsView.actionableSubtitle = false
+            (noDataView as! BackupView).subtitleButton.isEnabled = false
+            (noDataView as! BackupView).actionableSubtitle = false
         }
 
         tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
-        reloadData(animated: false)
     }
     
     @IBAction func createAttachment(_ sender: Any) {
         let alertController = UIAlertController(title: NSLocalizedString("Attachment Type", comment: "Attachment Type"), message: nil, preferredStyle: .actionSheet)
-        
+
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Website", comment: "Website"), style: .default) { action in
             self.performSegue(withIdentifier: "createUrlAttachment", sender: nil)
         })
@@ -53,9 +46,9 @@ public class AttachmentsViewController : DataViewController {
         alertController.popoverPresentationController?.barButtonItem = createButton
         present(alertController, animated: true)
     }
-    
-    @IBAction func edit(_ sender: Any) {
-        setEditingAttachments(editing: !attachmentsTableView.isEditing)
+
+    public override func reloadData() {
+        reloadData(animated: false)
     }
 
     private func reloadData(animated: Bool) {
@@ -64,32 +57,11 @@ public class AttachmentsViewController : DataViewController {
         websites = attachments.filter { $0.type == Attachment.ContentType.url.rawValue }.map { $0 as! UrlAttachment }
         images = attachments.filter { $0.type == Attachment.ContentType.image.rawValue }.map { $0 as! ImageAttachment }
         
-        UIView.transition(with: attachmentsTableView, duration: animated ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
-            self.attachmentsTableView.reloadData()
+        UIView.transition(with: tableView, duration: animated ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
+            self.tableView.reloadData()
         })
 
-        let hasAttachments = attachments.count > 0
-        if attachmentsTableView.isEditing && !hasAttachments {
-            setEditingAttachments(editing: false)
-        }
-        
-        editButton.isEnabled = hasAttachments
-        attachmentsTableView.setHidden(hidden: !hasAttachments, animated: animated)
-        noAttachmentsView.setHidden(hidden: hasAttachments, animated: animated)
-    }
-    
-    private func setEditingAttachments(editing: Bool) {
-        attachmentsTableView.setEditing(editing, animated: true)
-        
-        if editing {
-            editButton.title = NSLocalizedString("Done", comment: "Done")
-            editButton.style = .done
-        } else {
-            editButton.title = NSLocalizedString("Edit", comment: "Edit")
-            editButton.style = .plain
-        }
-        
-        createButton.isEnabled = !editing
+        setHasData(attachments.count > 0, animated: animated)
     }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -166,18 +138,10 @@ extension AttachmentsViewController : UITableViewDelegate, UITableViewDataSource
             if tableView.isEditing {
                 performSegue(withIdentifier: "createImageAttachment", sender: imageAttachment)
             } else {
-                let photos = images.map { attachment -> NYTPhoto? in
-                    guard let image = imageAttachment.image else {
-                        return nil
-                    }
-        
-                    return Photo(title: attachment.title ?? NSLocalizedString("Image", comment: "Image"), image: image)
-                }.flatMap { $0 }
+                let photos = images.map { $0.photo }
+                let galleryPreview = INSPhotosViewController(photos: photos, initialPhoto: photos[indexPath.row], referenceView: nil)
                 
-                let dataSource = NYTPhotoViewerArrayDataSource(photos: photos)
-                let photosViewController = NYTPhotosViewController(dataSource: dataSource, initialPhotoIndex: indexPath.row, delegate: nil)
-                
-                present(photosViewController, animated: true)
+                present(galleryPreview, animated: true)
             }
         }
     }
@@ -204,7 +168,7 @@ extension AttachmentsViewController : UITableViewDelegate, UITableViewDataSource
 extension AttachmentsViewController : CreateAttachmentViewControllerDelegate {
     public func createAttachmentViewController(viewController: CreateAttachmentViewController, didCreateAttachment attachment: Attachment) {
         dismiss(animated: true)
-        
+
         homework.addToAttachments(attachment)
         reloadData(animated: true)
     }

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
+import INSPhotoGallery
 import UIKit
 
 public extension Attachment {
@@ -30,5 +31,14 @@ public extension ImageAttachment {
                 data = nil
             }
         }
+    }
+
+    public var photo: INSPhotoViewable {
+        let photo = INSPhoto(image: image, thumbnailImage: nil)
+        if let title = title {
+            photo.attributedTitle = NSAttributedString(string: title)
+        }
+
+        return photo
     }
 }

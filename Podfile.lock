@@ -2,34 +2,26 @@ PODS:
   - Date+Previous (1.0)
   - Date+WithoutTime (1.0)
   - DayDatePicker (1.5)
-  - FLAnimatedImage (1.0.12)
+  - INSPhotoGallery (1.2.5)
   - JTCalendar (2.2.1)
-  - NYTPhotoViewer (2.0.0):
-    - NYTPhotoViewer/AnimatedGifSupport (= 2.0.0)
-    - NYTPhotoViewer/Core (= 2.0.0)
-  - NYTPhotoViewer/AnimatedGifSupport (2.0.0):
-    - FLAnimatedImage (~> 1.0.12)
-    - NYTPhotoViewer/Core
-  - NYTPhotoViewer/Core (2.0.0)
   - SZTextView (1.3.0)
 
 DEPENDENCIES:
   - Date+Previous
   - Date+WithoutTime
-  - DayDatePicker (~> 1.5)
+  - DayDatePicker
+  - INSPhotoGallery
   - JTCalendar
-  - NYTPhotoViewer
   - SZTextView
 
 SPEC CHECKSUMS:
   Date+Previous: 6ed6d612b6aecb620f279c0b33e7b59e882eee39
   Date+WithoutTime: f6cb44bd2d2d348d62567591b53b244f2379591f
   DayDatePicker: fc2c53e23179995d50f4db40cd139d1a5c0174e8
-  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  INSPhotoGallery: 8bd5b434e70d06dd698085f8e865f6602d82014b
   JTCalendar: be9e781229c6e539d9b71267560410886cd65cfb
-  NYTPhotoViewer: 34b8bd6bcc297466adec1668f9a01249d73c90e6
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
 
-PODFILE CHECKSUM: 6705bb56a6626673aaf0fbb198d32e007281180b
+PODFILE CHECKSUM: 1207961b40c8b105c4020f984a85c1e85faf7bf1
 
 COCOAPODS: 1.4.0

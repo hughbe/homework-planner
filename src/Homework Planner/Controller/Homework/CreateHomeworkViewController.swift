@@ -77,9 +77,14 @@ extension CreateHomeworkViewController : HomeworkContentViewControllerDelegate {
 extension CreateHomeworkViewController : DayDatePickerViewControllerDelegate {
     public func dayDatePickerViewController(viewController: DayDatePickerViewController, didSelectDate date: Date) {
         CoreDataStorage.shared.context.insert(homework)
-        
         homework.subject = subject
         homework.dueDate = date
-        createDelegate?.createHomeworkViewController(viewController: self, didCreateHomework: homework)
+
+        do {
+            try CoreDataStorage.shared.context.save()
+            createDelegate?.createHomeworkViewController(viewController: self, didCreateHomework: homework)
+        } catch let error as NSError {
+            showAlert(error: error)
+        }
     }
 }
