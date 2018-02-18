@@ -80,6 +80,10 @@ extension CreateHomeworkViewController : DayDatePickerViewControllerDelegate {
         homework.subject = subject
         homework.dueDate = date
 
+        for attachment in homework.attachments ?? [] {
+            (attachment as? Attachment)?.homework = homework
+        }
+
         do {
             try CoreDataStorage.shared.context.save()
             createDelegate?.createHomeworkViewController(viewController: self, didCreateHomework: homework)
