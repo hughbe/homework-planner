@@ -91,6 +91,12 @@ public class TimetableViewController : EditableViewController {
         }
     }
 
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
+    }
+
     override public func reloadData() {
         do {
             lessons = try timetable.getLessons()
@@ -211,6 +217,12 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = lesson.subject?.name ?? "No Subject"
         cell.teacherLabel.text = lesson.subject?.teacher
         cell.timeLabel.text = lesson.formattedDuration
+
+        if lesson.isCurrent {
+            cell.timeLabel.font = UIFont(descriptor: cell.timeLabel.font.fontDescriptor.withSymbolicTraits(.traitBold)!, size: cell.timeLabel.font.pointSize)
+        } else {
+            cell.timeLabel.font = UIFont(descriptor: cell.timeLabel.font.fontDescriptor.withSymbolicTraits(.traitExpanded)!, size: cell.timeLabel.font.pointSize)
+        }
         
         return cell
     }
