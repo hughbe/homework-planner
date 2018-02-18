@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Homework_Planner_Core
 
 public class CreateImageAttachmentViewController : CreateAttachmentViewController {
     @IBOutlet weak var imageView: UIImageView!

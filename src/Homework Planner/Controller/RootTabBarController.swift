@@ -7,7 +7,6 @@
 //
 
 import Date_Previous
-import Homework_Planner_Core
 import StoreKit
 import UIKit
 

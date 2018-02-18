@@ -8,7 +8,6 @@
 
 import CoreData
 import DayDatePicker
-import Homework_Planner_Core
 import UIKit
 
 public protocol CreateHomeworkViewControllerDelegate {

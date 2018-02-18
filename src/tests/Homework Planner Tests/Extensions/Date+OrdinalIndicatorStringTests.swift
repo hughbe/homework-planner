@@ -1,12 +1,11 @@
 //
 //  Date+OrdinalIndicatorStringTests.swift
-//  Homework Planner Core Tests
+//  Homework Planner Tests
 //
 //  Created by Hugh Bellamy on 12/02/2018.
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
-import Homework_Planner_Core
 import XCTest
 
 class DateOrdinalIndicatorStringTests: XCTestCase {

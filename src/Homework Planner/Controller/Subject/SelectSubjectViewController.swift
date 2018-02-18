@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import Homework_Planner_Core
 import UIKit
 
 public protocol SelectSubjectViewControllerDelegate {

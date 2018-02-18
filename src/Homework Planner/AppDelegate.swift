@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import Homework_Planner_Core
 import StoreKit
 import UIKit
 import UserNotifications

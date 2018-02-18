@@ -1,6 +1,6 @@
 //
 //  EditableViewController.swift
-//  Homework Planner Core
+//  Homework Planner
 //
 //  Created by Hugh Bellamy on 14/02/2018.
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
@@ -19,11 +19,13 @@ open class EditableViewController : DataViewController {
     }
 
     @IBAction func edit(_ sender: Any) {
-        setEditing(!tableView.isEditing)
+        setEditing(!tableView.isEditing, animated: true)
     }
 
-    public func setEditing(_ editing: Bool) {
-        tableView.setEditing(editing, animated: true)
+    open override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+
+        tableView.setEditing(editing, animated: animated)
 
         if editing {
             editButton.title = NSLocalizedString("Done", comment: "Done")

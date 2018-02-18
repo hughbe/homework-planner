@@ -6,7 +6,6 @@
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
 //
 
-import Homework_Planner_Core
 import INSPhotoGallery
 import SafariServices
 import UIKit

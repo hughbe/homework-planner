@@ -60,14 +60,28 @@ extension Subject {
     
     public var uiColor: UIColor? {
         get {
-            guard let color = color else {
+            guard let string = color else {
                 return nil
             }
-            
-            return UIColor(string: color)
+
+            let componentsString = string.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
+            let components = componentsString.components(separatedBy: ", ")
+
+            if components.count != 4 {
+                return nil
+            }
+
+            return UIColor(red: CGFloat((components[0] as NSString).floatValue),
+                      green: CGFloat((components[1] as NSString).floatValue),
+                      blue: CGFloat((components[2] as NSString).floatValue),
+                      alpha: CGFloat((components[3] as NSString).floatValue))
         }
         set {
-            color = newValue?.stringRepresentation
+            if let components = newValue?.cgColor.components {
+                color = "[\(components[0]), \(components[1]), \(components[2]), \(components[3])]"
+            } else {
+                color = nil
+            }
         }
     }
 }

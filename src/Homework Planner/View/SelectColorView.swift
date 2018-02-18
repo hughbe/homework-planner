@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Homework_Planner_Core
 
 @objc public protocol SelectColorViewDelegate {
     func selectColorView(selectColorView: SelectColorView, didSelectColor color: UIColor)

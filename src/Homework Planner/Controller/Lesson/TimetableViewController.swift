@@ -8,7 +8,6 @@
 
 import CoreData
 import Date_Previous
-import Homework_Planner_Core
 import StoreKit
 import UIKit
 
@@ -42,7 +41,7 @@ public class TimetableViewController : EditableViewController {
     public var timetable = Timetable(date: Date(), modifyIfWeekend: true) {
         didSet {
             currentDayButton.title = timetable.dayName
-            setEditing(false)
+            setEditing(false, animated: true)
             reloadData()
         }
     }

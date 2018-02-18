@@ -1,6 +1,6 @@
 //
 //  UIView+Borders.swift
-//  Homework Planner Core
+//  Homework Planner
 //
 //  Created by Hugh Bellamy on 14/02/2018.
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-public extension UIView {
-    public enum ViewSide {
-        case top
-        case right
-        case bottom
-        case left
-    }
+public enum ViewSide {
+    case top
+    case right
+    case bottom
+    case left
+}
 
+public extension UIView {
     public func createViewBackedBorder(side: ViewSide, thickness: CGFloat, color: UIColor, leftOffset: CGFloat = 0, rightOffset: CGFloat = 0, topOffset: CGFloat = 0, bottomOffset: CGFloat = 0) -> UIView {
 
         switch side {

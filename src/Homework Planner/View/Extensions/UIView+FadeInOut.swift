@@ -1,6 +1,6 @@
 //
 //  UIView+FadeInOut.swift
-//  Homework Planner Core
+//  Homework Planner
 //
 //  Created by Hugh Bellamy on 05/02/2018.
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-public extension UIView {
-    public func setHidden(hidden: Bool, animated: Bool) {
+internal extension UIView {
+    func setHidden(hidden: Bool, animated: Bool) {
         guard isHidden != hidden else {
             return
         }

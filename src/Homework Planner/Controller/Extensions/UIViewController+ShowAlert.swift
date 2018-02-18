@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-extension UIViewController {
+public extension UIViewController {
     public func showAlert(error: NSError) {
         let message: String
         if error.code == NSValidationRelationshipDeniedDeleteError {

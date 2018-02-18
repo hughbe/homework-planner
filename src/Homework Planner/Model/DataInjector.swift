@@ -1,6 +1,6 @@
 //
 //  DataInjector.swift
-//  Homework Planner Core
+//  Homework Planner
 //
 //  Created by Hugh Bellamy on 14/02/2018.
 //  Copyright © 2018 Hugh Bellamy. All rights reserved.
