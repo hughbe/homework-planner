@@ -30,6 +30,16 @@
 				<string>homework-planner</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>homework-planner-timetable</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>homework-planner-timetable</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

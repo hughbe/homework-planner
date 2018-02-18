@@ -65,11 +65,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let resourceSpecifier = (url as NSURL).resourceSpecifier, resourceSpecifier.count > 2 else {
             return false
         }
-        
+
+        guard let scheme = url.scheme else {
+            return false
+        }
+
         let index: String.Index = resourceSpecifier.index(resourceSpecifier.startIndex, offsetBy: 2)
-        let objectId = resourceSpecifier[index...]
-        
-        return showHomework(objectId: String(objectId))
+        let objectData = String(resourceSpecifier[index...])
+
+        if scheme == "homework-planner" {
+            return showHomework(objectId: objectData)
+        } else if scheme == "homework-planner-timetable" {
+            guard let tabBarController = window?.rootViewController as? UITabBarController else {
+                return false
+            }
+
+            tabBarController.selectedIndex = 1
+            guard let navigationController = tabBarController.selectedViewController as? UINavigationController, let timetableViewController = navigationController.viewControllers[0] as? TimetableViewController else {
+                return false
+            }
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+
+            guard let date = dateFormatter.date(from: objectData) else {
+                return false
+            }
+
+            timetableViewController.reloadAnimation = .fade
+            timetableViewController.timetable = Timetable(date: date, modifyIfWeekend: false)
+
+            return true
+        }
+
+        return false
     }
     
     @discardableResult

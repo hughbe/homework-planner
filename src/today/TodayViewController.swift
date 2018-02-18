@@ -55,8 +55,14 @@ class TodayViewController: DayViewController, NCWidgetProviding {
         if self.homework.count > 0 && indexPath.section == 0 {
             let homework = self.homework[indexPath.row]
             let urlString = homework.objectID.uriRepresentation().absoluteString
-            let url = URL(string: "homework-planner://\(urlString)")!
 
+            let url = URL(string: "homework-planner://\(urlString)")!
+            extensionContext?.open(url)
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+
+            let url = URL(string: "homework-planner-timetable://\(dateFormatter.string(from: Date()))")!
             extensionContext?.open(url)
         }
     }
