@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lbK-rO-8OT" customClass="BackupView" customModule="Homework_Planner_Core">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lbK-rO-8OT" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
                                 <rect key="frame" x="47" y="133.5" width="281" height="415.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -37,7 +37,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="90" id="LBR-KL-cYf" customClass="HomeworkTableViewCell" customModule="Homework_Planner_Core">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="90" id="LBR-KL-cYf" customClass="HomeworkTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LBR-KL-cYf" id="owz-RQ-CyS">
@@ -186,7 +186,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ziU-UM-wnP" customClass="ContainerView" customModule="Homework_Planner" customModuleProvider="target">
                                             <rect key="frame" x="28" y="120.5" width="319" height="362.5"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20R-Kq-3jG" customClass="BackupView" customModule="Homework_Planner_Core">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20R-Kq-3jG" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="319" height="362.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -202,7 +202,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="319" height="363"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <prototypes>
-                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubjectCell" rowHeight="90" id="M2u-Yc-ddj" customClass="SubjectTableViewCell" customModule="Homework_Planner_Core">
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubjectCell" rowHeight="90" id="M2u-Yc-ddj" customClass="SubjectTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="55.5" width="319" height="90"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M2u-Yc-ddj" id="P63-cM-db4">
@@ -355,7 +355,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dip-0y-Omo" customClass="ContainerView" customModule="Homework_Planner" customModuleProvider="target">
                                             <rect key="frame" x="28" y="121" width="319" height="362.5"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuu-3N-I7K" customClass="BackupView" customModule="Homework_Planner_Core">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuu-3N-I7K" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="319" height="362.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -1578,7 +1578,7 @@
                                     <constraint firstAttribute="height" constant="77" id="5m3-26-Gm4"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-3M-yfH" customClass="BackupView" customModule="Homework_Planner_Core">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-3M-yfH" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
                                 <rect key="frame" x="56.5" y="141" width="262.5" height="477"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -1590,7 +1590,7 @@
                                 <rect key="frame" x="0.0" y="141" width="375" height="477"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeworkCell" rowHeight="90" id="hyg-bt-RYN" customClass="HomeworkTableViewCell" customModule="Homework_Planner_Core">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeworkCell" rowHeight="90" id="hyg-bt-RYN" customClass="HomeworkTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hyg-bt-RYN" id="XmU-ko-C4D">
@@ -1640,7 +1640,7 @@
                                             <outlet property="titleLabel" destination="IPS-Zz-YwE" id="V9Q-kH-b9x"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="LessonCell" rowHeight="90" id="frl-hi-oGt" customClass="LessonTableViewCell" customModule="Homework_Planner_Core">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="LessonCell" rowHeight="90" id="frl-hi-oGt" customClass="LessonTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="145.5" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="frl-hi-oGt" id="sYr-fy-0JS">
@@ -1787,7 +1787,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7m-dR-pUp" customClass="BackupView" customModule="Homework_Planner_Core">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7m-dR-pUp" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
                                 <rect key="frame" x="47" y="95" width="281" height="448.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -1800,7 +1800,7 @@
                                     <action selector="createLesson:" destination="5PN-hO-PtM" eventType="touchUpInside" id="yWD-lL-amd"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHj-ca-Tt2" customClass="BackupView" customModule="Homework_Planner_Core">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHj-ca-Tt2" customClass="BackupView" customModule="Homework_Planner" customModuleProvider="target">
                                 <rect key="frame" x="20" y="40" width="335" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -1818,7 +1818,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Cell" rowHeight="90" id="8vY-Ek-PjJ" customClass="LessonTableViewCell" customModule="Homework_Planner_Core">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Cell" rowHeight="90" id="8vY-Ek-PjJ" customClass="LessonTableViewCell" customModule="Homework_Planner" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8vY-Ek-PjJ" id="Et9-Ur-F6Q">
