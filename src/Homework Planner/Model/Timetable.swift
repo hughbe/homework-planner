@@ -45,7 +45,7 @@ public struct Timetable {
         date = previousDate
     }
 
-    public func getLessons() throws -> [Lesson] {
+    public func getLessons() throws -> [LessonViewModel] {
         let request = NSFetchRequest<Lesson>(entityName: "Lesson")
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Lesson.startHour, ascending: true),
@@ -53,12 +53,12 @@ public struct Timetable {
         ]
         request.predicate = NSPredicate(format: "(dayOfWeek == %@) AND (week == %@)", argumentArray: [day.dayOfWeek, day.week])
 
-        return try CoreDataStorage.shared.context.fetch(request)
+        return try CoreDataStorage.shared.context.fetch(request).map(LessonViewModel.init)
     }
 
     public var dayName: String {
         let (today, _) = Timetable.getDay(date: Date(), modifyIfWeekend: false)
-        let difference = day.dayDifference(from: today)
+        let difference = Timetable.difference(from: day, to: today)
 
         let dayName: String
         if difference == 0 {
@@ -76,7 +76,7 @@ public struct Timetable {
         return dayName
     }
 
-    public func getCurrentLesson() throws -> Lesson? {
+    public func getCurrentLesson() throws -> LessonViewModel? {
         return try getLessons().first { $0.isCurrent }
     }
 
@@ -152,5 +152,12 @@ public struct Timetable {
         let weekday = Calendar.current.component(.weekday, from: date)
 
         return (Day(dayOfWeek: weekday, week: week), date)
+    }
+
+    private static func difference(from: Day, to: Day) -> Int {
+        let fromTotal = from.week * 7 + from.dayOfWeek
+        let toTotal = to.week * 7 + to.dayOfWeek
+
+        return fromTotal - toTotal
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import DayDatePicker
 import Date_Previous
 import Foundation
 import UIKit
@@ -136,7 +137,7 @@ public class LegacyImporter {
         }
     }
 
-    public static func importIfNeeded() {
+    public static func importIfNeeded() throws {
         if imported {
             return
         }
@@ -147,15 +148,15 @@ public class LegacyImporter {
         NSKeyedUnarchiver.setClass(LessonLegacy.self, forClassName: "Lesson")
         NSKeyedUnarchiver.setClass(DayLegacy.self, forClassName: "Day")
 
-        importSubjects()
-        importHomework()
-        importLessons()
+        try importSubjects()
+        try importHomework()
+        try importLessons()
 
-        try? CoreDataStorage.shared.context.save()
+        try CoreDataStorage.shared.context.save()
         imported = true
     }
     
-    private static func importSubjects() {
+    private static func importSubjects() throws {
         guard let data = UserDefaults.standard.object(forKey: "subjects") as? Data else {
             return
         }
@@ -163,26 +164,26 @@ public class LegacyImporter {
         allSubjects = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SubjectLegacy] ?? []
 
         for subject in allSubjects {
-            if findSubject(name: subject.name, teacher: subject.teacher) != nil {
+            if try SubjectViewModel.findSubject(name: subject.name, teacher: subject.teacher) != nil {
                 // Already imported.
                 continue
             }
-            
+
             createSubject(subject: subject)
         }
     }
     
     @discardableResult
-    private static func createSubject(subject: SubjectLegacy) -> Subject {
-        let newSubject = Subject(context: CoreDataStorage.shared.context)
+    private static func createSubject(subject: SubjectLegacy) -> SubjectViewModel {
+        var newSubject = SubjectViewModel()
         newSubject.name = subject.name
         newSubject.teacher = subject.teacher
-        newSubject.uiColor = subject.color
+        newSubject.color = subject.color
         
         return newSubject
     }
     
-    private static func importHomework() {
+    private static func importHomework() throws {
         guard let data = UserDefaults.standard.object(forKey: "homeworks") as? Data else {
             return
         }
@@ -196,59 +197,57 @@ public class LegacyImporter {
             
             let updatedSubject = allSubjects.first(where: { $0.id == actualSubject.id }) ?? actualSubject
             
-            let newSubject: Subject
-            if let subject = findSubject(name: updatedSubject.name, teacher: updatedSubject.teacher) {
+            let newSubject: SubjectViewModel
+            if let subject = try SubjectViewModel.findSubject(name: updatedSubject.name, teacher: updatedSubject.teacher) {
                 newSubject = subject
             } else {
                 newSubject = createSubject(subject: updatedSubject)
             }
             
-            let newHomework = Homework(context: CoreDataStorage.shared.context)
+            var newHomework = HomeworkViewModel()
             newHomework.subject = newSubject
             newHomework.workSet = homework.workSet
-            newHomework.dueDate = homework.dueDate
+            newHomework.setDueDate(dueDate: homework.dueDate)
             switch homework.type {
             case 0:
-                newHomework.type = Homework.WorkType.none.rawValue
+                newHomework.setType(type: .none)
             case 1:
-                newHomework.type = Homework.WorkType.essay.rawValue
+                newHomework.setType(type: .essay)
             case 2:
-                newHomework.type = Homework.WorkType.exercise.rawValue
+                newHomework.setType(type: .exercise)
             case 3:
-                newHomework.type = Homework.WorkType.revision.rawValue
+                newHomework.setType(type: .revision)
             case 4:
-                newHomework.type = Homework.WorkType.notes.rawValue
+                newHomework.setType(type: .notes)
             default:
-                newHomework.type = Homework.WorkType.other.rawValue
+                newHomework.setType(type: .other)
             }
             
             for attachment in homework.attachments {
                 if attachment.type == 0 {
-                    if let data = attachment.info as? Data {
-                        let newAttachment = ImageAttachment(context: CoreDataStorage.shared.context)
-                        newAttachment.type = Attachment.ContentType.image.rawValue
+                    if let data = attachment.info as? Data, let image = UIImage(data: data) {
+                        let newAttachment = ImageAttachmentViewModel()
                         newAttachment.title = attachment.title
-                        newAttachment.data = data
+                        newAttachment.image = image
                         
-                        newHomework.addToAttachments(newAttachment)
+                        newHomework.addAttachment(attachment: newAttachment)
                     }
                 } else {
                     if let string = attachment.info as? String, let url = URL(string: string) {
-                        let newAttachment = UrlAttachment(context: CoreDataStorage.shared.context)
-                        newAttachment.type = Attachment.ContentType.url.rawValue
+                        let newAttachment = UrlAttachmentViewModel()
                         newAttachment.title = attachment.title
                         newAttachment.url = url
                     
-                        newHomework.addToAttachments(newAttachment)
+                        newHomework.addAttachment(attachment: newAttachment)
                     }
                 }
             }
             
-            newHomework.completed = homework.completed
+            newHomework.setCompleted(completed: homework.completed)
         }
     }
     
-    private static func importLessons() {
+    private static func importLessons() throws {
         Timetable.numberOfWeeks = isTwoWeekTimetable ? 2 : 1
         Timetable.weekStart = weekStartDate
 
@@ -264,24 +263,20 @@ public class LegacyImporter {
             
             let updatedSubject = allSubjects.first(where: { $0.id == actualSubject.id }) ?? actualSubject
             
-            let newSubject: Subject
-            if let subject = findSubject(name: updatedSubject.name, teacher: updatedSubject.teacher) {
+            let newSubject: SubjectViewModel
+            if let subject = try SubjectViewModel.findSubject(name: updatedSubject.name, teacher: updatedSubject.teacher) {
                 newSubject = subject
             } else {
                 newSubject = createSubject(subject: updatedSubject)
             }
-            
-            let startComponents = Calendar.current.dateComponents([.hour, .minute], from: lesson.startTime)
-            let endComponents = Calendar.current.dateComponents([.hour, .minute], from: lesson.endTime)
-            
-            let newLesson = Lesson(context: CoreDataStorage.shared.context)
+
+            var newLesson = LessonViewModel()
             newLesson.subject = newSubject
-            newLesson.startHour = Int32(startComponents.hour ?? 1)
-            newLesson.startMinute = Int32(startComponents.minute ?? 1)
-            newLesson.endHour = Int32(endComponents.hour ?? 2)
-            newLesson.endMinute = Int32(endComponents.minute ?? 2)
-            newLesson.week = Int32(day.week)
-            newLesson.dayOfWeek = Int32(day.day + 1)
+            newLesson.startTime = TimePickerView.Time(date: lesson.startTime)
+            newLesson.endTime = TimePickerView.Time(date: lesson.endTime)
+
+            let newDay = Day(dayOfWeek: day.day + 1, week: day.week)
+            newLesson.setDay(day: newDay)
         }
     }
     
@@ -304,24 +299,5 @@ public class LegacyImporter {
         
         let filtered = days.filter { $0.week == 2 }
         return filtered.count != 0
-    }
-    
-    private static func findSubject(name: String, teacher: String) -> Subject? {
-        let request = NSFetchRequest<Subject>(entityName: "Subject")
-        
-        do {
-            let subjects = try CoreDataStorage.shared.context.fetch(request)
-            return subjects.first { subject in
-                return subject.name == name && subject.teacher == teacher
-            }
-        } catch let error as NSError {
-#if UIApplication
-            UIApplication.shared.keyWindow?.rootViewController?.showAlert(error: error)
-#else
-            print(error)
-#endif
-
-            return nil
-        }
     }
 }

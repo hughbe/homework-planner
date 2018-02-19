@@ -12,11 +12,4 @@ import Foundation
 public struct Day {
     public let dayOfWeek: Int
     public let week: Int
-
-    public func dayDifference(from other: Day) -> Int {
-        let total = week * 7 + dayOfWeek
-        let otherTotal = other.week * 7 + other.dayOfWeek
-
-        return total - otherTotal
-    }
 }

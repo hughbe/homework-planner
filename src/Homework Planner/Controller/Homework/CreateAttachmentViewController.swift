@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol CreateAttachmentViewControllerDelegate {
-    func createAttachmentViewController(viewController: CreateAttachmentViewController, didCreateAttachment attachment: Attachment)
+    func createAttachmentViewController(viewController: CreateAttachmentViewController, didCreateAttachment attachment: AttachmentViewModel)
     func didCancel(viewController: CreateAttachmentViewController)
 }
 
@@ -50,7 +50,7 @@ public class CreateAttachmentViewController : UIViewController {
         actionsView.createButton.isEnabled = isValid
     }
     
-    internal func saveAttachment(attachment: Attachment) {
+    internal func saveAttachment(attachment: AttachmentViewModel) {
         view.endEditing(true)
         delegate?.createAttachmentViewController(viewController: self, didCreateAttachment: attachment)
     }

@@ -11,7 +11,7 @@ import UIKit
 public class CreateImageAttachmentViewController : CreateAttachmentViewController {
     @IBOutlet weak var imageView: UIImageView!
     
-    public var editingAttachment: ImageAttachment?
+    public var editingAttachment: ImageAttachmentViewModel?
     
     private var image: UIImage?
     
@@ -72,11 +72,14 @@ public class CreateImageAttachmentViewController : CreateAttachmentViewControlle
     }
 
     @IBAction func createAttachment(_ sender: Any) {
-        let createdAttachment = editingAttachment ?? ImageAttachment(context: CoreDataStorage.shared.context)
+        guard let name = nameTextField.text else {
+            return
+        }
+
+        let createdAttachment = editingAttachment ?? ImageAttachmentViewModel()
         
-        createdAttachment.title = nameTextField.text
+        createdAttachment.title = name
         createdAttachment.image = image
-        createdAttachment.type = Attachment.ContentType.image.rawValue
 
         saveAttachment(attachment: createdAttachment)
     }

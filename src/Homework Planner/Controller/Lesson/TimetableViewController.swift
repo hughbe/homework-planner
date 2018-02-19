@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import DayDatePicker
 import Date_Previous
 import StoreKit
 import UIKit
@@ -24,7 +25,7 @@ public class TimetableViewController : EditableViewController {
     
     private var timetableProduct: SKProduct?
 
-    private var lessons: [Lesson] = [] {
+    private var lessons: [LessonViewModel] = [] {
         didSet {
             if reloadAnimation != .none {
                 tableView.beginUpdates()
@@ -47,6 +48,8 @@ public class TimetableViewController : EditableViewController {
     }
 
     public override func viewDidLoad() {
+        tableView.register(UINib(nibName: String(describing: LessonTableViewCell.self), bundle: nil), forCellReuseIdentifier: "LessonCell")
+
         super.viewDidLoad()
 
         if !InAppPurchase.unlockTimetable.isPurchased {
@@ -78,7 +81,7 @@ public class TimetableViewController : EditableViewController {
             }
         }
 
-        register(notification: Subject.Notifications.subjectsChanged) { _ in
+        register(notification: SubjectViewModel.Notifications.subjectsChanged) { _ in
             self.reloadAnimation = .fade
             self.reloadData()
         }
@@ -105,19 +108,16 @@ public class TimetableViewController : EditableViewController {
     }
 
     @IBAction func createLesson(_ sender: Any) {
-        let endHour = lessons.last?.endHour
-        let endMinute = lessons.last?.endMinute
-
-        showCreateLesson(lesson: nil, startHour: endHour, startMinute: endMinute)
+        showCreateLesson { createLessonViewController in
+            createLessonViewController.day = timetable.day
+            createLessonViewController.startTime = lessons.last?.endTime
+        }
     }
     
-    private func showCreateLesson(lesson: Lesson?, startHour: Int32?, startMinute: Int32?) {
+    private func showCreateLesson(presentationHandler: (CreateLessonViewController) -> ()) {
         let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateLessonNavigationViewController") as! CreateLessonViewController
         viewController.createDelegate = self
-
-        viewController.editingLesson = lesson
-        viewController.startHour = startHour
-        viewController.startMinute = startMinute
+        presentationHandler(viewController)
 
         tabBarController?.present(viewController, animated: true)
     }
@@ -188,18 +188,9 @@ extension TimetableViewController : CreateLessonViewControllerDelegate {
         viewController.dismiss(animated: true)
     }
     
-    public func createLessonViewController(viewController: CreateLessonViewController, didCreateLesson lesson: Lesson) {
-        lesson.dayOfWeek = Int32(timetable.day.dayOfWeek)
-        lesson.week = Int32(timetable.day.week)
-
-        do {
-            try CoreDataStorage.shared.context.save()
-            viewController.dismiss(animated: true)
-
-            reloadData()
-        } catch let error as NSError {
-            showAlert(error: error)
-        }
+    public func createLessonViewController(viewController: CreateLessonViewController, didCreateLesson lesson: LessonViewModel) {
+        viewController.dismiss(animated: true)
+        reloadData()
     }
 }
 
@@ -209,19 +200,8 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! LessonTableViewCell
-        let lesson = lessons[indexPath.row]
-
-        cell.colorView.backgroundColor = lesson.subject?.uiColor ?? UIColor.black
-        cell.nameLabel.text = lesson.subject?.name ?? "No Subject"
-        cell.teacherLabel.text = lesson.subject?.teacher
-        cell.timeLabel.text = lesson.formattedDuration
-
-        if lesson.isCurrent {
-            cell.timeLabel.font = UIFont(descriptor: cell.timeLabel.font.fontDescriptor.withSymbolicTraits(.traitBold)!, size: cell.timeLabel.font.pointSize)
-        } else {
-            cell.timeLabel.font = UIFont(descriptor: cell.timeLabel.font.fontDescriptor.withSymbolicTraits(.traitExpanded)!, size: cell.timeLabel.font.pointSize)
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LessonCell", for: indexPath) as! LessonTableViewCell
+        cell.configure(lesson: lessons[indexPath.row])
         
         return cell
     }
@@ -232,16 +212,12 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let lesson = lessons[indexPath.row]
-            CoreDataStorage.shared.context.delete(lesson)
-            
             do {
-                try CoreDataStorage.shared.context.save()
+                try lessons[indexPath.row].delete()
 
                 reloadAnimation = .fade
                 lessons.remove(at: indexPath.row)
             } catch let error as NSError {
-                CoreDataStorage.shared.context.rollback()
                 showAlert(error: error)
             }
         }
@@ -254,8 +230,7 @@ extension TimetableViewController : UITableViewDelegate, UITableViewDataSource {
             return
         }
 
-        let lesson = lessons[indexPath.row]
-        showCreateLesson(lesson: lesson, startHour: nil, startMinute: nil)
+        showCreateLesson { $0.editingLesson = lessons[indexPath.row] }
     }
 }
 

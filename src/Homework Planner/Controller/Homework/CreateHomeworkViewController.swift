@@ -12,26 +12,21 @@ import UIKit
 
 public protocol CreateHomeworkViewControllerDelegate {
     func createHomeworkViewControllerDidCancel(viewController: CreateHomeworkViewController)
-    func createHomeworkViewController(viewController: CreateHomeworkViewController, didCreateHomework homework: Homework)
+    func createHomeworkViewController(viewController: CreateHomeworkViewController, didCreateHomework homework: HomeworkViewModel)
 }
 
 public class CreateHomeworkViewController : UINavigationController {
     public var createDelegate: CreateHomeworkViewControllerDelegate?
 
-    private var homework: Homework!
-    private var subject: Subject!
+    private var homework: HomeworkViewModel!
+    private var subject: SubjectViewModel!
 
-    public var editingHomework: Homework?
+    public var editingHomework: HomeworkViewModel?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let editingHomework = editingHomework {
-            homework = editingHomework
-        } else {
-            let entityDescription = NSEntityDescription.entity(forEntityName: "Homework", in: CoreDataStorage.shared.context)!
-            homework = Homework(entity: entityDescription, insertInto: nil)
-        }
+        homework = editingHomework ?? HomeworkViewModel(insert: false)
 
         let selectSubjectViewController = topViewController as! SelectSubjectViewController
         selectSubjectViewController.selectedSubject = homework.subject
@@ -47,11 +42,9 @@ public class CreateHomeworkViewController : UINavigationController {
             homeworkDueDateViewController.navigationItem.title = NSLocalizedString("Due Date", comment: "Due Date")
             homeworkDueDateViewController.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Create", comment: "Create")
             homeworkDueDateViewController.delegate = self
+
             homeworkDueDateViewController.minDate = DayDatePickerView.Date(date: Date())
-            
-            if let dueDate = homework.dueDate {
-                homeworkDueDateViewController.date = DayDatePickerView.Date(date: dueDate)
-            }
+            homeworkDueDateViewController.date = homework.date
         }
     }
 }
@@ -61,30 +54,24 @@ extension CreateHomeworkViewController : SelectSubjectViewControllerDelegate {
         createDelegate?.createHomeworkViewControllerDidCancel(viewController: self)
     }
     
-    public func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: Subject) {
+    public func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: SubjectViewModel) {
         self.subject = subject
         performSegue(withIdentifier: "setContent", sender: nil)
     }
 }
 
 extension CreateHomeworkViewController : HomeworkContentViewControllerDelegate {
-    public func homeworkContentViewController(viewController: HomeworkContentViewController, didUpdateHomework homework: Homework) {
+    public func homeworkContentViewController(viewController: HomeworkContentViewController, didUpdateHomework homework: HomeworkViewModel) {
         performSegue(withIdentifier: "setDueDate", sender: nil)
     }
 }
 
 extension CreateHomeworkViewController : DayDatePickerViewControllerDelegate {
     public func dayDatePickerViewController(viewController: DayDatePickerViewController, didSelectDate date: Date) {
-        CoreDataStorage.shared.context.insert(homework)
-        homework.subject = subject
-        homework.dueDate = date
-
-        for attachment in homework.attachments ?? [] {
-            (attachment as? Attachment)?.homework = homework
-        }
+        homework.setDueDate(dueDate: date)
 
         do {
-            try CoreDataStorage.shared.context.save()
+            try homework.create(subject: subject)
             createDelegate?.createHomeworkViewController(viewController: self, didCreateHomework: homework)
         } catch let error as NSError {
             showAlert(error: error)

@@ -52,11 +52,7 @@ class TodayViewController: DayViewController, NCWidgetProviding {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if self.homework.count > 0 && indexPath.section == 0 {
-            let homework = self.homework[indexPath.row]
-            let urlString = homework.objectID.uriRepresentation().absoluteString
-
-            let url = URL(string: "homework-planner://\(urlString)")!
-            extensionContext?.open(url)
+            extensionContext?.open(homework[indexPath.row].url)
         } else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"

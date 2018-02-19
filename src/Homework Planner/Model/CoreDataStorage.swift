@@ -27,13 +27,26 @@ public class CoreDataStorage {
         let container = PersistentContainer(name: "Homework_Planner")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error {
-#if UIApplication
-                UIApplication.shared.keyWindow?.rootViewController?.showAlert(error: error as NSError)
+#if !TODAY_EXTENSION
+UIApplication.shared.keyWindow?.rootViewController?.showAlert(error: error as NSError)
+#else
+    print(error.localizedDescription)
 #endif
             }
         })
         return container
     }()
+
+    public func tryDelete(object: NSManagedObject) throws {
+        CoreDataStorage.shared.context.delete(object)
+
+        do {
+            try CoreDataStorage.shared.context.save()
+        } catch let error as NSError {
+            CoreDataStorage.shared.context.rollback()
+            throw error
+        }
+    }
 
 #if DEBUG
     public func clear() {

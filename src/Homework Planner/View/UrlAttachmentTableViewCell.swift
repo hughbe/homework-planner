@@ -9,6 +9,11 @@
 import UIKit
 
 public class UrlAttachmentTableViewCell : UITableViewCell {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var urlLabel: UILabel!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var urlLabel: UILabel!
+
+    public func configure(attachment: UrlAttachmentViewModel) {
+        nameLabel.text = attachment.title
+        urlLabel.text = attachment.url?.absoluteString
+    }
 }

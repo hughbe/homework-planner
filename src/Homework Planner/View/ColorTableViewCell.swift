@@ -9,8 +9,12 @@
 import UIKit
 
 public class ColorTableViewCell : UITableViewCell {
-    @IBOutlet public weak var colorView: UIView!
+    @IBOutlet private weak var colorView: UIView!
     @IBOutlet private weak var colorLeadingConstraint: NSLayoutConstraint!
+
+    public func configure(color: UIColor) {
+        colorView.backgroundColor = color
+    }
     
     public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let color = colorView.backgroundColor

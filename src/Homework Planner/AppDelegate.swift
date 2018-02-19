@@ -48,9 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
         SKPaymentQueue.default().add(InAppPurchase.transactionObserver)
 
-        LegacyImporter.importIfNeeded()
+        do {
+            try LegacyImporter.importIfNeeded()
+        } catch let error as NSError {
+            window?.rootViewController?.showAlert(error: error)
+        }
 #if DEBUG
-        DataInjector.injectIfNeeded()
+        try! DataInjector.injectIfNeeded()
 #endif
         
         return true
@@ -109,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             let homework = try CoreDataStorage.shared.context.existingObject(with: id) as! Homework
             
-            viewController.present(HomeworkContentViewController.create(for: homework), animated: true)
+            viewController.present(HomeworkContentViewController.create(for: HomeworkViewModel(homework: homework)), animated: true)
             
             return true
         } catch let error as NSError {

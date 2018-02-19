@@ -24,5 +24,6 @@ target 'today' do
 
   pod 'Date+Previous'
   pod 'Date+WithoutTime'
+  pod 'DayDatePicker'
 
 end

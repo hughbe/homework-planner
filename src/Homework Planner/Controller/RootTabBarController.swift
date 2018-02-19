@@ -45,9 +45,9 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
             
             let displayTypeAlertController = UIAlertController(title: NSLocalizedString("Homework Display Type", comment: "Homework Display Type"), message: nil, preferredStyle: .actionSheet)
             
-            for type in Homework.DisplayType.allValues {
+            for type in HomeworkViewModel.DisplayType.allValues {
                 displayTypeAlertController.addAction(UIAlertAction(title: type.name, style: .default) { action in
-                    Homework.DisplayType.currentDisplay = type
+                    HomeworkViewModel.DisplayType.currentDisplay = type
                 })
             }
             
@@ -92,7 +92,7 @@ extension RootTabBarController : SelectSubjectViewControllerDelegate {
         viewController.dismiss(animated: true)
     }
     
-    public func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: Subject) {
+    public func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: SubjectViewModel) {
         viewController.dismiss(animated: true)
     }
 }

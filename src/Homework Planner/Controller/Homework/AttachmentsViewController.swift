@@ -11,10 +11,10 @@ import SafariServices
 import UIKit
 
 public class AttachmentsViewController : EditableViewController {
-    private var websites: [UrlAttachment] = []
-    private var images: [ImageAttachment] = []
+    private var websites: [UrlAttachmentViewModel] = []
+    private var images: [ImageAttachmentViewModel] = []
     
-    public var homework: Homework!
+    public var homework: HomeworkViewModel!
     public var isEditingEnabled = true
     private var currentImage: UIImage!
 
@@ -51,28 +51,28 @@ public class AttachmentsViewController : EditableViewController {
     }
 
     private func reloadData(animated: Bool) {
-        let attachments = homework.attachments?.allObjects as? [Attachment] ?? []
-        
-        websites = attachments.filter { $0.type == Attachment.ContentType.url.rawValue }.map { $0 as! UrlAttachment }
-        images = attachments.filter { $0.type == Attachment.ContentType.image.rawValue }.map { $0 as! ImageAttachment }
+        websites = homework.websites
+        images = homework.images
         
         UIView.transition(with: tableView, duration: animated ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
             self.tableView.reloadData()
         })
 
-        setHasData(attachments.count > 0, animated: animated)
+        setHasData(homework.numberOfAttachments > 0, animated: animated)
     }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let createAttachmentViewController = segue.destination as? CreateAttachmentViewController {
             createAttachmentViewController.delegate = self
             
-            if let editingAttachment = sender as? UrlAttachment {
+            if let editingAttachment = sender as? UrlAttachmentViewModel {
                 let createUrlAttachmentViewController = createAttachmentViewController as! CreateUrlAttachmentViewController
                 createUrlAttachmentViewController.editingAttachment = editingAttachment
-            } else if let editingAttachment = sender as? ImageAttachment {
+            } else if let editingAttachment = sender as? ImageAttachmentViewModel {
                 let createImageAttachmentViewController = createAttachmentViewController as! CreateImageAttachmentViewController
                 createImageAttachmentViewController.editingAttachment = editingAttachment
+            } else {
+                fatalError("Unknown attachment")
             }
         }
     }
@@ -102,18 +102,12 @@ extension AttachmentsViewController : UITableViewDelegate, UITableViewDataSource
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if websites.count > 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "UrlCell", for: indexPath) as! UrlAttachmentTableViewCell
-            let website = websites[indexPath.row]
-            
-            cell.nameLabel.text = website.title
-            cell.urlLabel.text = website.url?.absoluteString
+            cell.configure(attachment: websites[indexPath.row])
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageAttachmentTableViewCell
-            let image = images[indexPath.row]
-            
-            cell.nameLabel.text = image.title
-            cell.previewImageView.image = image.image
+            cell.configure(attachment: images[indexPath.row])
             
             return cell
         }
@@ -151,24 +145,22 @@ extension AttachmentsViewController : UITableViewDelegate, UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let attachment: Attachment
             if websites.count > 0 && indexPath.section == 0 {
-                attachment = websites[indexPath.row]
+                homework.removeAttachment(attachment: websites[indexPath.row])
             } else {
-                attachment = images[indexPath.row]
+                homework.removeAttachment(attachment: images[indexPath.row])
             }
-            
-            homework.removeFromAttachments(attachment)
+
             reloadData(animated: true)
         }
     }
 }
 
 extension AttachmentsViewController : CreateAttachmentViewControllerDelegate {
-    public func createAttachmentViewController(viewController: CreateAttachmentViewController, didCreateAttachment attachment: Attachment) {
+    public func createAttachmentViewController(viewController: CreateAttachmentViewController, didCreateAttachment attachment: AttachmentViewModel) {
         dismiss(animated: true)
 
-        homework.addToAttachments(attachment)
+        homework.addAttachment(attachment: attachment)
         reloadData(animated: true)
     }
     

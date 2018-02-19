@@ -11,8 +11,8 @@ import Date_WithoutTime
 import UIKit
 
 open class DayViewController : DataViewController {
-    public var homework: [Homework] = []
-    public var lessons: [Lesson] = []
+    public var homework: [HomeworkViewModel] = []
+    public var lessons: [LessonViewModel] = []
     public var currentDate = Date() {
         didSet {
             reloadData(animated: true)
@@ -22,9 +22,12 @@ open class DayViewController : DataViewController {
     private var token: NSObjectProtocol!
 
     open override func viewDidLoad() {
+        tableView.register(UINib(nibName: String(describing: HomeworkTableViewCell.self), bundle: nil), forCellReuseIdentifier: "HomeworkCell")
+        tableView.register(UINib(nibName: String(describing: LessonTableViewCell.self), bundle: nil), forCellReuseIdentifier: "LessonCell")
+
         super.viewDidLoad()
 
-        register(notification: Subject.Notifications.subjectsChanged) { _ in
+        register(notification: SubjectViewModel.Notifications.subjectsChanged) { _ in
             self.reloadData(animated: true)
         }
     }
@@ -53,7 +56,7 @@ open class DayViewController : DataViewController {
         reloadData(animated: true)
     }
 
-    public func fetchData(date: Date) -> ([Homework], [Lesson]) {
+    public func fetchData(date: Date) -> ([HomeworkViewModel], [LessonViewModel]) {
         let timetable = Timetable(date: date, modifyIfWeekend: false)
 
         let homeworkRequest = NSFetchRequest<Homework>(entityName: "Homework")
@@ -65,7 +68,7 @@ open class DayViewController : DataViewController {
         do {
             let homework = try CoreDataStorage.shared.context.fetch(homeworkRequest)
             let lessons = try timetable.getLessons()
-            return (homework, lessons)
+            return (homework.map(HomeworkViewModel.init), lessons)
         } catch let error as NSError {
             showAlert(error: error)
             
@@ -98,21 +101,12 @@ extension DayViewController : UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if homework.count > 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HomeworkCell", for: indexPath) as! HomeworkTableViewCell
-            let homework = self.homework[indexPath.row]
-            
-            cell.titleLabel.text = homework.subject?.name
-            cell.detailLabel.text = homework.workSet
-            cell.colorView.backgroundColor = homework.subject?.uiColor
+            cell.configure(homework: homework[indexPath.row], display: .sectionedBySubject)
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LessonCell", for: indexPath) as! LessonTableViewCell
-            let lesson = self.lessons[indexPath.row]
-            
-            cell.nameLabel.text = lesson.subject?.name ?? "No Subject"
-            cell.teacherLabel.text = lesson.subject?.teacher
-            cell.colorView.backgroundColor = lesson.subject?.uiColor
-            cell.timeLabel.text = lesson.formattedDuration
+            cell.configure(lesson: lessons[indexPath.row])
             
             return cell
         }
@@ -122,9 +116,8 @@ extension DayViewController : UITableViewDelegate, UITableViewDataSource {
         if indexPath.section != 1 {
             return 85
         }
-        
-        let lesson = lessons[indexPath.row]
-        if let teacher = lesson.subject?.teacher, teacher.count > 0 {
+
+        if lessons[indexPath.row].subject!.teacher.count > 0 {
             return 90
         }
         

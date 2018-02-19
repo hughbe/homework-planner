@@ -11,7 +11,7 @@ import UIKit
 
 public protocol SelectSubjectViewControllerDelegate {
     func didCancel(viewController: SelectSubjectViewController)
-    func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: Subject)
+    func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: SubjectViewModel)
 }
 
 public class SelectSubjectViewController: EditableViewController {
@@ -19,7 +19,7 @@ public class SelectSubjectViewController: EditableViewController {
 
     private var reloadAnimation = false
 
-    private var subjects: [Subject] = [] {
+    private var subjects: [SubjectViewModel] = [] {
         didSet {
             UIView.transition(with: tableView, duration: reloadAnimation ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
                 self.tableView.reloadData()
@@ -33,11 +33,11 @@ public class SelectSubjectViewController: EditableViewController {
     }
     public var delegate: SelectSubjectViewControllerDelegate?
     
-    public var selectedSubject: Subject?
+    public var selectedSubject: SubjectViewModel?
     public var selectionEnabled = true
     public var showCurrentLesson = false
 
-    private var currentLesson: Lesson? = nil {
+    private var currentLesson: LessonViewModel? = nil {
         didSet {
             if currentLesson != nil {
                 tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
@@ -51,7 +51,7 @@ public class SelectSubjectViewController: EditableViewController {
         super.viewDidLoad()
         tableView.allowsSelection = selectionEnabled
 
-        if let selectedSubject = selectedSubject, let index = subjects.index(where: { $0.objectID == selectedSubject.objectID }) {
+        if let selectedSubject = selectedSubject, let index = subjects.index(where: { $0.id == selectedSubject.id }) {
             DispatchQueue.main.async {
                 self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
             }
@@ -66,7 +66,7 @@ public class SelectSubjectViewController: EditableViewController {
         ]
 
         do {
-            subjects = try CoreDataStorage.shared.context.fetch(request)
+            subjects = try CoreDataStorage.shared.context.fetch(request).map(SubjectViewModel.init)
             if showCurrentLesson {
                 let timetable = Timetable(date: Date(), modifyIfWeekend: false)
                 currentLesson = try timetable.getCurrentLesson()
@@ -89,7 +89,7 @@ public class SelectSubjectViewController: EditableViewController {
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let createSubjectViewController = segue.destination as? CreateSubjectViewController {
             createSubjectViewController.delegate = self
-            if let subject = sender as? Subject {
+            if let subject = sender as? SubjectViewModel {
                 createSubjectViewController.editingSubject = subject
             }
         }
@@ -97,17 +97,9 @@ public class SelectSubjectViewController: EditableViewController {
 }
 
 extension SelectSubjectViewController : CreateSubjectViewControllerDelegate {
-    public func createSubjectViewController(viewController: CreateSubjectViewController, didCreateSubject: Subject) {
-
-        do {
-            try CoreDataStorage.shared.context.save()
-            dismiss(animated: true)
-
-            NotificationCenter.default.post(name: Subject.Notifications.subjectsChanged, object: nil)
-            reloadData()
-        } catch let error as NSError {
-            showAlert(error: error)
-        }
+    public func createSubjectViewController(viewController: CreateSubjectViewController, didCreateSubject: SubjectViewModel) {
+        dismiss(animated: true)
+        reloadData()
     }
     
     public func didCancel(viewController: CreateSubjectViewController) {
@@ -131,7 +123,7 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectCell") as! SubjectTableViewCell
 
-        let subject: Subject
+        let subject: SubjectViewModel
         if let currentLessonSubject = currentLesson?.subject, indexPath.section == 0 {
             subject = currentLessonSubject
         } else {
@@ -139,26 +131,13 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
         }
 
         let selected: Bool
-        if let selectedSubject = selectedSubject, selectedSubject.objectID == subject.objectID {
+        if let selectedSubject = selectedSubject, selectedSubject.id == subject.id {
             selected = true
         } else {
             selected = false
         }
 
-        cell.colorView.backgroundColor = subject.uiColor ?? UIColor.black
-        cell.nameLabel.text = subject.name
-        cell.teacherLabel.text = subject.teacher
-        
-        if selected {
-            cell.nameLabel.textColor = UIColor.white
-            cell.teacherLabel.textColor = UIColor.white
-            cell.backgroundColor = UIColor(red: 0, green: 153 / 255.0, blue: 102 / 255.0, alpha: 1)
-        }
-        else {
-            cell.nameLabel.textColor = UIColor.black
-            cell.teacherLabel.textColor = UIColor(white: 0.4, alpha: 1)
-            cell.backgroundColor = UIColor.clear
-        }
+        cell.configure(subject: subject, selected: selected)
 
         return cell
     }
@@ -213,7 +192,7 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
         }
     }
 
-    private func select(subject: Subject) {
+    private func select(subject: SubjectViewModel) {
         selectedSubject = subject
         tableView.reloadData()
 
@@ -222,15 +201,10 @@ extension SelectSubjectViewController : UITableViewDelegate, UITableViewDataSour
 
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let subject = subjects[indexPath.row]
-            CoreDataStorage.shared.context.delete(subject)
-
             do {
-                try CoreDataStorage.shared.context.save()
-                
-                subjects.remove(at: indexPath.row)
+                try subjects[indexPath.row].delete()
 
-                NotificationCenter.default.post(name: Subject.Notifications.subjectsChanged, object: nil)
+                subjects.remove(at: indexPath.row)
             } catch let error as NSError {
                 CoreDataStorage.shared.context.rollback()
                 showAlert(error: error)

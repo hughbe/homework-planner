@@ -9,5 +9,12 @@
 import UIKit
 
 public class LessonTableViewCell : SubjectTableViewCell {
-    @IBOutlet public weak var timeLabel: UILabel!
+    @IBOutlet private weak var timeLabel: UILabel!
+
+    public func configure(lesson: LessonViewModel) {
+        configure(subject: lesson.subject!, selected: false)
+
+        timeLabel.text = lesson.formattedDuration
+        timeLabel.font = lesson.font
+    }
 }

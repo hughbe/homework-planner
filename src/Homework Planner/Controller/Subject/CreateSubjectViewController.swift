@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public protocol CreateSubjectViewControllerDelegate {
-    func createSubjectViewController(viewController: CreateSubjectViewController, didCreateSubject: Subject)
+    func createSubjectViewController(viewController: CreateSubjectViewController, didCreateSubject: SubjectViewModel)
     func didCancel(viewController: CreateSubjectViewController)
 }
 
@@ -27,7 +27,7 @@ public class CreateSubjectViewController : UIViewController {
     @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
 
     public var delegate: CreateSubjectViewControllerDelegate?
-    public var editingSubject: Subject?
+    public var editingSubject: SubjectViewModel?
 
     private var completedSubjects: [String] = []
     private var selectColorsVisible = false
@@ -36,8 +36,7 @@ public class CreateSubjectViewController : UIViewController {
         super.viewDidLoad()
 
         colorButton.layer.cornerRadius = 5
-        colorButton.backgroundColor = Subject.Colors.randomColor()
-        selectColorView.colors = Subject.Colors.all
+        selectColorView.colors = SubjectViewModel.Colors.all
 
         setSelectColorsVisible(selectColorsVisible: false, animated: false)
         
@@ -45,8 +44,10 @@ public class CreateSubjectViewController : UIViewController {
         if let subject = editingSubject {
             nameTextField.text = subject.name
             teacherTextField.text = subject.teacher
-            colorButton.backgroundColor = subject.uiColor ?? UIColor.black
+            colorButton.backgroundColor = subject.color
             checkValid()
+        } else {
+            colorButton.backgroundColor = SubjectViewModel.Colors.randomColor()
         }
     }
     
@@ -62,9 +63,9 @@ public class CreateSubjectViewController : UIViewController {
         checkValid()
 
         if let name = nameTextField.text {
-            completedSubjects = Subject.CommonSubjects.filter({ subject in
+            completedSubjects = SubjectViewModel.CommonSubjects.filter { subject in
                     subject.lowercased().contains(name.lowercased()) && subject != name
-            })
+            }
             loadSubjectsSuggestions(showSuggestions: completedSubjects.count != 0, animated: true)
         }
     }
@@ -80,14 +81,21 @@ public class CreateSubjectViewController : UIViewController {
     }
 
     @IBAction func createSubject(_ sender: Any) {
-        let createdSubject = editingSubject ?? Subject(context: CoreDataStorage.shared.context)
+        var createdSubject = editingSubject ?? SubjectViewModel()
 
-        createdSubject.name = nameTextField.text
-        createdSubject.teacher = teacherTextField.text
-        createdSubject.uiColor = colorButton.backgroundColor
+        createdSubject.name = nameTextField.text ?? ""
+        createdSubject.teacher = teacherTextField.text ?? ""
+        createdSubject.color = colorButton.backgroundColor ?? UIColor.black
 
-        view.endEditing(true)
-        delegate?.createSubjectViewController(viewController: self, didCreateSubject: createdSubject)
+        do {
+            try CoreDataStorage.shared.context.save()
+            NotificationCenter.default.post(name: SubjectViewModel.Notifications.subjectsChanged, object: nil)
+
+            view.endEditing(true)
+            delegate?.createSubjectViewController(viewController: self, didCreateSubject: createdSubject)
+        } catch let error as NSError {
+            showAlert(error: error)
+        }
     }
 
     @IBAction func cancel(_ sender: Any) {

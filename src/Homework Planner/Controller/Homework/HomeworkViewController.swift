@@ -8,7 +8,6 @@
 
 import CoreData
 import UIKit
-import UserNotifications
 
 public enum HomeworkSearchType : Int {
     case all
@@ -64,9 +63,9 @@ public class HomeworkViewController : EditableViewController {
 
     private var reloadAnimation = false
     
-    private var unsectionedHomework: [Homework] = [] {
+    private var unsectionedHomework: [HomeworkViewModel] = [] {
         didSet {
-            sectionData()
+            sectionedHomework = HomeworkViewModel.section(homework: unsectionedHomework)
 
             UIView.transition(with: tableView, duration: reloadAnimation ? 0.35 : 0, options: .transitionCrossDissolve, animations: {
                 self.tableView.reloadData()
@@ -79,9 +78,11 @@ public class HomeworkViewController : EditableViewController {
         }
     }
 
-    private var sectionedHomework: [[Homework]] = []
+    private var sectionedHomework: [[HomeworkViewModel]] = []
 
     public override func viewDidLoad() {
+        tableView.register(UINib(nibName: String(describing: HomeworkTableViewCell.self), bundle: nil), forCellReuseIdentifier: "HomeworkCell")
+
         super.viewDidLoad()
 
         navigationItem.titleView = searchBar
@@ -91,10 +92,10 @@ public class HomeworkViewController : EditableViewController {
             registerForPreviewing(with: self, sourceView: tableView)
         }
 
-        register(notification: Homework.DisplayType.Notifications.didChange) { _ in
+        register(notification: HomeworkViewModel.DisplayType.Notifications.didChange) { _ in
             self.reloadData()
         }
-        register(notification: Subject.Notifications.subjectsChanged) { _ in
+        register(notification: SubjectViewModel.Notifications.subjectsChanged) { _ in
             self.reloadData()
         }
     }
@@ -121,7 +122,7 @@ public class HomeworkViewController : EditableViewController {
         searchType = HomeworkSearchType(rawValue: sender.selectedSegmentIndex)!
     }
     
-    func showCreateHomework(homework: Homework?) {
+    func showCreateHomework(homework: HomeworkViewModel?) {
         let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateHomeworkNavigationViewController") as! CreateHomeworkViewController
         viewController.createDelegate = self
         viewController.editingHomework = homework
@@ -165,102 +166,13 @@ public class HomeworkViewController : EditableViewController {
         }
 
         do {
-            unsectionedHomework = try CoreDataStorage.shared.context.fetch(request)
+            unsectionedHomework = try CoreDataStorage.shared.context.fetch(request).map(HomeworkViewModel.init)
         } catch let error as NSError {
             showAlert(error: error)
         }
     }
-    
-    private func sectionData() {
-        let homeworkDisplay = Homework.DisplayType.currentDisplay
-        
-        if homeworkDisplay == .sectionedBySubject {
-            let groupedHomework = Dictionary(grouping: unsectionedHomework) { homework in
-                homework.subject?.name ?? ""
-            }
-            sectionedHomework = groupedHomework.values.sorted { homework1, homework2 in
-                let name1 = homework1.first?.subject?.name ?? ""
-                let name2 = homework2.first?.subject?.name ?? ""
-                
-                return name1.compare(name2) == .orderedAscending
-            }
-        } else if homeworkDisplay == .sectionedByDate {
-            let groupedHomework = Dictionary(grouping: unsectionedHomework) { homework -> Date in
-                homework.dueDate ?? Date().withoutTime
-            }
-            sectionedHomework = groupedHomework.values.sorted { homework1, homework2 in
-                let date1 = homework1.first?.dueDate ?? Date().withoutTime
-                let date2 = homework2.first?.dueDate ?? date1
-                
-                return date1.compare(date2) == .orderedAscending
-            }
-        } else {
-            sectionedHomework = [unsectionedHomework]
-        }
 
-        sectionedHomework = sectionedHomework.map { homework in
-            return homework.sorted { (homework1, homework2) in
-                let order = homework1.order(other: homework2, comparisonType: homeworkDisplay.comparisonType)
-
-                return order == .before
-            }
-        }
-    }
-    
-    private func setEditing(editing: Bool) {
-        tableView.setEditing(editing, animated: true)
-        
-        if editing {
-            editButton.title = NSLocalizedString("Done", comment: "Done")
-            editButton.style = .done
-        } else {
-            editButton.title = NSLocalizedString("Edit", comment: "Edit")
-            editButton.style = .plain
-        }
-
-        createButton.isEnabled = !editing
-    }
-    
-    private func createNotification(for homework: Homework) {
-        guard let dueDate = homework.dueDate?.withoutTime, dueDate.compare(Date().withoutTime) == .orderedDescending else {
-            return
-        }
-        
-        guard let notificationDate = Calendar.current.date(byAdding: .day, value: 1, to: dueDate) else {
-            return
-        }
-
-        guard let name = homework.subject?.name else {
-            return
-        }
-
-        let center = UNUserNotificationCenter.current()
-        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
-        center.requestAuthorization(options: options) { (granted, error) in
-            if granted {
-                var components = Calendar.current.dateComponents([.year, .month, .day], from: notificationDate)
-                components.hour = 12
-
-                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-
-                let content = UNMutableNotificationContent()
-                content.title = name + " " + NSLocalizedString("homework is due tomorrow", comment: "homework is due tomorrow")
-
-                let notification = UNNotificationRequest(identifier: homework.objectID.uriRepresentation().absoluteString, content: content, trigger: trigger)
-                let center = UNUserNotificationCenter.current()
-                center.add(notification) { error in
-                    if let error = error {
-                        self.showAlert(error: error as NSError)
-                    }
-                }
-            }
-        }
-    }
-    
-    private func deleteNotification(for homework: Homework) {
-        let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: [homework.objectID.uriRepresentation().absoluteString])
-    }
+    public lazy var cell = tableView.dequeueReusableCell(withIdentifier: "HomeworkCell") as! HomeworkTableViewCell
 }
 
 extension HomeworkViewController : CreateHomeworkViewControllerDelegate {
@@ -268,10 +180,8 @@ extension HomeworkViewController : CreateHomeworkViewControllerDelegate {
         viewController.dismiss(animated: true)
     }
     
-    public func createHomeworkViewController(viewController: CreateHomeworkViewController, didCreateHomework homework: Homework) {
+    public func createHomeworkViewController(viewController: CreateHomeworkViewController, didCreateHomework homework: HomeworkViewModel) {
         viewController.dismiss(animated: true)
-
-        createNotification(for: homework)
         reloadData()
     }
 }
@@ -286,78 +196,39 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let homework = sectionedHomework[section].first else {
-            return nil
-        }
-        
-        if Homework.DisplayType.currentDisplay == .sectionedBySubject {
-            guard let subject = homework.subject, var title = subject.name else {
-                return nil
-            }
-            
-            if let teacher = subject.teacher, teacher.count > 0 {
-                title.append("(\(teacher))")
-            }
-            
-            return title
-        } else if Homework.DisplayType.currentDisplay == .sectionedByDate {
-            guard let dueDate = homework.dueDate else {
-                return nil
-            }
-            
-            return dueDate.formattedDayName
-        } else {
-            return nil
-        }
+        return sectionedHomework[section].first?.sectionTitle
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HomeworkTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeworkCell", for: indexPath) as! HomeworkTableViewCell
         let homework = sectionedHomework[indexPath.section][indexPath.row]
-        
-        if Homework.DisplayType.currentDisplay == .sectionedBySubject {
-            cell.titleLabel.text = homework.workSet
-            formatDueDateLabel(cell: cell, homework: homework)
-        } else if Homework.DisplayType.currentDisplay == .sectionedByDate {
-            cell.titleLabel.text = homework.subject?.name
-            cell.detailLabel.text = homework.workSet
-            cell.detailLabel.textColor = UIColor(white: 0.4, alpha: 1)
-        }
-        
-        cell.colorView.backgroundColor = homework.subject?.uiColor
 
-        cell.priority = homework.priority
         cell.priorityHandler = { cell in
-            homework.priority = !homework.priority
+            homework.togglePriority()
+            cell.configure(homework: homework, display: HomeworkViewModel.DisplayType.currentDisplay)
             self.moveAndSave(indexPath: indexPath)
         }
 
-        cell.completed = homework.completed
         cell.completionHandler = { cell in
-            homework.completed = !homework.completed
-            
-            if homework.completed {
-                self.deleteNotification(for: homework)
-            }
-            
-            if Homework.DisplayType.currentDisplay != .sectionedByDate {
-                self.formatDueDateLabel(cell: cell, homework: homework)
-            }
-            
+            homework.toggleCompleted()
+            cell.configure(homework: homework, display: HomeworkViewModel.DisplayType.currentDisplay)
+
             self.moveAndSave(indexPath: indexPath)
         }
+
+        cell.configure(homework: homework, display: HomeworkViewModel.DisplayType.currentDisplay)
         
         return cell
     }
     
     private func moveAndSave(indexPath: IndexPath) {
-        let oldHomework = self.sectionedHomework[indexPath.section].map{ $0.objectID }
-        sectionData()
+        let oldHomework = self.sectionedHomework[indexPath.section].map{ $0.id }
+        sectionedHomework = HomeworkViewModel.section(homework: unsectionedHomework)
         
         let newHomework = self.sectionedHomework[indexPath.section]
         tableView.performBatchUpdates({
             for enumerator in newHomework.enumerated() {
-                let oldIndex = oldHomework.index(of: enumerator.element.objectID)!
+                let oldIndex = oldHomework.index(of: enumerator.element.id)!
                 let oldIndexPath = IndexPath(row: oldIndex, section: indexPath.section)
                 let newIndexPath = IndexPath(row: enumerator.offset, section: indexPath.section)
 
@@ -372,45 +243,31 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    private func formatDueDateLabel(cell: HomeworkTableViewCell, homework: Homework) {
-        let dueDate = homework.dueDate ?? Date()
-        let result = Calendar.current.compare(dueDate, to: Date(), toGranularity: .day)
-        
-        if homework.completed || result != .orderedAscending {
-            cell.detailLabel.text = dueDate.formattedDayName
-        } else if result == .orderedAscending {
-            cell.detailLabel.text = NSLocalizedString("Overdue", comment: "Overdue") + " - " + dueDate.formattedDayName
-        }
-
-        if homework.completed || result == .orderedDescending {
-            cell.detailLabel.textColor = UIColor(white: 0.4, alpha: 1)
-        } else if result == .orderedSame {
-            cell.detailLabel.textColor = UIColor.orange
-        } else {
-            cell.detailLabel.textColor = UIColor.red
-        }
-    }
-    
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        cell.configure(homework: sectionedHomework[indexPath.section][indexPath.row], display: HomeworkViewModel.DisplayType.currentDisplay)
+        cell.layoutIfNeeded()
+        let size = cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        return size.height + 1
+    }
+
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let homework = sectionedHomework[indexPath.section][indexPath.row]
-            deleteNotification(for: homework)
-
-            CoreDataStorage.shared.context.delete(homework)
-            
             do {
-                try CoreDataStorage.shared.context.save()
+                try sectionedHomework[indexPath.section][indexPath.row].delete()
 
                 sectionedHomework[indexPath.section].remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
 
                 reloadData()
             } catch let error as NSError {
-                CoreDataStorage.shared.context.rollback()
                 showAlert(error: error)
             }
         }

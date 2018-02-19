@@ -9,6 +9,11 @@
 import UIKit
 
 public class ImageAttachmentTableViewCell : UITableViewCell {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var previewImageView: UIImageView!
+
+    public func configure(attachment: ImageAttachmentViewModel) {
+        nameLabel.text = attachment.title
+        previewImageView.image = attachment.image
+    }
 }

@@ -12,7 +12,7 @@ import UIKit
 
 public protocol CreateLessonViewControllerDelegate {
     func createLessonViewControllerDidCancel(viewController: CreateLessonViewController)
-    func createLessonViewController(viewController: CreateLessonViewController, didCreateLesson lesson: Lesson)
+    func createLessonViewController(viewController: CreateLessonViewController, didCreateLesson lesson: LessonViewModel)
 }
 
 public class CreateLessonViewController : UINavigationController {
@@ -20,26 +20,20 @@ public class CreateLessonViewController : UINavigationController {
     private var startTimeController: TimePickerViewController?
     private var endTimeController: TimePickerViewController?
     
-    private var lesson: Lesson!
-    private var subject: Subject!
+    private var lesson: LessonViewModel!
+    private var subject: SubjectViewModel!
 
-    public var startHour: Int32?
-    public var startMinute: Int32?
-    public var editingLesson: Lesson?
+    public var day: Day?
+    public var startTime: TimePickerView.Time?
+    public var editingLesson: LessonViewModel?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let editingLesson = editingLesson {
-            lesson = editingLesson
-        } else {
-            let entityDescription = NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataStorage.shared.context)!
-            lesson = Lesson(entity: entityDescription, insertInto: nil)
-        }
-        
-        if let startHour = startHour, let startMinute = startMinute {
-            lesson.startHour = startHour
-            lesson.startMinute = startMinute
+
+        lesson = editingLesson ?? LessonViewModel(insert: false)
+        lesson.startTime = startTime
+        if let day = day {
+            lesson.setDay(day: day)
         }
         
         let selectSubjectViewController = topViewController as! SelectSubjectViewController
@@ -53,28 +47,15 @@ public class CreateLessonViewController : UINavigationController {
                 startTimeController = timePickerViewController
                 timePickerViewController.navigationItem.title = NSLocalizedString("Start Time", comment: "Start Time")
                 timePickerViewController.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Next", comment: "Next")
-                
-                if lesson.hasStartTime {
-                    let time = TimePickerView.Time(hour: Int(lesson.startHour), minute: Int(lesson.startMinute))
-                    timePickerViewController.time = time
-                }
+
+                timePickerViewController.time = lesson.startTime
             } else if segue.identifier == "setEndTime" {
                 endTimeController = timePickerViewController
                 timePickerViewController.navigationItem.title = NSLocalizedString("End Time", comment: "End Time")
                 timePickerViewController.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Create", comment: "Create")
-                
-                if lesson.hasStartTime {
-                    let time = TimePickerView.Time(hour: Int(lesson.startHour), minute: Int(lesson.startMinute))
-                    timePickerViewController.minTime = time.time(byAddingHour: 0, andMinutes: 5)
-                }
 
-                if lesson.hasEndTime {
-                    let time = TimePickerView.Time(hour: Int(lesson.endHour), minute: Int(lesson.endMinute))
-                    timePickerViewController.time = time
-                } else {
-                    let time = TimePickerView.Time(hour: Int(lesson.startHour), minute: Int(lesson.startMinute))
-                    timePickerViewController.time = time.time(byAddingHour: 0, andMinutes: 30)
-                }
+                timePickerViewController.minTime = lesson.startTime?.time(byAddingHour: 0, andMinutes: 5)
+                timePickerViewController.time = lesson.endTime
             }
             
             timePickerViewController.delegate = self
@@ -87,7 +68,7 @@ extension CreateLessonViewController : SelectSubjectViewControllerDelegate {
         createDelegate?.createLessonViewControllerDidCancel(viewController: self)
     }
     
-    public func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: Subject) {
+    public func selectSubjectViewController(viewController: SelectSubjectViewController, didSelectSubject subject: SubjectViewModel) {
         self.subject = subject
         performSegue(withIdentifier: "setStartTime", sender: nil)
     }
@@ -96,18 +77,17 @@ extension CreateLessonViewController : SelectSubjectViewControllerDelegate {
 extension CreateLessonViewController : TimePickerViewControllerDelegate {
     public func timePickerViewController(viewController: TimePickerViewController, didSelectTime time: TimePickerView.Time) {
         if viewController == startTimeController {
-            lesson.startHour = Int32(time.hour)
-            lesson.startMinute = Int32(time.minute)
-            
+            lesson.startTime = time
             performSegue(withIdentifier: "setEndTime", sender: nil)
         } else if viewController == endTimeController {
-            CoreDataStorage.shared.context.insert(lesson)
+            lesson.endTime = time
 
-            lesson.subject = subject
-            lesson.endHour = Int32(time.hour)
-            lesson.endMinute = Int32(time.minute)
-
-            createDelegate?.createLessonViewController(viewController: self, didCreateLesson: lesson)
+            do {
+                try lesson.create(subject: subject)
+                createDelegate?.createLessonViewController(viewController: self, didCreateLesson: lesson)
+            } catch let error as NSError {
+                showAlert(error: error)
+            }
         }
     }
 }

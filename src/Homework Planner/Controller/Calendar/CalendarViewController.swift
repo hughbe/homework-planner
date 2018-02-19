@@ -36,6 +36,12 @@ public class CalenadarViewController : DayViewController {
         
         setWeekMode(weekMode: true, animated: false)
     }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        reloadData(animated: animated)
+    }
     
     @IBOutlet var contentHeightConstraint: NSLayoutConstraint!
     @IBOutlet var contentBottomConstraint: NSLayoutConstraint!

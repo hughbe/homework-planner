@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol HomeworkContentViewControllerDelegate {
-    func homeworkContentViewController(viewController: HomeworkContentViewController, didUpdateHomework homework: Homework)
+    func homeworkContentViewController(viewController: HomeworkContentViewController, didUpdateHomework homework: HomeworkViewModel)
 }
 
 public class HomeworkContentViewController: UIViewController {
@@ -22,19 +22,16 @@ public class HomeworkContentViewController: UIViewController {
     @IBOutlet weak var websiteButton: UIBarButtonItem!
     @IBOutlet weak var attachmentsButton: UIBarButtonItem!
 
-    public var homework: Homework!
+    public var homework: HomeworkViewModel!
     public var delegate: HomeworkContentViewControllerDelegate?
     public var isEditingEnabled = true
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = homework.subject?.name
+        navigationItem.title = homework.subject!.name
         workSetTextView.text = homework.workSet
-        
-        if let type = Homework.WorkType(rawValue: homework.type) {
-            displayHomeworkType(type: type)
-        }
+        typeButton.title = homework.typeString
         
         if !isEditingEnabled {
             typeButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .disabled)
@@ -43,14 +40,15 @@ public class HomeworkContentViewController: UIViewController {
             workSetTextView.isEditable = false
             cameraButton.setHidden(true)
             websiteButton.setHidden(true)
-            
-            if let attachmentsCount = homework.attachments?.count, let title = attachmentsButton.title, attachmentsCount > 0 {
+
+            let attachmentsCount = homework.numberOfAttachments
+            if let title = attachmentsButton.title, attachmentsCount > 0 {
                 attachmentsButton.title = title + " (\(attachmentsCount))"
             } else {
                 attachmentsButton.isEnabled = false
             }
             
-            attachmentsButton.isEnabled = homework.attachments?.count ?? 0 > 0
+            attachmentsButton.isEnabled = attachmentsCount > 0
             navigationItem.rightBarButtonItem = nil
         }
 
@@ -85,19 +83,15 @@ public class HomeworkContentViewController: UIViewController {
     @IBAction func changeType(_ sender: Any) {
         let alertController = UIAlertController(title: NSLocalizedString("Homework Type", comment: "Homework Type"), message: nil, preferredStyle: .actionSheet)
         
-        for type in Homework.WorkType.allValues {
+        for type in HomeworkViewModel.WorkType.allValues {
             alertController.addAction(UIAlertAction(title: type.name, style: .default) { action in
-                self.homework.type = type.rawValue
-                self.displayHomeworkType(type: type)
+                self.homework.setType(type: type)
+                self.typeButton.title = self.homework.typeString
             })
         }
 
         alertController.popoverPresentationController?.barButtonItem = typeButton
         present(alertController, animated: true)
-    }
-    
-    private func displayHomeworkType(type: Homework.WorkType) {
-        typeButton.title = type.name
     }
     
     private func isValid() -> Bool {
@@ -128,7 +122,7 @@ public class HomeworkContentViewController: UIViewController {
         }
     }
     
-    public static func create(for homework: Homework) -> UIViewController {
+    public static func create(for homework: HomeworkViewModel) -> UIViewController {
         let homeworkViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeworkContentViewController") as! HomeworkContentViewController
         homeworkViewController.homework = homework
         homeworkViewController.isEditingEnabled = false
@@ -148,10 +142,10 @@ extension HomeworkContentViewController : UITextViewDelegate {
 }
 
 extension HomeworkContentViewController : CreateAttachmentViewControllerDelegate {
-    public func createAttachmentViewController(viewController: CreateAttachmentViewController, didCreateAttachment attachment: Attachment) {
+    public func createAttachmentViewController(viewController: CreateAttachmentViewController, didCreateAttachment attachment: AttachmentViewModel) {
         dismiss(animated: true)
         
-        homework.addToAttachments(attachment)
+        homework.addAttachment(attachment: attachment)
     }
     
     public func didCancel(viewController: CreateAttachmentViewController) {

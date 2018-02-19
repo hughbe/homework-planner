@@ -11,7 +11,7 @@ import UIKit
 public class CreateUrlAttachmentViewController : CreateAttachmentViewController {
     @IBOutlet weak var urlTextField: UITextField!
 
-    public var editingAttachment: UrlAttachment?
+    public var editingAttachment: UrlAttachmentViewModel?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ public class CreateUrlAttachmentViewController : CreateAttachmentViewController 
     }
     
     @IBAction func createAttachment(_ sender: Any) {
-        guard let urlText = urlTextField.text, let url = URL(string: urlText) else {
+        guard let name = nameTextField.text, let urlText = urlTextField.text, let url = URL(string: urlText) else {
             showAlert(title: NSLocalizedString("Invalid url", comment: "Invalid url"), message: nil)
             return
         }
@@ -57,12 +57,10 @@ public class CreateUrlAttachmentViewController : CreateAttachmentViewController 
             return
         }
         
-        let createdAttachment = editingAttachment ?? UrlAttachment(context: CoreDataStorage.shared.context)
-
-        createdAttachment.title = nameTextField.text
+        let createdAttachment = editingAttachment ?? UrlAttachmentViewModel()
+        createdAttachment.title = name
         createdAttachment.url = url
-        createdAttachment.type = Attachment.ContentType.url.rawValue
-        
+
         saveAttachment(attachment: createdAttachment)
     }
 }
