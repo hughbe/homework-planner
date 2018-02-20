@@ -14,6 +14,9 @@ public class HomeworkTableViewCell : ColorTableViewCell {
     @IBOutlet private weak var completedButton: UIButton!
     @IBOutlet private weak var priorityButton: UIButton!
 
+    @IBOutlet private weak var titleTrailingToButtons: NSLayoutConstraint!
+    @IBOutlet private weak var titleTrailingToSuperview: NSLayoutConstraint!
+
     public func configure(homework: HomeworkViewModel, display: HomeworkViewModel.DisplayType) {
         completedButton.setImage(homework.completedImage, for: .normal)
         priorityButton.setImage(homework.priorityImage, for: .normal)
@@ -24,6 +27,10 @@ public class HomeworkTableViewCell : ColorTableViewCell {
 
         completedButton.isHidden = completionHandler == nil
         priorityButton.isHidden = priorityHandler == nil
+
+        titleTrailingToButtons.isActive = completionHandler != nil
+        titleTrailingToSuperview.isActive = completionHandler == nil
+        contentView.layoutIfNeeded()
     }
     
     public var completionHandler: ((HomeworkTableViewCell) -> ())?

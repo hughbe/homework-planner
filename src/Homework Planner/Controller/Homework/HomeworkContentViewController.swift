@@ -28,8 +28,11 @@ public class HomeworkContentViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = homework.subject!.name
+
+        if let subject = homework.subject {
+            navigationItem.title = subject.name
+        }
+
         workSetTextView.text = homework.workSet
         typeButton.title = homework.typeString
         

@@ -168,7 +168,7 @@ public struct HomeworkViewModel {
     }
 
     public var priorityImage: UIImage {
-        return homework.completed ? HomeworkViewModel.starredImage : HomeworkViewModel.unstarredImage
+        return homework.priority ? HomeworkViewModel.starredImage : HomeworkViewModel.unstarredImage
     }
 
     public var completedImage: UIImage {
@@ -254,7 +254,7 @@ public struct HomeworkViewModel {
             return homework.sorted { (homework1, homework2) in
                 let order = homework1.order(other: homework2, comparisonType: DisplayType.currentDisplay.comparisonType)
 
-                return order == .before
+                return order == .orderedDescending
             }
         }
     }
@@ -311,49 +311,29 @@ extension HomeworkViewModel {
         case date
     }
 
-    public enum Order {
-        case before
-        case equal
-        case after
-
-        init(comparisonResult: ComparisonResult) {
-            switch comparisonResult {
-            case .orderedAscending:
-                self = .before
-            case .orderedSame:
-                self = .equal
-            case .orderedDescending:
-                self = .after
-            }
-        }
-    }
-
-    public func order(other: HomeworkViewModel, comparisonType: ComparisonType) -> Order {
+    public func order(other: HomeworkViewModel, comparisonType: ComparisonType) -> ComparisonResult {
         if homework.priority != other.homework.priority && (!other.homework.completed || homework.completed == other.homework.completed) {
             if homework.priority {
-                return .before
+                return .orderedDescending
             }
 
-            return .after
+            return .orderedAscending
         }
 
         if homework.completed != other.homework.completed {
             if homework.completed {
-                return .after
+                return .orderedAscending
             }
 
-            return .before
+            return .orderedDescending
         }
 
         if comparisonType == .subject {
-            return Order(comparisonResult: subject!.name.compare(other.subject!.name))
+            return other.subject!.name.compare(subject!.name)
         } else if comparisonType == .date {
-            let date1 = homework.dueDate ?? Date()
-            let date2 = other.homework.dueDate ?? date1
-
-            return Order(comparisonResult: date1.compare(date2))
+            return other.homework.dueDate!.compare(homework.dueDate!)
         } else {
-            return .equal
+            return .orderedSame
         }
     }
 }

@@ -49,7 +49,12 @@ public class ContainerView : PanelView {
         if minY + diff > 0 {
             centerVerticalContstraint.constant = diff
         } else {
-            centerVerticalContstraint.constant = -superCenter.y / 2 + 40
+            let fromTop: CGFloat = -minY / 2
+            if minY + fromTop > 0 {
+                centerVerticalContstraint.constant = fromTop
+            } else {
+                centerVerticalContstraint.constant = 0
+            }
         }
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: {

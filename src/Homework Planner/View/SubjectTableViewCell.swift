@@ -13,6 +13,8 @@ public class SubjectTableViewCell : ColorTableViewCell {
     @IBOutlet private weak var teacherLabel: UILabel!
 
     public func configure(subject: SubjectViewModel, selected: Bool) {
+        configure(color: subject.color)
+
         nameLabel.text = subject.name
         teacherLabel.text = subject.teacher
 
@@ -24,7 +26,7 @@ public class SubjectTableViewCell : ColorTableViewCell {
         else {
             nameLabel.textColor = UIColor.black
             teacherLabel.textColor = UIColor(white: 0.4, alpha: 1)
-            backgroundColor = UIColor.clear
+            backgroundColor = UIColor.white
         }
     }
 }

@@ -10,7 +10,7 @@ import CoreData
 import JTCalendar
 import UIKit
 
-public class CalenadarViewController : DayViewController {
+public class CalendarViewController : DayViewController {
     @IBOutlet weak var calendarMenuView: JTCalendarMenuView!
     @IBOutlet weak var calendarContentView: JTHorizontalCalendarView!
     
@@ -93,7 +93,7 @@ public class CalenadarViewController : DayViewController {
     }
 }
 
-extension CalenadarViewController : JTCalendarDelegate {
+extension CalendarViewController : JTCalendarDelegate {
     public func calendarBuildMenuItemView(_ calendar: JTCalendarManager!) -> UIView! {
         let label = UILabel()
         label.textAlignment = .center
@@ -152,7 +152,7 @@ extension CalenadarViewController : JTCalendarDelegate {
     }
 }
 
-extension CalenadarViewController : UIViewControllerPreviewingDelegate {
+extension CalendarViewController : UIViewControllerPreviewingDelegate {
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRow(at: location) else {
             return nil

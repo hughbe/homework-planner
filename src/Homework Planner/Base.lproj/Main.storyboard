@@ -1476,10 +1476,10 @@
             </objects>
             <point key="canvasLocation" x="-876" y="976"/>
         </scene>
-        <!--Calenadar View Controller-->
+        <!--Calendar View Controller-->
         <scene sceneID="xWw-5A-FIr">
             <objects>
-                <viewController id="ZQ9-s0-eST" customClass="CalenadarViewController" customModule="Homework_Planner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZQ9-s0-eST" customClass="CalendarViewController" customModule="Homework_Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dVc-Em-Bp0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

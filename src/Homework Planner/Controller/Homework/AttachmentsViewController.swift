@@ -71,7 +71,7 @@ public class AttachmentsViewController : EditableViewController {
             } else if let editingAttachment = sender as? ImageAttachmentViewModel {
                 let createImageAttachmentViewController = createAttachmentViewController as! CreateImageAttachmentViewController
                 createImageAttachmentViewController.editingAttachment = editingAttachment
-            } else {
+            } else if sender != nil {
                 fatalError("Unknown attachment")
             }
         }

@@ -53,7 +53,8 @@ public class SelectSubjectViewController: EditableViewController {
 
         if let selectedSubject = selectedSubject, let index = subjects.index(where: { $0.id == selectedSubject.id }) {
             DispatchQueue.main.async {
-                self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
+                let section = self.currentLesson == nil ? 0 : 1
+                self.tableView.scrollToRow(at: IndexPath(row: index, section: section), at: .middle, animated: false)
             }
         }
     }

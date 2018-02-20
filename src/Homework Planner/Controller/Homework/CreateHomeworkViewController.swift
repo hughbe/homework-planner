@@ -36,6 +36,7 @@ public class CreateHomeworkViewController : UINavigationController {
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let homeworkContentViewController = segue.destination as? HomeworkContentViewController {
+            homeworkContentViewController.navigationItem.title = subject.name
             homeworkContentViewController.homework = homework
             homeworkContentViewController.delegate = self
         } else if let homeworkDueDateViewController = segue.destination as? DayDatePickerViewController {
