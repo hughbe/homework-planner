@@ -92,6 +92,7 @@ public class HomeworkContentViewController: UIViewController {
                 self.typeButton.title = self.homework.typeString
             })
         }
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel))
 
         alertController.popoverPresentationController?.barButtonItem = typeButton
         present(alertController, animated: true)
