@@ -24,9 +24,12 @@ public class RootTabBarController : UITabBarController, UITabBarControllerDelega
         
         // Settings
         let alertController = UIAlertController(title: NSLocalizedString("Settings", comment: "Settings"), message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Restore Purchases", comment: "Restore Purchases"), style: .default) { action in
-            SKPaymentQueue.default().restoreCompletedTransactions()
-        })
+
+        if InAppPurchase.iapsEnabled {
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Restore Purchases", comment: "Restore Purchases"), style: .default) { action in
+                SKPaymentQueue.default().restoreCompletedTransactions()
+            })
+        }
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Change Subjects", comment: "Change Subjects"), style: .default) { action in
             let selectSubjectViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectSubjectViewController") as! SelectSubjectViewController
             selectSubjectViewController.selectionEnabled = false

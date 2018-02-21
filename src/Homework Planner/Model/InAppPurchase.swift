@@ -15,8 +15,14 @@ public enum InAppPurchase: String {
     }
 
     case unlockTimetable = "unlocktimetable"
+
+    public static var iapsEnabled = false
     
     public var isPurchased: Bool {
+        if !InAppPurchase.iapsEnabled {
+            return true
+        }
+
         if let value = UserDefaults.standard.value(forKey: rawValue) as? Bool {
             return value
         }
