@@ -8,6 +8,11 @@
 
 import UIKit
 
+public protocol HomeworkTableViewCellDelegate {
+    func homeworkTableViewCellDidToggleCompleted(_ cell: HomeworkTableViewCell)
+    func homeworkTableViewCellDidTogglePriority(_ cell: HomeworkTableViewCell)
+}
+
 public class HomeworkTableViewCell : ColorTableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var detailLabel: UILabel!
@@ -17,6 +22,8 @@ public class HomeworkTableViewCell : ColorTableViewCell {
     @IBOutlet private weak var titleTrailingToButtons: NSLayoutConstraint!
     @IBOutlet private weak var titleTrailingToSuperview: NSLayoutConstraint!
 
+    public var delegate: HomeworkTableViewCellDelegate?
+
     public func configure(homework: HomeworkViewModel, display: HomeworkViewModel.DisplayType) {
         completedButton.setImage(homework.completedImage, for: .normal)
         priorityButton.setImage(homework.priorityImage, for: .normal)
@@ -25,31 +32,19 @@ public class HomeworkTableViewCell : ColorTableViewCell {
         detailLabel.textColor = homework.detailColor(displayType: display)
         configure(color: homework.subject!.color)
 
-        completedButton.isHidden = completionHandler == nil
-        priorityButton.isHidden = priorityHandler == nil
+        completedButton.isHidden = delegate == nil
+        priorityButton.isHidden = delegate == nil
 
-        titleTrailingToButtons.isActive = completionHandler != nil
-        titleTrailingToSuperview.isActive = completionHandler == nil
+        titleTrailingToButtons.isActive = delegate != nil
+        titleTrailingToSuperview.isActive = delegate == nil
         contentView.layoutIfNeeded()
     }
-    
-    public var completionHandler: ((HomeworkTableViewCell) -> ())?
-    
-    public var priorityHandler: ((HomeworkTableViewCell) -> ())?
 
     @IBAction func toggleCompleted(_ sender: Any) {
-        if let completionHandler = completionHandler {
-            completionHandler(self)
-        }
+        delegate?.homeworkTableViewCellDidToggleCompleted(self)
     }
 
     @IBAction func togglePriority(_ sender: Any) {
-        if let priorityHandler = priorityHandler {
-            priorityHandler(self)
-        }
-    }
-
-    public var calculatedHeight: CGFloat {
-        return detailLabel.frame.maxY + 17
+        delegate?.homeworkTableViewCellDidTogglePriority(self)
     }
 }

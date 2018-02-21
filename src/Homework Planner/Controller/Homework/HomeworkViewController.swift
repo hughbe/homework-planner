@@ -203,19 +203,7 @@ extension HomeworkViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeworkCell", for: indexPath) as! HomeworkTableViewCell
         let homework = sectionedHomework[indexPath.section][indexPath.row]
 
-        cell.priorityHandler = { cell in
-            homework.togglePriority()
-            cell.configure(homework: homework, display: HomeworkViewModel.DisplayType.currentDisplay)
-            self.moveAndSave(indexPath: indexPath)
-        }
-
-        cell.completionHandler = { cell in
-            homework.toggleCompleted()
-            cell.configure(homework: homework, display: HomeworkViewModel.DisplayType.currentDisplay)
-
-            self.moveAndSave(indexPath: indexPath)
-        }
-
+        cell.delegate = self
         cell.configure(homework: homework, display: HomeworkViewModel.DisplayType.currentDisplay)
         
         return cell
@@ -293,5 +281,29 @@ extension HomeworkViewController : UIViewControllerPreviewingDelegate {
     
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         tabBarController?.present(viewControllerToCommit, animated: true)
+    }
+}
+
+extension HomeworkViewController : HomeworkTableViewCellDelegate {
+    public func homeworkTableViewCellDidToggleCompleted(_ cell: HomeworkTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+
+        let homework = sectionedHomework[indexPath.section][indexPath.row]
+        homework.toggleCompleted()
+        cell.configure(homework: homework, display: HomeworkViewModel.DisplayType.currentDisplay)
+        moveAndSave(indexPath: indexPath)
+    }
+
+    public func homeworkTableViewCellDidTogglePriority(_ cell: HomeworkTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+
+        let homework = sectionedHomework[indexPath.section][indexPath.row]
+        homework.togglePriority()
+        cell.configure(homework: homework, display: HomeworkViewModel.DisplayType.currentDisplay)
+        moveAndSave(indexPath: indexPath)
     }
 }
