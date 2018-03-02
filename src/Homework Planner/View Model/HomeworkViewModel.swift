@@ -35,6 +35,7 @@ public struct HomeworkViewModel {
 
     public func delete() throws {
         try CoreDataStorage.shared.tryDelete(object: homework)
+        deleteNotification()
     }
 
     public func create(subject: SubjectViewModel) throws {

@@ -1,7 +1,7 @@
 PODS:
   - Date+Previous (1.0)
   - Date+WithoutTime (1.0)
-  - DayDatePicker (1.5)
+  - DayDatePicker (1.6)
   - INSPhotoGallery (1.2.5)
   - JTCalendar (2.2.1)
   - SZTextView (1.3.0)
@@ -17,7 +17,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Date+Previous: 6ed6d612b6aecb620f279c0b33e7b59e882eee39
   Date+WithoutTime: f6cb44bd2d2d348d62567591b53b244f2379591f
-  DayDatePicker: fc2c53e23179995d50f4db40cd139d1a5c0174e8
+  DayDatePicker: 0ee26b94064946626d70ec187fe968ce78ec8b92
   INSPhotoGallery: 8bd5b434e70d06dd698085f8e865f6602d82014b
   JTCalendar: be9e781229c6e539d9b71267560410886cd65cfb
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1

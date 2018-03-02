@@ -132,25 +132,25 @@ public class DataInjector {
         chemistryLesson.endTime = TimePickerView.Time(hour: 10, minute: 15)
 
         var economicsLesson = LessonViewModel()
-        chemistryLesson.setDay(day: timetable.day)
+        economicsLesson.setDay(day: timetable.day)
         economicsLesson.subject = economics
         economicsLesson.startTime = TimePickerView.Time(hour: 10, minute: 40)
         economicsLesson.endTime = TimePickerView.Time(hour: 11, minute: 20)
 
         var maths1Lesson = LessonViewModel()
-        chemistryLesson.setDay(day: timetable.day)
+        maths1Lesson.setDay(day: timetable.day)
         maths1Lesson.subject = maths1
         maths1Lesson.startTime = TimePickerView.Time(hour: 11, minute: 20)
         maths1Lesson.endTime = TimePickerView.Time(hour: 11, minute: 55)
 
         var maths2Lesson = LessonViewModel()
-        chemistryLesson.setDay(day: timetable.day)
+        maths2Lesson.setDay(day: timetable.day)
         maths2Lesson.subject = maths2
         maths2Lesson.startTime = TimePickerView.Time(hour: 12, minute: 00)
         maths2Lesson.endTime = TimePickerView.Time(hour: 12, minute: 35)
 
         var squashLesson = LessonViewModel()
-        chemistryLesson.setDay(day: timetable.day)
+        squashLesson.setDay(day: timetable.day)
         squashLesson.subject = squash
         squashLesson.startTime = TimePickerView.Time(hour: 14, minute: 00)
         squashLesson.endTime = TimePickerView.Time(hour: 15, minute: 00)
