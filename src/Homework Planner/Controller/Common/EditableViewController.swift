@@ -15,7 +15,7 @@ open class EditableViewController : DataViewController {
     open override func setHasData(_ hasData: Bool, animated: Bool) {
         super.setHasData(hasData, animated: animated)
 
-        
+        editButton.setHidden(!hasData)
     }
 
     @IBAction func edit(_ sender: Any) {
