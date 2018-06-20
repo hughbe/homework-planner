@@ -527,7 +527,6 @@
 				1EC2AC5F2031A04100969D3A /* Sources */,
 				1EC2AC602031A04100969D3A /* Frameworks */,
 				1EC2AC612031A04100969D3A /* Resources */,
-				B33BE87343E4B501DA9DA308 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -547,7 +546,6 @@
 				1EF6A895201D030F009F2BC7 /* Frameworks */,
 				1EF6A896201D030F009F2BC7 /* Resources */,
 				D83B8E68E29943E4C040919F /* [CP] Embed Pods Frameworks */,
-				C71F0D78D597CB2A216B581B /* [CP] Copy Pods Resources */,
 				1EC2AC732031A04100969D3A /* Embed App Extensions */,
 				1EC2AC992031A4C500969D3A /* Embed Frameworks */,
 			);
@@ -709,36 +707,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B33BE87343E4B501DA9DA308 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-today/Pods-today-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C71F0D78D597CB2A216B581B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Homework Planner/Pods-Homework Planner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D83B8E68E29943E4C040919F /* [CP] Embed Pods Frameworks */ = {
