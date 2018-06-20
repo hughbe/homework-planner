@@ -160,7 +160,7 @@ public class HomeworkViewController : EditableViewController {
             filterPredicate = nil
         }
 
-        let predicates = [notCompletedPredicate, filterPredicate].flatMap { $0 }
+        let predicates = [notCompletedPredicate, filterPredicate].compactMap { $0 }
         if predicates.count > 0 {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
