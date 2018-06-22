@@ -88,6 +88,7 @@
 		1EC2ACB22031BA6700969D3A /* HomeworkContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E651F812020F990007FD685 /* HomeworkContentViewController.swift */; };
 		1ECC7EE22030D37E0032F709 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ECC7EE02030D37E0032F709 /* Main.storyboard */; };
 		1ECDFFC8202C9B0F005A4731 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECDFFC7202C9B0F005A4731 /* CalendarViewController.swift */; };
+		1EDA68E420DD23A200FF6FA7 /* LessonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E268A462039D92600C227DA /* LessonTableViewCell.xib */; };
 		1EE7EBE6202B54370093ED37 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE7EBE5202B54370093ED37 /* StoreKit.framework */; };
 		1EE7EBE8202B585F0093ED37 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE7EBE7202B585F0093ED37 /* RootTabBarController.swift */; };
 		1EECD575201FC4710091B0B8 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EECD574201FC4710091B0B8 /* ContainerView.swift */; };
@@ -647,6 +648,7 @@
 				1E0572CF20321D7E00CCFD2A /* Assets.xcassets in Resources */,
 				1E268A452039D8EB00C227DA /* HomeworkTableViewCell.xib in Resources */,
 				1EC2AC6B2031A04100969D3A /* MainInterface.storyboard in Resources */,
+				1EDA68E420DD23A200FF6FA7 /* LessonTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

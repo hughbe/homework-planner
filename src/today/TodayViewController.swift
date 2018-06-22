@@ -47,6 +47,12 @@ class TodayViewController: DayViewController, NCWidgetProviding {
             headerTitle.textLabel?.textColor = UIColor.black
         }
     }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        cell.backgroundColor = UIColor.clear
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
