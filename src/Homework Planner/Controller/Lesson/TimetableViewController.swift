@@ -27,6 +27,10 @@ public class TimetableViewController : EditableViewController {
 
     private var lessons: [LessonViewModel] = [] {
         didSet {
+            guard tableView != nil else {
+                return
+            }
+
             if reloadAnimation != .none {
                 tableView.beginUpdates()
                 tableView.reloadSections(IndexSet(integer: 0), with: reloadAnimation)
@@ -41,8 +45,11 @@ public class TimetableViewController : EditableViewController {
 
     public var timetable = Timetable(date: Date(), modifyIfWeekend: true) {
         didSet {
-            currentDayButton.title = timetable.dayName
-            setEditing(false, animated: true)
+            if currentDayButton != nil {
+                currentDayButton.title = timetable.dayName
+                setEditing(false, animated: true)
+            }
+
             reloadData()
         }
     }

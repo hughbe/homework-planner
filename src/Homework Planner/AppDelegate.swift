@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 #if DEBUG
         try! DataInjector.injectIfNeeded()
 #endif
-        
+
         return true
     }
 

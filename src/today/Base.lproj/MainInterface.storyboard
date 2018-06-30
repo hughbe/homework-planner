@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="A2b-hJ-YN2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -140,17 +140,18 @@
                                     <outlet property="delegate" destination="M4Y-Lb-cyx" id="z0V-Mz-2dh"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have a Good Day!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKe-IF-Yfe">
-                                <rect key="frame" x="59" y="109" width="202" height="31.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No lessons or homework due today" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKe-IF-Yfe">
+                                <rect key="frame" x="20" y="93" width="280" height="63.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="A2b-hJ-YN2" secondAttribute="bottom" id="4iS-Hd-6mk"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="A2b-hJ-YN2" secondAttribute="bottom" constant="20" id="4iS-Hd-6mk"/>
                             <constraint firstItem="A2b-hJ-YN2" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="AA3-Wu-GfI"/>
-                            <constraint firstItem="NKe-IF-Yfe" firstAttribute="centerX" secondItem="ssy-KU-ocm" secondAttribute="centerX" id="gfc-yB-thZ"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="NKe-IF-Yfe" secondAttribute="trailing" constant="20" id="Yrh-GJ-IxE"/>
+                            <constraint firstItem="NKe-IF-Yfe" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="20" id="awI-hV-k2B"/>
                             <constraint firstItem="A2b-hJ-YN2" firstAttribute="trailing" secondItem="ssy-KU-ocm" secondAttribute="trailing" id="hCQ-ui-Ryg"/>
                             <constraint firstItem="NKe-IF-Yfe" firstAttribute="centerY" secondItem="ssy-KU-ocm" secondAttribute="centerY" id="lkj-Ob-OIb"/>
                             <constraint firstItem="A2b-hJ-YN2" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" id="q3o-7T-Q37"/>
